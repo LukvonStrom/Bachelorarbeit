@@ -1,0 +1,86 @@
+\chapter{Beispiele für Abbildungen und Tabellen}\label{chapter:abbildungenTabellen}
+
+Hier finden Sie Beispiele für Abbildungen, Tabellen, Formelsatz und  Source Code.
+
+\section{Abbildungen}
+In diesem Abschnitt gibt die Abbildungen~\ref{abb:Logo2cmHoch} und~\ref{abb:Logo2cmBreit}, die beide das Logo der DHBW zeigen.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[height=2cm]{graphics/dhbw.png}
+\caption[DHBW-Logo 2cm hoch]{DHBW-Logo 2cm hoch.\footnotemark}
+\label{abb:Logo2cmHoch}
+\end{figure}
+\footnotetext{Mit Änderungen entnommen aus: \cite{OhneAutorenOhneJahr}}
+
+\lstset{language=TeX, % hervorzuhebende Keywords definieren
+  morekeywords={footnotetext,footnotemark,footcite,caption}
+}
+
+\emph{Spezialfall:} Sofern \emph{innerhalb} der Bezeichnung einer Abbildung eine Fußnote angegeben oder eine Quelle referenziert werden soll, geschieht dies nicht per \lstinline|\footnote| oder \lstinline
+|\footcite|. Vielmehr sind die Befehle \lstinline|\footnotemark| und \lstinline|\footnotetext| zu verwenden und außerdem das optionale Argument für \lstinline|\caption| anzugeben (vgl.\ Source Code).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2cm]{graphics/dhbw.png}
+\caption[DHBW-Logo 2cm breit.]{DHBW-Logo 2cm breit. (Quelle: DHBW\footnotemark)}
+\label{abb:Logo2cmBreit}
+\end{figure}
+\footnotetext{\url{www.dhbw.de}}
+
+
+
+\section{Tabellen}
+
+In diesem Abschnitt gibt es zwei Beispiel-Tabellen, nämlich auf Seite~\pageref{tab:BeispielTabelleKlein} und auf Seite~\pageref{tab:BeispielTabelleGroesser}.
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{lcr}
+links & Mitte & rechts \\
+\hline
+Muster & Muster & Muster \\
+\end{tabular}
+\caption{Kleine Beispiel-Tabelle.}
+\label{tab:BeispielTabelleKlein}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|l|l|c|l|r||l}
+    \textbf{Spalte 1} & \textbf{Spalte 2} & \textbf{Spalte 3} & \textbf{Spalte 4} & \textbf{Spalte 5} & \textbf{Spalte 6} \\
+    \hline
+    a        & b          & c                & d        & e        & f        \\
+    Test     & Test, Test & Test, Test, Test & ~        & ~        & ~        \\
+    1        & 2          & 3                & 4        & 5        & 6        \\
+\end{tabular}
+\caption{Größere Beispiel-Tabelle.}
+\label{tab:BeispielTabelleGroesser}
+\end{table}
+
+\section{Etwas Mathematik}
+
+Eine abgesetzte Formel:
+\[
+  \int_a^b x^2 \: \mathrm{d} x = \frac{1}{3} (b^3 - a^3)
+\]
+
+Es ist $a^2+b^2 = c^2$ eine Formel im Text.
+
+\section{Source Code}
+
+Source Code-Blöcke können auf folgende Arten eingefügt werden:
+
+\lstset{language=Java}
+
+Direkt im \LaTeX-Source Code:
+\begin{lstlisting}
+if(1 > 0) {
+  System.out.println("OK"); 
+} else {
+  System.out.println("merkwuerdig");
+}
+\end{lstlisting}
+
+oder eingefügt aus einer externen Datei.
+\lstinputlisting{includes/HelloWorld.java}

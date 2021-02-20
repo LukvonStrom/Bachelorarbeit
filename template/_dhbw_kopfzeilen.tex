@@ -1,0 +1,80 @@
+%% Definitionen für Kopf- und Fußzeile auf normalen Seiten
+\defpagestyle{kopfzeile}
+{% Kopfdefinition
+  (\textwidth,0pt)    % Länge der oberen Linie,Dicke der oberen Linie       
+  {} % Definition für linke Seiten im doppelseitigen Layout
+  {} % Definition für rechte Seiten im doppelseitigen Layout      
+  {  % Definition für Seiten im einseitigen Layout
+	\makebox[0pt][l]{\rightmark}% 
+	\makebox[\linewidth]{}% 
+  }        
+  (\textwidth, 0.4pt) % Untere Linienlänge, Untere Liniendicke
+}
+{% Fußdefinition
+  (\textwidth,0pt)    % Obere Linienlänge, Obere Liniendicke
+  {} % Definition für linke Seiten im doppelseitigen Layout
+  {} % Definition für rechte Seiten im doppelseitigen Layout
+  {  % Definition für Seiten im einseitigen Layout
+    \makebox[\linewidth]{}%
+    \makebox[0pt][r]{\pagemark}%
+  }
+  (\textwidth, 0pt)   % Länge der unteren Linie,Dicke der unteren Linie
+}
+
+%% Definitionen für Kopf- und Fußzeile auf ersten Seiten eines Kapitels
+\defpagestyle{kapitelkopfzeile}
+{% Kopfdefinition
+  (\textwidth,0pt)    % Länge der oberen Linie,Dicke der oberen Linie       
+  {} % Definition für linke Seiten im doppelseitigen Layout
+  {} % Definition für rechte Seiten im doppelseitigen Layout      
+  {}  % Definition für Seiten im einseitigen Layout
+  (\textwidth, 0pt) % Untere Linienlänge, Untere Liniendicke
+}
+{% Fußdefinition
+  (\textwidth,0pt)    % Obere Linienlänge, Obere Liniendicke
+  {} % Definition für linke Seiten im doppelseitigen Layout
+  {} % Definition für rechte Seiten im doppelseitigen Layout
+  {  % Definition für Seiten im einseitigen Layout
+    \makebox[\linewidth]{}%
+    \makebox[0pt][r]{\pagemark}%
+  }
+  (\textwidth, 0pt)   % Länge der unteren Linie,Dicke der unteren Linie
+}
+
+%% Definitionen für Kopf- und Fußzeile im Anhang und bei Quellenverzeichnisse
+\newcommand{\spezialkopfzeileBezeichnung}{}
+\defpagestyle{spezialkopfzeile}
+{% Kopfdefinition
+  (\textwidth,0pt)    % Länge der oberen Linie,Dicke der oberen Linie       
+  {} % Definition für linke Seiten im doppelseitigen Layout
+  {} % Definition für rechte Seiten im doppelseitigen Layout      
+  {  % Definition für Seiten im einseitigen Layout
+	\makebox[0pt][l]{\spezialkopfzeileBezeichnung}% 
+	\makebox[\linewidth]{}% 
+  }        
+  (\textwidth, 0.4pt) % Untere Linienlänge, Untere Liniendicke
+}
+{% Fußdefinition
+  (\textwidth,0pt)    % Obere Linienlänge, Obere Liniendicke
+  {} % Definition für linke Seiten im doppelseitigen Layout
+  {} % Definition für rechte Seiten im doppelseitigen Layout
+  {  % Definition für Seiten im einseitigen Layout
+    \makebox[\linewidth]{}%
+    \makebox[0pt][r]{\pagemark}%
+  }
+  (\textwidth, 0pt)   % Länge der unteren Linie,Dicke der unteren Linie
+}
+            
+\newcommand\spezialkopfzeile[1]{%
+  \renewcommand\spezialkopfzeileBezeichnung{#1}
+  \pagestyle{spezialkopfzeile}
+}
+                
+% Standard-Pagestyle auswählen
+\pagestyle{kopfzeile}
+
+% keine Kopfzeile anzeigen auf Seiten, auf denen ein 
+% Kapitel beginnt oder das Inhalts-/Abbildungs-/Tabellenverzeichnis steht 
+\renewcommand{\chapterpagestyle}{kapitelkopfzeile}
+\tocloftpagestyle{kapitelkopfzeile}
+

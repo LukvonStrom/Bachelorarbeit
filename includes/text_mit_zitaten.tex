@@ -1,0 +1,129 @@
+\chapter{Zitieren}\label{chapter:zitate}
+
+Der Zitierstil ist so angepasst, dass er den Zitierrichtlinien des Studiengangs Wirtschaftsinformatik der DHBW Stuttgart entspricht. 
+
+\section{Zitate in den Text einfügen}
+In \LaTeX\ wird mit den Befehlen \verb|\footcite| 
+oder 
+\verb|\cite|
+eine Referenz im Text eingefügt. Meist wird \verb|\cite| nur \emph{innerhalb} einer Fußnote benutzt. 
+Damit ein vorangestelltes \enquote{Vgl.} in der Fußnote erscheint, können Sie wie folgt zitieren:
+\begin{verbatim}
+\footcite[Vgl.][S. 3]{Autor}
+\footcite[Vgl.][]{Autor}
+\end{verbatim}
+
+Das erste optionale Argument von \verb|\footcite| wird dem Zitat vorangestellt, das zweite ist die Seitenzahl. Den selben Effekt hätte
+\begin{verbatim}
+\footnote{Vgl. \cite[S. 3]{Autor}}
+\footnote{Vgl. \cite{Autor}}
+\end{verbatim}
+
+Hinweis: Falls \enquote{Vgl.}, aber keine Seitenzahl angeben werden soll, muss das zweite Argument vorhanden (jedoch leer) sein, ansonsten wird \enquote{Vgl.} als Seitenzahl interpretiert. Falsch ist also: 
+\begin{verbatim}
+\footcite[Vgl.]{Autor}  % so nicht!
+\end{verbatim}
+
+
+
+\subsection{Beispiele}
+Nachfolgend ein paar Beispiele, um die korrekte Darstellung zu überprüfen:
+
+\begin{itemize}
+\item \cite{Schlosser} ist ein Buch über \LaTeX.
+\item Zur Vorlesung \emph{Logik und Algebra} gibt es das gleichnamige Lehrbuch.\footcite{Staab}
+\item nochmal dasselbe Buch\footcite{Staab}
+\item ein weiteres Buch desselben Autors\footcite{BuschlingerStaab}
+
+\item Der Konferenzbeitrag \cite{Ancuti} beschäftigt sich mit Bildverarbeitung.
+\item Cloud Computing wird in einer Diplomarbeit erklärt.\footcite[S.~14]{Boettger:Diplomarbeit}
+\item Preiß\footcite{Preiss} gibt eine Einführung in Datenbanken.
+\item Eine Erläuterung, was \enquote{Intangibles} sind, findet sich bei Stoi\footcite[S.~82]{Stoi}.
+\item weitere Ausführung in derselben Quelle\footcite[Vgl.][S.~84]{Stoi}
+\item Laut Wikipedia\footcite[Abschnitt~5]{wiki:Wirtschaftsinformatik} ist Wirtschaftsinformatik ein interessantes Studienfach.
+\item ITIL-Prozesse kann man tatsächlich auch mit \LaTeX\ dokumentieren.\footcite{Carvalho:PJ:2012-1}
+\item Open-Source und Cloud-Computing in einem Buchbeitrag\footcite{Wind}
+\item Buch mit zwei Autoren\footcite{MitZweiAutoren}
+\item Buch mit drei Autoren\footcite{MitDreiAutoren}
+\item Buch ohne Autor\footcite{OhneAutoren}
+\item Buch ohne Autor und ohne Jahr\footcite{OhneAutorenOhneJahr}
+\item und noch ein anderes Buch ohne Autor und ohne Jahr\footcite{OhneAutorenOhneJahr2}
+\item Buch ohne Autor, aber dafür mit Herausgeber\footcite{keinAutorAberHerausgeber}
+
+\item manche Bachelorarbeit baut auf einer vorhergehenden Projektarbeit\footcite{mayer:PA1} auf
+\item das Handbuch zu BibLaTeX\footcite{biblatex:manual} und eines zu Windows 8\footcite{Win8}
+\item zwei Beiträge zu Büchern\footcite{Trautwein:Nokia}${}^{,}$\footcite{Mann} und zu einem Konferenzband\footcite{Trautwein:Erfolgsfaktoren}
+\item eine Online-Quelle\footcite{SAP:HANA}
+\item eine plagiierte Dissertation,\footcite{GuttenPlag} nicht zur Nachahmung empfohlen
+\item zum Testen, ob Umlaute und Sonderzeichen korrekt wiedergegeben werden\footcite{Umlauttest}
+\end{itemize}
+
+\subsection{Spezialfälle}
+\begin{itemize}
+\item \emph{Zwei Quellen am Satzende} werden durch Komma getrennt.\footcite{Staab}${}^{,}$\footcite{mayerLukas:PA1} Hier muss \verb|${}^{,}$| eingeschoben werden.
+\item \emph{Eindeutigkeit:} Normalerweise wird kein Vorname des Autors angegeben. Falls es allerdings zur Eindeutigkeit\footnote{\cite{trautwein2011unternehmensplanspiele} vs. \cite{hitzler2011optimierung}} (bei gleicher Jahreszahl) erforderlich ist, wird der Vorname abgekürzt bzw.\ nötigenfalls sogar ganz ausgeschrieben mit angegeben.\footnote{Vgl. \cite{mayer:PA1} und \cite{mayerLukas:PA1}}
+ 
+Welch ein Glück, dass Sie sich darum dank \LaTeX\ gar nicht kümmern müssen (arme Word\texttrademark-User ;-).
+
+\item Die Verwendung von \emph{Sekundärliteratur}\footcitePrimaerSekundaer{Primaerquelle}{}{Sekundaerquelle}{11} wird weiter in Abschnitt~\ref{sec:sekundaerliteratur} erläutert.
+\end{itemize}
+
+
+\section{Eintragstypen für die Literatur-Datenbank}
+
+Die verwendete Literatur pflegen Sie in einer Literatur-Datenbank im Bibtex-Format. Dabei handelt es sich um eine Textdatei, wobei für jede Quelle mittels Name-Value-Pairs die relevanten Attribute (Autor, Titel etc.) hinterlegt sind. Die Datei wird üblicherweise nicht im Texteditor, sondern in einem spezialisierten Programm wie JabRef bearbeitet.
+
+Sofern in der Literatur-Datenbank der Typ eines Eintrags (Entry Type) korrekt festgelegt ist, wird er im Literaturverzeichnis automatisch richtig dargestellt. Mit folgenden Typen sollten Sie i.d.R.\ auskommen:
+\begin{description}
+\item[article] Artikel in einer Fachzeitschrift, auch E-Journal (Zeitschrift in elektronischer Form)\footnote{Bei E-Journals/E-Books werden beim Zitieren anstelle der (u.U. nicht eindeutigen, da von der Schriftgröße abhängigen) Seitenzahl Abschnitt und Absatz näher bezeichnet, also: \cite[Abschnitt 1.2.3, Absatz 4]{Staab}.}
+\item[book] Buch, auch E-Book 
+\item[inbook] Kapitel in einem Buch, zu dem mehrere Autoren beigetragen haben 
+\item[inproceedings] Beitrag zu einer Fachtagung/Konferenz 
+\item[manual] Handbuch
+\item[misc] anderweitig nicht zuordenbarer Typ
+\item[phdthesis] Dissertation
+\item[thesis] Bachelor-/Master-/Diplomarbeit (Art wird im Attribut \enquote{type} festgelegt) 
+\item[online] Internet- oder Intranet-Quelle\footnote{\label{fn:onlineEntryType}Man beachte, dass der Eintragstyp \enquote{online} in JabRef nur im \enquote{biblatex-Modus} (Menü: Datei -- Neue biblatex Bibliothek) auswählbar ist.}
+\item[report] technischer Bericht, Forschungsbericht oder White Paper; diesen Typ können Sie auch verwenden, um eine Projektarbeit zu zitieren (Art wird im Attribut \enquote{type} festgelegt) 
+\end{description} 
+
+Eine Übersicht über die notwendigen Attribute jedes Eintragstyps gibt die folgende Tabelle, wobei ein Schrägstrich als \enquote{oder} zu verstehen ist.\footnote{Auszugsweise entnommen aus \cite{biblatex:manual}.} Zudem sind die wichtigsten optionalen Attribute aufgeführt.
+
+\begin{tabular}{l|p{6cm}|p{6cm}}
+\textbf{Eintragstyp} & \textbf{notwendige Attribute} & \textbf{optionale Attribute (Auswahl)} \\
+\hline
+article & author, title, journal, year/date  & volume, number, pages, month, note \\
+\hline
+book & author, title, year/date  & publisher, edition, editor, \mbox{volume/number}, series, isbn, url \\
+\hline
+inbook & author, title, booktitle, year/date  & bookauthor, editor, volume/number, series, isbn, url \\
+\hline
+inproceedings & author, title, booktitle, year/date  & organization/publisher, editor, volume/number, series, isbn, url  \\
+\hline
+manual & author/editor, title, year/date  & organization/publisher, address, edition, month, note, url, urldate \\
+\hline
+misc & author/editor, title, year/date & howpublished, organization, month, note \\
+\hline
+phdthesis & author, title, institution, year/date  & address, month, note \\
+\hline
+thesis & author, title, institution, type, year/date &  address, month, note \\
+\hline
+online\textsuperscript{\ref{fn:onlineEntryType}} & author/editor, title, year\footnotemark/date, url & urldate \\
+\hline
+report & author, title, institution, type, year/date & number, version, url, urldate \\
+\end{tabular}
+\footnotetext{%
+Sofern kein Jahr bekannt ist, sollte das Attribut nicht leer gelassen werden (sonst wird die aktuelle Jahreszahl automatisch eingefügt), sondern der Eintrag \enquote{o.J.} gewählt werden.}
+
+
+
+\section{Zitieren von Sekundärliteratur}\label{sec:sekundaerliteratur}
+Gelegentlich lässt es sich nicht vermeiden, aus der Sekundärliteratur zu zitieren. Dies leistet der folgende Befehl.
+\begin{verbatim}
+\footcitePrimaerSekundaer{Primaerquelle}{Seite}{Sekundaerquelle}{Seite}
+\end{verbatim}
+Die erste Seitenangabe bezieht sich auf die Primär-, die zweite auf die Sekundärquelle.
+Die Seitenangaben sind optional, sie können auch leer bleiben.\footcitePrimaerSekundaer{Primaerquelle}{23}{Sekundaerquelle}{}
+Es ist aber zu beachten, dass der Befehl \verb|\footcitePrimaerSekundaer| vier Argumente hat.
+
+Ins Literaturverzeichnis soll nur die Sekundärquelle aufgenommen werden. Dies wird dadurch erreicht, dass in der Literatur-Datenbank bei der Primärquelle im Attribut \enquote{keyword} der Wert \enquote{ausblenden} eintragen wird.

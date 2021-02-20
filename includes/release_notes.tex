@@ -1,0 +1,366 @@
+\anhang{Release Notes}
+\anhangteil{Änderungen in Version 1.1}\label{anhang:ReleaseNotes11}
+In Version 1.1 sind einige Rückmeldungen, die nach der Einführungsvorlesung am 6.2.2015 oder nach Veröffentlichung der Vorlage in Moodle eingegangen sind, berücksichtigt worden. Korrekturen sind mit \enquote{(Fix)} gekennzeichnet. 
+
+\begin{itemize}
+\item \verb|latex-vorlage.tex|
+\begin{itemize}
+\item (Fix) Abkürzungsverzeichnis wird vor Abbildungsverzeichnis platziert
+\item (Fix) Abbildungs- und Tabellenverzeichnis in Inhaltsverzeichnis aufgenommen
+\item (Fix) Quellenverzeichnis wird nun ohne Kapitelnummer dargestellt
+
+\item eingebundene Dateien in Unterverzeichnissen \verb|includes| bzw.\ \verb|graphics|
+\item Beispiel-Anhang (Datei \verb|anhang.tex|) mit Erklärungen wurde eingebunden 
+\end{itemize}
+
+\item \verb|_dhbw_praeambel.tex|
+\begin{itemize}
+\item (Fix) das Paket hyperref wird nach biblatex eingebunden, um ein Problem mit der Verlinkung der Fußnoten im PDF zu beheben
+\item (Fix) Fußnoten  gemäß der Richtlinien fortlaufend nummeriert und nicht pro Kapitel
+\item Einstellungen hinzugefügt, um Anhangsverzeichnis zu ermöglichen
+\item bessere Kompatibilität zwischen KOMA-Script (scrreprt) und anderen Paketen mittels scrhack
+\end{itemize}
+
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item (Fix) keine Abschnittsnummern für einzelne Verzeichnisse im Quellenverzeichnis
+\end{itemize}
+
+\item \verb|abbildungen_und_tabellen.tex|
+\begin{itemize}
+\item Erklärung, wie eine Fußnote/ein Zitat bei einer Abbildung zu erstellen ist
+\end{itemize}
+
+\item \verb|abkuerzungen.tex|
+\begin{itemize}
+\item Abkürzungsverzeichnis wird im Inhaltsverzeichnis aufgeführt
+\end{itemize}
+
+\item \verb|abstract.tex|, \verb|anhang.tex|, \verb|einleitung.tex| 
+\begin{itemize}
+\item Erklärungen im Text ergänzt
+\end{itemize}
+
+\item \verb|deckblatt.tex|
+\begin{itemize}
+\item Meta-Daten (Autor, Titel) für die generierte PDF-Datei lassen sich nun festlegen
+\end{itemize}
+
+\end{itemize}
+
+
+\anhangteil{Änderungen in Version 1.2}\label{anhang:ReleaseNotes12}
+Über das Forum in Moodle sind einige Rückmeldungen eingegangen -- vielen Dank an alle, die dazu beigetragen haben. In der Version 1.2 wurden folgende Änderungen vorgenommen, wobei Korrekturen wieder mit \enquote{(Fix)} gekennzeichnet sind: 
+
+\begin{itemize}
+\item \verb|latex-vorlage.tex| (Hauptdokument)
+\begin{itemize}
+\item (Fix) Zeile 19: Seitenzahlen zu Beginn mit römischen \emph{Groß}buchstaben nummeriert
+\end{itemize}
+
+\item \verb|_dhbw_praeambel.tex|
+\begin{itemize}
+\item Zeile 39/40: Unterstützung für \enquote{ebenda} 
+\item Zeile 46--68: zweite Gliederungsebene für Anhänge ermöglicht
+\item (Fix) Zeile 70--73: Abbildungen und Tabellen: Zähler fortlaufend, kein Rücksetzen zu Kapitelbeginn (Paket \verb|chngcntr| anstelle von Paket \verb|remreset|)
+\end{itemize}
+
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item (Fix) bei Quellen mit Herausgeber, aber ohne Autor wird der Name des Herausgebers im Verzeichnis fett gedruckt
+\item Unterstützung für \enquote{ebenda} 
+\end{itemize}
+
+\item \verb|abkuerzungen.tex|
+\begin{itemize}
+\item Bemerkungen zur fortgeschrittenen Nutzung des \verb|acronym|-Pakets eingefügt 
+\end{itemize}
+
+\item \verb|einleitung.tex|
+\begin{itemize}
+\item Abschnitt 1.3 zu Einstellungen ergänzt
+\item Abschnitt 1.5 zu Fehlerbehebungen eingefügt 
+\end{itemize}
+
+\item \verb|text-mit-zitaten.tex|
+\begin{itemize}
+\item Abschnitt 3.1 eingefügt, Erläuterungen zum Zitieren mit \enquote{vgl.} und \enquote{ebenda}. 
+\item Abschnitt 3.2: Beispiele ergänzt
+\item Hinweis zu Jahreszahlen bei Online-Quellen
+\end{itemize}
+
+\item \verb|anhang.tex|
+\begin{itemize}
+\item Erläuterungen zur zweiten Gliederungsebene
+\end{itemize}
+
+\item \verb|literatur-datenbank.bib|
+\begin{itemize}
+\item weitere Beispiele für Quellen
+\end{itemize}
+
+\end{itemize}
+
+\anhangteil{Änderungen in Version 1.3}\label{anhang:ReleaseNotes13}
+Durch die ab 1/2016 geltenden Änderungen der Zitierrichtlinien des Studiengangs waren einige kleinere Anpassungen der Vorlage erforderlich, die nachfolgend beschrieben sind. Bei dieser Gelegenheit ebenfalls erfolgte Korrekturen sind wieder mit \enquote{(Fix)} gekennzeichnet:
+
+\begin{itemize}
+\item \verb|latex-vorlage.tex| (Hauptdokument)
+\begin{itemize}
+\item Hinweis auf Option doppelseitiger Druck entfernt
+\item Schriftgröße der Kapitelüberschriften verkleinert
+\item (Fix) Kopf- und Fußzeilen werden nun korrekt angezeigt für erste Seite eines Kapitels und auch  Quellenverzeichnisse
+\end{itemize}
+
+\item \verb|_dhbw_praeambel.tex|
+\begin{itemize}
+\item Angabe des unteren Rands für Seitenzahl, da diese nun unten rechts steht
+\item Unterstützung für \enquote{ebenda} entfernt
+\item (Fix) Präfixe wie \enquote{von} im Namen eines Autors werden berücksichtigt
+\item Anpassung der Abstände bei Kapitelüberschriften
+\item Kopf- und Fußzeile für Verzeichnisse nun in \verb|_dhbw_kopfzeilen.tex| definiert 
+\end{itemize}
+
+
+\item \verb|deckblatt.tex|
+\begin{itemize}
+\item Schriftgröße des Titels vergrößert
+\item Befehl \verb|\typMeinerArbeit| eingeführt, um Typ auszuwählen
+\item Festlegung des Themas (für ehrenwörtliche Erklärung) mit Befehl \verb|\themaMeinerArbeit|
+\item Darstellung der Angabe des Betreuers in der Ausbildungsstätte angepasst
+\item Formulierung des Sperrvermerks angepasst  
+\end{itemize}
+
+\item \verb|_dhbw_erklaerung.tex|
+\begin{itemize}
+\item Formulierung angepasst an geänderte Prüfungsordnung
+\item Typ und Thema der Arbeit werden automatisch eingefügt
+\end{itemize}
+
+\item \verb|_dhbw_kopfzeilen.tex|
+\begin{itemize}
+\item Seitennummern stehen jetzt unten rechts
+\item (Fix) Kopf- und Fußzeile werden nun korrekt angezeigt in Verzeichnissen und dem Anhang
+\end{itemize}
+
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item Anpassung des Zitierstils auf die ab 1/2016 geltenden Regelungen  
+\item Vorkehrungen für Eindeutigkeit (Hinzufügen abgekürzter oder nötigenfalls ausgeschriebener Vorname) bei Übereinstimmung von Name und Jahreszahl 
+\end{itemize}
+
+\item \verb|einleitung.tex|
+\begin{itemize}
+\item Abschnitt 1.3 zu Einstellungen grundlegend überarbeitet
+\item Abschnitt 1.5.2 zur Kontrolle der Seitenränder eingefügt 
+\end{itemize}
+
+\item \verb|text-mit-zitaten.tex|
+\begin{itemize}
+\item Abschnitt 3.1: Hinweise zu \enquote{ebenda} entfernt
+\item Abschnitt 3.2: Beispiele zur Eindeutigkeit des Zitats ergänzt
+\item Abschnitt 3.3: Hinweise für E-Journals/E-Books ergänzt 
+\end{itemize}
+
+\item \verb|anhang.tex|
+\begin{itemize}
+\item (Fix) Befehl \verb|\spezialkopfzeile| aufgenommen, damit in Kopfzeile das Wort \enquote{Anhang} angezeigt wird 
+\item diese Release Notes wurden in eine eigene Datei verschoben
+\end{itemize}
+
+\item \verb|release_notes.tex|
+\begin{itemize}
+\item s.o.
+\end{itemize}
+
+
+\item \verb|literatur-datenbank.bib|
+\begin{itemize}
+\item weitere Beispiele für Quellen
+\end{itemize}
+\end{itemize}
+
+\anhangteil{Änderungen in Version 1.4}\label{anhang:ReleaseNotes14}
+Durch nicht abwärtskompatible Änderungen beim Versionswechsel von Biblatex 3.2 zu 3.3 sind einige Änderungen notwendig geworden.\footnote{Diese basieren auf Vorschlägen von Yannik Ehlert -- vielen Dank dafür!}
+Die vorliegende Version 1.4 wurde erfolgreich mit MikTeX gestestet (portable Version 2.9.6361 vom 3.6.2017, unter Verwendung von Biblatex 3.7).
+
+\begin{itemize}
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item Anpassung der \verb|\usebibmacro|-Befehle
+\end{itemize}
+
+\item \verb|_dhbw_authoryear.bbx|
+\begin{itemize}
+\item  Änderung von \verb|\printdateextralabel| zu \verb|\printlabeldateextra|
+\end{itemize}
+\end{itemize}
+
+\anhangteil{Änderungen in Version 1.5}\label{anhang:ReleaseNotes15}
+Für den Test dieser Version auf einem Windows-System wurde wieder die portable Version von MiKTeX (2.9.6521 vom 10.11.2017) verwendet.\footnote{\url{http://miktex.org/portable}} Da in diesem Paket leider die Versionen von Biblatex (3.10) und Biber (2.7) inkompatibel sind, ist es erforderlich, die Datei \verb|biber.exe| im Verzeichnis \verb|texmfs\install\miktex\bin\| durch die aktuelle Version 2.10 vom 20.12.2017\footnote{\url{https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/binaries/Windows/}} zu ersetzen. Im Editor TeXworks verwendet man dann zum Übersetzen des \LaTeX-Sourcecodes Typeset/pdfLaTeX bzw.\ Typeset/Biber.
+
+Korrekturen sind wieder mit \enquote{(Fix)} gekennzeichnet.
+
+\begin{itemize}
+\item \verb|latex-vorlage.tex| (Hauptdokument)
+\begin{itemize}
+\item Nach der Änderung der Zitierrichtlinien gibt es nun kein separates Verzeichnis mehr für Internet- und Intranetquellen.
+\item Option \verb|notkeyword=ausblenden| bei \verb|\printbibligraphy| sorgt dafür, dass Sekundärliteratur korrekt zitiert wird.
+\end{itemize}
+
+\item \verb|_dhbw_praembel.tex|
+\begin{itemize}
+\item (Fix) Die Bezeichnung geschachtelter Anhänge wurde auf das in den Zitierrichtlinien geforderte Format \enquote{Anhang 2/1} angepasst (Befehl \verb|\anhangteil|).
+\end{itemize}
+
+\item \verb|einleitung.tex|
+\begin{itemize}
+\item Hinweis zum Ausblenden der farbigen Links im PDF hinzugefügt
+\end{itemize}
+
+\item \verb|text-mit-zitaten.tex|
+\begin{itemize}
+\item Abschnitt 3.4 aktualisiert nach Wegfall des separaten Verzeichnisses für Internet- und Intranetquellen
+\item Abschnitt zum Zitieren von Sekundärliteratur hinzugefügt
+\end{itemize}
+
+\end{itemize}
+
+
+\anhangteil{Änderungen in Version 1.6}\label{anhang:ReleaseNotes16}
+Diese Version wurde auf einem Windows-System erfolgreich mit der portablen Version von MiKTeX (2.9.6621 vom 18.02.2018) getestet.\footnote{Vielen Dank an Florian Eichin für seine wertvollen Anmerkungen.}
+
+Korrekturen sind wieder mit \enquote{(Fix)} gekennzeichnet.
+
+\newpage
+
+\begin{itemize}
+\item \verb|latex-vorlage.tex| (Hauptdokument)
+\begin{itemize}
+\item (Fix) An einer Stelle gab es in Version 1.5 (Internetquellen nicht mehr separat) noch ein Überbleibsel von Version 1.4 (Internetquellen separat), dies wurde korrigiert.
+\item (Fix) Im Inhaltsverzeichnis war die Verlinkung des Abbildungs- und Tabellenverzeich\-nisses nicht ganz korrekt.
+\item Mit den Befehlen \verb|\literaturverzeichnis| bzw.\ \verb|\literaturUndQuellenverzeichnis| kann bequem die Erstellung der Quellenverzeichnisse gesteuert werden, abhängig davon, ob es ein Gesprächsverzeichnis gibt oder nicht.
+ 
+\end{itemize}
+
+\item \verb|_dhbw_praembel.tex|
+\begin{itemize}
+\item Einrückungen für Abbildungs-, Tabellen- und Anhangverzeichnis angepasst
+\item Abkürzungen \enquote{Abb.} und \enquote{Tab.} für Abbildungen bzw.\ Tabellen
+\end{itemize}
+
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item Befehle \verb|\literaturverzeichnis| und \verb|\literaturUndGespraechsverzeichnis| definiert
+\item Befehl \verb|\footcitePrimaerSekundaer| definiert
+\end{itemize}
+
+\item \verb|_dhbw_erklaerung.tex|
+\begin{itemize}
+\item Eintrag als \enquote{Erklärung} (statt \enquote{Ehrenwörtliche Erklärung}) ins Inhaltsverzeichnis
+\end{itemize}
+
+\item \verb|einleitung.tex|
+\begin{itemize}
+\item Bezeichnung \enquote{Erklärung} statt \enquote{Ehrenwörtliche Erklärung}
+\item Erläuterung von \verb|\literaturverzeichnis| und \verb|\literaturUndGespraechsverzeichnis|
+\item Hinweis auf Notwendigkeit von Updates bei MikTeX Portable
+\end{itemize}
+
+\item \verb|text_mit_zitaten.tex|
+\begin{itemize}
+\item Erläuterungen zu Befehl \verb|\footcitePrimaerSekundaer| ergänzt
+\end{itemize}
+
+\item \verb|anhang.tex|
+\begin{itemize}
+\item Befehl \verb|\abstaendeanhangverzeichnis| für Anpassung Einrückung ergänzt
+\end{itemize}
+
+\item \verb|literatur-datenbank.bib|
+\begin{itemize}
+\item Eintrag ergänzt
+\end{itemize}
+
+\end{itemize}
+
+\anhangteil{Änderungen in Version 1.7}\label{anhang:ReleaseNotes17}
+Diese Version wurde auf einem Windows-System erfolgreich mit der portablen Version von MiKTeX (2.9.6942 vom 04.01.2019) getestet.
+
+Korrekturen sind wieder mit \enquote{(Fix)} gekennzeichnet.
+
+\begin{itemize}
+\item \verb|_dhbw-authoryear.bbx|
+\begin{itemize}
+\item Da \verb|labeldate| in Biblatex nicht mehr unterstützt wird, erfolgte eine Umbenennung in 
+\verb|labeldateparts|.\footnote{vgl.\ \url{https://github.com/semprag/biblatex-sp-unified/issues/23}}
+\end{itemize}
+
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item (Fix) Es wurde das Problem behoben, dass im Literaturverzeichnis bei bestimmten Eintragstypen der Titel in Anführungszeichen steht.\footnote{Danke an Florian Eichin für seinen Hinweis.}
+\end{itemize}
+
+\end{itemize}
+
+
+\anhangteil{Änderungen in Version 1.8}\label{anhang:ReleaseNotes18}
+Diese Version wurde auf einem Windows-System erfolgreich mit der portablen Version von MiKTeX (2.9.6942 vom 04.01.2019) getestet.
+
+Die Aktualisierungen in der Vorlage spiegeln zum Einen die Änderungen in den Zitierrichtlinien wieder. Zum Anderen wurden einige studentische Vorschläge aufgegriffen, um die Nutzung der Vorlage zu erleichtern.\footnote{Danke an Bjarne Koll, Tobias Schwarz und Lars Ungerathen für ihre Anregungen.} 
+
+\begin{itemize}
+
+\item \verb|latex_vorlage.tex| (Hauptdokument)
+\begin{itemize}
+\item Es wird nun davon ausgegangen, dass die zur Vorlage gehörenden Dateien in einem eigenen Verzeichnis (\verb|template|) liegen.
+\item Stellenweise wurden Erläuterungen als Kommentare hinzugefügt.
+\end{itemize}
+
+\item \verb|_dhbw_biblatex-config.tex|
+\begin{itemize}
+\item Code, der mehrere Quellenverzeichnisse unterstützt, wurde entfernt.
+\item Ein zu großer Abstand nach Zitaten von Sekundärliteratur wurde korrigiert. 
+\end{itemize}
+
+\item \verb|_dhbw_erklaerung.bbx|
+\begin{itemize}
+\item Gemäß der Anforderung in den Zitierrichtlinien wird die Erklärung nicht ins Inhaltsverzeichnis aufgenommen und nicht mit einer Seitenzahl versehen. 
+\end{itemize}
+
+\pagebreak
+\item \verb|_dhbw_praeambel.bbx|
+\begin{itemize}
+\item Gemäß der Anforderung in den Zitierrichtlinien werden im Literaturverzeichnis alle Autor/innen eines Werks angegeben.
+\end{itemize}
+
+\item \verb|abstract.tex|
+\begin{itemize}
+\item Hinweis auf \LaTeX-Spickzettel hinzugefügt.
+\end{itemize}
+
+\item \verb|deckblatt.tex|
+\begin{itemize}
+\item Vorname, Name, Titel der Arbeit sind nur zu Beginn einzutragen und werden dann an den entsprechenden Stellen automatisch ergänzt.
+\item Hervorhebung, dass Angaben zum Unternehmen sowie den Betreuer/innen zu ergänzen sind. 
+\item Wortlaut des Vertraulichkeitsvermerks wurde an die aktuelle Fassung in der Studien- und Prüfungsordnung angepasst. 
+\end{itemize}
+
+\item \verb|einleitung.tex|
+\begin{itemize}
+\item Ein eigenständiges Gesprächsverzeichnis als Teil des Quellenverzeichnisses ist in den Zitierrichtlinien nicht mehr vorgesehen, die entsprechenden Hinweise wurden entfernt.
+\item Ein alter Hinweis auf die Darstellung von Links im Verzeichnis der Internetquellen wurde entfernt, da es ein solches eigenständiges Verzeichnis nicht mehr gibt. 
+\end{itemize}
+
+\item \verb|text_mit_zitaten.tex|
+\begin{itemize}
+\item Es wird nun erläutert, wie zwei Quellenangaben unmittelbar nebeneinander dargestellt werden können.
+\item Erklärungen, die von mehreren Quellenverzeichnissen ausgegangen sind, wurden entfernt.
+\end{itemize}
+
+\item \verb|literatur-datenbank.bib|
+\begin{itemize}
+\item Gespräch wurde entfernt, da dieses nicht mehr im Quellenverzeichnis aufgeführt werden soll.
+\end{itemize}
+
+\end{itemize}

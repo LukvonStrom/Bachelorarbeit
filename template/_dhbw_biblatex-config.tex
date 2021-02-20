@@ -1,0 +1,178 @@
+%kein Punkt am Ende bei \footcite
+%http://www.golatex.de/footcite-ohne-punkt-am-schluss-t4865.html
+\renewcommand{\bibfootnotewrapper}[1]{\bibsentence#1}
+
+
+%Reihenfolge der Autorennamen
+%   
+% http://golatex.de/viewtopic,p,80448.html#80448
+% Argumente: siehe http://texwelt.de/blog/modifizieren-eines-biblatex-stils/
+\DeclareNameFormat{sortname}{% Bibliographie
+  \ifnum\value{uniquename}=0 % Normalfall
+    \ifuseprefix%
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\namepartgiveni}
+           {\namepartprefix}
+           {\namepartsuffixi}%
+       }
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\namepartgiveni}
+           {\namepartprefixi}
+           {\namepartsuffixi}%
+       }%
+  \fi
+  \ifnum\value{uniquename}=1% falls nicht eindeutig, abgek. Vorname 
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\namepartgiveni}
+           {\namepartprefix}
+           {\namepartsuffix}%
+       }%
+  \fi
+  \ifnum\value{uniquename}=2% falls nicht eindeutig, ganzer Vorname 
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\namepartgiven}
+           {\namepartprefix}
+           {\namepartsuffix}%
+       }%
+  \fi   
+  \usebibmacro{name:andothers}}
+
+\DeclareNameFormat{labelname}{% für Zitate
+  \ifnum\value{uniquename}=0 % Normalfall
+    \ifuseprefix%
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\empty}
+           {\namepartprefix}
+           {\namepartsuffixi}%
+       }
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\empty}
+           {\namepartprefixi}
+           {\namepartsuffixi}%
+       }%
+  \fi
+  \ifnum\value{uniquename}=1% falls nicht eindeutig, abgek. Vorname 
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\namepartgiveni}
+           {\namepartprefix}
+           {\namepartsuffix}%
+       }%
+  \fi
+  \ifnum\value{uniquename}=2% falls nicht eindeutig, ganzer Vorname 
+      {%
+         \usebibmacro{name:family-given}
+           {\namepartfamily}
+           {\namepartgiven}
+           {\namepartprefix}
+           {\namepartsuffix}%
+       }%
+  \fi   
+  \usebibmacro{name:andothers}}
+      
+  
+\DeclareFieldFormat{extrayear}{% = the 'a' in 'Jones 1995a'
+  \iffieldnums{labelyear}
+    {\mknumalph{#1}}
+    {\mknumalph{#1}}}        
+
+\renewcommand*{\multinamedelim}{\addslash}
+\renewcommand*{\finalnamedelim}{\addslash}
+\renewcommand*{\multilistdelim}{\addslash}
+\renewcommand*{\finallistdelim}{\addslash}
+
+\renewcommand{\nameyeardelim}{~}
+
+% Literaturverzeichnis: Doppelpunkt zwischen Name (Jahr): Rest 
+% http://de.comp.text.tex.narkive.com/Tn1HUIXB/biblatex-authoryear-und-doppelpunkt
+\renewcommand{\labelnamepunct}{\addcolon\addspace}
+
+% damit die Darstellung für Vollzitate von Primärquellen in 
+% Fußnoten später auf "nicht fett" geändert werden kann 
+% (nur für Zitate von Sekundärliteratur relevant)
+\newcommand{\textfett}[1]{\textbf{#1}}
+
+% für Zitate von Sekundärliteratur:
+\newcommand{\footcitePrimaerSekundaer}[4]{%
+  \renewcommand{\textfett}[1]{##1}%
+  \footnote{\fullcite[#2]{#1}, zitiert nach \cite[#4]{#3}}%  
+  \renewcommand{\textfett}[1]{\textbf{##1}}%
+}
+
+% Im Literaturverzeichnis: Autor (Jahr) fett
+\renewbibmacro*{author}{%
+  \ifboolexpr{%
+    test \ifuseauthor%
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\usebibmacro{bbx:savehash}%
+        \textfett{\printnames{author}}%
+        \iffieldundef{authortype}
+          {\setunit{\addspace}}
+          {\setunit{\addcomma\space}}}%
+     \iffieldundef{authortype}
+       {}
+       {\usebibmacro{authorstrg}%
+        \setunit{\addspace}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\addspace}}%
+  \textfett{\usebibmacro{date+extrayear}}}
+
+% Sonderfall: Quelle ohne Autor, aber mit Herausgeber
+% Name des Herausgebers wird fett gedruckt
+\renewbibmacro*{bbx:editor}[1]{%
+  \ifboolexpr{%
+    test \ifuseeditor%
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\textfett{\printnames{editor}}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{editor}%
+     \setunit{\addspace}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\addspace}}%
+  \textfett{\usebibmacro{date+extrayear}}}
+
+% Anpassungen für deutsche Sprache
+\DefineBibliographyStrings{ngerman}{%
+	nodate = {{o.J.}},
+	urlseen = {{Abruf:}},
+	ibidem = {{ebenda}}
+}
+
+% keine Anführungszeichen beim Titel im Literaturverzeichnis
+\DeclareFieldFormat[article,book,inbook,incollection,inproceedings,manual,misc,phdthesis,thesis,online,report]{title}{#1\isdot}
+
+\newcommand{\literaturverzeichnis}{%
+% nur Literaturverzeichnis
+% (als eigenes Kapitel)
+\phantomsection
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\spezialkopfzeile{Literaturverzeichnis}
+\defbibheading{lit}{\chapter*{Literaturverzeichnis}}
+\label{chapter:quellen}
+\printbibliography[heading=lit,notkeyword=ausblenden]
+}

@@ -1,0 +1,137 @@
+%%% Präambel %%%
+% hier sollten keine Änderungen erforderlich sein
+%
+\usepackage[utf8]{inputenc}   % Zeichencodierung UTF-8 für Eingabe-Dateien
+\usepackage[T1]{fontenc}      % Darstellung von Umlauten im PDF
+
+\usepackage{listings}         % für Einbindung von Code-Listings
+\lstset{numbers=left,numberstyle=\tiny,numbersep=5pt,texcl=true}
+\lstset{literate=             % erlaubt Sonderzeichen in Code-Listings 
+{Ö}{{\"O}}1
+{Ä}{{\"A}}1
+{Ü}{{\"U}}1
+{ß}{{\ss}}2
+{ü}{{\"u}}1
+{ä}{{\"a}}1
+{ö}{{\"o}}1
+{€}{{\euro}}1
+}
+
+\usepackage[
+  inner=35mm,outer=15mm,top=25mm,
+  bottom=20mm,foot=12mm,includefoot
+]{geometry}                 % Einstellungen für Ränder
+
+\usepackage{float}
+
+\usepackage[ngerman]{babel} % Spracheinstellungen Deutsch
+\usepackage[babel,german=quotes]{csquotes} % deutsche Anf.zeichen
+\usepackage{enumerate}      % anpassbare Nummerier./Aufz.
+\usepackage{graphicx}       % Einbinden von Grafiken
+\usepackage[onehalfspacing]{setspace} % anderthalbzeilig
+
+\usepackage{blindtext}      % Textgenerierung für Testzwecke
+\usepackage{color}          % Verwendung von Farbe 
+
+\usepackage{acronym}        % für ein Abkürzungsverzeichnis
+
+\usepackage{lscape}
+
+\usepackage[                % Biblatex
+  backend=biber,
+  bibstyle=_dhbw_authoryear,maxbibnames=99,
+  citestyle=authoryear,     
+  uniquename=true, useprefix=true,
+  bibencoding=utf8, giveninits=true]{biblatex}
+\input{template/_dhbw_biblatex-config.tex} % mit DHBW-spezifischen Einstellungen
+
+
+
+\usepackage[hidelinks]{hyperref}       % URL-Formatierung, klickbare Verweise
+
+\usepackage[plain]{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{tocloft}        % für Verzeichnis der Anhänge
+
+\newcounter{anhcnt}
+\setcounter{anhcnt}{0}
+\newlistof{anhang}{app}{}
+
+\newcommand{\anhang}[1]{%
+  \refstepcounter{anhcnt}
+  \setcounter{anhteilcnt}{0}
+  \section*{Anhang \theanhcnt: #1}
+  \addcontentsline{app}{section}{\protect\numberline{Anhang \theanhcnt}#1}\par
+}
+
+\newcounter{anhteilcnt}
+\setcounter{anhteilcnt}{0}
+
+\newcommand{\anhangteil}[1]{%
+	\refstepcounter{anhteilcnt}
+	\subsection*{Anhang~\arabic{anhcnt}/\arabic{anhteilcnt}: #1}
+	\addcontentsline{app}{subsection}{\protect\numberline{Anhang \theanhcnt/\arabic{anhteilcnt}}#1}\par
+}
+
+\renewcommand{\theanhteilcnt}{Anhang \theanhcnt/\arabic{anhteilcnt}}
+
+% vgl. S. 4 Paket-Beschreibung tocloft 	
+% Einrückungen für Anhangverzeichnis
+\makeatletter
+\newcommand{\abstaendeanhangverzeichnis}{
+\renewcommand*{\l@section}{\@dottedtocline{1}{0em}{5.5em}}
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{2.3em}{6.5em}}
+}
+\makeatother
+
+% Abbildungs- und Tabellenverzeichnis
+% Bezeichnungen
+\renewcaptionname{ngerman}{\figurename}{Abb.}
+\renewcaptionname{ngerman}{\tablename}{Tab.}
+\makeatletter
+\renewcommand*{\ALG@name}{Alg.}
+\makeatother
+% Einrückungen
+\makeatletter
+\renewcommand*{\l@figure}{\@dottedtocline{1}{0em}{2.3em}}
+\renewcommand*{\l@table}{\@dottedtocline{1}{0em}{2.3em}}
+\makeatother
+
+\usepackage{tabularx}
+
+\usepackage{chngcntr}                % fortlaufende Zähler für Fußnoten, Abbildungen und Tabellen
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{footnote}{chapter}
+
+\usepackage[automark]{scrlayer-scrpage} 
+\input{template/_dhbw_kopfzeilen.tex}		 % für schöne Kopfzeilen 
+
+\usepackage{textcomp}            % erlaubt EUR-Zeichen in Eingabedatei
+\usepackage{eurosym}             % offizielles EUR-Symbol in Ausgabe
+\renewcommand{\texteuro}{\euro}  % ACHTUNG: nach hyperref aufrufen!
+
+\usepackage{scrhack}             % stellt Kompatibilität zw. KOMA-Script
+                                 % (scrreprt) und anderen Paketen her
+                        
+\usepackage{todo}
+\usepackage{enumitem}
+
+\usepackage[table,xcdraw]{xcolor}
+
+\usepackage{pdfpages}
+                                 
+% Anpassung der Abstände bei Kapitelüberschriften
+% (betrifft auch Inhalts-, Abbildungs- und Tabellenverzeichnis)
+\renewcommand*\chapterheadstartvskip{\vspace*{-\topskip}}
+\newcommand{\myBeforeTitleSkip}{1mm}
+\newcommand{\myAfterTitleSkip}{10mm}
+\setlength\cftbeforetoctitleskip{\myBeforeTitleSkip}
+\setlength\cftbeforeloftitleskip{\myBeforeTitleSkip}
+\setlength\cftbeforelottitleskip{\myBeforeTitleSkip}
+
+\setlength\cftaftertoctitleskip{\myAfterTitleSkip}
+\setlength\cftafterloftitleskip{\myAfterTitleSkip}
+\setlength\cftafterlottitleskip{\myAfterTitleSkip}                                                            
+%%% Ende der Präambel %%%

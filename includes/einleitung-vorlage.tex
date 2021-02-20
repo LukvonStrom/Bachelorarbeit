@@ -1,0 +1,200 @@
+\chapter{Einleitung}
+
+Bald kann nun der Text Ihrer Projekt- oder Bachelorarbeit beginnen. Dank \LaTeX\ wird Ihre Arbeit garantiert professionell aussehen. Für den Inhalt sind Sie aber weiterhin selbst verantwortlich~\mbox{;-)}
+
+Natürlich ist es schwer, sich vorzustellen, wie das Dokument aussieht, wenn die Vorlage doch gar keinen Text enthält. Aus diesem Grund wird mit Hilfe des Pakets \enquote{blindtext} so genannter Blindtext erzeugt. Mit dem Befehl \verb|\blinddocument| wird nachfolgend ein ganzes Kapitel sinnfreier Blindtext eingefügt.\footnote{Beachten Sie, dass Sie in Ihrer Arbeit eine Strukturierung wie in Abschnitt 2.1 vermeiden sollten: Dort gibt es einen Abschnitt 2.1.1, aber keinen Abschnitt 2.1.2.} 
+
+In den Abschnitten~\ref{section:werkzeuge} bis \ref{section:zeichencodierung} sind zuvor die wichtigsten Werkzeuge, die Dateistruktur der Vorlage sowie einige Einstellungen beschrieben. Abschnitt~\ref{section:fehlerbehebung} gibt Hilfestellungen für bestimmte Fehler. In Kapitel~\ref{chapter:zitate} finden sich Beispiele, wie Sie Quellen korrekt zitieren können. In Kapitel~\ref{chapter:abbildungenTabellen} werden Abbildungen, Tabellen, ein Code-Listing und auch mathematische Formeln in den Text eingebunden. Ab Seite~\pageref{chapter:quellen} finden Sie das Literaturverzeichnis.
+
+\emph{Hinweis:} Die farbigen, anklickbaren Links, die in der PDF-Ansicht enthalten sind, werden beim Ausdruck nicht wiedergegeben.\footnote{Das Feature lässt sich abschalten, indem man die Option \texttt{hidelinks} bei \texttt{documentclass} zu Beginn des Hauptdokuments hinzufügt. Für weitere Konfigurationsmöglichkeiten siehe \url{https://ctan.org/pkg/hyperref}.}
+
+\section{Werkzeuge}\label{section:werkzeuge}
+
+Sämtliche benötigten Werkzeuge sind Open Source und damit kostenlos nutzbar.
+
+Für einen einfachen Start in \LaTeX\ sowie Tests können Sie einen Online-Editor wie \url{overleaf.com} verwenden. Allerdings sollten Sie eine Projekt- oder Bachelorarbeit nicht mit diesem System erstellen, da es sich um eine Cloud-Lösung handelt, bei der letztlich nicht gewährleistet ist, dass Firmen-Interna und schützenswerte Daten nicht in die Hände Dritter gelangen können. Für eine lokale Installation können Sie z.B.\ TeXLive (alle gängigen Plattformen, \url{http://tug.org/texlive/}), MikTeX (Windows, \url{http://www.miktex.org/}) oder TexShop (Mac OS, \url{http://pages.uoregon.edu/koch/texshop/}) verwenden.
+
+In Moodle findet sich der Link zu einer portablen Version von MikTeX, welche ohne Installation auskommt. Dieses System wird für Schulungen an der DHBW genutzt, es enthält aber prinzipiell alle Werkzeuge, um eine Bachelorarbeit zu schreiben.\footnote{Manche werden das relativ schlichte TeXworks durch einen anderen Editor ersetzen wollen.} Mit diesem System wird auch jede neue Version der Vorlage getestet.
+
+Erstellen Sie Ihr Dokument von Beginn an in \LaTeX. Es ist etwa wenig sinnvoll, zuerst in Word zu schreiben und das Ergebnis am Ende nach \LaTeX\ zu konvertieren.\footnote{Falls es je nötig sein sollte, gibt es für die umgekehrte Richtung diverse Konverter, z.B.\ latex2rtf, \url{http://sourceforge.net/projects/latex2rtf/}.} 
+
+   
+Die Vorlage verwendet biblatex,\footnote{siehe etwa \url{http://www.ub.uni-konstanz.de/serviceangebote/literaturverwaltung/bibtex/bibtex-und-biblatex-benutzen.html} für eine Gegenüberstellung von BibTeX und biblatex.}
+um den vorgegebenen Stil der Zitierrichtlinien umzusetzen. Der Editor muss daher so konfiguriert werden, dass er beim Übersetzen biber statt bibtex verwendet. Zur Verwaltung der Quellen nutzt man etwa JabRef (Java, \url{http://jabref.sourceforge.net/}).
+
+\section{Benötigte Dateien}
+
+Die folgenden Dateien, deren Namen einheitlich mit \verb|_dhbw_| beginnt, werden eingebunden. Änderungen an diesen Dateien sind nicht erforderlich.
+
+\verb|_dhbw_authoryear.bbx       (Anpassung Einträge im Literaturverzeichnis)| \\
+muss sich im selben Verzeichnis wie die zu kompilierende Hauptdatei (\verb|latex-vorlage.tex|) befinden, die folgenden Dateien im Unterverzeichnis \verb|template|:
+\begin{verbatim}
+_dhbw_biblatex-config.tex  (weitere Einstellung für Biblatex)
+_dhbw_erklaerung.tex       (ehrenwörtliche Erklärung)
+_dhbw_kopfzeilen.tex       (Kapitelname in Kopfzeilen) 
+_dhbw_praeambel.tex        (Einbindung der benötigten Pakete)
+\end{verbatim}
+
+Weiterhin sind nur für die Übersetzung der Beispieldatei erforderlich:
+\begin{verbatim}
+dhbw.png                   (Beispiel für eine Grafik, die eingebunden wird)
+HelloWorld.java            (eingebundenes Java-Listing)
+literatur-datenbank.bib    (Literatur-Datenbank mit Beispiel-Einträgen)
+\end{verbatim}
+Die Grafik ist im Verzeichnis \verb|graphics| abgelegt, die anderen Dateien in \verb|includes|. 
+
+Ferner gliedert sich dieser Text in folgende Dateien (ebenfalls im Verzeichnis \verb|includes|), die per \verb|\input|-Befehl eingebunden werden:
+\begin{verbatim}
+abbildungen_und_tabellen.tex
+abkuerzungen.tex
+abstract.tex
+anhang.tex
+deckblatt.tex
+einleitung.tex
+text_mit_zitaten.tex
+\end{verbatim}
+
+Um das Editieren (und Debuggen) zu erleichtern, ist es ratsam, ein längeres Dokument in einzelne Dateien zu strukturieren (z.B.\ kapitelweise) und ggf.\ die Ordnerstruktur nach eigenen Bedürfnissen anzupassen. Viele Editoren unterstützen es, in einem Projekt die Hauptdatei festzulegen, so dass der Compiler von einer beliebigen Unterdatei aus aufgerufen werden kann. (In TeXworks geschieht dies durch die Angabe \verb|% !TeX root = ../latex-vorlage.tex| in der ersten Zeile einer Unterdatei, wobei die Hauptdatei relativ zu dieser angegeben werden muss.)
+
+\section{Vorzunehmende Einstellungen}
+
+\emph{Hinweis:} Mit der ab 1/2016 geltenden Fassung der Zitierrichtlinien ist die zuvor bestehende Möglichkeit, auch doppelseitig auszudrucken, gestrichen worden. Gleiches gilt für die nun nicht mehr bestehende Option, \enquote{ebenda} zu nutzen.
+
+\subsection{Deckblatt}
+
+Die folgenden Anpassungen sind in der Datei \verb|deckblatt.tex| vorzunehmen. Die entsprechenden Stellen sind im Source Code wie folgt gekennzeichnet:
+\lstset{language=TeX} 
+\begin{lstlisting}
+% HIER EDITIEREN: 
+\end{lstlisting}
+
+\subsubsection{Titel und Erklärung}
+Natürlich ist das Deckblatt anzupassen, schließlich soll dort Ihr Name erscheinen. Denken Sie bitte aber auch unbedingt daran, am Anfang der Datei festzulegen, um welchen Typ (Projekt-/ Bachelor-/Seminararbeit) es sich handelt und wie Ihr Thema (Titel der Arbeit) lautet.\footnote{%
+Falls Sie einen langen Titel mit Untertitel haben, können Sie für die Aufnahme in die Erklärung den Untertitel auch weglassen.} Beide Angaben werden automatisch in die ehrenwörtliche Erklärung eingefügt, so dass Sie in der Datei \verb|_dhbw_erklaerung.tex| keine Änderungen vornehmen müssen.
+In der Datei \verb|deckblatt.tex| wird die Schriftgröße für den Titel auf \verb|\LARGE| eingestellt. Falls Sie je einen sehr langen Titel haben, wählen Sie eine kleinere Schriftgröße mit dem Befehl \verb|\Large| (Zeile 27 im Source Code).
+
+\subsubsection{Meta-Daten im PDF}
+Zu Beginn von \verb|deckblatt.tex| können Sie Ihren Namen und den Titel der Arbeit für die Meta-Daten der PDF-Datei angeben. 
+
+
+\subsubsection{Vertraulichkeitsvermerk}
+Ein so genannter \enquote{Sperr- oder Vertraulichkeitsvermerk} sollte eher die Ausnahme sein. Meiner Erfahrung nach enthalten die allerwenigsten Arbeiten brisante Firmengeheimnisse. Arbeiten werden -- unabhängig von einem Sperrvermerk -- von der DHBW sowieso nicht an Dritte weitergegeben, auch die Prüfer müssen die Inhalte vertraulich behandeln. Durch einen Sperrvermerk schränken Sie sich aber möglicherweise selbst ein, da Sie dann Ihre Arbeit im Grunde auch niemandem ohne Genehmigung Ihrer Firma zeigen dürfen.
+Falls ein Sperrvermerk erforderlich ist, können Sie die auskommentierten Zeilen am Ende der Datei \verb|deckblatt.tex| nutzen.
+
+\subsection{Hauptdokument}
+
+Sie bearbeiten folgenden Abschnitt, um Ihre einzelnen Kapitel einzubinden:
+\lstset{language=}
+\lstinputlisting[firstline=48,lastline=59,firstnumber=48]{latex-vorlage.tex}
+
+Je nachdem, ob Sie Abstract und Abkürzungsverzeichnis verwenden, ändern Sie die folgenden Zeilen.
+In aller Regel werden Sie auch Tabellen und Abbildungen nutzen, ansonsten entfernen Sie die entsprechenden Verzeichnisse. 
+\lstinputlisting[firstline=21,lastline=42,firstnumber=21]{latex-vorlage.tex}
+
+Änderungen außerhalb dieser Bereiche sind nicht erforderlich.
+
+\emph{Hinweis:} Mit den Änderungen der Zitierrichtlinien 01/2020 ist die Anforderung entfallen, ein Gesprächsverzeichnis im Quellenverzeichnis zu führen. Stattdessen ist dies in den Textteil bzw.\ einen Anhang zu integrieren.
+
+
+\section{Zeichencodierung}\label{section:zeichencodierung}
+
+Achten Sie darauf, dass Sie für alle \LaTeX\ und BibTeX-Dateien eine einheitliche Zeichencodierung verwenden, damit Umlaute und Sonderzeichen korrekt wiedergegeben werden. Sie müssen dazu ggf.\ die Einstellungen Ihres Editors anpassen.
+
+Damit Sonderzeichen korrekt dargestellt werden, sollte als Codierung \emph{UTF-8} (Unicode) eingestellt sein. UTF-8 stimmt in den ersten 128 Unicode-Zeichen mit dem ASCII-Zeichensatz überein, kann aber auch Sonderzeichen oder Zeichen beliebiger Sprachen darstellen.
+
+Diese Datei ist \emph{UTF-8}-codiert, weshalb sich in der Präambel folgender Befehl findet:
+\lstset{language=TeX} 
+\begin{lstlisting}
+\usepackage[utf8]{inputenc}   % Zeichencodierung UTF-8 für Eingabe-Dateien
+\end{lstlisting}
+
+Mit der richtigen Codierung können die Sonderzeichen ä, ö, ü, Ä, Ö, Ü, ß, € wie gewohnt direkt im Source Code eines \LaTeX-Dokuments geschrieben werden.
+
+\section{Fehlerbehebung}\label{section:fehlerbehebung}
+
+\subsection{Kopfzeile}
+Es ist \emph{kein Fehler}, sondern beabsichtigt, dass auf der ersten Seite eines Kapitels (und auch bei der ersten Seite der Verzeichnisse) die Kopfzeile fehlt.
+
+\subsection{Kontrolle der Seitenränder}
+Wenn Sie in Zeile 3 der Hauptdatei das Packet \enquote{showframe} einbinden, können Sie sich die Ränder Ihres Dokuments zur Kontrolle anzeigen lassen. Es empfiehlt sich, die Ränder zu kontrollieren und darauf zu achten, dass beim Druck \emph{keine Skalierung} im PDF-Viewer gewählt wird.  
+
+Überlange Zeilen erkennen Sie außerdem an den Warnmeldungen \verb|Overfull \hbox| in der \verb|.log|-Datei.
+
+\subsection{biber}
+Zumindest unter Mac OS kommt es manchmal vor, dass sich biber aufhängt und mit einer Fehlermeldung folgender Form stoppt:
+
+{\small
+\begin{verbatim}
+read_file '/var/folders/ay/ay9RQK7FEcKOxehY75+N4k+++TI/-Tmp-/
+par-746f62696173737472617562/cache-a3cdad92316c60c9c5179d80d6bb51a7a024393c/
+inc/lib/Biber/LaTeX/recode_data.xml' - sysopen: No such file or directory at 
+/var/folders/ay/ay9RQK7FEcKOxehY75+N4k+++TI/-Tmp-/par-746f62696173737472617562/
+cache-a3cdad92316c60c9c5179d80d6bb51a7a024393c/inc/lib/Biber/LaTeX/Recode.pm 
+line 112.
+INFO - This is Biber 1.9
+INFO - Logfile is 'latex-vorlage.blg'
+\end{verbatim}
+}
+
+Abhilfe schafft Löschen des temporären Verzeichnisses, hier: \verb|par-746f62696173737472617562|, inklusive der Unterverzeichnisse.
+
+Ein korrekter biber-Lauf sieht in etwa so aus:
+{\small
+\begin{verbatim}
+INFO - Logfile is 'latex-vorlage.blg'
+INFO - Reading 'latex-vorlage.bcf'
+INFO - Found 25 citekeys in bib section 0
+INFO - Processing section 0
+INFO - Looking for bibtex format file 'includes/literatur-datenbank.bib' for section 0
+INFO - Decoding LaTeX character macros into UTF-8
+INFO - Found BibTeX data source 'includes/literatur-datenbank.bib'
+INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = 
+non-ignorable'
+INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 
+'normalization = prenormalized'
+INFO - Sorting list 'nyt' of type 'entry' with scheme 'nyt' and locale 'de-DE'
+INFO - No sort tailoring available for locale 'de-DE'
+INFO - Writing 'latex-vorlage.bbl' with encoding 'UTF-8'
+INFO - Output to latex-vorlage.bbl 
+\end{verbatim}
+}
+
+\subsection{Zeilenumbruch bei langen URLs}
+Sehr lange und komplizierte URLs\footcite{langeURL} können in manchen Fällen ein Problem beim Zeilenumbruch in Blocksatz darstellen, v.a.\ im Verzeichnis der Internetquellen. Folgende URL ragt beispielsweise in den rechten Rand hinein: 
+
+\url{http://www.google.de/search?hl=de&source=hp&q=biblatex+umbruch+url&gbv=2&oq=biblatex+umbruch+&gs_l=heirloom-hp.3.0.0i13i30l2j0i22i10i30.1757.7464.0.8525.22.19.0.3.3.0.204.1959.13j5j1.19.0.msedr...0...1ac.1.34.heirloom-hp..0.22.1990.yWySyKFfLPY}
+
+Eine nahe liegende Lösungsmöglichkeit ist, den betroffenen Satz etwas umzuformulieren.
+Jetzt geht es allerdings auch nicht besser.\footnote{%
+\LaTeX\ sieht von einer Trennung der URL bei einem Bindestrich ab, um Missverständnisse zu vermeiden.
+}
+\url{http://www.google.de/search?hl=de&source=hp&q=biblatex+umbruch+url&gbv=2&oq=biblatex+umbruch+&gs_l=heirloom-hp.3.0.0i13i30l2j0i22i10i30.1757.7464.0.8525.22.19.0.3.3.0.204.1959.13j5j1.19.0.msedr...0...1ac.1.34.heirloom-hp..0.22.1990.yWySyKFfLPY}
+
+Man kann sich aber damit behelfen, dass man die URL manuell in mehrere hintereinander gestellte \verb|\href|-Befehle auftrennt (der anklickbare Link bleibt so weiterhin korrekt). Einzig die Zeichen \verb|&| und \verb|_| sind zu escapen (als \verb|\&| bzw.\ \verb|\_|). Schauen Sie bitte in den Source Code.
+
+\newcommand{\mylongurl}[1]{%
+% erstes Argument von href ist das Linkziel, das beim Klicken angesprungen wird
+\href{http://www.google.de/search?hl=de&source=hp&q=biblatex+umbruch+url&gbv=2&oq=biblatex+umbruch+&gs_l=heirloom-hp.3.0.0i13i30l2j0i22i10i30.1757.7464.0.8525.22.19.0.3.3.0.204.1959.13j5j1.19.0.msedr...0...1ac.1.34.heirloom-hp..0.22.1990.yWySyKFfLPY}{\texttt{#1}}\\}
+
+%beachten Sie, dass & und _ escaped werden müssen
+\mylongurl{http://www.google.de/search?hl=de\&source=hp\&q=biblatex+umbruch+url\&gbv=2\&oq=}
+\mylongurl{biblatex+umbruch+\&gs\_l=heirloom-hp.3.0.0i13i30l2j0i22i10i30.1757.7464.0.8525.22.}
+\mylongurl{19.0.3.3.0.204.1959.13j5j1.19.0.msedr...0...1ac.1.34.heirloom-hp..0.22.1990.}
+\mylongurl{yWySyKFfLPY}
+
+\subsection{Verwendung von MikTeX Portable}
+Falls Sie MikTeX Portable verwenden, nutzen Sie bitte die Funktion \enquote{Check for updates}, welche über das Tray Icon erreichbar ist. In einem Fall gab es vor dem Update Schwierigkeiten mit der automatischen Silbentrennung des Babel-Pakets, die sich im Compiler-Log wie folgt äußerten
+{\small\begin{verbatim}
+Package babel Warning: No hyphenation patterns were preloaded for
+(babel)                the language `German (new orthography)' into the format.
+
+(babel)                Please, configure your TeX system to add them and
+(babel)                rebuild the format. Now I will use the patterns
+(babel)                preloaded for \language=0 instead on input line 43.
+\end{verbatim}
+}
+Bei korrekter Funktionsweise sollte sich im Log stattdessen nur ein Hinweis finden wie:
+{\small\begin{verbatim}
+Babel <3.18> and hyphenation patterns for 75 language(s) loaded.
+\end{verbatim}
+}
