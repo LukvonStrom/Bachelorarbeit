@@ -6,8 +6,50 @@
 
 \subsection{Datenbankseitige Verarbeitung}
 \subsubsection{Datenbankabfragen}
+\begin{itemize}
+\item Timestream
+\item Redshift
+\item Athena
+\item Elasticsearch
+\end{itemize}
+
 \subsubsection{Externe Analyse}
+\begin{itemize}
+\item Amazon EMR
+\item Amazon Glue
+\item AWS Lake Formation
+\end{itemize}
+
 
 \subsection{Echtzeitverarbeitung}
 \subsubsection{Streamanalyse}
+\begin{itemize}
+\item AWS Kinesis Data Analytics/Stream
+\item AWS Lambda
+\end{itemize}
+
+Source -> Stream ingestion -> Stream storage -> Stream processing -> Destination
+
+Talkingpoints gegen Streaming onprem:
+\begin{itemize}
+\item Difficult to set up
+\item Difficult to achieve high availability
+\item Error prone and complex to manage
+\item Tricky to scale
+\item Integration requires development
+\item Expensive to maintain
+\end{itemize}
+Amazon Kinesis Data Streams 
+\begin{itemize}
+\item Daten verfügbar in 70 Milisekunden
+\end{itemize}
+
+
+Amazon Kinesis Data Analytics
+
+
 \subsubsection{Brokeranalyse}
+
+\begin{itemize}
+\item AWS IoT Analytics
+\end{itemize}
