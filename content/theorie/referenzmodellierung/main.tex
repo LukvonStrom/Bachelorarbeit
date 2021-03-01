@@ -1,25 +1,66 @@
-\section{Referenzmodellierung}\label{theorie:referenzmodellierung}
-Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von vom Brocke ist ein Referenzmodell als solches zu erkennen, wenn der Gegenstand und/oder\footnote{Die Verwendung von \enquote{und/oder} wurde hier gewählt, da der Autor der Quelle das \enquote{oder} aus der boolschen Algebra gewählt hat um explizit beide Fälle einzuschliessen.} der Inhalt des Referenzmodells bei der Konstruktion des Gegenstandes und/oder des Inhaltes eines zu konstruierenden Anwendungsmodells wiederverwendet werden kann.\footcite[Vgl.][34]{vomBrocke.2003} Dabei hat ein Referenzmodell einen Empfehlungscharakter und stellt eine \enquote{best practice} dar.\footcite[Vgl.][31]{vomBrocke.2003} 
+\section{Referenzarchitektur}\label{theorie:referenzmodellierung}
+\Todo{Einleitung -> Bass,Kazman --> Referenzmodell Basis von Refernzarchitektur}
 
-
-\Todo{Grundsätze ordnungsgemäßer Modellierung - siehe auch 148 vomBrocke.2003}
+Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Referenzmodell, wie in \autoref{abb:RelationshipsReferenceModel} welches in Softwarearchitekturen instanziiert werden kann. \footcite[Vgl.][S.~17~f.]{Bass.2010} In diesem Kapitel soll deshalb speziell auf die theoretische Definition von Referenzmodellierung eingegangen werden und entsprechend die theoretische Definition des Referenzarchitekturbegriffs genauso wie mögliche Vorgehensmodelle betrachtet werden.
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.45\textheight]{graphics/anwendung-referenzmodelle.pdf}
+\includegraphics[width=0.66\textwidth]{graphics/Relationships-reference-models.pdf}
+\caption[Beziehungen zwischen Referenzmodellen, Architekturpatterns, Referenzarchitekturen und Softwarearchitekturen]{Beziehungen zwischen Referenzmodellen, Architekturpatterns, Referenzarchitekturen und Softwarearchitekturen.\footnotemark}
+\label{abb:RelationshipsReferenceModel}
+\end{figure}
+\footnotetext{Mit Änderungen entnommen aus: \cite[][18]{Bass.2010}}
+
+\subsection{Referenzmodelle}
+
+Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von vom Brocke ist ein Referenzmodell als solches zu erkennen, wenn der Gegenstand und/oder\footnote{Die Verwendung von \enquote{und/oder} wurde hier gewählt, da der Autor der Quelle das \enquote{oder} aus der boolschen Algebra gewählt hat um explizit beide Fälle einzuschliessen.} der Inhalt des Referenzmodells bei der Konstruktion des Gegenstandes und/oder des Inhaltes eines zu konstruierenden Anwendungsmodells wiederverwendet werden kann.\footcite[Vgl.][34]{vomBrocke.2003} Dabei hat ein Referenzmodell einen Empfehlungscharakter und stellt eine \enquote{best practice} dar.\footcite[Vgl.][31]{vomBrocke.2003} 
+
+Ein Referenzmodell kann nach vom Brocke nicht objektiv allgemeingültig sein und auch keinen objektiven Empfehlungscharakter haben, sondern muss subjektiv beurteilt werden.\footcite[Vgl. auch im Folgenden][31~f.]{vomBrocke.2003}  Dabei ist zumindest von den Interessensgruppen der Konstruierenden und der Nutzenden auszugehen, welche das Referenzmodell subjektiv unterschiedlich nach Allgemeingültigkeit und Empfehlungscharakter bewerten. Je nachdem welche Beurteilung höher gewichtet wird und früher einfließt, kann also entweder von der Situation ausgegangen werden, dass das Referenzmodell vom Konstruierenden zu einem solchen erklärt wird oder ein Modell, ob vom Konstruierenden beabsichtigt oder nicht, von den Nutzenden zu einem solchen erhoben wird.
+
+\subsection{Grundsätze ordnungsgemäßer Referenzmodellierung}
+\Todo{Grundsätze ordnungsgemäßer Modellierung/GoRM - siehe auch 148 vomBrocke.2003}
+
+
+\subsection{Konstruktionstechniken}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.5\textheight]{graphics/anwendung-referenzmodelle.pdf}
 \caption[Konstruktionstechniken der Referenzmodellierung]{Konstruktionstechniken der Referenzmodellierung.\footnotemark}
 \label{abb:KonstruktionstechnikenRefMod}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite[][262]{vomBrocke.2003}}
+
+\subsection{Anwendung von Referenzmodellen}
+Instanziierung
+Konfiguration
 \Todo{Einsatzszenarien darstellen (Konfiguration, ...)}
 
-Ein Referenzmodell kann nach vom Brocke nicht objektiv allgemeingültig sein und auch keinen objektiven Empfehlungscharakter haben, sondern muss subjektiv beurteilt werden.\footcite[Vgl. auch im Folgenden][31~f.]{vomBrocke.2003}  Dabei ist zumindest von den Interessensgruppen der Konstruierenden und der Nutzenden auszugehen, welche das Referenzmodell subjektiv unterschiedlich nach Allgemeingültigkeit und Empfehlungscharakter bewerten. Je nachdem welche Beurteilung höher gewichtet wird und früher einfließt, kann also entweder von der Situation ausgegangen werden, dass das Referenzmodell vom Konstruierenden zu einem solchen erklärt wird oder ein Modell, ob vom Konstruierenden beabsichtigt oder nicht, von den Nutzenden zu einem solchen erhoben wird.
+\subsection{Referenzarchitektur}
+Der IEEE Standard 1471-2000 definiert Architektur im Kontext von softwareintensiven Systemen wie folgt:
+\enquote{The fundamental organization of a system embodied in its components, their relationships
+to each other, and to the environment, and the principles guiding its design and evolution.} \footcite[][3]{IEEEComputerSociety.2000}. Ein softwareintensives System wird dabei als jedes System, bei dem Software essentielle Einflüsse auf das Design, die Erstellung, das Deployment oder die Evolution des Systems hat.\footcite[Vgl.][1]{IEEEComputerSociety.2000}
+
+Wird dieser Architekturbegriff auf bekannte Bereitstellungsmodi aus der Cloud, wie \ac{SaaS}, \ac{PaaS}, \ac{IaaS} oder \ac{FaaS} angewendet, wird klar, dass von einer Architektur im Sinne des IEEE Standards 1471-2000 ausgegangen werden kann, sobald Software involviert ist. Im Rahmen dieser Arbeit werden auch Dienste, die sich nach der NIST Cloud Definition unter \ac{SaaS} Dienste zählen lassen, behandelt. Als \ac{SaaS} Dienst gilt dabei jeder Dienst, bei dem Nutzende die unterliegende Infrastruktur nicht verwalten und die Applikation nur über limitierte Konfigurationen verwalten können. Sollte aber die Konfiguration mittels einer Programmiersprache bzw. Datenabfragesprache wie SQL erfolgen, ist die Bedingung erfüllt, dass Software wesentliche Einflüsse auf das System hat.
+
+
+\citeauthor{Gallagher.2000} definiert eine Referenzarchitektur als eine generalisierte Architektur mehrerer Endsysteme, die eine oder mehrere Domänen teilen.\footcite[Vgl. auch im Folgenden][3]{Gallagher.2000} Die Referenzarchitektur definiert nach Sicht des Autors dabei die gemeinsame Infrastruktur der Endsysteme und die Schnitstellen der Komponenten, die in den Endsystemen enthalten sein sollen. Dabei ist eine Referenzarchitektur zu instanziieren, um eine spezifische Softwarearchitektur zu erstellen. Gallagher definiert die Aufgaben einer Referenzarchitektur wie folgt: Zum einen werden übergreifende Funktionen und Konfigurationen generalisiert und extrahiert und zum anderen wird eine kosteneffiziente und verlässliche Basis geschaffen, um Zielsysteme abzuleiten/zu instanziieren.\footcite[Vgl.][3]{Gallagher.2000}
+
+\citeauthor{Trefke.2012} schränkt in seiner Definition die Instanziierung insoweit ein, dass individuelle Besonderheiten abstrahiert werden müssen, um eine Allgemeingültigkeit der Referenzarchitektur in einer speziellen Domäne zu erhalten.  \footcite[Vgl. auch im Folgenden][]{Trefke.2012} Zusätzlich fügt \citeauthor{Trefke.2012} der Referenzarchitektur als optionale Aufgaben die Definition von Leitlinien für die Verwendung, Evolution und Verantwortlichkeiten hinzu. Zurückgreifend auf \citeauthor{vomBrocke.2003} legt \citeauthor{Trefke.2012} fest, dass eine Referenzarchitektur als spezifischeres Referenzmodell seinen Empfehlungscharakter entweder durch Erfahrungen und hohe Nutzerakzeptanz oder durch Festsetzung durch Erschaffende erhält.
+
+Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzungen der Referenzarchitektur: Die standardisierende Referenzarchitektur, welche darauf zielt eine Standardarchitektur für spezielle Anwendungsfälle zu schaffen und die unterstützende/erleichternde Referenzarchitektur, welche Personen in Architekturrollen unterstützen sollen, ähnliche Probleme leichter zu lösen.\footcite[Vgl. auch im Folgenden][S.~422~ff.]{Angelov.2012} Nach \citeauthor{Angelov.2012} sind standardisierende Referenzarchitekturen nicht zur Verwendung von innovativen, also kaum getesteten oder noch nicht von Experten akzeptierten Elementen geeignet. Die unterstützenden/erleichternden Referenzarchitekturen hingegen können solche innovativen Elemente durchaus verwenden und auch eine Technologievorauswahl treffen.
+
+
+
+
 
 % Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorischen Rahmenbedingungen, in welchen ein Referenzmodell eingesetzt werden soll analysiert werden.\footcite[Vgl.][]{vomBrocke.2004}
 
-Im Rahmen dieser Arbeit entwickelte Modelle ordnen sich der Infrastrukturarchitektur unter. Die Infrastruktur umfasst nach Definition von Lichtenegger u.a. die Beschreibung der Software-, Hardware und Netzwerkinfrastruktur, die zum Betrieb von Applikationen erforderlich ist. \Todo{Bessere Definition} Auch die hier zu entwickelnden Referenzarchitekturen für Datenverarbeitung zählen dabei nach der in diesem Kapitel erläuterten Defintion von vom Brocke als Referenzmodelle, da sie explizit zur Wiederverwendung konstruiert wurden.
+% Im Rahmen dieser Arbeit entwickelte Modelle ordnen sich der Infrastrukturarchitektur unter. Die Infrastruktur umfasst nach Definition von Lichtenegger u.a. die Beschreibung der Software-, Hardware und Netzwerkinfrastruktur, die zum Betrieb von Applikationen erforderlich ist. \Todo{Bessere Definition} Auch die hier zu entwickelnden Referenzarchitekturen für Datenverarbeitung zählen dabei nach der in diesem Kapitel erläuterten Defintion von vom Brocke als Referenzmodelle, da sie explizit zur Wiederverwendung konstruiert wurden.
 
-Zur Darstellung der verwendeten Produkte in den Referenzmodellen und des Datenflusses soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In derr finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden.
+\subsection{Vorgehensmodell}
+
+Zur Darstellung der verwendeten Produkte und Dienstleistungen von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In derr finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden.
 
 \begin{figure}[H]
 \centering
