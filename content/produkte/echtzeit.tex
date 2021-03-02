@@ -1,3 +1,13 @@
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/Overview-Realtime.pdf}
+\caption{Einsetzbare Produkte im Bereich Echtzeitverarbeitung}
+\label{abb:ProdukteRT}
+\end{figure}
+
+
+===========
+
 Innerhalb des \ac{IoT} Core Brokers ist es möglich, Regeln zu definieren, die einzelne Nachrichten aus Topics in andere Dienste weiterzuleiten. Dazu müssen besagte Nachrichten selektiert werden, was mittels eines SQL Dialekts möglich ist. Eine beispielhafte Selektion könnte folgendermaßen aussehen: 
 
 
@@ -38,6 +48,9 @@ Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analys
 \label{abb:GrobArchitekturKinesisAnalytics}
 \end{figure}
 In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Dienste aus der Kinesis Familie mit anderen Diensten dargestellt. Angenommen werden dabei die in \autoref{chap:rahmendatenverarbeitung} erläuterten Rahmenbedingungen, weshalb \ac{IoT} Core als Message Broker eingesetzt ist. Wie in der in \autoref{productselection:iotanalytics} beschriebenen Architektur, muss auch hier für die Datenverarbeitung eine Regel im \ac{IoT} Core Broker angelegt werden, um relevante Nachrichten an Kinesis Data Streams weiterzuleiten.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.}
+
 \subsection{AWS Lambda}
+
+\subsection{Amazon MSK}
 
 \subsection{Produktauswahl}
