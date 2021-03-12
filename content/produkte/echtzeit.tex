@@ -38,7 +38,8 @@ Die Nachrichten aus dem Topic iot-demo-sensor werden dabei beispielhaft an IoT A
 In \autoref{abb:GrobArchitekturIoTAnalytics} ist die Grobarchitektur und Verknüpfung mit anderen Diensten unter Annahme der Vorraussetzungen aus \autoref{chap:rahmendatenverarbeitung} gezeigt. Datenliefernde Geräte, wie beispielsweise Sensoren liefern Zeitreihen-Messwerte via dem \ac{MQTT} Protokoll an. Die Weiterleitung zu IoT Analytics erfolgt mittels einer eingerichteten Regel im \ac{IoT} Core Messagebroker, welche mittels eines Dialekts der SQL Sprache gewisse Topics vorselektiert oder alle Topics zulässt.
 
 \subsection{AWS IoT Events}
-
+Im Rahmen der \AWSIOT Produktfamilie gibt es neben dem bereits angesprochenen \AWSIOT Analytics ebenfalls \AWSIOT Events.  
+Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt werden sollen. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Events-general.pdf}
@@ -92,7 +93,7 @@ Kafka hat eigene Verarbeitungslogiken integriert, mit welchen einige Analysen be
 => binary protocol no \ac{MQTT} Support, redundant, only Lambda and EC2 conenctivity
 
 \subsection{Amazon Glue}
-https://aws.amazon.com/de/about-aws/whats-new/2020/04/aws-glue-now-supports-serverless-streaming-etl/
+\href{https://aws.amazon.com/de/about-aws/whats-new/2020/04/aws-glue-now-supports-serverless-streaming-etl/}{aws-glue-now-supports-serverless-streaming-etl}
 
 https://docs.aws.amazon.com/glue/latest/dg/add-job-streaming.html
 
