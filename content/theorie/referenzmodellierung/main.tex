@@ -50,13 +50,24 @@ Wird dieser Architekturbegriff auf bekannte Bereitstellungsmodi aus der Cloud, w
 
 Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzungen der Referenzarchitektur: Die standardisierende Referenzarchitektur, welche darauf zielt eine Standardarchitektur für spezielle Anwendungsfälle zu schaffen und die unterstützende/erleichternde Referenzarchitektur, welche Personen in Architekturrollen unterstützen sollen, ähnliche Probleme leichter zu lösen.\footcite[Vgl. auch im Folgenden][S.~422~ff.]{Angelov.2012} Nach \citeauthor{Angelov.2012} sind standardisierende Referenzarchitekturen nicht zur Verwendung von innovativen, also kaum getesteten oder noch nicht von Experten akzeptierten Elementen geeignet. Die unterstützenden/erleichternden Referenzarchitekturen hingegen können solche innovativen Elemente durchaus verwenden und auch eine Technologievorauswahl treffen.
 
-
-
-
-
 % Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorischen Rahmenbedingungen, in welchen ein Referenzmodell eingesetzt werden soll analysiert werden.\footcite[Vgl.][]{vomBrocke.2004}
 
-% Im Rahmen dieser Arbeit entwickelte Modelle ordnen sich der Infrastrukturarchitektur unter. Die Infrastruktur umfasst nach Definition von Lichtenegger u.a. die Beschreibung der Software-, Hardware und Netzwerkinfrastruktur, die zum Betrieb von Applikationen erforderlich ist. \Todo{Bessere Definition} Auch die hier zu entwickelnden Referenzarchitekturen für Datenverarbeitung zählen dabei nach der in diesem Kapitel erläuterten Defintion von vom Brocke als Referenzmodelle, da sie explizit zur Wiederverwendung konstruiert wurden.
+%\Todo{What are inputs of a Reference Architecture? - Muller.2020}
+\citeauthor{Muller.2020} empfiehlt eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden, schläg t aber für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden ein inkrementelles Vorgehen vor.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Das inkrementelle Vorgehen von Muller beinhaltet dabei die Erstellung von Prototypen und inkrementelle Einholung von Feedback der Zielstakeholder.
+
+
+\subsection{Qualitätskriterien von Referenzarchitekturen}
+\citeauthor{Muller.2020} schlägt sieben Qualitätskriterien vor, welche von einer guten Referenzarchitektur erfüllt werden sollten:\footcite[Vgl. auch im Folgenden][8]{Muller.2020}
+\begin{enumerate}
+\item Verständlichkeit für eine breite, heterogene Gruppe an Stakeholdern (Kunden, Projektmanager, Entwickler, etc.)
+\item Zugänglichkeit und Zugriff durch die Mehrheit der Organisation
+\item Adressierung der Hauptprobleme der spezifischen Problemdomäne
+\item Zufriedenstellende Qualität
+\item akzeptabel
+\item \enquote{up-to-date} und wartbar
+\item wertschöpfend für den Betrieb
+\end{enumerate}
+
 
 \subsection{Vorgehensmodell}
 
@@ -70,6 +81,10 @@ Zur Darstellung der verwendeten Produkte und Dienstleistungen von \ac{AWS} in de
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Starke.o.J.}}
 
+
+Wie von \citeauthor{Muller.2020} vorgeschlagen und im vorherigen Unterkapitel erläutert, ist ein inkrementeller Ansatz unter Verwendung von Prototypen und kontinuierlichem Feedback der Zielstakeholder unerlässlich.\footcite[Vgl.][7]{Muller.2020} 
+
+Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[24-27][]{Webber.2001}
 
 
 % Überleitung => generelle Referenzmodelle 

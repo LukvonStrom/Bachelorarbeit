@@ -92,13 +92,16 @@ Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Archit
 \subsection{Echtzeitverarbeitung}
 Gemäß der in \autoref{abb:KappaStreaming} gezeigten $\kappa$-Architektur gibt es Nutzungsfälle, in welchen eine reine Echtzeitauswertung basierend auf einer Datenquelle, wie beispielsweise dem Messagebroker Sinn machen kann. \citeauthor{Belur.2020} sieht dabei vier verschiedene Verwendungszwecke, in welchen die niedrige Verarbeitungslatenz besonders wichtig ist und den maximalen Wert aus den Daten zieht.\footcite[Vgl. auch im Folgenden][]{Belur.2020} Durch Echtzeit reporting und die Erstellung von Dashboards können aktuelle Daten schnell übersichtlich aufbereitet werden. Mittels erstellter Regeln, die Schwellwertüberschreitungen und Anomalien detektieren, können Nutzende benachrichtigt werden, sobald es zu einer Abweichung kommt. Ebenfalls sinnvoll ist Machine Learning zum auffinden von Mustern in den Daten zu verwenden, was verbesserte Anomalierkennung, Vorraussagen und ähnliche Features ermöglicht. Ein weiterer valider Usecase der $\kappa$-Architektur ist die Transformation von Daten in gewisse Zielformate, um beispielsweise Drittsysteme anzusprechen.
 Requirements:
-Unified experience for data ingestion and edge processing
-Versatile out-of-the-box connectivity
-Scalable stream processing with complex transformations
-Operationalized business rules and ML models
-Ability to handle unstructured data and schema drift:
-Reusability of processing logic
-Governance and lineage
+\begin{itemize}
+\item Unified experience for data ingestion and edge processing
+\item Versatile out-of-the-box connectivity
+\item Scalable stream processing with complex transformations
+\item Operationalized business rules and ML models
+\item Ability to handle unstructured data and schema drift:
+\item Reusability of processing logic
+\item Governance and lineage
+\end{itemize}
+
 % \subsubsection{Streamanalyse}
 % \begin{itemize}
 % \item AWS Kinesis Data Analytics/Stream
