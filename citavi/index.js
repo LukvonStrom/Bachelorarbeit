@@ -8,17 +8,22 @@ const file = await fs.readFile(path.join(__dirname,'citavi.bib'))
 let text = file.toString()
 
 var sample = bibtexParse.toJSON(text);
-let removableAttributes = ["abstract", "doi", "isbn", "language", "note", "file", "keywords", "issn"]
+let removableAttributes = ["abstract", "doi", "isbn", "language", "note", "file", "keywords", "issn", "pagetotal"]
 sample = sample.map(el => {
 	if(!el || !el.entryTags){
 		throw new Exception("Data not formatted properly");
 	}
-	for(let attribute of removableAttributes){
-		if(el.entryTags[attribute]){
-			delete el.entryTags[attribute]
-		}		
-	}
-	return el;
+	let keys = (Object.keys(el.entryTags)).filter(el2 => !removableAttributes.includes(el2))
+	let buffer = Object.assign({}, el);
+	buffer.entryTags = {}
+	for (let key of keys){
+		if(key === "year" && el.entryTags[key] === "o.J."){
+			buffer.entryTags[key] = "nodate";
+		}else{
+			buffer.entryTags[key] = el.entryTags[key];
+		}
+	}	
+	return buffer;
 });
 
 let tex = bibtexParse.toBibtex(sample, false);

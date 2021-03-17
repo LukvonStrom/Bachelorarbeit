@@ -1,19 +1,40 @@
 \section{Theorie der Anforderungserhebung}
-\Todo{Rücksprache am 17.03.}
-Gemäß der in \autoref{chap:qualitycriteria} definierten Qualitätskriterien und der von \citeauthor{vomBrocke.2003} aufgestellten Allgemeingültigkeitskriterien kann ein Referenzmodell und damit auch eine Referenzarchitektur nicht objektiv allgemeingültig sein. Ziel einer Referenzarchitektur sollte also sein, für die Zielstakeholder eine möglichst hohe subjektive Allgemeingültigkeit zu erreichen, um Nutzen zu stiften. Um dieses Ziel zu erreichen, sind Interviews mit Zielstakeholdern der SPIRIT/21 zu führen, welche dem Interviewleitfaden in \autoref{tab:intervieleitfaden} folgen. Kombiniert mit Reviews der entstehenden Artefakte, also der Referenzmodelle werden diese zu einem nutzenstiftenden Artefakt.
+
+Gemäß der in \autoref{chap:qualitycriteria} definierten Qualitätskriterien und der von \citeauthor{vomBrocke.2003} aufgestellten Allgemeingültigkeitskriterien kann ein Referenzmodell und damit auch eine Referenzarchitektur nicht objektiv allgemeingültig sein. Zusätzlich ergeben sich als weitere wichtige Eingaben zur Konstruktion eines Referenzmodells die Dekompositionstiefe und die Anwendbarkeit. Zusammen lassen sich diese Dimensionen als Kiviat Diagramm\footcite[Vgl.][33\psqq]{Kolence.1973}, wie in \autoref{abb:Dimensionen} gezeigt, abbilden. 
+
+\begin{figure}[H]
+\centering
+%\outertolerance{4}{4}{4}%defines the outer toleranceband for next spider
+%\innertolerance{1}{1}{1}%defines the inner toleranceband for next spider
+\spider{0}{0}{0}%draws the spider diagram with coordinates
+\caption{Referenzarchitekturdimensionen}
+\label{abb:Dimensionen}
+\end{figure}
+
+\Todo{Interviemethodik systematisieren Literatur}
+
+Ziel einer Referenzarchitektur sollte also sein, das optimale Verhältnis der drei Dimensionen für die Zielstakeholder zu finden und daraus eine Referenzarchitektur zu erstellen. Um dieses Ziel zu erreichen, sind Interviews mit Zielstakeholdern der SPIRIT/21 zu führen, welche dem Interviewleitfaden in \autoref{tab:intervieleitfaden} folgen. Im referenzierten Leitfaden stehen dabei Fragen mit einem F-Präfix für allgemeine Fragen und Fragen mit einem D-Präfix für Fragen in Bezug auf die drei Dimensionen. Kombiniert mit mindestens einem Review der Referenzmodelle werden die Modelle zu einem nutzenstiftenden Artefakt.
+
+
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|}
 \hline
 ID & Beschreibung \\ \hline
-A1 & Rolle innerhalb der SPIRIT/21 \\ \hline
-A2 & Anwendungsgebiete der Referenzarchitekturen \\ \hline
-A3 & Anforderungen an Anpassbarkeit einer RA \\ \hline
-A4 & Anforderungen an Darstellung einer RA \\ \hline
-A5 & Anforderungen an Allgemeingültigkeit einer RA \\ \hline
-A6 & Wie kompatibel sollen die Referenzarchitekturen zueinander sein \\ \hline
+\multicolumn{2}{|c|}{\cellcolor[HTML]{ECF4FF}Allgemeine Fragen} \\ \hline
+F1 & Rolle innerhalb der SPIRIT/21 \\ \hline
+F2 & Anwendungsgebiete der Referenzarchitekturen \\ \hline
+F3 & Kompatibilität der Referenzarchitekturen zueinander? \\ \hline
+F4 & Priorisierung der Qualitätskriterien (siehe autoref) \\ \hline
+F5 & Priorisierung der Datennutzungstypen (siehe autoref) \\ \hline
+\multicolumn{2}{|c|}{\cellcolor[HTML]{ECF4FF}Dimensionen der Referenzarchitekturen} \\ \hline
+D1 & Anforderungen an Anwendung der Referenzarchitekturen \\ \hline
+D2 & Anforderungen an Allgemeingültigkeit der Referenzarchitekturen \\ \hline
+D3 & Dekompositionstiefe der Referenzarchitekturen \\ \hline
 \end{tabular}
 \caption{Interviewleitfaden für Schlüsselstakeholder}
 \label{tab:intervieleitfaden}
 \end{table}
+
+

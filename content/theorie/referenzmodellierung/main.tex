@@ -53,7 +53,7 @@ Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzu
 % Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorischen Rahmenbedingungen, in welchen ein Referenzmodell eingesetzt werden soll analysiert werden.\footcite[Vgl.][]{vomBrocke.2004}
 
 %\Todo{What are inputs of a Reference Architecture? - Muller.2020}
-\citeauthor{Muller.2020} empfiehlt eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden, schläg t aber für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden ein inkrementelles Vorgehen vor.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Das inkrementelle Vorgehen von Muller beinhaltet dabei die Erstellung von Prototypen und inkrementelle Einholung von Feedback der Zielstakeholder.
+\citeauthor{Muller.2020} empfiehlt eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden, schlägt aber für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden ein inkrementelles Vorgehen vor.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Das inkrementelle Vorgehen von Muller beinhaltet dabei die Erstellung von Prototypen und inkrementelle Einholung von Feedback der Zielstakeholder.
 
 
 \subsection{Qualitätskriterien von Referenzarchitekturen}\label{chap:qualitycriteria}
@@ -95,6 +95,17 @@ Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die W
 \item \label{view:fourth} Dynamic-Variation-Point View
 \end{enumerate}
 Dabei sind für diese Arbeit, in der keine implementierungsnahe Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht aus \autoref{view:first} und \autoref{view:second} wichtig. Die statische und dynamische Variationspunktsicht aus \autoref{view:third} und \autoref{view:fourth} agieren stärker auf Implementierungsebene, in dem beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann und deren Verhaltensweisen durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden kann.\footcite[Vgl.][25\psq]{Webber.2001} 
+
+\renewcommand\#{\protect\scalebox{0.8}{\protect\raisebox{0.4ex}{\char"0023}}}
+
+Variationspunkte können, wie in \autoref{abb:Variationspunkte} dargestellt innerhalb der verschiedenen, dargestellten Schichten wie folgt dargestellt werden:
+\begin{figure}[H]
+\centering
+\includegraphics[height=1.33cm]{graphics/Variationpoints.pdf}
+\caption{Darstellung Variationspunkte}
+\label{abb:Variationspunkte}
+\end{figure}
+In den Architekturebenen werden entsprechend die Variationspunkte mit durchgängigen Nummern versehen, welche entsprechend vor dem \# stehen.
 
 
 
