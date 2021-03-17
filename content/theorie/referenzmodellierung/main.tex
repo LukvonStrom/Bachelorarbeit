@@ -13,9 +13,9 @@ Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Ref
 
 \subsection{Referenzmodelle}
 
-Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von vom Brocke ist ein Referenzmodell als solches zu erkennen, wenn der Gegenstand und/oder\footnote{Die Verwendung von \enquote{und/oder} wurde hier gewählt, da der Autor der Quelle das \enquote{oder} aus der boolschen Algebra gewählt hat um explizit beide Fälle einzuschliessen.} der Inhalt des Referenzmodells bei der Konstruktion des Gegenstandes und/oder des Inhaltes eines zu konstruierenden Anwendungsmodells wiederverwendet werden kann.\footcite[Vgl.][34]{vomBrocke.2003} Dabei hat ein Referenzmodell einen Empfehlungscharakter und stellt eine \enquote{best practice} dar.\footcite[Vgl.][31]{vomBrocke.2003} 
+Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von \citeauthor{vomBrocke.2003} ist ein Referenzmodell als solches zu erkennen, wenn der Gegenstand und/oder\footnote{Die Verwendung von \enquote{und/oder} wurde hier gewählt, da der Autor der Quelle das \enquote{oder} aus der boolschen Algebra gewählt hat um explizit beide Fälle einzuschliessen.} der Inhalt des Referenzmodells bei der Konstruktion des Gegenstandes und/oder des Inhaltes eines zu konstruierenden Anwendungsmodells wiederverwendet werden kann.\footcite[Vgl.][34]{vomBrocke.2003} Dabei hat ein Referenzmodell einen Empfehlungscharakter und stellt eine \enquote{best practice} dar.\footcite[Vgl.][31]{vomBrocke.2003} 
 
-Ein Referenzmodell kann nach vom Brocke nicht objektiv allgemeingültig sein und auch keinen objektiven Empfehlungscharakter haben, sondern muss subjektiv beurteilt werden.\footcite[Vgl. auch im Folgenden][31~f.]{vomBrocke.2003}  Dabei ist zumindest von den Interessensgruppen der Konstruierenden und der Nutzenden auszugehen, welche das Referenzmodell subjektiv unterschiedlich nach Allgemeingültigkeit und Empfehlungscharakter bewerten. Je nachdem welche Beurteilung höher gewichtet wird und früher einfließt, kann also entweder von der Situation ausgegangen werden, dass das Referenzmodell vom Konstruierenden zu einem solchen erklärt wird oder ein Modell, ob vom Konstruierenden beabsichtigt oder nicht, von den Nutzenden zu einem solchen erhoben wird.
+Ein Referenzmodell kann nach \citeauthor{vomBrocke.2003} nicht objektiv allgemeingültig sein und auch keinen objektiven Empfehlungscharakter haben, sondern muss subjektiv beurteilt werden.\footcite[Vgl. auch im Folgenden][31~f.]{vomBrocke.2003}  Dabei ist zumindest von den Interessensgruppen der Konstruierenden und der Nutzenden auszugehen, welche das Referenzmodell subjektiv unterschiedlich nach Allgemeingültigkeit und Empfehlungscharakter bewerten. Je nachdem welche Beurteilung höher gewichtet wird und früher einfließt, kann also entweder von der Situation ausgegangen werden, dass das Referenzmodell vom Konstruierenden zu einem solchen erklärt wird oder ein Modell, ob vom Konstruierenden beabsichtigt oder nicht, von den Nutzenden zu einem solchen erhoben wird.
 
 \subsection{Grundsätze ordnungsgemäßer Referenzmodellierung}
 \Todo{Grundsätze ordnungsgemäßer Modellierung/GoRM - siehe auch 148 vomBrocke.2003}
@@ -56,7 +56,7 @@ Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzu
 \citeauthor{Muller.2020} empfiehlt eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden, schläg t aber für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden ein inkrementelles Vorgehen vor.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Das inkrementelle Vorgehen von Muller beinhaltet dabei die Erstellung von Prototypen und inkrementelle Einholung von Feedback der Zielstakeholder.
 
 
-\subsection{Qualitätskriterien von Referenzarchitekturen}
+\subsection{Qualitätskriterien von Referenzarchitekturen}\label{chap:qualitycriteria}
 \citeauthor{Muller.2020} schlägt sieben Qualitätskriterien vor, welche von einer guten Referenzarchitektur erfüllt werden sollten:\footcite[Vgl. auch im Folgenden][8]{Muller.2020}
 \begin{enumerate}
 \item Verständlichkeit für eine breite, heterogene Gruppe an Stakeholdern (Kunden, Projektmanager, Entwickler, etc.)
@@ -71,20 +71,33 @@ Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzu
 
 \subsection{Vorgehensmodell}
 
-Zur Darstellung der verwendeten Produkte und Dienstleistungen von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In derr finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden.
+Nach \citeauthor{Muller.2020} hat eine Referenzarchitektur mehrere Dekompositionen, in beispielsweise eine funktionale, eine konstruktionsorientierte oder eine infrastrukturorientierte Komposition. Diese Dekompositionsschichten lassen sich ebenfalls in bekannten Architekturfframeworks wie arc42 finden, weshalb diese mit Anpassungen zur Visualisierung dienen sollen.
+
+Zur Darstellung der verwendeten Produkte und Dienstleistungen von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In der finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{graphics/erste-Stufe-Bausteinsicht.png}
+\includegraphics[width=\textwidth]{graphics/Bausteinsicht.png}
 \caption[Stufe 1 der Bausteinsicht in arc42]{Stufe 1 der Bausteinsicht in arc42.\footnotemark}
 \label{abb:BausteinsichtStufe1}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Starke.o.J.}}
 
 
+
 Wie von \citeauthor{Muller.2020} vorgeschlagen und im vorherigen Unterkapitel erläutert, ist ein inkrementeller Ansatz unter Verwendung von Prototypen und kontinuierlichem Feedback der Zielstakeholder unerlässlich.\footcite[Vgl.][7]{Muller.2020} 
 
-Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[24-27][]{Webber.2001}
+Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[Vgl.][24\psqq]{Webber.2001} Mittels der Variationspunkte kann eine statische Referenz-/ Produktlinienarchitektur konstruiert werden, welche an spezifisch definierten Punkten angepasst werden muss, um einzigartige Architekturen zu erzeugen.\footcite[Vgl.][24]{Webber.2001} Dabei gibt es vier verschiedene Ansichten, aus denen Variationspunkte definiert werden können:\footcite[Vgl.][25\psq]{Webber.2001}
+\begin{enumerate}
+\item \label{view:first} Requirement-Variation-Point View
+\item \label{view:second} Component-Variation-Point View
+\item \label{view:third} Static-Variation-Point View
+\item \label{view:fourth} Dynamic-Variation-Point View
+\end{enumerate}
+Dabei sind für diese Arbeit, in der keine implementierungsnahe Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht aus \autoref{view:first} und \autoref{view:second} wichtig. Die statische und dynamische Variationspunktsicht aus \autoref{view:third} und \autoref{view:fourth} agieren stärker auf Implementierungsebene, in dem beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann und deren Verhaltensweisen durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden kann.\footcite[Vgl.][25\psq]{Webber.2001} 
+
+
+
 
 
 % Überleitung => generelle Referenzmodelle 
