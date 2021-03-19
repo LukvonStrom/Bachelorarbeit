@@ -1,4 +1,4 @@
-\section{Grundlagen der Datenanalyse}
+\section{Grundlagen der Datenanalyse}\label{chap:GrundlagenDatenanalyse}
 
 Mathematisch ausgedrückt besteht eine Zeitreihe (im englischen auch \enquote{time series} genannt) aus einer endlichen Menge an zeitlich aufsteigend sortierten Messwerten $x_{t_1},x_{t_2},...,x_{t_T};  x_{t_k} \in \mathbb{R}^n, k=1,2,...,T$, wofür $t_1 < t_2 < t_T $ gilt.\footcite[Vgl.][1]{Deistler.2018b} Zeitreihendaten sind in verschiedenen Feldern zu finden, beispielsweise im Bereich der Aktienmärkte, wo die Preise der einzelnen Kurse abgebildet werden, im Bereich der Gesundheitsforschung, wo die Ansteckungsrate ansteckender Krankheiten wie Covid-19 verfolgt wird oder im Bereich der Sozialwissenschaften, in welchen der Verlauf von Geburtsraten über die Zeit analysiert werden soll.\footcite[Vgl.][1]{Shumway.2017b} In \autoref{abb:BeispielZeitreihe} findet sich beispielhaft die Zeitreihe der verimpften Dosen des COVID-19 Impfstoffes im Januar 2021.
 
@@ -17,7 +17,22 @@ Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im
 \Todo{Definition Zeitreihendaten}
 \Todo{Definition Datenanalyse}
 
-Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} In einer Analyse, die in \autoref{abb:DataHalflife} dargestellt wird, erhob Nucleus Research die Zahl, dass Daten für taktische Entscheidende nach maximal 30 Minuten die Hälfte des Wertes eingebüßt hat. Für operative Entscheidende ist die durchschnittliche Halbwertszeit nach acht Stunden erreicht, für strategische Entscheidende nach ca. 56 Stunden, also nach über 2 Tagen.
+Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempos einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die Entscheidungstempos sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen Entscheidungstempi respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
+
+% \footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012}
+% The value of data diminishes based on the cadence of decisions. Decision tempos are
+% tactical (driving process changes in near real time), operational (driving changes that take
+% days or weeks to implement), or strategic (driving changes that become part of a quarterly
+% or longer planning and implementation process). The concept of half life, with diminishing
+% value curves based on a company’s decision tempo, can be used to help companies
+% measure the impact of prioritizing their data management and analytics investments. 
+
+
+
+Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \autoref{abb:DataHalflife} gezeigten Befragungsergebnisse von \citeauthor{NucleusResarchInc..2012}, Daten nach maximal 30 Minuten die Hälfte des Wertes eingebüßt.\footcite[Vgl. auch im Folgenden][6]{NucleusResarchInc..2012} Für operative Entscheidungstempi ist die durchschnittliche Halbwertszeit nach acht Stunden erreicht, für strategische Entscheidungstempi nach ca. 56 Stunden, also nach über 2 Tagen.
+
+
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/half-life-data.pdf}
@@ -27,7 +42,11 @@ Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentni
 \footnotetext{Mit Änderungen entnommen aus: \cite{NucleusResarchInc..2012}}
 Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträumen, in denen die erhobenen Daten den höchsten Wert haben, ergibt sich die Notwendigkeit von verschiedenen Datenverarbeitungsstrategien, um entsprechend strategischen, taktischen und operativen Entscheidenden die werthaltigsten Daten als Entscheidungsgrundlage zu präsentieren.
 
-\Todo{Kategorien der Datenentscheider}
+\subsection{Arten der Auswertung}
+\subsubsection{Median}
+\subsubsection{Anomaliedetektion}
+\subsubsection{Schwellwertüberschreitung}
+\subsubsection{Trenderkennung/gleitender Durchschnitt}
 
 
 % \Todo{Grafik Data Analytics Pipeline}
@@ -83,12 +102,6 @@ Die $\kappa$/Kappa Referenzarchitektur von \citeauthor{Kreps.2014}, dargestellt 
 Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen, welche ein klassisches \ac{OLAP} Szenario aufzeigt. \Todo{Codd zitieren} Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditionellen Analytics weit verbreitet, bietet jedoch womöglich wichtige Einsichten erst nachdem die Datenhalbwertszeit bereits überschritten wurde.
 
 
-\subsection{Arten der Auswertung}
-\subsubsection{Median}
-\subsubsection{Anomaliedetektion}
-\subsubsection{Schwellwertüberschreitung}
-\subsubsection{Trenderkennung/gleitender Durchschnitt}
-
 
 \subsection{Echtzeitverarbeitung}
 Gemäß der in \autoref{abb:KappaStreaming} gezeigten $\kappa$-Architektur gibt es Nutzungsfälle, in welchen eine reine Echtzeitauswertung basierend auf einer Datenquelle, wie beispielsweise dem Messagebroker Sinn machen kann. \citeauthor{Belur.2020} sieht dabei vier verschiedene Verwendungszwecke, in welchen die niedrige Verarbeitungslatenz besonders wichtig ist und den maximalen Wert aus den Daten zieht.\footcite[Vgl. auch im Folgenden][]{Belur.2020} Durch Echtzeit reporting und die Erstellung von Dashboards können aktuelle Daten schnell übersichtlich aufbereitet werden. Mittels erstellter Regeln, die Schwellwertüberschreitungen und Anomalien detektieren, können Nutzende benachrichtigt werden, sobald es zu einer Abweichung kommt. Ebenfalls sinnvoll ist Machine Learning zum auffinden von Mustern in den Daten zu verwenden, was verbesserte Anomalierkennung, Vorraussagen und ähnliche Features ermöglicht. Ein weiterer valider Usecase der $\kappa$-Architektur ist die Transformation von Daten in gewisse Zielformate, um beispielsweise Drittsysteme anzusprechen.
@@ -110,24 +123,24 @@ Requirements:
 % \end{itemize}
 
 \subsection{Datenbankseitige Verarbeitung}
-\subsubsection{Datenbankabfragen}
-\begin{itemize}
-\item Timestream
-\item Redshift
-\item Athena
-\item Elasticsearch
-\end{itemize}
+% \subsubsection{Datenbankabfragen}
+% \begin{itemize}
+% \item Timestream
+% \item Redshift
+% \item Athena
+% \item Elasticsearch
+% \end{itemize}
 
-\subsubsection{Externe Analyse}
-\begin{itemize}
-\item Amazon EMR
-\item Amazon Glue
-\item AWS Lake Formation
-\end{itemize}
+% \subsubsection{Externe Analyse}
+% \begin{itemize}
+% \item Amazon EMR
+% \item Amazon Glue
+% \item AWS Lake Formation
+% \end{itemize}
+Gemäß der in \autoref{abb:OLAPStreaming} gezeigten \ac{OLAP} Architektur, gibt es, wie für die Echtzeitverarbeitung auch nutzende Unternehmen, die ein Entscheidugnstempo mit höherem Horizont haben. Für diese Entscheidungstypen ist dabei wichtig, dass eine Analyse möglichst viele historische Daten umfasst, aber nicht so wichtig, wie zeitnah diese erstellt werden kann. Eine gängige Möglichkeit um effizient alte Daten zu analysieren stellen \ac{OLAP} Datenbanken dar, welche durch spezielle Indexstrukturen und Optimierungen auf komplexe lesende Abfragen bei großen Datenmengen optimiert wurden. \Todo{belegen} Mittels dieser \ac{OLAP} Datenbanken lassen sich dank der jeweiligen Abfragesprachen und -dialekte komplizierte Abfragen realisieren. Bekanntes Beispiel für so eine Abfragesprache wäre \ac{SQL}, welches einige verschiedene Implementierungen (Dialekte) hat, die verwendet werden können. 
 
 
-
-
+NOTIZEN:
 Source -> Stream ingestion -> Stream storage -> Stream processing -> Destination
 
 Talkingpoints gegen Streaming onprem:
@@ -137,13 +150,4 @@ Tricky to scale, Integration requires development,Expensive to maintain
 
 Amazon Kinesis Data Streams - Daten verfügbar in 70 Milisekunden
 
-
-
 Amazon Kinesis Data Analytics
-
-
-\subsubsection{Brokeranalyse}
-
-\begin{itemize}
-\item AWS IoT Analytics
-\end{itemize}

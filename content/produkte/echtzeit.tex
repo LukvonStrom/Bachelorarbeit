@@ -28,7 +28,7 @@ FROM 'iot-demo-sensor'
 Die Nachrichten aus dem Topic iot-demo-sensor werden dabei beispielhaft an IoT Analytics weitergeleitet.
 
 \subsection{AWS IoT Analytics} \label{productselection:iotanalytics}
-\AWSIOT Analytics ist ein Dienst der \AWSIOT Produktfamilie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT Core geladen werden können, zulässt.
+\AWSIOT Analytics ist ein Dienst der \AWSIOT Produktfamilie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für alle Aufgaben, die im Kontext von Data Pipelines in \autoref{abb:DataPipeline} bereits gezeigt wurden, also Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung an, bzw. bietet Schnittstellen um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT Core für Analysen genutzt werden kann.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Analytics-general.pdf}
@@ -39,7 +39,7 @@ In \autoref{abb:GrobArchitekturIoTAnalytics} ist die Grobarchitektur und Verknü
 
 \subsection{AWS IoT Events}
 Im Rahmen der \AWSIOT Produktfamilie gibt es neben dem bereits angesprochenen \AWSIOT Analytics ebenfalls \AWSIOT Events.  
-Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt und verarbeitet werden sollen. 
+Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt und verarbeitet werden sollen, indem Aktionen ausgelöst werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.b} Die Abläufe können dabei, ähnlich wie bei Node-Red graphisch konfiguriert werden. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Events-general.pdf}
@@ -47,7 +47,16 @@ Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-
 \label{abb:GrobArchitekturIoTEvents}
 \end{figure}
 
-\Todo{IoT Events ansprechen (Schwellwerte)}
+\AWSIOT Events basiert auf abgebildeten Zuständen, die basierend auf ihren Übergängen Aktionen auslösen. \autoref{abb:BeispielIoTEvents} zeigt 3 beispielhaft 3 definierte Zustandsübergänge in der Weboberfläche von \AWSIOT Events. Jeder Kreis, welcher einen Zustand simbolisiert, hat 3 eigene Ereignisse, nämlich OnEnter, OnInput und OnExit. Zusätzlich sind Zustände mit Zustandsübergangspfeilen verbunden, welche basierend auf einer Ausführungskondition ausgelöst werden. Eine solche Ausführungskondition (auch Trigger genannt) wäre beispielsweise
+\begin{lstlisting}
+$input.Input1.value > $variable.threshold
+\end{lstlisting}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/IoT-Events-Demo.png}
+\caption{Beispiel IoT Events}
+\label{abb:BeispielIoTEvents}
+\end{figure}
 
 \subsection{Amazon Kinesis}
 Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis älter als \AWSIOT Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT Events.\footcite[Vgl.][]{Pogosova.28.05.2020}
