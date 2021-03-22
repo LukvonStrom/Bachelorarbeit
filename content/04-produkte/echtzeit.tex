@@ -99,13 +99,10 @@ Bei \ac{MSK} handelt es sich um einen Managed Service für die Open Source Lösu
 
 Kafka hat eigene Verarbeitungslogiken integriert, mit welchen einige Analysen bereits durchgeführt werden können. Um diese in \ac{AWS} weiterverarbeiten zu können, müssen die Ergebnisse via der Integration mit Lambda oder der Integration mit \ac{EC2}, der Amazon Plattform für virtuelle Maschinen abgerufen werden.
 
-=> binary protocol no \ac{MQTT} Support, redundant, only Lambda and EC2 conenctivity
+% => binary protocol no \ac{MQTT} Support, redundant, only Lambda and EC2 conenctivity
 
-\subsection{Amazon Glue}
-\href{https://aws.amazon.com/de/about-aws/whats-new/2020/04/aws-glue-now-supports-serverless-streaming-etl/}{aws-glue-now-supports-serverless-streaming-etl}
-
-https://docs.aws.amazon.com/glue/latest/dg/add-job-streaming.html
-
-läuft auf der Apache Spark Structured Streaming-Engine
+\subsection{AWS Glue}
+Mittels dem \ac{AWS} Glue Dienst, welcher diverse \ac{ETL} Dienste, wie beispielsweise Datenkatalogisierung und Datentransformation basierend auf dem Apache Spark Ökosystem anbietet, können ebenfalls Streams analysiert werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.d}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020} Basierend auf der Apache Spark Structured 
+Streaming-Engine können nach Aussage des Herstellers Daten aus Kinesis oder Kafka (und damit aus \ac{MSK}) geladen werden. Nachfolgend werden die eingehenden Daten mittels sogenannter Jobs analysiert/transformiert, welche in Sprachen wie Scala, Java, Python oder R geschrieben sein können. Nach Abschluss der Analyse können die Daten in \ac{S3} oder in eine \ac{JDBC} kompatible Datenbank (z.B. MySQL, PostgreSQL, Amazon Redshift, Oracle Databse, ...) geladen werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.e} Die Interaktion zwischen eigener Logik und AWS Glue erfolgt via \acp{API} von Apache Spark, die entsprechende Kentnisse zur Interaktion mit den Daten erfordern.
 
 \subsection{Produktauswahl}

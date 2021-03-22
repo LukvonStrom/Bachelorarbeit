@@ -1,3 +1,5 @@
+In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die datenbankseitige (\enquote{\ac{OLAP}} Verarbeitung) von \ac{AWS}, gemeinsam mit ihren jeweiligen Einsatzgebieten gezeigt. In diesem Abschnitt soll besonders auf die Dienste zur Verarbeitung nach dem Laden der Daten in eine der gezeigten Datenquellen eingegangen werden. Gezeigt werden jedoch auch Dienste für Datenvisualisierung und Machine Learning, da diese komplementär oder mit den prozessierten Daten verwendet werden können. Da die einzelnen Datenquellen jeweils verschiedene Sprachen, bzw. Dialekte von \ac{SQL} verwenden, sind die spezifischen Abfragesprachen mit einem generischen Eintrag in der Grafik abgebildet. Dabei ist es bei \ac{AWS} durchaus üblich, Interoperabilität zu anderen \ac{AWS} Diensten, wie beispielsweise Lambda, in den jeweiligen \ac{SQL} Dialekt einzubauen.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Overview-DB.pdf}
@@ -37,13 +39,13 @@ iotDemo & temperature & 2021-02-25 20:00:00.000000000 & 17.3 & 17.8 \\ \hline
 \end{table}
 
 \subsection{Amazon Redshift}
+Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage des Herstellers \enquote{enterprise-level} ist und auf ein Datenvolument von Petabytes skalieren kann. \footcite[Vgl.][1]{AmazonWebServicesInc..o.J.g} Redshift ist dabei ein klassisches \ac{OLAP} Produkt, welches für eine Vielzahl verschiedener Daten effizient Auswertungen bereitstellen kann. Redshift basiert auf der bekannten Open Source Datenbank PostgreSQL, weicht jedoch in der Implementierung diverser Kommandos und Features ab, die das Amazon als irrelevant für \ac{OLAP} Anwendungen hält.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}\nzitat\footcite[Vgl.][428\psqq]{AmazonWebServicesInc..o.J.g} Kern von Redshift sind sogenannte Cluster, welche aus einer oder mehrerer Berechnungsknoten (\enquote{compute nodes}) und Anführerknoten(\enquote{leader nodes}) besteht. Applikationen interagieren allein mit den Anführerknoten, die existierenden Berechnungsknoten sind zwar transparent für die Anwendung, werden jedoch von den Anführerknoten mit Ausführungsplänen versorgt, die diese entwickelt um Anfragen effizient zu verarbeiten.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}
 
-\subsection{Amazon MSK}
+\subsection{Amazon S3}
+Amazon \acf{S3} ist per se nur ein Datenspeicherungsdienst, wird jedoch von Amazon kombiniert mit dem Dienst AWS Lake Formation als Basis für einen Data Lake empfohlen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.f}\nzitat\footcite[Vgl.][2\psqq]{AmazonWebServicesInc..2017}
 
 \subsection{Amazon Athena}
 
 \subsection{Amazon Elasticsearch}
-
-\subsection{Amazon S3}
 
 \subsection{Produktauswahl}
