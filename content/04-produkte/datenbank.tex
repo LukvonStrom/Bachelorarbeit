@@ -8,8 +8,14 @@ In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die datenbankseitige
 \end{figure}
 
 \subsection{Amazon Timestream}
+
+
+
+Timestream ist nach Aussage des Herstellers eine schneller, skalierbare und speziell für Zeitreihendaten entwickelte Datenbank, welche über \ac{AWS} als Dienstleistung bezogen werden kann.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.h} Timestream integriert zwei verschiedene Speichertypen, nämlich \ac{RAM}-basierten Speicher, in dem Daten auf welche schnell zugegriffen werden sollen gespeichert werden können und Festplatten-basierten Speicher, welcher für historische Daten dienen soll.
+Timestream besetzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funktionen zur Analyse von Zeitreihendaten erweitert wurde. Ein Beispiel für den Einsatz des \ac{SQL}-Dialekts zur Kalkulation des 99. Perzentils ist in \autoref{lst:sql-timestream} gezeigt.
 \lstset{language=SQL} 
-\begin{lstlisting}
+
+\begin{lstlisting}[caption={Berechnung des 99. Perzentils in Timestream},label=lst:sql-timestream, captionpos=b]
 SELECT DeviceType,
   measure_name,
   BIN(time, 120m) AS binned_timestamp,
@@ -45,7 +51,11 @@ Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage
 Amazon \acf{S3} ist per se nur ein Datenspeicherungsdienst, wird jedoch von Amazon kombiniert mit dem Dienst AWS Lake Formation als Basis für einen Data Lake empfohlen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.f}\nzitat\footcite[Vgl.][2\psqq]{AmazonWebServicesInc..2017}
 
 \subsection{Amazon Athena}
+Amazon Athena ist nach Aussage des Herstellers ein voll verwalteter Query Dienst, welcher das durchsuchen von großen Datenmengen im \ac{S3} Speicherdienst möglich macht.\footcite[Vgl.][]{Barr.2016} Athena basiert dabei auf dem ursprünglich von Facebook entwickelten Presto, welches mittlerweile Open Source ist. Innerhalb von Athena können Daten verschiedener Formate (\ac{CSV}, Apache Parquet, Apache ORC, \ac{JSON}, ...) mittels \ac{SQL} verarbeitet werden.
 
 \subsection{Amazon Elasticsearch}
+Amazon Elasticsearch ist die verwaltetete Variante der ehemals Open-Source Elasticsearch Datenbank, entwickelt von Elastic.\footcite[Vgl.][]{Barr.01.10.2015} Elasticsearch ist dabei nach Aussage des Herstellers eine verteilte, freie und offene Analytics- und Suchplattform für viele verschiedenen Datenformen.\footcite[Vgl.][]{ElasticsearchInc..o.J.} Elasticsearch basiert auf der Open Source Bibliothek Apache Lucene. Elasticsearch geniesst neben der Popularität im Bereich Logverarbeitung und Monitoring auch Beliebtheit als \ac{IIoT} Datenbank.\footcite[Vgl.][]{Mantfeld.2019}\nzitat\footcite[Vgl.][]{Bajer.2017}
+
+
 
 \subsection{Produktauswahl}

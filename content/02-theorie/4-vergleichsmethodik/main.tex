@@ -1,16 +1,48 @@
 \section{Vergleichsmethodik für die Produktauswahl}\label{chap:vergleichsmethodik}
 
-Desired properties of a Big Data system: \footcite[Vgl.][S.~7-9]{Marz.2015}
-\begin{itemize}
+\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben folgende,erwünschte Eigenschaften eines Big Data Systems festegelegt:\footcite[Vgl.][7\psqq]{Marz.2015}
+\begin{enumerate}
 \item Robustness and fault tolerance
+
+Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also beispielsweise Analysecode \enquote{immutable} ist).
 \item Low latency reads and updates
+
+Lesezugriffe auf Daten sollen mit niedriger Latenz stattfinden. Wie bereits beschrieben, kann aufgrund der Messdistanz eine Aktualisierung von Daten durchaus längere Zeit benötigen, jedoch sollte ein Big Data System in der Lage sein, Datenaktualisierungen mit niedriger Latenz durchzuführen.
 \item Scalability
+
+Das Big Data System sollte durch transparente oder intransparente Provisionierung weiterer Ressourcen in der Lage sein, gleiche Performance in verschiedenen Belastungssituationen zu liefern. Dies deckt sich mit einem der Kernversprechen der Public Clouds nach NIST Definition (\enquote{rapid elasticity}).\footcite[Vgl.][2]{Mell.2011}
 \item Generalization
+
+Ein Big Data System sollte in der Lage sein, verschiedene Anwendungen zu unterstützen. Da die Zielsetzung dieser Bachelorarbeit auf Zeitseriendaten aufbaut, welche wie in \autoref{chap:GrundlagenDatenanalyse} gezeigt, einen großen Einsatzspielraum haben, ist diese Bedingung bei ausreichender Generalisierung der Referenzarchitekturen erfüllt.
 \item Extensibility
+
+Das zu gestaltende Big Data System soll erweiterbar sein und neue Funktionen oder Änderungen ohne größeren Aufwand ermöglichen.
 \item Ad hoc queries
+
+Diverseste Abfragen sollen schnellstmöglich auf dem Datensatz der Big Data Anwendung möglich sein.
 \item Minimal maintenance
+
+Eine Big data Anwendung soll wartbar bleiben, indem Komplexität in den Kernkomponenten, welche nach Ansicht von \citeauthor{Marz.2015} zu erhöhtem Wartungsaufwand führt, möglichst gering ist.
 \item Debuggability
+
+Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Werte entstanden sind, um mögliche Fehler verfolgen zu können.
+\end{enumerate}
+
+Kriterien von Lukas an ein Produkt:
+\begin{itemize}
+\item zufriedenstellende Integration mit AWS nativen Diensten (z.B. Monitoring)
+\item Möglichst serverless (wenig Maintenance Aufwand)
+\item skalierbarkeit auf 0 bis 10000
 \end{itemize}
+
+Anforderungen von Kunden
+\begin{itemize}
+\item Skalierbarkeit
+\item pay for what you use (no dead infra)
+\item transparente Fehler
+\end{itemize}
+
+
 
 
 \subsection{Featurevergleich}
