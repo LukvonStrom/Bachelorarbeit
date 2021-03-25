@@ -42,8 +42,31 @@ Anforderungen von Kunden
 \item transparente Fehler
 \end{itemize}
 
+\begin{itemize}
+    \item Übertragbarkeit
+\end{itemize}
 
-
+=> Sortierte Tabelle mit Kriterien (geben Plus oder entsprechend Minuspunkte)
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Prio & Kriterium & Show stopper? \\ \hline
+11 & \begin{tabular}[c]{@{}l@{}}Robustness and\\ fault tolerance\end{tabular} &  \\ \hline
+10 & \begin{tabular}[c]{@{}l@{}}Low latency \\ reads and updates\end{tabular} &  \\ \hline
+9 & Scalability &  \\ \hline
+8 & Generalization &  \\ \hline
+7 & Extensibility &  \\ \hline
+6 & Ad hoc queries &  \\ \hline
+5 & Minimal maintenance &  \\ \hline
+4 & Debuggability &  \\ \hline
+3 & möglichst serverless &  \\ \hline
+2 & Integration mit AWS nativen Produkten &  \\ \hline
+1 & Übertragbarkeit &  \\ \hline
+\end{tabular}
+\caption{Prioritäten}
+\label{tab:prioritaeten}
+\end{table}
 
 \subsection{Featurevergleich}
 

@@ -1,1 +1,80 @@
 \interview{Peter E.}{Head of Solution}{IIoT}{Initiales Anforderungsinterview}{24.03.2021}{peter}
+
+\newcommand{\PE}{\textbf{Peter E.:}~}
+
+\LF Hallo Peter, herzlichen Dank dass du dir die Zeit genommen hast mir als Interviewapartner zur Verfügung zu stehen! Kannst du bitte kurz beschreiben, welche Rolle du in der SPIRIT inne hast und wie deine Rolle mit Zeitseriendaten und Referenzarchitekturen zusammenhängt?
+
+\PE Meine Rolle in der SPIRIT ist laut offizieller Bezeichnung Head of Solution \ac{IIoT} und Automation. Das heißt ich kümmere mich um die gesamten \ac{IIoT} Projekte, die in der SPIRIT abgewickelt werden. Sei das Geschäftsentwicklung, Kundenbetreuung, Personalaufbau, Presales, ... oder anderes. Wir beschäftigen uns hauptsächlich mit der Digitalisierung von Städten, z.B. mit der Prozessoptimierung im Energie- und Versorgungsbereich. Dabei digitalisieren wir die ganzen Strom-, Gas-, Wasserzähler und lesen diese via Funk aus. Ich arbeite eigentlich ausschliesslich mit Zeitreihendaten, weil ein typisches Merkmal von \ac{IoT} Projekten ist, dass diese gesammelt und auf verschiedenste Arten ausgewertet werden. 
+
+\LF Verstehe. Das Ziel meiner Bachelorarbeit ist ja, Referenzarchitekturen für die Verarbeitung von Zeitreihendaten in der Cloud, speziell in \ac{AWS} zu konstruieren. Wo siehst du denn Einsatzbereiche für solche Referenzarchitekturen, also Kundencases o.ä.? 
+
+\PE Wir haben eigentlich immer die gleiche Grobarchitektur, nach der die Datenverarbeitung läuft. Im Feld sind Sensoren, die über Gateway Services, welche die Daten in ein einheitliches Format harmonisieren, Daten erfassen. Die Daten kommen dann in ein Backend, wo sie verarbeitet werden und werden abschliessend gespeichert. Vom Speicherort aus werden die Daten momentan weiterverarbeitet. Das ist dabei sowohl Visualisierung als auch Übergabe an z.B. Drittsysteme. 
+
+\LF Wenn man das auf mein Feld, die Cloud überträgt, wäre die Analyse \enquote{hinten raus} ja eine der Möglichkeiten für eine Referenzarchitektur.
+
+\PE Ja, aber du hast ja abgesehen davon auch in der Cloud Se4rvices, um dir deine Datenbeschaffung zu ermöglichen, wie z.B. den \AWSIOT Core, also den \ac{MQTT} Broker. An den kann man ja die Gatewayservices anknüpfen. Wenn ich mich richtig erinnere, bietet aber auch \ac{AWS} verwaltete Gatewayservices zur Datennormalisierung an. Letztenendes könnte man diese Architektur also auch komplett in \ac{AWS} abbilden.
+
+\LF Ja das wäre auch ein gute Option, ich denke aber, dass es nur bedingt Sinn macht das in \ac{AWS} nochmal komplett neuzubauen, da ihr ja schon einige laufenden Konverter habt, die die Daten der Sensoren in maschinenlesbare Formate umwandeln. Ausgehend von diesen umgewandelten Daten wäre aus meiner Sicht eine Analyse viel spannender.
+
+\PE Verstehe, da könnte man ja die Daten aus der IoT Plattform ausleiten und Richtung \ac{AWS} senden. Dies tun wir bereits so ähnlich in einem Kundenprojekt via \ac{MQTT}, wo wir die Daten zur TU Dresden für Analysen ausleiten. Wir haben ja aber auch die \coo Sensoren in unseren Konferenzräumen, die permanent Daten sammeln, die könnte man ähnlich weiterleiten.
+
+\LF Ja, die \coo Daten hatte ich auch schon im Kopf.
+
+\PE Wenn du Auswertungen aber fahren möchtest, die statistisch belastbar sind, dann brauchst du ja Daten, die häufig und in großer Menge ankommen.
+
+\LF Ja, dafür habe ich den Gerätesimulator entworfen, mit dem ich in einem kurzen Intervall Daten in den \ac{MQTT} Broker bringen kann. 
+
+\PE Wichtig ist, dass du die Usecases nach Datenfluss vergleichst. Also was und wie viel kommt von außen rein und welche Analysen möchtest du drüber fahren? Letztenendes ist das, was du machen möchtest das, was Ralph mit der \ac{IoT} Plattform über Jahre gemacht hat. Das ist auch eine Referenzarchitektur. Da hat er sich überlegt: \enquote{Was könnte man nehmen um Zeitreihendaten zu speichern ?} - da kam er auf Elasticsearch. \enquote{Wie bekomme ich Daten in die Plattform?} - Da ist er nach langer Suche auf \ac{MQTT} gekommen. \enquote{Wie kann man eine Verarbeitungslogik gestalten?} - Da kam er auf Node-Red.
+
+\LF Im Prinzip geht es genau um solche Referenzarchitekturen, die explorativ zu erarbeiten. 
+
+\PE Das erste was du brauchst für die Referenzarchitektur ist eine Datenbank, die große Mengen an Zeitreihendaten verarbeiten kann.
+
+\LF Ja, das ist eine Möglichkeit. Ich möchte mir aber auch Streamingdaten vom Broker direkt anschauen. Für Anwendungsfälle wie Schwellenwerte brauche ich die Daten nicht in der Datenbank, sondern kann schon vorher sagen, ob man einen Alarm auslösen muss.
+
+\PE Ja wobei du bei der Schwellwertanalyse natürlich Karenzzeiten beachten musst. Wenn beispielsweise in einem Kühlhaus ein Temperatursensor vorne an der Tür ist und du einen Alarm auf 0 \textdegree{}C hast. Dann reicht es, wenn die Tür zum Ent- oder Beladen aufgemacht wird, um den Alarm auszulösen. Ohne Karenzzeit hat man hier nen Alarmzustand, mit entsprechender Karenzzeit von beispielsweise 10 Minuten verhindert man solche Fehlauslösung.
+
+\LF Ja, das müsste man aber auch in einer Echtzeitpipeline abbilden können. Generell geht es darum sich die verscheidenen Verarbeitungswege von Daten in \ac{AWS} anzuschauen. 
+
+\PE Okay, dann musst du aber bei der Datenquelle Unterscheidungen treffen. Es gibt zum einen diskrete Daten, wie beispielsweise Zählertelegramme von Wasserzählern. Dieser \enquote{beamt} ein Telegramm raus, in fünf Minuten das nächste und so weiter. Das ist kein kontinuierlicher Strom, sondern der sendet immer ein Datenpaket in einem Zeitabstand $x$. Oder man bekommt Daten von einem Sensor, wenn sich etwas ändert. Das sind keine Streamingdaten, sondern Zeitreihendaten. Ich weiß dabei nicht, ob man kontinuierliche Daten über \ac{MQTT} übermitteln kann.
+
+Es gibt drei verschiedene Datenkategorien. Das eine sind Events. Das heißt die Infrastruktur meldet einen Status oder ein Ereigniss, auf dass dann in einer Infrastruktur reagiert wird. Diese Events sind auch Zeitreihendaten. Wenn wir in die IT schauen, gibt es in einem Server Events, wo beispielsweise übermittelt wird \enquote{Meine Platte ist voll}. Dieses Event wird alle paar Minuten übermittelt, weil es beispielsweise ein Schwellwert ist. Diese Ereignisse enthalten keine Messwerte, sondern sind ein Ergebniss einer Messwertauswertung. Trotzdem laufen sie als Zeitseriendaten ein, weil sie hintereinander kommen, wie Messwerte auch. In einer Auswertung dieser Daten könnte man die dann deduplizieren oder eine Korrelation zu Metadaten machen. Wenn in einem Rechner z.B. die Gehäusetemperatur und die CPU und weiteres zu hoch ist, lässt das auf überhohe Last schliessen. 
+
+Der nächste Typ wäre Metriken, also Messwerte. Aus der Auswertung dieser Werte kann man dann selbst solche Events generieren. Das ist dann aber die Aufgabe der eigenen Auswertungslogik. Messwerte können diskret haben, wenn diese in einem zeitlichen Abstand kommen. 
+
+Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das ist dann Streaming.  Das betrifft nicht nur IoT sondern Automatisierungstechnik generell. Bei diesen drei Arten unterscheidet sich jeweils die Verarbeitung. Gestreamte Messwerte wären beispielsweise, wenn man aneiner stromporduzierenden Windturbine hängt. Dabei misst man in einem relativ engen Zeitraster, wie der Verlauf der Leistungskurve aussieht. Oder man misst, wie die Stromkurve oder die Phasenverschiebung aussieht. Die Daten sind sehr eng zeitlich gerastert, damit man auch kleinste Änderungen mitbekommt. 
+
+\LF Du machst also den Unterschied zwischen diskreten Messwerten und \enquote{Streamingdaten} abhängig von der Messdistanz, weenn ich das richtig verstehe?
+
+\PE Richtig. Im Prinzip kann man sagen, wenn die Daten einen gewissen zeitlichen Abstand unterschreiten, kann man von einem Stream sprechen. 
+
+\LF Generell soll das Ziel der Referenzarchitektur sein, verschiedene Messdistanzen zu erlauben, seien das jetzt Milisekunden oder Minuten.
+
+\PE Genau, und wenn du einen Milisekundenabstand hast, dann bist du sozusagen im Streaming mode. Da muss dann deine Infrastruktur dahinter permanent auf Höhe sein, damit die ja nix verpasst. 
+
+\LF Ja, das ist einer der Punikte wo aus meiner Sicht die Cloud interessant wird.
+
+\PE ja, aber die Cloud wird auch schon bei Daten interessant, wenn ein hohes Volumen von vielen Devices eintrifft. Wenn man beispielsweise eine Stadt nimmt, die Smart Meter breit einsetzt, dann haben die bei einer größeren Stadt über 70.000 Devices verteilt. Die senden dann vielleicht nur alle 15 Minuten ein Messwert. Wenn aber jetzt ein Stromzähler pro Telegram 50 Bytes sendet, alle 15 Minuten und das multipliziert mit 70.000 ist die Cloud schon sehr interessant.
+
+\LF Ja, das sehe ich auch so. Es kommt ja zum einen auf die Menge $n$ der Sensoren an und zum anderen eben auf die Messdistanz.
+
+\PE Genau. Um mal bei dem Windradbeispiel zu bleiben: Ein Windrad kann eine Dateninfrastruktur schon ziemlich unter Stress setzen, wenn man zeitlich enge Raster braucht, weil man kleinste Abweichungen mitbekommen will. Kennst du da aus der Messtechnik das Shannon Theorem? \textit{(Nyquist-Shannon-Abtasttheorem)}
+
+\LF Nein.
+
+\PE Da geht es um Analog-Digital Wandlung. Auf einer Stromleitung hat man ja einen Sinus von 50 Hz. Das ist ja ein kontinuierliches Signal. Wenn man diese Kurve jetzt samplen, also digitalisieren will, möchte man ja eine Art Messpunkt an der Kurve anlegen, um die Sinuskurve in ein zeitlich enges Raster aus digitalen, diskreten Messwerten zu legen. Das Theorem sagt, dass man mindestens  mit der doppelten Messfrequenz so ein Signal abtasten muss, um das richtig herauszubekommen. Also muss ein Analog Digital Wandler mindestens mit 100Hz abtasten. Wenn der Analog-Digital Wandler jetzt eine Auflösung von 16 bit hat, wird die Amplitude der Sinuskurve in $2^{16}$ \enquote{Stifte} zerteilt. Das heißt pro Messample hat man 2 bytes, dann hat man 100 Samples pro Sekunde mal 2, also 200 bytes pro Sekunde, nur bei 50Hz. Bei einem schnelleren Signal muss man das entsprechend schneller abtasten. Normalerweise werden Signale mit der vierfachen Frequenz gesampled, also 200Hz und 200 Datenpunkte pro Sekunde. Das ist dann Streaming. Das kommt immer zum Einsatz, wenn man analoge Signale digitalisiert, wie hier die Spannung, die  ins Netz eingespeist wird.
+
+\LF Auch solche \enquote{Streaming} Usecases sollte meine Architektur unterstützen. Idealerweise skalieren die eingesetzten Dienste ja auch.
+
+\PE Von diesen Lastanforderungen kann man ableiten, welche Dienste man im Hitnergrund von \ac{AWS} braucht, um das zu verarbeiten. Diese Methodik habe ich beim HP in der IT-Datacenterautomatisierung/Überwachung/Monitoring schon gehabt. Das gleiche trifft aber auch so auf \ac{IoT} zu. Das ist auch einer der Gründe, warum man die gleiche Software für IT-Automatisierung und für den Maschinenbau einsetzen kann. Das ist die gleiche Software. Wenn du so eine Referenzarchitektur also erstellt hast, kann man die nicht nur für \ac{IoT} benutzen. Das ist wichtig. Man kann die auch für IT benutzen.
+
+\LF JA, die Idee die Referenzarchitektur auch für Monitoring zu verwenden, die besteht. Ganz viele Daten sind ja Zeitreihendaten.
+
+\PE Der Fakt, dass man solche Systeme sowohl für \ac{IoT} als auch IT verwenden kann, ist für mich ein unique selling point. Das Beispiel dafür ist mein Windparkmanager, den ich beim HP gemacht habe. Da habe ich das andersrum gedreht. Da habe ich die IT-Monitoringsoftware genommen und für \ac{IoT} Geräte verwendet. Die Kunden waren begeistert! 
+
+\LF Verstehe, diese Dual use Möglichkeit werde ich auf jeden Fall nochmal erwähnen in der Bachelorarbeit. Ich hätte auch noch ein paar Fragen vorbereitet. In der Literatur gibt es die Aussage, dass es drei verschiedene Entscheidertypen gibt (Erklärungen siehe \autoref{abb:DataHalflife}). Es gibt taktische, operative und strategische Entscheider. Welche Entscheider findest denn du am wichtigsten?
+
+\PE Die wichtigsten sind aus meiner Sicht die taktischen Entscheider, welche wohl den fachlichen Entscheidern in den Fachabteilungen entsprechen. Diese Leute sitzen im operativen Geschäft und müssen schnell entscheiden, bevor im Zweifelsfall etwas \enquote{abfackelt}. Beispiel Windturbine - es gibt Fälle, wo die Windturbine in einen kritischen Zustand geht - da muss sofort gehandelt werden, weil sonst Leben bedroht sind. Es gibt aber auch Entscheider mit mitelfristigen Entscheidungen, die operativen Entscheider. Diese Entscheidenden wollen beispielsweise Trends sehen, um Entscheidungen zu treffen. Eine Ebene höher, bei den strategischen Entscheidern, quasi auf dem \enquote{C-Level} werden wesentlich größere Datenmengen für Lagebilder in anderen Perspektiven und \enquote{Blickhöhen benötigt}. Leute auf den beiden oberen Ebenen nehmen die Daten als gegeben hin. Die haben keine Ahnung, welche technische Komplexität dahinter steht, Daten zu erfassen und aufzubereiten. Und damit diese Entscheider sich nicht darum kümmern müssen und davon nichts mitbekommen, da kommt deine Referenzarchitektur ins Spiel. 
+
+\LF Verstehe, ja das sehe ich genau so. Ich hätte noch ein paar kleiner Fragen dabei, wo ich deine Priorisierung bräuchte. Ich habe ja die Qualitätskriterien von \citeauthor{Muller.2020}.
+[44/68]
