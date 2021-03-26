@@ -43,9 +43,55 @@ Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \aut
 Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträumen, in denen die erhobenen Daten den höchsten Wert haben, ergibt sich die Notwendigkeit von verschiedenen Datenverarbeitungsstrategien, um entsprechend strategischen, taktischen und operativen Entscheidenden die werthaltigsten Daten als Entscheidungsgrundlage zu präsentieren.
 
 \subsection{Arten der Auswertung}
+Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die jeweilige Referenzarchitektur und die verwendeten Dienste fähig sind. Im Folgenden werden dazu einige einfachere Auswertungsmethoden für Zeitreihendaten vorgestellt. Die Zeitreihenanalyse und einsetzbare Werkzeuge werden im statistischen Sinn von weiterführenden Werken, wie von \citeauthor{Shumway.2017} behandelt. Es ist davon auszugehen, dass auch weiterführende Auswertungen wie fourieranalytischen Methoden, sofern in der jeweiligen Umgebung bereits vorhanden oder programmierbar, eingesetzt werden können.
 \subsubsection{Median}
+\begin{tikzpicture}
+    \begin{axis}[
+    xlabel=Zeit (Minuten),
+    ylabel=Messwert,
+    xmin=0, 
+    ymin=0,
+    legend pos=outer north east]
+        \addplot {sin(deg(x-1.6))+1}; 
+        \addplot {0.5899082};
+        \addplot {1.2392493};
+        \addplot {1.72939505};
+        \legend{$\sin(x-1.6)+1$,25stes Perzentil,Median,75tes Perzentil}
+    \end{axis}
+\end{tikzpicture}
+
+
 \subsubsection{Anomaliedetektion}
+\begin{tikzpicture}
+    \begin{axis}[
+    xlabel=Zeit (Minuten),
+    ylabel=Messwert,
+    xmin=0, 
+    ymin=0,
+    legend pos=outer north east]
+        \addplot {sin(deg(x-1.6))+1}; 
+        \addplot {2*sin(1.5*deg(x-1))+2};
+        \addplot {0.5*sin(2*deg(x-1.6))+1};
+        \legend{Normaler Verlauf,Anomalie 1,Anomalie 2}
+    \end{axis}
+\end{tikzpicture}
+
 \subsubsection{Schwellwertüberschreitung}
+
+\begin{tikzpicture}
+    \begin{axis}[
+    xlabel=Zeit (Minuten),
+    ylabel=Messwert,
+    xmin=0, 
+    ymin=0,
+    legend pos=outer north east]
+        \addplot {sin(deg(x-1.6))+1}; 
+        \addplot {1.75};
+        \draw [line width=0.8mm, black](axis cs:3,0) -- node[right]{Karenzzeit} (axis cs:3,2);
+        \legend{$\sin(x-1.6)+1$,Schwellwert ($1.75$)}
+    \end{axis}
+\end{tikzpicture}
+
 \subsubsection{Trenderkennung/gleitender Durchschnitt}
 
 

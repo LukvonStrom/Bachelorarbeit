@@ -76,5 +76,37 @@ Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das 
 
 \PE Die wichtigsten sind aus meiner Sicht die taktischen Entscheider, welche wohl den fachlichen Entscheidern in den Fachabteilungen entsprechen. Diese Leute sitzen im operativen Geschäft und müssen schnell entscheiden, bevor im Zweifelsfall etwas \enquote{abfackelt}. Beispiel Windturbine - es gibt Fälle, wo die Windturbine in einen kritischen Zustand geht - da muss sofort gehandelt werden, weil sonst Leben bedroht sind. Es gibt aber auch Entscheider mit mitelfristigen Entscheidungen, die operativen Entscheider. Diese Entscheidenden wollen beispielsweise Trends sehen, um Entscheidungen zu treffen. Eine Ebene höher, bei den strategischen Entscheidern, quasi auf dem \enquote{C-Level} werden wesentlich größere Datenmengen für Lagebilder in anderen Perspektiven und \enquote{Blickhöhen benötigt}. Leute auf den beiden oberen Ebenen nehmen die Daten als gegeben hin. Die haben keine Ahnung, welche technische Komplexität dahinter steht, Daten zu erfassen und aufzubereiten. Und damit diese Entscheider sich nicht darum kümmern müssen und davon nichts mitbekommen, da kommt deine Referenzarchitektur ins Spiel. 
 
-\LF Verstehe, ja das sehe ich genau so. Ich hätte noch ein paar kleiner Fragen dabei, wo ich deine Priorisierung bräuchte. Ich habe ja die Qualitätskriterien von \citeauthor{Muller.2020}.
-[44/68]
+\LF Verstehe, ja das sehe ich genau so. Ich hätte noch ein paar kleiner Fragen dabei, wo ich deine Priorisierung bräuchte. Ich habe ja die Qualitätskriterien von \citeauthor{Muller.2020}. Welche davon priorisierst du denn am höchsten oder was siehst du denn am wichtigsten?
+
+\PE Da Kriterium eins ist sehr wichtig. Verständlich für eine breite, und was wichtig ist eine heterogene Gruppe an Stakeholdern. Die Referenzarchitektur aus verschiedenen Perspektiven zu beleuchten ist wichtig. Was bei dir unter fünf steht, \enquote{akzeptabel}, das würde ich unter Akzeptanz sehen und als zweites einstufen. Damit hängen andere Kriterien zusammen. Es ist akzeptabel, wenn die Qualität stimmt. Zugänglichkeit und Zugriff durch die Mehrheit der Organisation führt zu einer hohen Akzeptanz. Adressierung der Hauptprobleme ist auch wichtig, weil sich die meisten Problemkategorien im \ac{IoT} Bereich auf wenige Kernprobleme herunterbrechen lässt. \\
+Ich würde mich nochmal korrigieren, das wäre meine Reihenfolge:
+\begin{enumerate}
+    \item Verständlichkeit
+    \item Adressierung der Hauptprobleme (daraus bedingt sich werstschöpfend für den Betrieb)
+    \item Akzeptanz durch die Anwender (bedingt durch):
+    \begin{enumerate}
+        \item zufriedenstellende Qualität des Produktes (hängt von up-to date und wartbar ab)
+        \item Qualität/\enquote{das es gescheit funktioniert}
+        \item \textit{einfache} Zugänglichkeit durch Mehrheit der Organisation
+    \end{enumerate}
+\end{enumerate}
+
+\LF Herzlichen  Dank für die Priorisierung! Ich hätte auch noch das Dimensionsmodell. Wie würdest du die jeweils bewerten?
+
+\PE Wir gehen das Pferd immer von der folgenden Seite an - Wir versuchen diese Usecases auf ein allgemeingültiges Lvel in \ac{IIoT} anzuheben. Unsere \ac{IIoT} Plattform ist, wie ich vorher erklärt habe genauso abstrahiert.
+
+\LF Die Anwendbarkeit wäre bei dir also die fünf?
+
+\PE Genau. Dein Modell hat ja Zielkonflikte. Der Idealfall wäre, wenn alles fünf wäre. 
+
+\LF In der perfekten Welt wären alle also eine fünf. Wenn wir jetzt ein bestcase Szenario annehmen, dann wäre die Anwendbarkeit ja fünf bei dir. Wie wären die anderen Werte?
+
+\PE Die Dekompositionstiefe sollte möglichst gering sein. Als Anwender möchte man gegebenenfalls gar nicht alle Low-Level Details sehen.
+
+\LF Verstehe. Wenn du das in Zahlen fassen würdest wäre das eine?
+
+\PE Die Allgemeingültigkeit wäre bei einer fünf, die Anwendbarkeit zwischen vier und fünf. Die Dekompositionstiefe wäre für mich zwischen zwei und drei. Wenn du die Dekomposition zu detailliert machst, wird es womöglich zu komplex und ist nicht mehr anwendbar.
+
+\LF Verstehe, alles klar. Das waren einige coole Insights, herzlichen Dank dafür und für deine Zeit!
+
+\PE Keine Ursache
