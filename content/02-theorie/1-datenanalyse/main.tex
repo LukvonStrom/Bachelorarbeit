@@ -13,9 +13,9 @@ Die möglichen Anwendungen in der Informatik sind ebenfalls vielzählig. So kön
 
 Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne der Messfrequenz, in welcher Daten betrachtet werden. \Todo{belegen} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und die zeitliche Distanz zwischen einzelnen Messwerten ist gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich einzelne, nicht äquidistante Messwerte auszusortieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte einmal am Tag gesammelt erhoben wurden.
 
+Es ist von zwei vorliegenden Typen von Zeitreihendaten auszugehen. Zum einen existiert der mit Zeitstempel versehene Messwert, welcher einen oder in manchen Fällen auch mehrere diskrete Messwerte kombiniert mit dem Zeitstempel der Erfassung übermittelt. Zum anderen existieren auch Ereignisse, welche keine Messwerte enthalten, sondern Ergebnisse einer Vorauswertung innerhalb des übermittelnden Systems sind. So wäre ein Ereignis beispielsweise niedriger Batteriestand eines verbundenen Sensors. Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zeitstempel oder periodisch mit Zeitstempel bis zum beheben der Ursache versendet. \Todo{belegen}
 
-\Todo{Definition Zeitreihendaten}
-\Todo{Definition Datenanalyse}
+\subsection{Analysewert verarbeiteter Daten}
 
 Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempos einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die Entscheidungstempos sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen Entscheidungstempi respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
 
@@ -44,7 +44,12 @@ Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträum
 
 \subsection{Arten der Auswertung}
 Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die jeweilige Referenzarchitektur und die verwendeten Dienste fähig sind. Im Folgenden werden dazu einige einfachere Auswertungsmethoden für Zeitreihendaten vorgestellt. Die Zeitreihenanalyse und einsetzbare Werkzeuge werden im statistischen Sinn von weiterführenden Werken, wie von \citeauthor{Shumway.2017} behandelt. Es ist davon auszugehen, dass auch weiterführende Auswertungen wie fourieranalytischen Methoden, sofern in der jeweiligen Umgebung bereits vorhanden oder programmierbar, eingesetzt werden können.
-\subsubsection{Median}
+
+
+\subsubsection{Median und Quantile}
+Eine der wichtigsten statistischen Lageparameter sind die Quantile eines Datensatzes und der Median, welcher ein spezielles, 50 prozentiges Quantil ist. Innerhalb eines gewissen Betrachtungsfensters können für Zeitreihendaten, wie für viele andere Datensätze auch, Quantile und der Median erfasst werden. Das Quantil erfasst mit der jeweiligen Prozentangabe und dem zugehörigen, ermittelten Wert die Grenze an Werten, die kleiner sind. Bei einem 75-\%-Quantil von zwei wären entsprechend nur 25\% der sich im Datensatz befindlichen Daten größer als zwei. Da ein Median das 50-\%-Quantil ist, bildet der Median entsprechend die Grenze ab, bei welcher 50\% der WErte im Datensatz kleiner und der Rest größer ist. In \autoref{abb:quantile} sind das 25,50 und 75-\%-Quantil auf einer modifizierten Sinusfunktion gezeigt.
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}
     \begin{axis}[
     xlabel=Zeit (Minuten),
@@ -56,12 +61,22 @@ Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die je
         \addplot {0.5899082};
         \addplot {1.2392493};
         \addplot {1.72939505};
-        \legend{$\sin(x-1.6)+1$,25stes Perzentil,Median,75tes Perzentil}
+        \legend{$\sin(x-1.6)+1$,25-\%-Quantil,Median (50-\%-Quantil),75-\%-Quantil}
     \end{axis}
 \end{tikzpicture}
+\caption{Median und Quantile angewendet auf abgewandelte Sinusfunktion}
+\label{abb:quantile}
+\end{figure}
 
+Gängig in der Datenanalyse als Sonderform der Quantile sind die sogenannten Perzentile, welche in einprozentigen Schritten existieren. Häufig verwendet werden insbesondere das 90-\% und das 99\% Perzentil.
 
 \subsubsection{Anomaliedetektion}
+
+\footcite[Vgl.][]{o.V..o.J.b} 
+\footcite[Vgl.][]{Pai.2020}
+
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}
     \begin{axis}[
     xlabel=Zeit (Minuten),
@@ -72,12 +87,17 @@ Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die je
         \addplot {sin(deg(x-1.6))+1}; 
         \addplot {2*sin(1.5*deg(x-1))+2};
         \addplot {0.5*sin(2*deg(x-1.6))+1};
-        \legend{Normaler Verlauf,Anomalie 1,Anomalie 2}
+        \legend{Normaler Verlauf ($sin(deg(x-1.6))+1$),Anomalie 1,Anomalie 2}
     \end{axis}
 \end{tikzpicture}
+\caption{Illustrierte Annomalieerkennung am Beispiel abgewandelter Sinus Funktionen}
+\label{abb:anomalie}
+\end{figure}
 
 \subsubsection{Schwellwertüberschreitung}
-
+Bei vielen gemessenen und sonstig erfassten Zeitreihendaten, bei denen akzeptierbare Werte und Wertbereiche, die Aktionen erfordern bekannt sind, sind Schwellwerte bereits ausreichend oder komplementär verwendbar. Dabei wird, wie in \autoref{abb:Schwellwerte} gezeigt, ein Schwellwert definiert (in diesem Fall $1.75$). Zusätzlich dargestellt ist eine Karenzzeit von 12 Sekunden. Erst nach kontinuierlicher Überschreitung des Schwellwerts von 12 Sekunden wird ein Alarm ausgelöst. 
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}
     \begin{axis}[
     xlabel=Zeit (Minuten),
@@ -91,22 +111,71 @@ Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die je
         \legend{$\sin(x-1.6)+1$,Schwellwert ($1.75$)}
     \end{axis}
 \end{tikzpicture}
+\caption{Schwellwertüberschreitung mit Karenzzeit einer Sinusfunktion}
+\label{abb:Schwellwerte}
+\end{figure}
+Gleichzeitig ist es aber auch möglich, zählerbasiert einen Alarm/eine Aktion auszulösen. Bei einer Messdistanz von angenommenen 10 Sekunden und dreifacher Auslösung wäre eine 30 sekündige Karenzzeit ebenfalls implementierbar.
 
 \subsubsection{Trenderkennung/gleitender Durchschnitt}
+Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, sind eine Form der Kurvenglättung. Sie glätten ausreissende Kurven und ermöglichen einen groben Trend der vorliegenden Daten anhand der Steigung der geglätteten Kurve vorauszusagen.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+    xlabel=betrachtete Tage im Januar 2021,
+    ylabel=Preis in \$,
+    legend pos=outer north east]
+        \addplot coordinates {
+        	(25, 159.18)
+        	(26, 150)
+        	(27, 380)
+        	(28, 483)
+        	(29, 413.98)
+        };
+        
+        \addplot coordinates {
+        (25, 159.18)
+        (26, 154.59)
+        (27, 265)
+        (28, 431.5)
+        };
+        \addplot coordinates {
+        (27,229.7266667)
+        (28,337.6666667)
+        (29,425.66)
+        };
+        
+        \addplot coordinates {
+        (28,	293.045)
+        (29,	356.745)
+        };
+        
+        \addplot coordinates {
+        (29,	317.232)
+        };
+        \legend{Tageshöchstwerte von \$GME,gleitender Durchschnitt (Intervall: 2), gleitender Durchschnitt (Intervall: 3),gleitender Durchschnitt (Intervall: 4),gleitender Durchschnitt (Intervall: 5)};
+    \end{axis}
+\end{tikzpicture}
+\caption{Gleitender Durchschnitt des Tageshöchstwertes während des Gamestop Gamma Squeezes}
+\label{abb:gleitendeDurchschnitte}
+\end{figure}
+
+$M_t = (\sum_{T=1}^{t-1}  x_T + x_t )\cdot \frac{1}{T + t}$
 
 
 % \Todo{Grafik Data Analytics Pipeline}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/DataPipeline.pdf}
-\caption{Aufbau und Ablauf in einer Data Pipeline}
+\caption[Aufbau und Ablauf in einer Data Pipeline]{Aufbau und Ablauf in einer Data Pipeline}
 \label{abb:DataPipeline}
 \end{figure}
+\footnotetext{Mit Änderungen entnommen aus: \cite[][]{}}
 \Todo{Quellenangabe}
 
 
 \subsection{Bestehende Referenzarchitekturkategorien}
-Im Bereich der Streamingarchitekturen gibt es bereits etabblierte Referenzarchitekturen, welche verschiedene mögliche Aufbauarten einer Verarbeitung von Streaming/Zeitseriendaten zeigen.
+Im Bereich der Streamingarchitekturen gibt es bereits etabblierte Referenzarchitekturen, welche verschiedene mögliche Aufbauarten einer Verarbeitung von Streaming/Zeitreihendaten zeigen.
 
 % \Todo{Lambda, Kappa, OLAP elaborieren}
 \begin{figure}[H]

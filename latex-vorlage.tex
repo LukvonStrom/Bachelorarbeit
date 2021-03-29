@@ -10,9 +10,8 @@
 %%% Name der eigenen Literatur-Datenbank (ggf. anpassen) %%%
 \bibliography{includes/literatur-db.bib}
 
-% \usepgfplotslibrary{external}
-
-% \tikzexternalize
+% \usetikzlibrary{external}
+% \tikzexternalize[prefix=tikz/]
 
 \begin{document}
 %%% Deckblatt einbinden %%% 
@@ -77,6 +76,35 @@
 % \label{tab:interviewuebersicht-#6-#5}
 \end{table}
 }
+
+\newcommand{\produktbewertung}[2]{
+\setsepchar{,}
+\readlist\arg{#2}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{ECF4FF} 
+Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
+\arg[1]/11 & \arg[2]/10 & \arg[3]/9 \\ \hline
+\rowcolor[HTML]{ECF4FF} 
+Minimal maintenance & Debuggability/transparente Fehler & Extensibility \\ \hline
+\arg[4]/8 & \arg[5]/7 & \arg[6]/6 \\ \hline
+\rowcolor[HTML]{ECF4FF} 
+Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
+\arg[7]/5 & \arg[8]/4 & \arg[9]/3 \\ \hline
+\rowcolor[HTML]{ECF4FF} 
+Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
+\arg[10]/2 & \arg[11]/1 & \cellcolor[HTML]{DAE8FC}\arg[12]/66 \\ \hline
+\end{tabular}
+\caption{Bewertungsmatrix #1}
+\label{tab:bewertungsmatrix-#1}
+\end{table}
+
+
+}
+
 % \renewcommand{\clearpage}{}
 \renewcommand*{\lstlistingname}{Codebeispiel}
 \input{content/01-einleitung/main}

@@ -13,7 +13,7 @@ Lesezugriffe auf Daten sollen mit niedriger Latenz stattfinden. Wie bereits besc
 Das Big Data System sollte durch transparente oder intransparente Provisionierung weiterer Ressourcen in der Lage sein, gleiche Performance in verschiedenen Belastungssituationen zu liefern. Dies deckt sich mit einem der Kernversprechen der Public Clouds nach NIST Definition (\enquote{rapid elasticity}).\footcite[Vgl.][2]{Mell.2011}
 \item Generalization
 
-Ein Big Data System sollte in der Lage sein, verschiedene Anwendungen zu unterstützen. Da die Zielsetzung dieser Bachelorarbeit auf Zeitseriendaten aufbaut, welche wie in \autoref{chap:GrundlagenDatenanalyse} gezeigt, einen großen Einsatzspielraum haben, ist diese Bedingung bei ausreichender Generalisierung der Referenzarchitekturen erfüllt.
+Ein Big Data System sollte in der Lage sein, verschiedene Anwendungen zu unterstützen. Da die Zielsetzung dieser Bachelorarbeit auf Zeitreihendaten aufbaut, welche wie in \autoref{chap:GrundlagenDatenanalyse} gezeigt, einen großen Einsatzspielraum haben, ist diese Bedingung bei ausreichender Generalisierung der Referenzarchitekturen erfüllt.
 \item Extensibility
 
 Das zu gestaltende Big Data System soll erweiterbar sein und neue Funktionen oder Änderungen ohne größeren Aufwand ermöglichen.
@@ -28,45 +28,73 @@ Eine Big data Anwendung soll wartbar bleiben, indem Komplexität in den Kernkomp
 Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Werte entstanden sind, um mögliche Fehler verfolgen zu können.
 \end{enumerate}
 
-Kriterien von Lukas an ein Produkt:
-\begin{itemize}
-\item zufriedenstellende Integration mit AWS nativen Diensten (z.B. Monitoring)
-\item Möglichst serverless (wenig Maintenance Aufwand)
-\item skalierbarkeit auf 0 bis 10000
-\end{itemize}
+% Kriterien von Lukas an ein Produkt:
+% \begin{itemize}
+% \item zufriedenstellende Integration mit AWS nativen Diensten (z.B. Monitoring)
+% \item Möglichst serverless (wenig Maintenance Aufwand)
+% \item skalierbarkeit auf 0 bis 10000
+% \end{itemize}
 
-Anforderungen von Kunden
-\begin{itemize}
-\item Skalierbarkeit
-\item pay for what you use (no dead infra)
-\item transparente Fehler
-\end{itemize}
+% Anforderungen von Kunden
+% \begin{itemize}
+% \item Skalierbarkeit
+% \item pay for what you use (no dead infra)
+% \item transparente Fehler
+% \end{itemize}
 
-\begin{itemize}
-    \item Übertragbarkeit
-\end{itemize}
+% \begin{itemize}
+%     \item Übertragbarkeit (ggf. zwischen Clouds)
+% \end{itemize}
+
+
+
 
 => Sortierte Tabelle mit Kriterien (geben Plus oder entsprechend Minuspunkte)
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-Prio & Kriterium & Show stopper? \\ \hline
-11 & \begin{tabular}[c]{@{}l@{}}Robustness and\\ fault tolerance\end{tabular} &  \\ \hline
-10 & \begin{tabular}[c]{@{}l@{}}Low latency \\ reads and updates\end{tabular} &  \\ \hline
-9 & Scalability &  \\ \hline
-8 & Generalization &  \\ \hline
-7 & Extensibility &  \\ \hline
-6 & Ad hoc queries &  \\ \hline
-5 & Minimal maintenance &  \\ \hline
-4 & Debuggability &  \\ \hline
-3 & möglichst serverless &  \\ \hline
-2 & Integration mit AWS nativen Produkten &  \\ \hline
-1 & Übertragbarkeit &  \\ \hline
+ID & Kriterium & Priorität \\ \hline
+\#A & Robustness and fault tolerance & 11 \\ \hline
+\#B & Scalability & 10 \\ \hline
+\#C & möglichst serverless/pay for usage & 9 \\ \hline
+\#D & Minimal maintenance & 8 \\ \hline
+\#E & Debuggability/transparente Fehler & 7 \\ \hline
+\#F & Extensibility & 6 \\ \hline
+\#G & Low latency reads and updates & 5 \\ \hline
+\#H & Ad hoc queries & 4 \\ \hline
+\#I & Generalization & 3 \\ \hline
+\#J & Integration mit AWS nativen Produkten & 2 \\ \hline
+\#K & Übertragbarkeit zwischen Clouds (ISO 9126) (Anhang) & 1 \\ \hline
 \end{tabular}
 \caption{Prioritäten}
 \label{tab:prioritaeten}
 \end{table}
+
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|l|l|l|}
+% \hline
+% \rowcolor[HTML]{ECF4FF} 
+% Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
+% x/11 & x/10 & x/9 \\ \hline
+% \rowcolor[HTML]{ECF4FF} 
+% Minimal maintenance & Debuggability/transparente Fehler & Extensibility \\ \hline
+% x/8 & x/7 & x/6 \\ \hline
+% \rowcolor[HTML]{ECF4FF} 
+% Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
+% x/5 & x/4 & x/3 \\ \hline
+% \rowcolor[HTML]{ECF4FF} 
+% Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
+% x/2 & x/1 & \cellcolor[HTML]{DAE8FC}x \\ \hline
+% \end{tabular}
+% \caption{Bewertungsmatrix Produkt}
+% \label{tab:bewertungsmatrix-produkt}
+% \end{table}
+
+\produktbewertung{Produkt}{x,x,x,x,x,x,x,x,x,x,x,x}
+
+Ausgehend von den in \autoref{tab:prioritaeten} gezeigten Prioritäten, soll \autoref{tab:bewertungsmatrix-Produkt} verwendet werden um die jeweiligen Produkte zu bewerten.
 
 \subsection{Featurevergleich}
 
