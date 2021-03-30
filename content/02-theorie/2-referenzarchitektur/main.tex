@@ -1,7 +1,5 @@
 \section{Referenzarchitektur}\label{theorie:referenzmodellierung}
-\Todo{Einleitung -> Bass,Kazman --> Referenzmodell Basis von Refernzarchitektur}
-
-Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Referenzmodell, wie in \autoref{abb:RelationshipsReferenceModel} welches in Softwarearchitekturen instanziiert werden kann. \footcite[Vgl.][S.~17~f.]{Bass.2010} In diesem Kapitel soll deshalb speziell auf die theoretische Definition von Referenzmodellierung eingegangen werden und entsprechend die theoretische Definition des Referenzarchitekturbegriffs genauso wie mögliche Vorgehensmodelle betrachtet werden.
+Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Referenzmodell, wie in \autoref{abb:RelationshipsReferenceModel} welches in Softwarearchitekturen instanziiert werden kann. \footcite[Vgl.][S.~17~f.]{Bass.2010} 
 
 \begin{figure}[H]
 \centering
@@ -11,6 +9,10 @@ Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Ref
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite[][18]{Bass.2010}}
 
+In diesem Kapitel sollen deshalb die theoretische Definition des Referenzarchitekturbegriffs, genauso wie mögliche Vorgehensmodelle betrachtet werden.
+
+
+
 \subsection{Referenzmodelle}
 
 Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von \citeauthor{vomBrocke.2003} ist ein Referenzmodell als solches zu erkennen, wenn der Gegenstand und/oder\footnote{Die Verwendung von \enquote{und/oder} wurde hier gewählt, da der Autor der Quelle das \enquote{oder} aus der boolschen Algebra gewählt hat um explizit beide Fälle einzuschliessen.} der Inhalt des Referenzmodells bei der Konstruktion des Gegenstandes und/oder des Inhaltes eines zu konstruierenden Anwendungsmodells wiederverwendet werden kann.\footcite[Vgl.][34]{vomBrocke.2003} Dabei hat ein Referenzmodell einen Empfehlungscharakter und stellt eine \enquote{best practice} dar.\footcite[Vgl.][31]{vomBrocke.2003} 
@@ -18,23 +20,9 @@ Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von \citeaut
 Ein Referenzmodell kann nach \citeauthor{vomBrocke.2003} nicht objektiv allgemeingültig sein und auch keinen objektiven Empfehlungscharakter haben, sondern muss subjektiv beurteilt werden.\footcite[Vgl. auch im Folgenden][31~f.]{vomBrocke.2003}  Dabei ist zumindest von den Interessensgruppen der Konstruierenden und der Nutzenden auszugehen, welche das Referenzmodell subjektiv unterschiedlich nach Allgemeingültigkeit und Empfehlungscharakter bewerten. Je nachdem welche Beurteilung höher gewichtet wird und früher einfließt, kann also entweder von der Situation ausgegangen werden, dass das Referenzmodell vom Konstruierenden zu einem solchen erklärt wird oder ein Modell, ob vom Konstruierenden beabsichtigt oder nicht, von den Nutzenden zu einem solchen erhoben wird.
 
 \subsection{Grundsätze ordnungsgemäßer Referenzmodellierung}
-\Todo{Grundsätze ordnungsgemäßer Modellierung/GoRM - siehe auch 148 vomBrocke.2003}
+\Todo{Grundsätze ordnungsgemäßer Modellierung/GoRM - siehe auch 148 vomBrocke.2003} \\
+\textbf{=> Buch ist per Fernleihe bestellt, aber noch nicht da}
 
-
-\subsection{Konstruktionstechniken}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight]{graphics/anwendung-referenzmodelle.pdf}
-\caption[Konstruktionstechniken der Referenzmodellierung]{Konstruktionstechniken der Referenzmodellierung.\footnotemark}
-\label{abb:KonstruktionstechnikenRefMod}
-\end{figure}
-\footnotetext{Mit Änderungen entnommen aus: \cite[][262]{vomBrocke.2003}}
-
-\subsection{Anwendung von Referenzmodellen}
-Instanziierung
-Konfiguration
-\Todo{Einsatzszenarien darstellen (Konfiguration, ...)}
 
 \subsection{Referenzarchitektur}
 Der IEEE Standard 1471-2000 definiert Architektur im Kontext von softwareintensiven Systemen wie folgt:
@@ -68,7 +56,7 @@ Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzu
 \item wertschöpfend für den Betrieb
 \end{enumerate}
 
-Generelle Design Prinzipien des AWS Well Architected Frameworks - Analytics Lens\footcite[Vgl.][6]{Ravirala.2020}:
+\ac{AWS} definiert im Rahmen des sogenannten Well Architected Frameworks für verschiedene \enquote{Lenses}, also Spezialisierungen, Themenfelder, die bei exzellenten Architekturen zu beachten sind. Für Datenanalysen gibt es die Analytics Lens, welche entsprechend für Referenzarchitekturen genauso Anwendung finden sollte. Kriterien sind dabei die Folgenden:\footcite[Vgl.][6]{Ravirala.2020}:
 \begin{itemize}
 \item Automate data ingestion
 \item Design ingestion for failures and duplicates => Siehe Robustness and fault tolerance
@@ -101,14 +89,14 @@ Zur Darstellung der verwendeten Produkte und Dienstleistungen von \ac{AWS} in de
 
 Wie von \citeauthor{Muller.2020} vorgeschlagen und im vorherigen Unterkapitel erläutert, ist ein inkrementeller Ansatz unter Verwendung von Prototypen und kontinuierlichem Feedback der Zielstakeholder unerlässlich.\footcite[Vgl.][7]{Muller.2020} 
 
-Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[Vgl.][24\psqq]{Webber.2001} Mittels der Variationspunkte kann eine statische Referenz-/ Produktlinienarchitektur konstruiert werden, welche an spezifisch definierten Punkten angepasst werden muss, um einzigartige Architekturen zu erzeugen.\footcite[Vgl.][24]{Webber.2001} Dabei gibt es vier verschiedene Ansichten, aus denen Variationspunkte definiert werden können:\footcite[Vgl.][25\psq]{Webber.2001}
+Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[Vgl.][24\psqq]{Webber.2001} Mittels der Variationspunkte kann eine statische Referenzarchitektur konstruiert werden, welche an spezifisch definierten Punkten angepasst werden muss, um einzigartige Architekturen zu erzeugen.\footcite[Vgl.][24]{Webber.2001} Dabei gibt es vier verschiedene Ansichten, aus denen Variationspunkte definiert werden können:\footcite[Vgl.][25\psq]{Webber.2001}
 \begin{enumerate}
 \item \label{view:first} Requirement-Variation-Point View
 \item \label{view:second} Component-Variation-Point View
 \item \label{view:third} Static-Variation-Point View
 \item \label{view:fourth} Dynamic-Variation-Point View
 \end{enumerate}
-Dabei sind für diese Arbeit, in der keine implementierungsnahe Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht aus \autoref{view:first} und \autoref{view:second} wichtig. Die statische und dynamische Variationspunktsicht aus \autoref{view:third} und \autoref{view:fourth} agieren stärker auf Implementierungsebene, in dem beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann und deren Verhaltensweisen durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden kann.\footcite[Vgl.][25\psq]{Webber.2001} 
+Dabei sind für diese Arbeit, in der keine implementierungsnahe (im Sinne von Programmierung) Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht aus \autoref{view:first} und \autoref{view:second} wichtig. Die statische und dynamische Variationspunktsicht aus \autoref{view:third} und \autoref{view:fourth} agieren stärker auf Implementierungsebene, in dem beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann und deren Verhaltensweisen durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden kann.\footcite[Vgl.][25\psq]{Webber.2001} 
 
 \renewcommand\#{\protect\scalebox{0.8}{\protect\raisebox{0.4ex}{\char"0023}}}
 

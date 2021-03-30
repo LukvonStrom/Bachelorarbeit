@@ -46,10 +46,22 @@ Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Wer
 %     \item Übertragbarkeit (ggf. zwischen Clouds)
 % \end{itemize}
 
+Vielleicht noch:
+Requirements:\footcite[Vgl.][]{Belur.2020}
+\begin{itemize}
+\item Unified experience for data ingestion and edge processing
+\item Versatile out-of-the-box connectivity
+\item Scalable stream processing with complex transformations
+\item Operationalized business rules and ML models
+\item Ability to handle unstructured data and schema drift:
+\item Reusability of processing logic
+\item Governance and lineage
+\end{itemize}
 
 
 
-=> Sortierte Tabelle mit Kriterien (geben Plus oder entsprechend Minuspunkte)
+
+=> Sortierte Tabelle mit Kriterien (geben nach Erfüllungsgrad Punkte)
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -97,7 +109,24 @@ ID & Kriterium & Priorität \\ \hline
 Ausgehend von den in \autoref{tab:prioritaeten} gezeigten Prioritäten, soll \autoref{tab:bewertungsmatrix-Produkt} verwendet werden um die jeweiligen Produkte zu bewerten.
 
 \subsection{Featurevergleich}
+Es soll auf die Mindestverfügbarkeit folgender Fähigkeiten überprüft werden:
+\begin{itemize}
+\item Auswertungen nach \autoref{chap:auswertungsarten}
+\end{itemize}
 
 \subsection{Performancevergleich}
+Es muss mindestens die theoretische Verarbeitungslatenz verglichen werden
 
 \subsection{Kostenvergleich}
+Um einen sinnvollen Kostenvergleich aufzustellen, sind folgende Annahmen zu treffen:
+Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen. Es gehen 1 Nachricht mit einem Kb pro Sekunde ein. Es ist die Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in € erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Produkte, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden. 
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+Dimension & Preis/Einheit           & Summe \\
+Beispiel  & x\$/100.000 Datenpunkte & x\$  
+\end{tabular}
+\caption{Kostenvergleich Schema}
+\label{tab:kostenvergleich-schema}
+\end{table}
+Es sind alle Abrechnungsdimensionen in der in \autoref{tab:kostenvergleich-schema} gezeigten Form zu dokumentieren.

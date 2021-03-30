@@ -57,7 +57,7 @@ $input.Input1.value > $variable.threshold
 \end{figure}
 
 \subsection{Amazon Kinesis}
-Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis älter als \AWSIOT Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT Events.\footcite[Vgl.][]{Pogosova.28.05.2020}
+Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis älter als \AWSIOT Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis garantiert zusätzlich, dass Daten in 70 Milisekunden verfügbar sind.
 
 \begin{figure}[H]
 \centering
@@ -104,3 +104,52 @@ Mittels dem \ac{AWS} Glue Dienst, welcher diverse \ac{ETL} Dienste, wie beispiel
 Streaming-Engine können nach Aussage des Herstellers Daten aus Kinesis oder Kafka (und damit aus \ac{MSK}) geladen werden. Nachfolgend werden die eingehenden Daten mittels sogenannter Jobs analysiert/transformiert, welche in Sprachen wie Scala, Java, Python oder R geschrieben sein können. Nach Abschluss der Analyse können die Daten in \ac{S3} oder in eine \ac{JDBC} kompatible Datenbank (z.B. MySQL, PostgreSQL, Amazon Redshift, Oracle Databse, ...) geladen werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.e} Die Interaktion zwischen eigener Logik und AWS Glue erfolgt via \acp{API} von Apache Spark, die entsprechende Kentnisse zur Interaktion mit den Daten erfordern.
 
 \subsection{Produktauswahl}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{ECF4FF} 
+Begründung & Kriterium & Bewertung \\ \hline
+Einsatz von Code & Robustness and fault tolerance & 8 \\ \hline
+Einsatz von Code, statische Analyse & Ad hoc queries & 0 \\ \hline
+Anzahl der AWS-Dienste\textless{}5 & Integration mit AWS & 1 \\ \hline
+Anzahl der AWS-Dienste=0 & Integration mit AWS & 0 \\ \hline
+AWS-properitär & Übertragbarkeit & 0 \\ \hline
+\end{tabular}
+\caption{Spezielle Einstufungen einzelner Produktbesonderheiten}
+\label{tab:einstufungen}
+\end{table}
+
+\produktbewertung{AWS~IoT~Analytics}{8,10,7,7,7,5,5,4,2,1,0,57}
+\autoref{tab:bewertungsmatrix-AWS~IoT~Analytics}
+
+\produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
+\autoref{tab:bewertungsmatrix-AWS~IoT~Events}
+
+\produktbewertung{Amazon~Kinesis}{11,5,4,4,6,6,5,0,3,2,0,46}
+\autoref{tab:bewertungsmatrix-Amazon~Kinesis}
+
+\produktbewertung{AWS~Lambda}{8,10,9,6,7,6,0,0,3,2,1,52}
+\autoref{tab:bewertungsmatrix-AWS~Lambda}
+
+\produktbewertung{Amazon~MSK}{11,5,4,7,5,6,5,0,3,1,1,48}
+\autoref{tab:bewertungsmatrix-Amazon~MSK}
+
+\produktbewertung{AWS~Glue}{8,10,9,6,4,4,5,0,2,1,0,49}
+\autoref{tab:bewertungsmatrix-AWS~Glue}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Platz & Name & Summe \\ \hline
+1 & AWS IoT Analytics & \cellcolor[HTML]{DAE8FC}57 \\ \hline
+2 & AWS Lambda & \cellcolor[HTML]{DAE8FC}52 \\ \hline
+3 & AWS Glue & \cellcolor[HTML]{DAE8FC}49 \\ \hline
+4 & Amazon MSK & \cellcolor[HTML]{DAE8FC}48 \\ \hline
+5 & AWS IoT Events & \cellcolor[HTML]{DAE8FC}47 \\ \hline
+6 & Amazon Kinesis & \cellcolor[HTML]{DAE8FC}46 \\ \hline
+\end{tabular}
+\caption{Produktreihenfolge Echtzeitprodukte}
+\label{tab:Reihenfolge-Echtzeit}
+\end{table}
