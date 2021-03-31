@@ -116,13 +116,13 @@
                                  % (scrreprt) und anderen Paketen her
                         
 \usepackage{todo}
-\usepackage{enumitem}
 
-\usepackage[table,xcdraw]{xcolor}
+%\usepackage{rotating}
+
 \usepackage{pgfplots}
-\usepackage{rotating}
 \usepackage{listofitems}
-\usepackage{pgfplotstable}
+\usetikzlibrary{positioning,arrows}
+\pgfplotsset{compat=1.17}
 
 % \usepackage[expansion, final]{microtype}
                                  
@@ -140,67 +140,8 @@
 \setlength\cftafterlottitleskip{\myAfterTitleSkip}                                                            
 %%% Ende der Präambel %%%
 
-%% Based on the Diagram by romeovs - https://tex.stackexchange.com/a/10064
 
-\def\n{3}   %define how much axes you want
-\def\N{5}   %define the number of node on each axis
-\usetikzlibrary{positioning,arrows}
-\pgfplotsset{compat=1.17}
 
-\newcommand{\spider}[3]{
-    \begin{tikzpicture}[scale=0.75]
-        \foreach \x in{0,1,...,\n}{%
-            \draw[->] (0,0)--(360/\n*\x:\N+0.5);
-            \foreach \y in{0,1,...,\N}{
-                \draw[thin,lightgray](360/\n*\x:\y)--(360/\n*\x+360/\n:\y);
-                \draw[fill] (360/\n*\x:\y) circle(1pt);
-                \ifnum\x=1
-                    
-                %     % \ifnum\y>0
-                %         \draw(360/\n*\x:\y)node[below]{\y};
-                %     % \else 
-                %         % \draw(360/\n*\x:\y)node[above right]{\y};
-                %     % \fi
-                % \else
-                    \draw(360/\n*\x:\y)node[above right]{\y};
-                \fi
-                }
-
-        }
-
-        \draw(360/\n:\N+0.5)node[above]{Dekompositionstiefe};     %adjust the labels (also add or delete exces axes)
-        \draw(2*360/\n:\N+0.5)node[below]{Allgemeingültigkeit};   %eg. if you have 6 axes, delete the last 2
-        \draw(3*360/\n:\N+0.5)node[above=0.5cm]{Anwendbarkeit};        %or if you have 9 axes add one
-        \draw[ultra thick,draw=blue](360/\n:#1)--(360/\n*2:#2)--(360/\n*3:#3)--cycle;
-    \end{tikzpicture}
-}
-
-\newcommand{\spideroverview}[9]{
-    \begin{tikzpicture}[]
-        \foreach \x in{0,1,...,\n}{%
-            \draw[->] (0,0)--(360/\n*\x:\N+0.5);
-            \foreach \y in{0,1,...,\N}{
-                \draw[thin,lightgray](360/\n*\x:\y)--(360/\n*\x+360/\n:\y);
-                \draw[fill] (360/\n*\x:\y) circle(1pt);
-                \ifnum\x=1
-                    \draw(360/\n*\x:\y)node[above right]{\y};
-                \fi
-                }
-
-        }
-
-        \draw(360/\n:\N+0.5)node[above]{Dekompositionstiefe};
-        \draw(2*360/\n:\N+0.5)node[below]{Allgemeingültigkeit};   
-        \draw(3*360/\n:\N+0.5)node[above=0.5cm]{Anwendbarkeit};        
-        
-        \draw[ultra thick,draw=red](360/\n:#1)--(360/\n*2:#2)--(360/\n*3:#3)--cycle;
-        \draw[ultra thick,draw=blue](360/\n:#4)--(360/\n*2:#5)--(360/\n*3:#6)--cycle;
-        \draw[ultra thick,draw=cyan](360/\n:#7)--(360/\n*2:#8)--(360/\n*3:#9)--cycle;
-        \node[draw=black,thick,rounded corners=2pt,below=5.5cm] {%
-        \begin{tabular}{p{5.05mm}l|p{5.05mm}c|p{5.05mm}p{14.5mm}}
-         \raisebox{2pt}{\tikz{\draw[ultra thick,draw=red] (0,0) -- (5mm,0);}} & Philip A. &
-         \raisebox{2pt}{\tikz{\draw[ultra thick,draw=blue] (0,0) -- (5mm,0);}} &Ralph B. &
-         \raisebox{2pt}{\tikz{\draw[ultra thick,draw=cyan] (0,0) -- (5mm,0);}}&Peter E.\\
-        \end{tabular}};
-    \end{tikzpicture}
-}
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}

@@ -1,8 +1,10 @@
 %%% LaTeX-Vorlage Version 1.8 %%%
 
+\PassOptionsToPackage{table,xcdraw}{xcolor}
+
 % Grundlegende Dokumenteneigenschaften gemäß DHBW-Vorgaben
 \documentclass[a4paper,fontsize=11pt,oneside,parskip=half,headings=normal]{scrreprt} 
-% \usepackage{showframe} % nur für Kontrolle der Ränder 
+ \usepackage{showframe} % nur für Kontrolle der Ränder 
 
 %%% Präambel einbinden (mit Festlegungen gemäß DHBW-Vorgaben) %%%
 \input{template/_dhbw_praeambel.tex}
@@ -24,6 +26,7 @@
 %%% Abstract einbinden (optionale Kurzfassung Ihrer Arbeit) %%%
 \input{includes/abstract.tex}
 \cleardoublepage
+
 
 %%% Inhalts-, Abbildungs-, Tabellenverzeichnisse %%%
 % sollen einzeilig gesetzt werden, um Platz zu sparen 
@@ -51,62 +54,9 @@
 %%% Ihr eigentlicher Inhalt %%%
 % Empfehlung: strukturieren Sie Ihren Text in einzelnen Dateien 
 % und binden Sie diese hier mit \input{includes/dateiname.tex} ein
-
-\newcommand{\AWS}{\ac{AWS}}
-\newcommand{\AWSIOT}{\ac{AWS}~\ac{IoT} }
-\newcommand{\nzitat}{${}^{,}$}
-\newcommand{\coo}{\ensuremath{\mathrm{CO_2}}}
-\newcommand{\wip}[0]{\[WIP\]}
-\newcommand{\ready}[0]{\[DONE\]}
-\newcommand{\interview}[6]{
-% name
-% position
-% acro
-% thema
-% datum
-\anhang{Experteninterview #1}\label{chap:interview-#6-#5}
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{|l|X|}
-\hline
-    Datum                  & #5 \\ \hline
-    Thema                  & #4 \\ \hline
-    \begin{tabular}[c]{@{}l@{}}Teilnehmende,\\ Position\end{tabular} & \begin{tabular}[c]{@{}l@{}}Lukas Fruntke, Verfasser\\ #1, #2 - \acf{#3}\end{tabular}\\ \hline
-\end{tabularx}
-% \caption{Interviewübersicht #1}
-% \label{tab:interviewuebersicht-#6-#5}
-\end{table}
-}
-
-\newcommand{\produktbewertung}[2]{
-\setsepchar{,}
-\readlist\arg{#2}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\rowcolor[HTML]{ECF4FF} 
-Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
-\arg[1]/11 & \arg[2]/10 & \arg[3]/9 \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-Minimal maintenance & Debuggability/transparente Fehler & Extensibility \\ \hline
-\arg[4]/8 & \arg[5]/7 & \arg[6]/6 \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
-\arg[7]/5 & \arg[8]/4 & \arg[9]/3 \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
-\arg[10]/2 & \arg[11]/1 & \cellcolor[HTML]{DAE8FC}\arg[12]/66 \\ \hline
-\end{tabular}
-\caption{Bewertungsmatrix #1}
-\label{tab:bewertungsmatrix-#1}
-\end{table}
+\input{template/custom_commands}
 
 
-}
-
-% \renewcommand{\clearpage}{}
-\renewcommand*{\lstlistingname}{Codebeispiel}
 \input{content/01-einleitung/main}
 
 \input{content/02-theorie/main}
@@ -130,6 +80,8 @@ Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
 
 \clearpage
 \todos
+
+
 
 %%% Quellenverzeichnisse (keine Anpassung nötig) %%%
 \clearpage
