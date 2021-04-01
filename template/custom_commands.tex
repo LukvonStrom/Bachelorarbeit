@@ -101,9 +101,9 @@
 \newcommand{\produktbewertung}[2]{
 \setsepchar{,}
 \readlist\arg{#2}
-\ifthenelse{\equal{#1}{Produkt}}
-    {}
-    {\subsubsection{#1}}
+% \ifthenelse{\equal{#1}{Produkt}}
+%     {}
+%     {\subsubsection{#1}}
 
 \begin{table}[H]
 \centering
@@ -113,7 +113,7 @@
 Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
 \textbf{\arg[1]}/11 & \textbf{\arg[2]}/10 & \textbf{\arg[3]}/9 \\ \hline
 \rowcolor[HTML]{ECF4FF} 
-Minimal maintenance & Debuggability/transparente Fehler & Extensibility \\ \hline
+Minimal maintenance & Debuggability/transparente Fehler & Kosten \\ \hline
 \textbf{\arg[4]}/8 & \textbf{\arg[5]}/7 & \textbf{\arg[6]}/6 \\ \hline
 \rowcolor[HTML]{ECF4FF} 
 Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
@@ -125,6 +125,8 @@ Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
 \caption{Bewertungsmatrix #1}
 \label{tab:bewertungsmatrix-#1}
 \end{table}
+
+In \autoref{tab:bewertungsmatrix-#1} wird #1 gemäß der in \autoref{tab:einstufungen} eingeschränkten Bewertungen bewertet.
 }
 
 % \renewcommand{\clearpage}{}

@@ -3,7 +3,14 @@
 Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodelle einen subjektiven Empfehlungscharakter besitzen, damit sie akzeptiert und wiederverwendet werden. Dafür muss ein Abgleich mit den Anforderungen der Nutzenden geschehen. Um dies zu erreichen, wurden im Anhang transkribierte Interviews (Vgl. Anhang~\ref{chap:interview-philipp-22.03.2021},\ref{chap:interview-ralph-24.03.2021},\ref{chap:interview-peter-24.03.2021}) durchgeführt. Daraus ergibt sich das in \autoref{abb:TopLevelEchtzeitRA} gezeigte Diagramm, welches die Anforderungen der individuellen Stakeholder an Dekompositiontiefe, Anwendbarkeit und Allgemeingültigkeit darstellt.
 
 
-\Todo{Anforderungstabelle}
+\begin{itemize}
+\item Anwendbarkeit auf Monitoring (klassische IT)
+\item Anwendbarkeit auf Sensordaten (IoT)
+\item wertschöpfend für den Betrieb
+\item akzeptabel und problemlösend für Domäne
+\item Handling von Events, Messwerten und \enquote{Streaming}
+\end{itemize}
+
 
 \begin{figure}[H]
 \centering
@@ -17,6 +24,10 @@ Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodel
 \caption{Ergebnisse der Interviews}
 \label{abb:DimensionenUebersicht}
 \end{figure}
+Dekompositionstiefe: $3,\overline{3}$
+Anwendbarkeit: $3,\overline{3}$
+Allgemeingültigkeit: $3$
+
 \section{Echtzeitverarbeitung}
 \textbf{Noch nicht final, soll zeigen wie es mal werden soll}
 \begin{figure}[H]
@@ -26,7 +37,16 @@ Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodel
 \label{abb:TopLevelEchtzeitRA}
 \end{figure}
 
-\section{Datenbankseitige Verarbeitung}
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.33\textheight]{graphics/Echtzeit-RA-Elements.pdf}
+\caption{Interagierende Dienstelemente}
+\label{abb:ElementeEchtzeitRA}
+\end{figure}
+
+
+
+\section{Batch Verarbeitung}
 
 
 
@@ -35,6 +55,15 @@ Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodel
 \includegraphics[width=\textwidth]{graphics/DB-RA-Overview.pdf}
 \caption{Top Level View Referenzarchitektur}
 \label{abb:TopLevelDBRA}
+\end{figure}
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/DB-RA-Elements.pdf}
+\caption{Interagierende Dienstelemente}
+\label{abb:ElementeDBRA}
 \end{figure}
 
 \section{Einsatzszenarien der Referenzmodelle}

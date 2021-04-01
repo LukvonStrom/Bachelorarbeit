@@ -12,11 +12,11 @@
 
 \LF Wenn man das auf mein Feld, die Cloud überträgt, wäre die Analyse \enquote{hinten raus} ja eine der Möglichkeiten für eine Referenzarchitektur.
 
-\PE Ja, aber du hast ja abgesehen davon auch in der Cloud Se4rvices, um dir deine Datenbeschaffung zu ermöglichen, wie z.B. den \AWSIOT Core, also den \ac{MQTT} Broker. An den kann man ja die Gatewayservices anknüpfen. Wenn ich mich richtig erinnere, bietet aber auch \ac{AWS} verwaltete Gatewayservices zur Datennormalisierung an. Letztenendes könnte man diese Architektur also auch komplett in \ac{AWS} abbilden.
+\PE Ja, aber du hast ja abgesehen davon auch in der Cloud Services, um dir deine Datenbeschaffung zu ermöglichen, wie z.B. den \AWSIOT Core, also den \ac{MQTT} Broker. An den kann man ja die Gatewayservices anknüpfen. Wenn ich mich richtig erinnere, bietet aber auch \ac{AWS} verwaltete Gatewayservices zur Datennormalisierung an. Letztenendes könnte man diese Architektur also auch komplett in \ac{AWS} abbilden.
 
 \LF Ja das wäre auch ein gute Option, ich denke aber, dass es nur bedingt Sinn macht das in \ac{AWS} nochmal komplett neuzubauen, da ihr ja schon einige laufenden Konverter habt, die die Daten der Sensoren in maschinenlesbare Formate umwandeln. Ausgehend von diesen umgewandelten Daten wäre aus meiner Sicht eine Analyse viel spannender.
 
-\PE Verstehe, da könnte man ja die Daten aus der IoT Plattform ausleiten und Richtung \ac{AWS} senden. Dies tun wir bereits so ähnlich in einem Kundenprojekt via \ac{MQTT}, wo wir die Daten zur TU Dresden für Analysen ausleiten. Wir haben ja aber auch die \coo Sensoren in unseren Konferenzräumen, die permanent Daten sammeln, die könnte man ähnlich weiterleiten.
+\PE Verstehe, da könnte man ja die Daten aus der IoT Plattform ausleiten und Richtung \ac{AWS} senden. Dies tun wir bereits so ähnlich in einem Kundenprojekt via \ac{MQTT}, wo wir die Daten zur TU Dresden für Analysen ausleiten. Wir haben ja aber auch die \coo{} Sensoren in unseren Konferenzräumen, die permanent Daten sammeln, die könnte man ähnlich weiterleiten.
 
 \LF Ja, die \coo Daten hatte ich auch schon im Kopf.
 
@@ -52,7 +52,7 @@ Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das 
 
 \PE Genau, und wenn du einen Milisekundenabstand hast, dann bist du sozusagen im Streaming mode. Da muss dann deine Infrastruktur dahinter permanent auf Höhe sein, damit die ja nix verpasst. 
 
-\LF Ja, das ist einer der Punikte wo aus meiner Sicht die Cloud interessant wird.
+\LF Ja, das ist einer der Punkte wo aus meiner Sicht die Cloud interessant wird.
 
 \PE ja, aber die Cloud wird auch schon bei Daten interessant, wenn ein hohes Volumen von vielen Devices eintrifft. Wenn man beispielsweise eine Stadt nimmt, die Smart Meter breit einsetzt, dann haben die bei einer größeren Stadt über 70.000 Devices verteilt. Die senden dann vielleicht nur alle 15 Minuten ein Messwert. Wenn aber jetzt ein Stromzähler pro Telegram 50 Bytes sendet, alle 15 Minuten und das multipliziert mit 70.000 ist die Cloud schon sehr interessant.
 

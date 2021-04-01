@@ -58,56 +58,6 @@ Requirements:\footcite[Vgl.][]{Belur.2020}
 \item Governance and lineage
 \end{itemize}
 
-
-
-
-=> Sortierte Tabelle mit Kriterien (geben nach Erfüllungsgrad Punkte)
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-ID & Kriterium & Priorität \\ \hline
-\#A & Robustness and fault tolerance & 11 \\ \hline
-\#B & Scalability & 10 \\ \hline
-\#C & möglichst serverless/pay for usage & 9 \\ \hline
-\#D & Minimal maintenance & 8 \\ \hline
-\#E & Debuggability/transparente Fehler & 7 \\ \hline
-\#F & Extensibility & 6 \\ \hline
-\#G & Low latency reads and updates & 5 \\ \hline
-\#H & Ad hoc queries & 4 \\ \hline
-\#I & Generalization & 3 \\ \hline
-\#J & Integration mit AWS nativen Produkten & 2 \\ \hline
-\#K & Übertragbarkeit zwischen Clouds (ISO 9126) (Anhang) & 1 \\ \hline
-\end{tabular}
-\caption{Prioritäten}
-\label{tab:prioritaeten}
-\end{table}
-
-% \begin{table}[H]
-% \centering
-% \begin{tabular}{|l|l|l|}
-% \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
-% x/11 & x/10 & x/9 \\ \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Minimal maintenance & Debuggability/transparente Fehler & Extensibility \\ \hline
-% x/8 & x/7 & x/6 \\ \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
-% x/5 & x/4 & x/3 \\ \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
-% x/2 & x/1 & \cellcolor[HTML]{DAE8FC}x \\ \hline
-% \end{tabular}
-% \caption{Bewertungsmatrix Produkt}
-% \label{tab:bewertungsmatrix-produkt}
-% \end{table}
-
-\produktbewertung{Produkt}{x,x,x,x,x,x,x,x,x,x,x,x}
-
-Ausgehend von den in \autoref{tab:prioritaeten} gezeigten Prioritäten, soll \autoref{tab:bewertungsmatrix-Produkt} verwendet werden um die jeweiligen Produkte zu bewerten.
-
 \subsection{Featurevergleich}
 Es soll auf die Mindestverfügbarkeit folgender Fähigkeiten überprüft werden:
 \begin{itemize}
@@ -119,12 +69,14 @@ Es muss mindestens die theoretische Verarbeitungslatenz verglichen werden
 
 \subsection{Kostenvergleich}
 Um einen sinnvollen Kostenvergleich aufzustellen, sind folgende Annahmen zu treffen:
-Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen. Es gehen 1 Nachricht mit einem Kb pro Sekunde ein. Es ist die Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in € erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Produkte, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden. 
+Es existieren 200 Geräte/Sensoren. Es geht eine Nachricht mit einem kB pro Minute pro Gerät ein (0,0432 GB/Gerät/Monat und 8,64 GB/Monat).
+Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und wo möglich eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  Es ist die Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in € erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Produkte, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden. Analysen, wo individuell auslösbar erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. 
 \begin{table}[H]
 \centering
-\begin{tabular}{lll}
-Dimension & Preis/Einheit           & Summe \\
-Beispiel  & x\$/100.000 Datenpunkte & x\$  
+\begin{tabular}{|l|l|l|}
+\hline
+Dimension & Preis/Einheit           & Summe \\ \hline
+Beispiel  & x\$/100.000 Datenpunkte & x\$  \\\hline
 \end{tabular}
 \caption{Kostenvergleich Schema}
 \label{tab:kostenvergleich-schema}
