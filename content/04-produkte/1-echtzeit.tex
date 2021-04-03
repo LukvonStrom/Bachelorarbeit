@@ -65,7 +65,23 @@ $input.Input1.value > $variable.threshold
 \end{figure}
 
 \produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
-\autoref{tab:bewertungsmatrix-AWS~IoT~Events}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Dimension & Preis/Einheit           & Summe \\ \hline
+Datenverarbeitung  & 0,20\$/GB & 1,728\$  \\\hline
+Datenspeicherung verarbeitet  & 0,03\$/GB & 0,7776\$  \\\hline
+Anfragenbearbeitung & \begin{tabular}[c]{@{}l@{}}6,5\$ \\ 0,00634\$/GB\end{tabular} & 157,95\$ \\ \hline
+\begin{tabular}[c]{@{}l@{}}Datenspeicherung roh\\ \ac{S3}\\ Standard Tier\end{tabular}  & 0,0245\$/GB & 0,63504\$  \\\hline
+Summe  &  & 161,09064\$  \\\hline
+%Eigene Analyselogik  & 0,36\$/h & x\$  \\\hline
+\end{tabular}
+\caption{Kostenvergleich AWS~IoT~Analytics}
+\label{tab:kostenvergleich-AWS~IoT~Analytics}
+\end{table}
+AmazonWebServicesInc..o.J.k
 
 \subsection{Amazon Kinesis}
 Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis älter als \AWSIOT Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis garantiert zusätzlich, dass Daten in 70 Milisekunden verfügbar sind.

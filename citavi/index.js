@@ -17,6 +17,13 @@ sample = sample.map(el => {
 	let buffer = Object.assign({}, el);
 	buffer.entryTags = {}
 	for (let key of keys){
+		// Klare Herausgeberschaft statt Autorenschaft
+		if((key === "author" && el.entryTags["author"] === "Amazon Web Services, Inc.") || (key === "url" && el.entryTags["url"].includes("amazon.com"))){
+			if(el.entryTags["author"] === "Amazon Web Services, Inc."){
+				buffer.entryTags["author"] = "";
+			}
+			buffer.entryTags["editor"] = "Amazon Web Services, Inc.";
+		}
 		if(key === "year" && el.entryTags[key] === "o.J."){
 			buffer.entryTags[key] = "nodate";
 		}else{
