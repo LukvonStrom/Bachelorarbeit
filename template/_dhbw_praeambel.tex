@@ -25,12 +25,11 @@
 \usepackage{float}
 
 \usepackage[ngerman]{babel} % Spracheinstellungen Deutsch
+\usepackage{minted}
 \usepackage[babel,german=quotes]{csquotes} % deutsche Anf.zeichen
 \usepackage{enumerate}      % anpassbare Nummerier./Aufz.
 \usepackage{graphicx}       % Einbinden von Grafiken
 \usepackage[onehalfspacing]{setspace} % anderthalbzeilig
-
-\usepackage{blindtext}      % Textgenerierung für Testzwecke
 \usepackage{color}          % Verwendung von Farbe 
 
 \usepackage{acronym}        % für ein Abkürzungsverzeichnis
@@ -41,16 +40,16 @@
   backend=biber,
   bibstyle=_dhbw_authoryear,maxbibnames=99,
   citestyle=authoryear,     
-  uniquename=true, useprefix=true,
+  uniquename=true, useprefix=true, dashed=false,
   bibencoding=utf8, giveninits=true]{biblatex}
 \input{template/_dhbw_biblatex-config.tex} % mit DHBW-spezifischen Einstellungen
 
 
 
-\usepackage[hidelinks]{hyperref}       % URL-Formatierung, klickbare Verweise
+\usepackage{hyperref}       % URL-Formatierung, klickbare Verweise
 
-\usepackage[plain]{algorithm}
-\usepackage{algorithmic}
+% \usepackage[plain]{algorithm}
+% \usepackage{algorithmic}
 
 \usepackage{tocloft}        % für Verzeichnis der Anhänge
 
@@ -89,14 +88,13 @@
 % Bezeichnungen
 \renewcaptionname{ngerman}{\figurename}{Abb.}
 \renewcaptionname{ngerman}{\tablename}{Tab.}
-\makeatletter
-\renewcommand*{\ALG@name}{Alg.}
-\makeatother
 % Einrückungen
 \makeatletter
 \renewcommand*{\l@figure}{\@dottedtocline{1}{0em}{2.3em}}
 \renewcommand*{\l@table}{\@dottedtocline{1}{0em}{2.3em}}
 \makeatother
+
+
 
 \usepackage{tabularx}
 
@@ -145,3 +143,4 @@
 \setcounter{biburlnumpenalty}{9000}
 \setcounter{biburlucpenalty}{9000}
 \setcounter{biburllcpenalty}{9000}
+

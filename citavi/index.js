@@ -19,10 +19,10 @@ sample = sample.map(el => {
 	for (let key of keys){
 		// Klare Herausgeberschaft statt Autorenschaft
 		if((key === "author" && el.entryTags["author"] === "Amazon Web Services, Inc.") || (key === "url" && el.entryTags["url"].includes("amazon.com"))){
-			if(el.entryTags["author"] === "Amazon Web Services, Inc."){
-				buffer.entryTags["author"] = "";
+			if(el.entryTags["author"].includes("Amazon Web Services")){
+				delete buffer.entryTags.author;
 			}
-			buffer.entryTags["editor"] = "Amazon Web Services, Inc.";
+			buffer.entryTags["editor"] = "{Amazon Web Services, Inc.}";
 		}
 		if(key === "year" && el.entryTags[key] === "o.J."){
 			buffer.entryTags[key] = "nodate";

@@ -70,7 +70,17 @@ Es muss mindestens die theoretische Verarbeitungslatenz verglichen werden
 \subsection{Kostenvergleich}
 Um einen sinnvollen Kostenvergleich aufzustellen, sind folgende Annahmen zu treffen:
 Es existieren 200 Geräte/Sensoren. Es geht eine Nachricht mit einem kB pro Minute pro Gerät ein (0,0432 GB/Gerät/Monat und 8,64 GB/Monat).
-Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und wo möglich eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  Es ist die Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in € erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Produkte, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden. Analysen, wo individuell auslösbar erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. 
+Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und wo möglich eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  Es ist die Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in € erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Produkte, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden mit permanentem Speicher, der historische Daten speichert (\ac{S3}). Analysen, wo individuell auslösbar erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. Andernfalls wird angenommen, dass der Schwellwert 5 mal pro Gerät pro Monat überschritten wird (1000 Überschreitungen).
+Für die Zwischenspeicherung in S3, wenn benötigt, wird folgendes Datenschema angenommen:
+
+\begin{listing}[H]
+\inputminted[frame=lines,breaklines=true]{json}{estimates/filtered-estimate.json}
+\caption[Beispiel JSON]{Beispiel \ac{JSON}}
+\label{listing:json}
+\end{listing}
+Um Historien über 3 Monate bereitzustellen, sind entsprechend 3000 Einträge nötig, was eine Dateigröße von ~455,32 KB ergibt. Das Berechnugnsskript ist im Anhang \ref{anhang:berechnung} abgedruckt.
+
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
