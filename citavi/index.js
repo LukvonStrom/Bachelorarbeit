@@ -26,6 +26,7 @@ sample = sample.map(el => {
 		}
 		if(key === "year" && el.entryTags[key] === "o.J."){
 			buffer.entryTags[key] = "nodate";
+			buffer.entryTags["sortyear"] = 1
 		}else{
 			buffer.entryTags[key] = el.entryTags[key];
 		}

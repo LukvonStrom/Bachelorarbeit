@@ -11,22 +11,12 @@ In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die Batch (\enquote{
 \subsection{Amazon Timestream}
 Timestream ist nach Aussage des Herstellers eine schneller, skalierbare und speziell für Zeitreihendaten entwickelte Datenbank, welche über \ac{AWS} als Dienstleistung bezogen werden kann.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.h} Timestream integriert zwei verschiedene Speichertypen, nämlich \ac{RAM}-basierten Speicher, in dem Daten auf welche schnell zugegriffen werden sollen gespeichert werden können und Festplatten-basierten Speicher, welcher für historische Daten dienen soll.
 Timestream besetzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funktionen zur Analyse von Zeitreihendaten erweitert wurde. Ein Beispiel für den Einsatz des \ac{SQL}-Dialekts zur Kalkulation des 99. Perzentils ist in \autoref{lst:sql-timestream} gezeigt.
-\lstset{language=SQL} 
 
-\begin{lstlisting}[caption={Berechnung des 99. Perzentils in Timestream},label=lst:sql-timestream, captionpos=b]
-SELECT DeviceType,
-  measure_name,
-  BIN(time, 120m) AS binned_timestamp,
-  ROUND(AVG(measure_value::double), 2) AS avg,
-  ROUND(APPROX_PERCENTILE(measure_value::double, 0.99), 2) AS p99 
-FROM "iot - demo".iot 
-WHERE measure_name = 'temperature' 
-  AND time > ago(24h) 
-GROUP BY DeviceType,
-  measure_name,
-  BIN(time, 120m) 
-ORDER BY ABS(avg - p99) DESC
-\end{lstlisting}
+\begin{listing}[H]
+\inputminted[frame=lines,breaklines=true]{sql}{code/timestream-example.sql}
+\caption{Berechnung des 99. Perzentils in Timestream}
+\label{lst:sql-timestream}
+\end{listing}
 
 \begin{table}[H]
 \centering

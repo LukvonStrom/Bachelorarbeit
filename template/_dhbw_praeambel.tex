@@ -46,7 +46,7 @@
 
 
 
-\usepackage{hyperref}       % URL-Formatierung, klickbare Verweise
+\usepackage[hidelinks]{hyperref}       % URL-Formatierung, klickbare Verweise
 
 % \usepackage[plain]{algorithm}
 % \usepackage{algorithmic}
@@ -121,6 +121,13 @@
 \usepackage{listofitems}
 \usetikzlibrary{positioning,arrows}
 \pgfplotsset{compat=1.17}
+
+% Listings von mited
+\addto\extrasngerman{%  
+  \def\listingautorefname{Codeausschnitt}%  
+}
+
+\renewcommand\listingscaption{Codeausschnitt}
 
 % \usepackage[expansion, final]{microtype}
                                  
