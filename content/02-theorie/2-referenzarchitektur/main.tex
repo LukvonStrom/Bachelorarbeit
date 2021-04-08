@@ -38,10 +38,10 @@ Wird dieser Architekturbegriff auf bekannte Bereitstellungsmodi aus der Cloud, w
 
 Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzungen der Referenzarchitektur: Die standardisierende Referenzarchitektur, welche darauf zielt eine Standardarchitektur für spezielle Anwendungsfälle zu schaffen und die unterstützende/erleichternde Referenzarchitektur, welche Personen in Architekturrollen unterstützen sollen, ähnliche Probleme leichter zu lösen.\footcite[Vgl. auch im Folgenden][S.~422~ff.]{Angelov.2012} Nach \citeauthor{Angelov.2012} sind standardisierende Referenzarchitekturen nicht zur Verwendung von innovativen, also kaum getesteten oder noch nicht von Experten akzeptierten Elementen geeignet. Die unterstützenden/erleichternden Referenzarchitekturen hingegen können solche innovativen Elemente durchaus verwenden und auch eine Technologievorauswahl treffen.
 
-% Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorischen Rahmenbedingungen, in welchen ein Referenzmodell eingesetzt werden soll analysiert werden.\footcite[Vgl.][]{vomBrocke.2004}
+Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorischen Rahmenbedingungen, in welchen ein Referenzmodell eingesetzt werden soll, analysiert werden.\footcite[Vgl.][]{vomBrocke.2004}
 
 %\Todo{What are inputs of a Reference Architecture? - Muller.2020}
-\citeauthor{Muller.2020} empfiehlt eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden, schlägt aber für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden ein inkrementelles Vorgehen vor.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Das inkrementelle Vorgehen von Muller beinhaltet dabei die Erstellung von Prototypen und inkrementelle Einholung von Feedback der Zielstakeholder.
+\citeauthor{Muller.2020} empfiehlt eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden, schlägt aber für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden ein inkrementelles Vorgehen vor.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Das inkrementelle Vorgehen von \citeauthor{Muller.2020} beinhaltet dabei die Erstellung von Prototypen und inkrementelle Einholung von Feedback der Zielstakeholder. 
 
 
 \subsection{Qualitätskriterien von Referenzarchitekturen}\label{chap:qualitycriteria}
@@ -73,7 +73,7 @@ Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzu
 
 \subsection{Vorgehensmodell}
 
-\citeauthor{Schutte.1998} unterteilt Referenzmodellierung generell in vier Phasen.\footcite[Vgl. auch im Folgenden][184\psq]{Schutte.1998} Die erste Phase, die Problemdefinition ist mit der Darstellung des behandelten Problems in der Einleitung dieser Arbeit bereits vorgenommen worden. Laut \citeauthor{Schutte.1998} kann der Wirklichkeitszugang des erstellten Modells nur über Bilder erfolgen, welche entsprechend zu modellieren sind.\footcite[Vgl. auch im Folgenden][185\psq]{Schutte.1998} Da momentan keine Erfahrungen in den zu verwendenden Technologien für die Referenzmodellierung vorliegt, handelt es sich um eine Top-down Referenzmodellierung/Referenzarchitektur.
+\citeauthor{Schutte.1998} unterteilt Referenzmodellierung generell in vier Phasen.\footcite[Vgl. auch im Folgenden][184\psq]{Schutte.1998} Die erste Phase, die Problemdefinition ist mit der Darstellung des behandelten Problems in der Einleitung dieser Arbeit bereits vorgenommen worden. Laut \citeauthor{Schutte.1998} kann der Wirklichkeitszugang des erstellten Modells nur über Bilder erfolgen, welche entsprechend zu modellieren sind.\footcite[Vgl. auch im Folgenden][185\psq]{Schutte.1998} Da momentan keine Erfahrungen in den zu verwendenden Technologien für die Referenzmodellierung vorliegt, handelt es sich um eine Top-down Referenzmodellierung/Referenzarchitektur. Bei der Konstruktion des Referenzmodellrahmens wird durch das \enquote{Was} motiviert, welche Unternehmensspezifika zu beachten sind.\footcite[Vgl. auch im Folgenden][186]{Schutte.1998} In der vorliegenden Arbeit wäre beispielsweise Teil des Referenzmodellrahmens, dass cloudbasiert gearbeitet werden soll und dass die Zeitreihendaten vorerst vornehmlich von \ac{IoT} Anwendungsfällen stammen, was sich später dennoch ändern könnte.\footcite[Vgl. auch im Folgenden][187\psq]{Schutte.1998} In der \enquote{Wie} Phase, die dieses Kapitel behandeln soll, wird die Referenzarchitektur strukturiert und Darstellungsarten gezeigt, welche folgend angewendet werden können. 
 
 \begin{figure}[H]
 \centering
@@ -86,18 +86,36 @@ Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzu
 
 
 
-Nach \citeauthor{Muller.2020} hat eine Referenzarchitektur mehrere Dekompositionen, in beispielsweise eine funktionale, eine konstruktionsorientierte oder eine infrastrukturorientierte Komposition. Diese Dekompositionsschichten lassen sich ebenfalls in bekannten Architekturfframeworks wie arc42 finden, weshalb diese mit Anpassungen zur Visualisierung dienen sollen. Dies deckt sich auch mit der Auffasung von \citeauthor{Schutte.1998} zur Referenzmodellierung.
-
-Zur Darstellung der verwendeten Produkte und Dienstleistungen von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In der finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden. Weitere Dekompositionsebenen, Beispiele und Kentnissammlungen die zu einer Referenzarchitektur gehören können unformalisierter beigefügt werden.
+Nach \citeauthor{Muller.2020} hat eine Referenzarchitektur mehrere Dekompositionen, in beispielsweise eine funktionale, eine konstruktionsorientierte oder eine infrastrukturorientierte Komposition.\footcite[Vgl.][7]{Muller.2020} Diese Dekompositionsschichten lassen sich ebenfalls in bekannten Architekturfframeworks wie arc42 finden, weshalb diese mit Anpassungen zur Visualisierung dienen sollen. Dies deckt sich auch mit der Auffasung von \citeauthor{Schutte.1998} zur Referenzmodellierung, dass Modellierung über zu schaffende Bilder erfolgen sollte.\footcite[Vgl.][185]{Schutte.1998}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{graphics/Bausteinsicht.png}
+\includegraphics[height=0.23\textheight]{graphics/reference-architecture-details.pdf}
+\caption[Gewünschter Detailgrad von Referenzarchitekturen nach \citeauthor{Muller.2020}]{Gewünschter Detailgrad von Referenzarchitekturen nach \citeauthor{Muller.2020}.\footnotemark}
+\label{abb:BausteinsichtStufe1}
+\end{figure}
+\footnotetext{Entnommen aus: \cite[][11]{Muller.2020}}
+
+Mehrere Dekompositionen machen insbesondere auch Sinn, da wie im Diagramm von \citeauthor{Muller.2020} eine Addressierung von unterschiedlichen Aspekten wie Systemgestaltung, aber auch Stakeholder oder Kontext erfolgen sollte. Eine Adressierung der Stakeholder und des Kontextes ist insofern gegeben, dass wie in \autoref{chap:requirements} gezeigt, Interviews durchgeführt und im Anhang dieser Arbeit transkribiert werden. An Stellen, an denen ein Einsatz von Teilen der Referenzarchitektur nontrivial scheint, kann durch Codebeispiele oder konkrete, kopierbare \enquote{Schnipsel} gezeigt werden, auf was speziell im technischen Bereich zu achten ist.
+
+Zusätzlich sollen Dekompositionen unterschiedliche Aufgaben erfüllen. Speziell für die Darstellung der verwendeten Produkte/Dienstleistungen von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In der finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.38\textheight]{graphics/Bausteinsicht.png}
 \caption[Stufe 1 der Bausteinsicht in arc42]{Stufe 1 der Bausteinsicht in arc42.\footnotemark}
 \label{abb:BausteinsichtStufe1}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Starke.o.J.}}
 
+Zusätzlich zu der Bausteinsicht können, wie in \autoref{abb:Diagrammtypen} geizeigt, weitere Diagrammtypen eingesetzt werden, um verschiedene Dekompositionen darstellen zu können.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/Diagrammtypen.pdf}
+\caption{Ergänzende Dekompositionen}
+\label{abb:Diagrammtypen}
+\end{figure}
 
 
 Wie von \citeauthor{Muller.2020} vorgeschlagen und im vorherigen Unterkapitel erläutert, ist ein inkrementeller Ansatz unter Verwendung von Prototypen und kontinuierlichem Feedback der Zielstakeholder unerlässlich.\footcite[Vgl.][7]{Muller.2020} 
