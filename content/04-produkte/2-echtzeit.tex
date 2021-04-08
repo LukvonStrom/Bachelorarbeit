@@ -44,6 +44,10 @@ AWS-properitär & Übertragbarkeit & 0 \\ \hline
 
 
 \subsection{AWS IoT Events}
+
+
+\subsubsection{Produkteinführung}
+
 Im Rahmen der \AWSIOT Produktfamilie gibt es neben dem bereits angesprochenen \AWSIOT Analytics ebenfalls \AWSIOT Events.  
 Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt und verarbeitet werden sollen, indem Aktionen ausgelöst werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.b} Die Abläufe können dabei, ähnlich wie bei Node-Red graphisch konfiguriert werden. 
 \begin{figure}[H]
@@ -65,8 +69,23 @@ $input.Input1.value > $variable.threshold
 \end{figure}
 Sollte ein Alarmzustand erreicht werden, können andere Dienste wie Lambda oder \ac{SNS} zur Verarbeitung oder Benachrichtigung integriert werden.
 
-\produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
+\subsubsection{Featurevergleich} 
+\Todo{Erweitern}
+Robustness and fault tolerance
+Low latency reads and updates
+Scalability
+Generalization
+Extensibility
+Ad hoc queries
+Minimal maintenance
+Debuggability
+vorgestellte Auswertungen 
+Reusability of processing logic
 
+\subsubsection{Performancevergleich}
+Performancegarantien
+
+\subsubsection{Kostenvergleich}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -84,7 +103,13 @@ Summe &  & \underline{175,6445} \\ \hline
 \end{table}
 Die Preise sind der offiziellen Preisaufstellung von \ac{AWS} entnommen. \footcite[Vgl.][]{AmazonWebServicesInc..o.J.k}
 
+\subsubsection{Gesamtbewertung}
+
+\produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
+
 \subsection{Amazon Kinesis}
+
+\subsubsection{Produkteinführung}
 Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis älter als \AWSIOT Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis garantiert zusätzlich, dass Daten in 70 Milisekunden verfügbar sind.
 
 Alternativ zur Kinesis Familie gibt es auch Open-Source Stream Analytics Produkte, wie von \citeauthor{Singh.2016} dargestellt.\footcite[Vgl.][]{Singh.2016} Diese kommen aufgrund der fehlenden Integration mit \ac{AWS} und des erhöhten Aufwands durch Eigenbetrieb nicht in Frage.
@@ -106,9 +131,23 @@ In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Diens
 \footnotetext{Entnommen aus: \cite{Pogosova.28.05.2020}}
 Kinesis Data Streams unterteilt, wie in \autoref{abb:KinesisShards} gezeigt, Daten in einzelne Partitionen/Shards, in denen gleich partitionierte Datensätze verarbeitet werden können.\footcite[Vgl. auch im Folgenden][]{Pogosova.28.05.2020} Einzelne Shards verhalten sich dabei wie geordnete Warteschlangen und speichern die Nachrichten nach Eingangsdatum sortiert. 
 
-\produktbewertung{Amazon~Kinesis}{11,5,4,4,6,6,5,0,3,2,0,46}
+\subsubsection{Featurevergleich} 
+\Todo{Erweitern}
+Robustness and fault tolerance
+Low latency reads and updates
+Scalability
+Generalization
+Extensibility
+Ad hoc queries
+Minimal maintenance
+Debuggability
+vorgestellte Auswertungen 
+Reusability of processing logic
 
+\subsubsection{Performancevergleich}
+Performancegarantien
 
+\subsubsection{Kostenvergleich}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -127,9 +166,15 @@ Summe &  & \underline{45,51} \\ \hline
 
 Siehe \footcite[][]{AmazonWebServicesInc..o.J.l}\nzitat\footcite[AmazonWebServicesInc..o.J.m][]{}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..2017b}
 
-
+\subsubsection{Gesamtbewertung}
+\produktbewertung{Amazon~Kinesis}{11,5,4,4,6,6,5,0,3,2,0,46}
 
 \subsection{AWS Lambda}
+
+
+
+
+\subsubsection{Produkteinführung}
 Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS} Dienstes. Innerhalb dieser Arbeit wird Lambda als einzige generelle Computing Plattform betrachtet, da Alternativen wie \ac{EC2}, welches virtuelle Maschinen anbietet oder \ac{ECS}, welches Container anbietet einen von einzelnen Events unabhängigen Lebenszyklus haben. So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert kontinuierlich und holen/ \enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. Lambda hingegen wird von unterstützenden Diensten zur Verarbeitung von Events aufgerufen. Dabei ist je nach Dienst einstellbar, ob ein Aufruf pro Event stattfinden soll, oder Events zu einer konfigurierbaren Anzahl gruppiert werden und dann an Lambda übergeben werden. Lambda eignet sich besonders für analytische Workloads, seit der kürzlichen Addition von Intels \ac{AVX2}, einem speziellen CPU-Instruktionssatz, der die Verarbeitung von Vektorinstruktionen, wie sie beispielsweise beim Machine Learning oder in der Statistik vorkommen, beschleunigt.\footcite[Vgl.][]{Beswick.24.11.2020} Aufgrund der zentralen Rolle im Bereich Compute bei \ac{AWS}, können viele Dienste Events an Lambda senden. In \autoref{abb:GrobArchitekturLambda} sind als Integrationsbeispiele die \acp{MoM} \ac{IoT} Core, MQ und Kinesis Data Streams als Eventlieferanten gezeigt.
 \begin{figure}[H]
 \centering
@@ -138,15 +183,30 @@ Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS
 \label{abb:GrobArchitekturLambda}
 \end{figure}
 
-\produktbewertung{AWS~Lambda}{8,10,9,6,7,6,0,0,3,2,1,52}
+\subsubsection{Featurevergleich} 
+\Todo{Erweitern}
+Robustness and fault tolerance
+Low latency reads and updates
+Scalability
+Generalization
+Extensibility
+Ad hoc queries
+Minimal maintenance
+Debuggability
+vorgestellte Auswertungen 
+Reusability of processing logic
 
+\subsubsection{Performancevergleich}
+Performancegarantien
+
+\subsubsection{Kostenvergleich}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
 Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
 Lambda Ausführungen & 0,0000002/Ausführung & 1,728 \\ \hline
-Lambda \textbackslash{}ac\{RAM\} & 0,0000000167 \#/GB-Sekunde & 720 \\ \hline
+Lambda \ac{RAM} & 0,0000000167/GB-Sekunde & 720 \\ \hline
 \ac{S3}-Speicher & 0,0245/GB Speicher & 0,0006 \\ \hline
 Summe &  & \underline{721,73} \\ \hline
 \end{tabular}
@@ -154,7 +214,7 @@ Summe &  & \underline{721,73} \\ \hline
 \label{tab:kostenvergleich-AWS~Lambda~Maximal}
 \end{table}
 
-\autoref{tab:kostenvergleich-AWS~Lambda~Maximal} zeigt die möglichen Kosten, wenn für jede eingehende Nachricht eine Lambdafunktion aufgerufen und ausgeführt wird (unabhängig davon, dass das mit den Standardeinstellungen für Parallelität nicht realisierbar wäre). Um diese hohen Kosten zu mitigieren, gibt es mehrere Varianten. Folgend wird auf die Zwischenschaltung einer \ac{MOM}, nämlich \ac{AWS} \ac{SQS} und auf die Vorfilterung der Nachrichten durch \AWSIOT{} Core Rules näher eingegangen.
+\autoref{tab:kostenvergleich-AWS~Lambda~Maximal} zeigt die möglichen Kosten, wenn für jede eingehende Nachricht eine Lambdafunktion aufgerufen und ausgeführt wird (unabhängig davon, dass das mit den Standardeinstellungen für Parallelität nicht realisierbar wäre). Um diese hohen Kosten zu mitigieren, gibt es mehrere Varianten. Folgend wird auf die Zwischenschaltung einer \ac{MoM}, nämlich \ac{AWS} \ac{SQS} und auf die Vorfilterung der Nachrichten durch \AWSIOT{} Core Rules näher eingegangen.
 
 \autoref{abb:Lambda-Batch} zeigt die Zwischenschaltung von \ac{SQS} als Puffer, von dem asynchron gelesen werden kann.
 
@@ -206,7 +266,12 @@ Summe &  & \underline{0,0841335} \\ \hline
 \label{tab:kostenvergleich-AWS~Lambda~IOT~Sammelverarbeitung}
 \end{table}
 
+\subsubsection{Gesamtbewertung}
+\produktbewertung{AWS~Lambda}{8,10,9,6,7,6,0,0,3,2,1,52}
+
 \subsection{Amazon MSK}
+
+\subsubsection{Produkteinführung}
 Bei \ac{MSK} handelt es sich um einen Managed Service für die Open Source Lösung Apache Kafka. Im Gegensatz zu anderen, hier im Kapitel aufgeführten Lösungen wie \ac{IoT} Analytics, hat Amazon \ac{MSK} nicht von Grund auf selber entwickelt, sondern einen großen Teil des Codes von Apache Kafka übernommen. Dies erklärt auch, warum die Anbindung an andere Dienste von Amazon bedeutend schwieriger ist, als beispielsweise an \ac{IoT} Core. In der in \autoref{abb:GrobArchitekturMSK} abgebildeten Grobarchitektur müsste zur Anbindung von Apache Kafka an zuliefernde Geräte ein Intermediär wie \ac{IoT} Core verrwendet werden, da Apache Kafka ein eigenes, binäres Protokoll hat, welches sonst in die Geräte implementiert werden müsste. \Todo{letzten Halbsatz belegen} Fraglich ist, ob sich eine Implementierung des Kafka Protokolls auf allen Endgeräten lohnt, speziell im Licht besser unterstützter Standards wie \ac{MQTT}. Umgangen werden kann die Implementierung des Kafka Protokolls auf zuliefernden Geräten auf dreierlei Arten: Zum einen lassen sich mittels Kafka Connect for \ac{MQTT} \ac{MQTT} Broker als Eventquellen anbinden.\footcite[Vgl.][]{Erber.12.01.2021} Alternativ kann Kafka auch als \ac{MQTT} Proxy dienen, was bedeutet, dass Kafka als eigenständiger MQTT Broker agiert, wobei zu beachten ist, dass Kafka weit nicht alle \ac{MQTT} Standardelemente implementiert und eine paralelle Weiterverarbeitung in anderen Amazon Diensten nicht möglich ist.\footcite[Vgl.][]{Erber.12.01.2021} Zuletzt gibt es noch die Möglichkeiten, die Nachrichten via \ac{IoT} Core innerhalb von \ac{AWS} an \ac{MSK} weiterzuleiten, was auch in \autoref{abb:GrobArchitekturMSK} dargestellt ist.
 \begin{figure}[H]
 \centering
@@ -217,10 +282,23 @@ Bei \ac{MSK} handelt es sich um einen Managed Service für die Open Source Lösu
 
 Kafka hat eigene Verarbeitungslogiken integriert, mit welchen einige Analysen bereits durchgeführt werden können. Um diese in \ac{AWS} weiterverarbeiten zu können, müssen die Ergebnisse via der Integration mit Lambda oder der Integration mit \ac{EC2}, der Amazon Plattform für virtuelle Maschinen abgerufen werden.
 
-\produktbewertung{Amazon~MSK}{11,5,4,7,5,6,5,0,3,1,1,48}
+\subsubsection{Featurevergleich} 
+\Todo{Erweitern}
+Robustness and fault tolerance
+Low latency reads and updates
+Scalability
+Generalization
+Extensibility
+Ad hoc queries
+Minimal maintenance
+Debuggability
+vorgestellte Auswertungen 
+Reusability of processing logic
 
+\subsubsection{Performancevergleich}
+Performancegarantien
 
-
+\subsubsection{Kostenvergleich}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.55\textwidth]{graphics/MSK-Networking.pdf}
@@ -250,30 +328,34 @@ Lambda: Maximal 10.000 Events
 
 \footcite[Vgl.][]{AmazonWebServicesInc..o.J.o}\nzitat\footcite[Vgl.][]{Beswick.2020}
 
+\subsubsection{Gesamtbewertung}
+\produktbewertung{Amazon~MSK}{11,5,4,7,5,6,5,0,3,1,1,48}
 % => binary protocol no \ac{MQTT} Support, redundant, only Lambda and EC2 conenctivity
 
-\subsection{AWS Glue}
-Mittels dem \ac{AWS} Glue Dienst, welcher diverse \ac{ETL} Dienste, wie beispielsweise Datenkatalogisierung und Datentransformation basierend auf dem Apache Spark Ökosystem anbietet, können ebenfalls Streams analysiert werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.d}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020} Basierend auf der Apache Spark Structured 
-Streaming-Engine können nach Aussage des Herstellers Daten aus Kinesis oder Kafka (und damit aus \ac{MSK}) geladen werden. Nachfolgend werden die eingehenden Daten mittels sogenannter Jobs analysiert/transformiert, welche in Sprachen wie Scala, Java, Python oder R geschrieben sein können. Nach Abschluss der Analyse können die Daten in \ac{S3} oder in eine \ac{JDBC} kompatible Datenbank (z.B. MySQL, PostgreSQL, Amazon Redshift, Oracle Databse, ...) geladen werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.e} Die Interaktion zwischen eigener Logik und AWS Glue erfolgt via \acp{API} von Apache Spark, die entsprechende Kentnisse zur Interaktion mit den Daten erfordern.
+% \subsection{AWS Glue}
+% Mittels dem \ac{AWS} Glue Dienst, welcher diverse \ac{ETL} Dienste, wie beispielsweise Datenkatalogisierung und Datentransformation basierend auf dem Apache Spark Ökosystem anbietet, können ebenfalls Streams analysiert werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.d}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020} Basierend auf der Apache Spark Structured 
+% Streaming-Engine können nach Aussage des Herstellers Daten aus Kinesis oder Kafka (und damit aus \ac{MSK}) geladen werden. Nachfolgend werden die eingehenden Daten mittels sogenannter Jobs analysiert/transformiert, welche in Sprachen wie Scala, Java, Python oder R geschrieben sein können. Nach Abschluss der Analyse können die Daten in \ac{S3} oder in eine \ac{JDBC} kompatible Datenbank (z.B. MySQL, PostgreSQL, Amazon Redshift, Oracle Databse, ...) geladen werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.e} Die Interaktion zwischen eigener Logik und AWS Glue erfolgt via \acp{API} von Apache Spark, die entsprechende Kentnisse zur Interaktion mit den Daten erfordern.
 
-\produktbewertung{AWS~Glue}{8,10,9,6,4,4,5,0,2,1,0,49}
+% \produktbewertung{AWS~Glue}{8,10,9,6,4,4,5,0,2,1,0,49}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
-\begin{tabular}[c]{@{}l@{}}Broker Instanz\\ (t3.small - 2 mal)\end{tabular} & 0,0526/h & 76,7960 \\ \hline
-Broker Storage & 0,119/h & 0,714 \\ \hline
-\begin{tabular}[c]{@{}l@{}}NAT Gateway\\ (2 mal)\end{tabular} & \begin{tabular}[c]{@{}l@{}}0,052/h\\ 0,052/GB\end{tabular} & 76,34 \\ \hline
-Lambda Ausführungen & 0,0000002/Ausführung & 0,00288 \\ \hline
-Lambda \ac{RAM} & 0,0000000167/GB-Sekunde & 1,2 \\ \hline
-\ac{S3}-Speicher & 0,0245/GB Speicher & 0,0006 \\ \hline
-Summe &  & \underline{155,05348} \\ \hline
-\end{tabular}
-\caption{Kostenvergleich AWS~Glue}
-\label{tab:kostenvergleich-AWS~Glue}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|l|l|l|}
+% \hline
+% Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
+% \begin{tabular}[c]{@{}l@{}}Broker Instanz\\ (t3.small - 2 mal)\end{tabular} & 0,0526/h & 76,7960 \\ \hline
+% Broker Storage & 0,119/h & 0,714 \\ \hline
+% \begin{tabular}[c]{@{}l@{}}NAT Gateway\\ (2 mal)\end{tabular} & \begin{tabular}[c]{@{}l@{}}0,052/h\\ 0,052/GB\end{tabular} & 76,34 \\ \hline
+% Lambda Ausführungen & 0,0000002/Ausführung & 0,00288 \\ \hline
+% Lambda \ac{RAM} & 0,0000000167/GB-Sekunde & 1,2 \\ \hline
+% \ac{S3}-Speicher & 0,0245/GB Speicher & 0,0006 \\ \hline
+% Summe &  & \underline{155,05348} \\ \hline
+% \end{tabular}
+% \caption{Kostenvergleich AWS~Glue}
+% \label{tab:kostenvergleich-AWS~Glue}
+% \end{table}
+
+
 
 \subsection{Produktauswahl}
 
@@ -283,7 +365,7 @@ Summe &  & \underline{155,05348} \\ \hline
 \hline
 Platz & Name & Summe \\ \hline
 1 & AWS Lambda & \cellcolor[HTML]{DAE8FC}52 \\ \hline
-2 & AWS Glue & \cellcolor[HTML]{DAE8FC}49 \\ \hline
+% 2 & AWS Glue & \cellcolor[HTML]{DAE8FC}49 \\ \hline
 3 & Amazon MSK & \cellcolor[HTML]{DAE8FC}48 \\ \hline
 4 & AWS IoT Events & \cellcolor[HTML]{DAE8FC}47 \\ \hline
 5 & Amazon Kinesis & \cellcolor[HTML]{DAE8FC}46 \\ \hline

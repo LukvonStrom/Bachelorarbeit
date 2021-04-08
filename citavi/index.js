@@ -17,19 +17,38 @@ sample = sample.map(el => {
 	let buffer = Object.assign({}, el);
 	buffer.entryTags = {}
 	for (let key of keys){
+		buffer.entryTags[key] = el.entryTags[key];
+
 		// Klare Herausgeberschaft statt Autorenschaft
-		if((key === "author" && el.entryTags["author"] === "Amazon Web Services, Inc.") || (key === "url" && el.entryTags["url"].includes("amazon.com"))){
-			if(el.entryTags["author"].includes("Amazon Web Services")){
+		if((key === "author" && buffer.entryTags["author"] === "Amazon Web Services, Inc.") || (key === "url" && buffer.entryTags["url"].includes("amazon.com"))){
+			if(buffer.entryTags["author"] && buffer.entryTags["author"].includes("Amazon Web Services")){
 				delete buffer.entryTags.author;
 			}
 			buffer.entryTags["editor"] = "{Amazon Web Services, Inc.}";
 		}
-		if(key === "year" && el.entryTags[key] === "o.J."){
-			buffer.entryTags[key] = "nodate";
-			buffer.entryTags["sortyear"] = 1
-		}else{
-			buffer.entryTags[key] = el.entryTags[key];
+		if(key==="url" && buffer.entryTags.url){
+			if(buffer.entryTags.url.includes("/?nc1=h_ls")){
+				buffer.entryTags.url = buffer.entryTags.url.replace("/?nc1=h_ls", "")
+			}
+
+			if(buffer.entryTags.url.substr(-1) === '/'){
+				buffer.entryTags.url = buffer.entryTags.url.substr(0, el.entryTags.url.length - 1);
+			}
+
+			// if(el.entryTags.url.includes("http://")|| el.entryTags.url.includes("https://")){
+			// 	buffer.entryTags.url = buffer.entryTags.url.replace("https://", "")
+			// 	buffer.entryTags.url = buffer.entryTags.url.replace("http://", "")
+			// }
+
+		
+			
 		}
+		if(key === "year" && buffer.entryTags.year === "o.J."){
+			buffer.entryTags.year = "nodate";
+			buffer.entryTags.sortyear = 1
+		}
+		
+		
 	}	
 	return buffer;
 });
