@@ -87,34 +87,7 @@ Summe &  & 31,7209015296 \\ \hline
 \subsubsection{Gesamtbewertung}
 \produktbewertung{Amazon~Timestream}{x,10,7,8,7,5,3,4,2,1,0,x}
 
-\subsection{Amazon Redshift}
-
-\subsubsection{Produkteinführung}
-Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage des Herstellers \enquote{enterprise-level} ist und auf ein Datenvolument von Petabytes skalieren kann. \footcite[Vgl.][1]{AmazonWebServicesInc..o.J.g} Redshift ist dabei ein klassisches \ac{OLAP} Produkt, welches für eine Vielzahl verschiedener Daten effizient Auswertungen bereitstellen kann. Redshift basiert auf der bekannten Open Source Datenbank PostgreSQL, weicht jedoch in der Implementierung diverser Kommandos und Features ab, die das Amazon als irrelevant für \ac{OLAP} Anwendungen hält.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}\nzitat\footcite[Vgl.][428\psqq]{AmazonWebServicesInc..o.J.g} Kern von Redshift sind sogenannte Cluster, welche aus einer oder mehrerer Berechnungsknoten (\enquote{compute nodes}) und Anführerknoten(\enquote{leader nodes}) besteht. Applikationen interagieren allein mit den Anführerknoten, die existierenden Berechnungsknoten sind zwar transparent für die Anwendung, werden jedoch von den Anführerknoten mit Ausführungsplänen versorgt, die diese entwickelt um Anfragen effizient zu verarbeiten.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}
-
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
-
-\subsubsection{Performancevergleich}
-\Todo{Performancegarantien}
-
-\subsubsection{Kostenvergleich}
-\Todo{Kosten}
-
-\subsubsection{Gesamtbewertung}
-\produktbewertung{Amazon~Redshift}{x,x,x,x,x,x,x,x,x,x,x,x}
-
-\subsection{Amazon Athena}
+\subsection{Amazon Athena}\label{chap:athena}
 
 \subsubsection{Produkteinführung}
 Amazon Athena ist nach Aussage des Herstellers ein voll verwalteter Query Dienst, welcher das durchsuchen von großen Datenmengen im \ac{S3} Speicherdienst möglich macht.\footcite[Vgl.][]{Barr.2016} Athena basiert dabei auf dem ursprünglich von Facebook entwickelten Presto, welches mittlerweile Open Source ist. Innerhalb von Athena können Daten verschiedener Formate (\ac{CSV}, Apache Parquet, Apache ORC, \ac{JSON}, ...) mittels \ac{SQL} verarbeitet werden. Zusätzlich ist seit November 2020 mittels der sogenannten \enquote{Federated Queries} auch die Abfrage von anderen Datenquellen wie Apache HBase, Amazon Document DB oder von Datenquellen, die durch eigenentwickelte Verbindungselemente verknüpft werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.s} Technisch werden diese Federated Queries via Lambda abgewickelt.
@@ -140,7 +113,7 @@ Reusability of processing logic
 \Todo{Performancegarantien}
 
 \subsubsection{Kostenvergleich}
-Für die Folgende Kostenbewertung wird angenommen, dass Athena die Daten aus S3 indiziert, welche im \ac{JSON} Format gespeichert werden. Zu beachten ist, dass effizientere Formate wie CSV, oder sogar Apache Parquet und ORC, welche komprimiert Daten speichern können, verwendet werden  könnten. Verwendung von Parquet oder ORC würde laut \ac{AWS} 30-90\% Kosten sparen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t}
+Für die Folgende Kostenbewertung wird angenommen, dass Athena die Daten aus \ac{S3} indiziert, welche im \ac{JSON} Format gespeichert werden. Zu beachten ist, dass effizientere Formate wie CSV, oder sogar Apache Parquet und ORC, welche komprimiert Daten speichern können, verwendet werden  könnten. Verwendung von Parquet oder ORC würde laut \ac{AWS} 30-90\% Kosten sparen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Gleichzeitig kann aber eine Speicherung im \ac{JSON} Format via \AWSIOT{} Rule erfolgen, ohne dass weitere Verarbeitung notwendig ist.
 
 Athena pricing: AmazonWebServicesInc..o.J.t  rounded up to the nearest megabyte, with a 10MB minimum per query
 Glue pricing: AmazonWebServicesInc..o.J.u
@@ -163,7 +136,7 @@ Athena Abfragen & \begin{tabular}[c]{@{}l@{}}0,005/GB \\ abgefragte Daten\end{ta
 \begin{tabular}[c]{@{}l@{}}Glue Data Catalog\\ Speicher\end{tabular} & 1/100.000 Objekte &  \\ \hline
 \begin{tabular}[c]{@{}l@{}}Glue Data Catalog\\ Abfragen\end{tabular} & 1/Million Abfragen &  \\ \hline
 Step Functions & \begin{tabular}[c]{@{}l@{}}0,025/1000 \\ Zustandsübergänge\end{tabular} &  \\ \hline
-\ac{SNS} &  &  \\ \hline
+\ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & 0,02 \\ \hline
 Summe &  &  \\ \hline
 \end{tabular}
 \caption{Kostenvergleich Amazon~Athena}
@@ -173,6 +146,62 @@ Summe &  &  \\ \hline
 
 \subsubsection{Gesamtbewertung}
 \produktbewertung{Amazon~Athena}{x,x,x,x,x,x,x,x,x,x,x,x}
+
+
+\subsection{Amazon Redshift}
+
+\subsubsection{Produkteinführung}
+Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage des Herstellers \enquote{enterprise-level} ist und auf ein Datenvolument von Petabytes skalieren kann. \footcite[Vgl.][1]{AmazonWebServicesInc..o.J.g} Redshift ist dabei ein klassisches \ac{OLAP} Produkt, welches für eine Vielzahl verschiedener Daten effizient Auswertungen bereitstellen kann. Redshift basiert auf der bekannten Open Source Datenbank PostgreSQL, weicht jedoch in der Implementierung diverser Kommandos und Features ab, die das Amazon als irrelevant für \ac{OLAP} Anwendungen hält.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}\nzitat\footcite[Vgl.][428\psqq]{AmazonWebServicesInc..o.J.g} Kern von Redshift sind sogenannte Cluster, welche aus einer oder mehrerer Berechnungsknoten (\enquote{compute nodes}) und Anführerknoten(\enquote{leader nodes}) besteht. Applikationen interagieren allein mit den Anführerknoten, die existierenden Berechnungsknoten sind zwar transparent für die Anwendung, werden jedoch von den Anführerknoten mit Ausführungsplänen versorgt, die diese entwickelt um Anfragen effizient zu verarbeiten.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}
+
+Redshift bietet zusätzlich mit Redshift Spectrum einen Dienst an, welcher auf den ersten Blick dem in \autoref{chap:athena} vorgestellten Athena gleicht. Beide rufen via \ac{SQL} Daten von \ac{S3} ab und beide kosten 5\$/TB gescannte Daten.\footcite[Vgl. auch im Folgenden][]{Smallcombe.2020} Wichtige Unterschiede liegen dabei aber in der Art, wie Ressourcen verwaltet und genutzt werden können. Während Redshifft Spectrum nur in Kombination mit einem Redshift Cluster verwendet werden kann, funktioniert Athena ohne Kopplung an verwaltende Ressourcen. Gleichzeitig ist ein stärkerer Einfluss auf die Performance bei Redshift möglich, da man zusätzliche Clusterressourcen einfach provisionieren kann, während Athena vollständig von \ac{AWS} verwaltet wird. Entsprechend erlaubt Redshift Spectrum zwar größeren Einfluss auf die Performance von Datenabfragen, dieser Einfluss muss jedoch in Form von zusätzlich abzurechnenden Clusterressourcen abgerechnet werden, was Redshift für Anwendungsfälle, die keine gesichert gleichbleibende Performance benötigen, unattraktiv macht.
+
+
+\subsubsection{Featurevergleich} 
+\Todo{Erweitern}
+Robustness and fault tolerance
+Low latency reads and updates
+Scalability
+Generalization
+Extensibility
+Ad hoc queries
+Minimal maintenance
+Debuggability
+vorgestellte Auswertungen 
+Reusability of processing logic
+
+\subsubsection{Performancevergleich}
+\Todo{Performancegarantien}
+
+\subsubsection{Kostenvergleich}
+Da Redshift Spectrum durch die zusätzlich zu provisionierenden Clusterresourcen einen Kostennachteil hat, wird von einem Kostenvergleich für Spectrum abgesehen. Stattdessen werden die Kosten für ein Redshift \ac{OLAP} Cluster berrechnet. Dabei ist zu beachten, dass \AWSIOT{} keine direkte Rule bietet, um Daten in Redshift abzulegen. Stattdessen müssen die Daten via Kinesis Data Firehose oder \ac{AWS} Lambda eingefügt werden. Zum Zwecke der Datenübertragung wird in diesem Fall Kinesis Data Firehose kalkuliert. Wie bei Elasticsearch Service gibt es auch bei Redshift verschiedene unterliegende Instanzen zur Auswahl.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.z} Im Vergleich werden, den Empfehlungen von \ac{AWS} folgend, eine Instanz der \ac{DC2} Klasse verwendet, welche sich für unkomprimierte Datenmengen kleiner ein TB eignen. Die kleinste verfügbare \ac{DC2} Instanz ist \enquote{dc2.large} mit 2 vCPUs, 15GiB Hauptspeicher und ~160 GB Festplattenspeicher. Redshift muss innerhalb eines \acp{VPC} gestartet werden, um Netzwerkisolation sicherzustellen. Aus diesem Grund muss ein Aufpreis auf Kinesis Data Firehose zu zahlen, welches Datenübertragung in ein \ac{VPC} mit einem Aufschlag berechnet.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.y} Kinesis Data Firehose rundet dazu noch Daten zu den nächsten 5 KB auf, was eine effektive Datenmenge von 41,77GB ergibt.
+
+Zusätzlich müssen Lambda Ausführung dazu gerechnet werden, die die Ausführungen der hinterlegten \ac{SQL} Abfragen zur Auswertung ausführen und danach \ac{SNS} benachrichtigen.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
+\begin{tabular}[c]{@{}l@{}}dc2.large Instanz\\ (OnDemand)\end{tabular} & 0,324/h & 233,60 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Firehose \\ Dateneingang\end{tabular} & 0,033/GB & 1,38 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Firehose\\ \ac{VPC}\end{tabular} & \begin{tabular}[c]{@{}l@{}}0,01/GB\\ 0,012/h\end{tabular} & 8,84 \\ \hline
+Lambda Ausführungen & 0,0000002/Ausführung & 0,000192 \\ \hline
+Lambda \ac{RAM} & 0,0000000167/GB-Sekunde & 0,08 \\ \hline
+\ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & 0,02 \\ \hline
+Summe &  & 243,920192 \\ \hline
+\end{tabular}
+\caption{Kostenvergleich Amazon~Redshift}
+\label{tab:kostenvergleich-Amazon~Redshift}
+\end{table}
+
+
+
+ 
+
+
+
+\subsubsection{Gesamtbewertung}
+\produktbewertung{Amazon~Redshift}{x,x,x,x,x,x,x,x,x,x,x,x}
 
 \subsection{Amazon Elasticsearch}
 
@@ -206,8 +235,8 @@ Benachrichtigungen werden über die native Integration von Kibana und \ac{SNS} a
 Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
 \begin{tabular}[c]{@{}l@{}}t3.medium Instanz\\ (OnDemand)\end{tabular} & 0,084/h & 61,32 \\ \hline
 \ac{EBS} Speicher & 0,161/GB & 1,61 \\ \hline
-\ac{SNS} &  &  \\ \hline
-Summe &  &  \\ \hline
+\ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & 0,02 \\ \hline
+Summe &  & 62,95\\ \hline
 \end{tabular}
 \caption{Kostenvergleich Amazon~Elasticsearch~Service}
 \label{tab:kostenvergleich-Amazon~Elasticsearch~Service}

@@ -179,6 +179,7 @@ acs-*.bib
 *.ilg
 *.ind
 
+citavi/export.json
 # minitoc
 *.maf
 *.mlf
