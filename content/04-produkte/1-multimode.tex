@@ -2,7 +2,7 @@ Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die 
 
 \subsection{AWS IoT Analytics} \label{productselection:iotanalytics}
 
-\subsubsection{Produkteinführung}
+
 
 \AWSIOT Analytics ist ein Dienst der \AWSIOT Produktfamilie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für alle Aufgaben, die im Kontext von Data Pipelines in \autoref{abb:DataPipeline} bereits gezeigt wurden, also Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung an, bzw. bietet Schnittstellen um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT Core für Analysen genutzt werden kann.
 \begin{figure}[H]
@@ -41,7 +41,7 @@ Datenverarbeitung  & 0,20/GB & 1,728  \\\hline
 Datenspeicherung verarbeitet  & 0,03/GB & 0,7776  \\\hline
 Anfragenbearbeitung & \begin{tabular}[c]{@{}l@{}}6,5 \\ 0,00634/GB\end{tabular} & 157,95 \\ \hline
 \begin{tabular}[c]{@{}l@{}}Datenspeicherung roh\\ \ac{S3}\\ Standard Tier\end{tabular}  & 0,0245/GB & 0,63504  \\\hline
-Summe  &  & \underline{161,09064}  \\\hline
+Summe & \cellcolor[HTML]{EFEFEF} & \underline{161,09064}  \\\hline
 %Eigene Analyselogik  & 0,36/h & x  \\\hline
 \end{tabular}
 \caption{Kostenvergleich AWS~IoT~Analytics}
