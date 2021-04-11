@@ -1,16 +1,7 @@
 \chapter{Modellierung}
+In diesem Kapitel sollen die Anforderungen aus den Interviews praktisch erhoben werden, die Referenzarchitekturen erstellt werden und die konstruierten Referenzarchitekturen folgend auch verglichen werden.
 \section{Anforderungserhebung}
 Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodelle einen subjektiven Empfehlungscharakter besitzen, damit sie akzeptiert und wiederverwendet werden. Dafür muss ein Abgleich mit den Anforderungen der Nutzenden geschehen. Um dies zu erreichen, wurden im Anhang transkribierte Interviews (Vgl. Anhang~\ref{chap:interview-philipp-22.03.2021},\ref{chap:interview-ralph-24.03.2021},\ref{chap:interview-peter-24.03.2021}) durchgeführt. Daraus ergibt sich das in \autoref{abb:TopLevelEchtzeitRA} gezeigte Diagramm, welches die Anforderungen der individuellen Stakeholder an Dekompositiontiefe, Anwendbarkeit und Allgemeingültigkeit darstellt.
-
-
-\begin{itemize}
-\item Anwendbarkeit auf Monitoring (klassische IT)
-\item Anwendbarkeit auf Sensordaten (\ac{IoT})
-\item wertschöpfend für den Betrieb
-\item akzeptabel und problemlösend für Domäne
-\item Handling von Events, Messwerten und \enquote{Streaming}
-\end{itemize}
-
 
 \begin{figure}[H]
 \centering
@@ -24,9 +15,16 @@ Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodel
 \caption{Ergebnisse der Interviews}
 \label{abb:DimensionenUebersicht}
 \end{figure}
-Dekompositionstiefe: $3,\overline{3}$
-Anwendbarkeit: $3,\overline{3}$
-Allgemeingültigkeit: $3$
+Durch die Interviews liessen sich folgende Durchschnitte errechnen: Dekompositionstiefe wurde im Schnitt mit $3,\overline{3}$ bewertet. Die Anwendbarkeit wurde ebenfalls mit $3,\overline{3}$ bewertet. Die Allgemeingültigkeit hingegen hat nur einen Schnitt von $3$/5. Entsprechend sollten Dekompositionstiefe und Anwendbarkeit priorisiert werden.
+
+Zusätzlich haben sich folgende Anforderungen ergeben:
+\begin{itemize}
+\item Anwendbarkeit auf Monitoring (klassische IT)
+\item Anwendbarkeit auf Sensordaten (\ac{IoT})
+\item Wertschöpfung für den Betrieb wichtig
+\item akzeptabel und problemlösend für Domäne
+\item Handling von Events, Messwerten und \enquote{Streaming}
+\end{itemize}
 
 \section{Echtzeitverarbeitung}
 \textbf{Noch nicht final, soll zeigen wie es mal werden soll}

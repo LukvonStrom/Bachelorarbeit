@@ -4,7 +4,7 @@ Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die 
 
 
 
-\AWSIOT Analytics ist ein Dienst der \AWSIOT Produktfamilie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für alle Aufgaben, die im Kontext von Data Pipelines in \autoref{abb:DataPipeline} bereits gezeigt wurden, also Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung an, bzw. bietet Schnittstellen um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT Core für Analysen genutzt werden kann.
+\AWSIOT Analytics ist ein Dienst der \AWSIOT Produktfamilie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung von Daten an, bzw. bietet Schnittstellen um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT Core für Analysen genutzt werden kann.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Analytics-general.pdf}
@@ -15,18 +15,13 @@ In \autoref{abb:GrobArchitekturIoTAnalytics} ist die Grobarchitektur und Verknü
 
 \Todo{Erklärung Analytics Compute Unit (Notebooks)}
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
+
+
 
 \subsubsection{Performancevergleich}
 \Todo{Performancegarantien}

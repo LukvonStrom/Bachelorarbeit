@@ -90,22 +90,27 @@
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
+\multicolumn{1}{|c|}{Kriterium} & \multicolumn{1}{c|}{Priorität} & \multicolumn{1}{c|}{Punkte} \\ \hline
+Auswertungen nach \autoref{chap:auswertungsarten} & 11 & \cellcolor[HTML]{ECF4FF}\arg[1] \\ \hline
+Performancegarantien & 10 & \cellcolor[HTML]{ECF4FF}\arg[2] \\ \hline
+Robustheit \& Fehlertoleranz & 9 & \cellcolor[HTML]{ECF4FF}\arg[3] \\ \hline
+Skalierbarkeit \& \enquote{serverlessness} & 8 & \cellcolor[HTML]{ECF4FF}\arg[4] \\ \hline
+Kosten & 7 & \cellcolor[HTML]{ECF4FF}\arg[5] \\ \hline
+geringer Wartungsaufwand & 6 & \cellcolor[HTML]{ECF4FF}\arg[6] \\ \hline
+Fehlertransparenz & 5 & \cellcolor[HTML]{ECF4FF}\arg[7] \\ \hline
+Erweiterbarkeit & 4 & \cellcolor[HTML]{ECF4FF}\arg[8] \\ \hline
+Generalisierung & 3 & \cellcolor[HTML]{ECF4FF}\arg[9] \\ \hline
+Integration mit anderen \ac{AWS} Diensleistungen & 2 & \cellcolor[HTML]{ECF4FF}\arg[10] \\ \hline
+Übertragbarkeit zwischen Clouds (ISO 9126) & 1 & \cellcolor[HTML]{ECF4FF}\arg[11] \\ \hline
 \rowcolor[HTML]{ECF4FF} 
-Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
-\textbf{\arg[1]}/11 & \textbf{\arg[2]}/10 & \textbf{\arg[3]}/9 \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-Minimal maintenance & Debuggability/transparente Fehler & Kosten \\ \hline
-\textbf{\arg[4]}/8 & \textbf{\arg[5]}/7 & \textbf{\arg[6]}/6 \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
-\textbf{\arg[7]}/5 & \textbf{\arg[8]}/4 & \textbf{\arg[9]}/3 \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-Integration mit AWS & Übertragbarkeit (ISO 9126) & Summe \\ \hline
-\textbf{\arg[10]}/2 & \textbf{\arg[11]}/1 & \cellcolor[HTML]{DAE8FC}\textbf{\arg[12]}/66 \\ \hline
+\multicolumn{1}{|c|}{\cellcolor[HTML]{ECF4FF}Summe} & 66 & \arg[12] \\ \hline
 \end{tabular}
 \caption{Bewertungsmatrix #1}
 \label{tab:bewertungsmatrix-#1}
 \end{table}
+
+
+
 
 In \autoref{tab:bewertungsmatrix-#1} wird #1 gemäß der in \autoref{tab:einstufungen} eingeschränkten Bewertungen bewertet.
 }

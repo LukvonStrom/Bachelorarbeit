@@ -170,7 +170,7 @@ Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, si
 \label{abb:gleitendeDurchschnitte}
 \end{figure}
 
-$M_t = (\sum_{T=1}^{t-1}  x_T + x_t )\cdot \frac{1}{T + t}$
+% $M_t = (\sum_{T=1}^{t-1}  x_T + x_t )\cdot \frac{1}{T + t}$
 
 
 
@@ -223,14 +223,14 @@ Wird die Analyse in irgendeiner Weise verändert (z.B. durtch Codeanpassungen) w
 Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen, welche ein klassisches \ac{OLAP} Szenario aufzeigt. \Todo{Codd zitieren} Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditionellen Analytics weit verbreitet, bietet jedoch womöglich wichtige Einsichten erst nachdem die Datenhalbwertszeit bereits überschritten wurde.
 
 % \Todo{Grafik Data Analytics Pipeline}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{graphics/DataPipeline.pdf}
-\caption[Aufbau und Ablauf in einer Data Pipeline]{Aufbau und Ablauf in einer Data Pipeline.\footnotemark}
-\label{abb:DataPipeline}
-\end{figure}
-\footnotetext{Mit Änderungen entnommen aus: \cite[][]{}}
-\Todo{Quellenangabe}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{graphics/DataPipeline.pdf}
+% \caption[Aufbau und Ablauf in einer Data Pipeline]{Aufbau und Ablauf in einer Data Pipeline.\footnotemark}
+% \label{abb:DataPipeline}
+% \end{figure}
+% \footnotetext{Mit Änderungen entnommen aus: \cite[][]{}}
+% \Todo{Quellenangabe}
 
 
 
@@ -238,35 +238,9 @@ Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Archit
 Gemäß der in \autoref{abb:KappaStreaming} gezeigten $\kappa$-Architektur gibt es Nutzungsfälle, in welchen eine reine Echtzeitauswertung basierend auf einer Datenquelle, wie beispielsweise dem Messagebroker, Sinn machen kann. \citeauthor{Belur.2020} sieht dabei vier verschiedene Verwendungszwecke, in welchen die niedrige Verarbeitungslatenz besonders wichtig ist und den maximalen Wert aus den Daten zieht.\footcite[Vgl. auch im Folgenden][]{Belur.2020} Durch Echtzeitreporting und die Erstellung von Dashboards können aktuelle Daten schnell übersichtlich aufbereitet werden. Mittels erstellter Regeln, die Schwellwertüberschreitungen und Anomalien detektieren, können Nutzende benachrichtigt werden, sobald es zu einer Abweichung kommt. Ebenfalls sinnvoll ist der Einsatz von Machine Learning zum Auffinden von Mustern in Daten, was verbesserte Anomalierkennung, Vorraussagen und ähnliche Features ermöglicht. Ein weiterer valider Usecase der $\kappa$-Architektur ist die Transformation von Daten in gewisse Zielformate, um beispielsweise Drittsysteme anzusprechen.
 
 
-% \subsubsection{Streamanalyse}
-% \begin{itemize}
-% \item AWS Kinesis Data Analytics/Stream
-% \item AWS Lambda
-% \end{itemize}
+
 
 \subsection{Batch Verarbeitung}
-% \subsubsection{Datenbankabfragen}
-% \begin{itemize}
-% \item Timestream
-% \item Redshift
-% \item Athena
-% \item Elasticsearch
-% \end{itemize}
 
-% \subsubsection{Externe Analyse}
-% \begin{itemize}
-% \item Amazon EMR
-% \item Amazon Glue
-% \item AWS Lake Formation
-% \end{itemize}
 Gemäß der in \autoref{abb:OLAPStreaming} gezeigten \ac{OLAP} Architektur, gibt es, wie für die Echtzeitverarbeitung auch nutzende Unternehmen, die ein Entscheidungstempo mit weiterem Horizont haben. Für diese Entscheidungstypen ist dabei wichtig, dass eine Analyse möglichst viele historische Daten umfasst. Es ist dabei aber nicht so wichtig, wie zeitnah diese erstellt werden kann. 
 Eine gängige Möglichkeit um effizient alte Daten zu analysieren, stellen \ac{OLAP} Datenbanken dar, welche durch spezielle Indexstrukturen und Optimierungen auf komplexe lesende Abfragen bei großen Datenmengen optimiert wurden. \Todo{belegen} Mittels dieser \ac{OLAP} Datenbanken lassen sich dank der jeweiligen Abfragesprachen und -dialekte komplizierte Abfragen realisieren. Bekanntes Beispiel für so eine Abfragesprache wäre \ac{SQL}, welches einige verschiedene Implementierungen (Dialekte) hat, die verwendet werden können. 
-
-
-% NOTIZEN:
-% Source -> Stream ingestion -> Stream storage -> Stream processing -> Destination
-
-% Talkingpoints gegen Streaming onprem:
-% Difficult to set up, Difficult to achieve high availability,
-% Error prone and complex to manage,
-% Tricky to scale, Integration requires development,Expensive to maintain

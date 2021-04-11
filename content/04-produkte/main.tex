@@ -1,55 +1,39 @@
 \addtocontents{toc}{\protect\newpage}
-\chapter{Produktauswahl}
-\Todo{Billing im Bezug auf pay for usage und Performance ergänzen}
+\chapter{Produkt-/Dienstleistungsauswahl}
 Im nachfolgenden Kapitel werden mittels der in \autoref{chap:vergleichsmethodik} vorgestellten Methodik die Produkte für die finalen Referenzarchitekturen unter den in \autoref{chap:rahmendatenverarbeitung} vorgestellten Rahmenbedingungen verglichen und ausgewählt.
 
 \section{Angewandte Methodik}
-=> Sortierte Tabelle mit Kriterien (geben nach Erfüllungsgrad Punkte)
+
+Grundlage der hier gezeigten Produktbewertungskriterien sind die in \autoref{chap:vergleichsmethodik} gezeigten Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \autoref{chap:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \enquote{serverlessness}, welches abgewertet werden soll, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Produkte nur zeitlich vorgeplante Auswertungen können, oder die Fähigkeit ausserhalb des eigenen Ausführungsplans Anfragen zu bearbeiten nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall diese bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Insgesamt sind die Kriterien nach Priorität absteigend geordnet, welche gleichzeitig die Summe an Punkten darstellt, die vergeben werden kann für dieses Kriterium. Da innerhalb der Kategorien ähnliche Funktionsweisen vorliegen können, die zu einer Abwertung führen, wird eine solche generelle Einschränkung für die Kategorie vorgenommen.
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-ID & Kriterium & Priorität \\ \hline
-\#A & Robustness and fault tolerance & 11 \\ \hline
-\#B & Scalability & 10 \\ \hline
-\#C & möglichst serverless/pay for usage & 9 \\ \hline
-\#D & Minimal maintenance & 8 \\ \hline
-\#E & Debuggability/transparente Fehler & 7 \\ \hline
-\#F & Extensibility & 6 \\ \hline
-\#G & Low latency reads and updates & 5 \\ \hline
-\#H & Ad hoc queries & 4 \\ \hline
-\#I & Generalization & 3 \\ \hline
-\#J & Integration mit \ac{AWS} nativen Produkten & 2 \\ \hline
-\#K & Übertragbarkeit zwischen Clouds (ISO 9126) (Anhang) & 1 \\ \hline
+Priorität & Kriterium \\ \hline
+11 & Auswertungen nach \autoref{chap:auswertungsarten}\\ \hline
+10 & Performancegarantien\\ \hline
+9 & Robustheit \& Fehlertoleranz\\ \hline
+8 & Skalierbarkeit \& \enquote{serverlessness} \\ \hline
+7 & Kosten \\ \hline
+6 & geringer Wartungsaufwand \\ \hline
+5 & Fehlertransparenz \\ \hline
+4 & Erweiterbarkeit \\ \hline
+3 & Generalisierung \\ \hline
+2 & Integration mit anderen \ac{AWS} Diensleistungen \\ \hline
+1 & Übertragbarkeit zwischen Clouds (ISO 9126) \\ \hline
 \end{tabular}
 \caption{Prioritäten}
 \label{tab:prioritaeten}
 \end{table}
 
-% \begin{table}[H]
-% \centering
-% \begin{tabular}{|l|l|l|}
-% \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Robustness and   fault tolerance & Scalability & möglichst serverless \\ \hline
-% x/11 & x/10 & x/9 \\ \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Minimal maintenance & Debuggability/transparente Fehler & Extensibility \\ \hline
-% x/8 & x/7 & x/6 \\ \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Low latency reads and updates & Ad hoc queries & Generalization \\ \hline
-% x/5 & x/4 & x/3 \\ \hline
-% \rowcolor[HTML]{ECF4FF} 
-% Integration mit \ac{AWS} & Übertragbarkeit (ISO 9126) & Summe \\ \hline
-% x/2 & x/1 & \cellcolor[HTML]{DAE8FC}x \\ \hline
-% \end{tabular}
-% \caption{Bewertungsmatrix Produkt}
-% \label{tab:bewertungsmatrix-produkt}
-% \end{table}
+
+
+Die Ergebnisse der Bewertung werden, wie in \autoref{tab:bewertungsmatrix-Produkt} gezeigt, dargestellt.
 
 \produktbewertung{Produkt}{x,x,x,x,x,x,x,x,x,x,x,x}
 
-Ausgehend von den in \autoref{tab:prioritaeten} gezeigten Prioritäten, soll \autoref{tab:bewertungsmatrix-Produkt} verwendet werden um die jeweiligen Produkte zu bewerten.
+Ausgehend von der Gesamtsumme der Punkte kann eine Rangliste erstellt werden, welche Dienstleistungen für die Referenzarchitektur verwendet werden können.
 
 \section{Produkte, die mehrere Modi unterstützen}
 \input{content/04-produkte/1-multimode}

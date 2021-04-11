@@ -1,62 +1,32 @@
 \section{Vergleichsmethodik für die Produktauswahl}\label{chap:vergleichsmethodik}
 
-\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben folgende,erwünschte Eigenschaften eines Big Data Systems festegelegt:\footcite[Vgl.][7\psqq]{Marz.2015}
+\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben folgende,erwünschte Eigenschaften eines Big Data Systems festgelegt (englisches Original geklammert):\footcite[Vgl.][7\psqq]{Marz.2015}
 \begin{enumerate}
-\item Robustness and fault tolerance
-
+\item Robustheit und Fehlertoleranz (Robustness and fault tolerance) - 
 Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also beispielsweise Analysecode \enquote{immutable} ist).
-\item Low latency reads and updates
 
+\item Lese- und Schreibzugriffe mit niedriger Latenz (Low latency reads and updates) - 
 Lesezugriffe auf Daten sollen mit niedriger Latenz stattfinden. Wie bereits beschrieben, kann aufgrund der Messdistanz eine Aktualisierung von Daten durchaus längere Zeit benötigen, jedoch sollte ein Big Data System in der Lage sein, Datenaktualisierungen mit niedriger Latenz durchzuführen.
-\item Scalability
 
+\item Skalierbarkeit (Scalability) - 
 Das Big Data System sollte durch transparente oder intransparente Provisionierung weiterer Ressourcen in der Lage sein, gleiche Performance in verschiedenen Belastungssituationen zu liefern. Dies deckt sich mit einem der Kernversprechen der Public Clouds nach NIST Definition (\enquote{rapid elasticity}).\footcite[Vgl.][2]{Mell.2011}
-\item Generalization
 
+\item Generalisierung (Generalization) - 
 Ein Big Data System sollte in der Lage sein, verschiedene Anwendungen zu unterstützen. Da die Zielsetzung dieser Bachelorarbeit auf Zeitreihendaten aufbaut, welche wie in \autoref{chap:GrundlagenDatenanalyse} gezeigt, einen großen Einsatzspielraum haben, ist diese Bedingung bei ausreichender Generalisierung der Referenzarchitekturen erfüllt.
-\item Extensibility
 
+\item Erweiterbarkeit (Extensibility) - 
 Das zu gestaltende Big Data System soll erweiterbar sein und neue Funktionen oder Änderungen ohne größeren Aufwand ermöglichen.
-\item Ad hoc queries
 
+\item Sofortige Abfrage (Ad hoc queries) - 
 Diverseste Abfragen sollen schnellstmöglich auf dem Datensatz der Big Data Anwendung möglich sein.
-\item Minimal maintenance
 
+\item geringer Wartungsaufwand (Minimal maintenance) - 
 Eine Big data Anwendung soll wartbar bleiben, indem Komplexität in den Kernkomponenten, welche nach Ansicht von \citeauthor{Marz.2015} zu erhöhtem Wartungsaufwand führt, möglichst gering ist.
-\item Debuggability
 
+\item Fehlertransparenz (Debuggability) - 
 Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Werte entstanden sind, um mögliche Fehler verfolgen zu können.
 \end{enumerate}
 
-% Kriterien von Lukas an ein Produkt:
-% \begin{itemize}
-% \item zufriedenstellende Integration mit AWS nativen Diensten (z.B. Monitoring)
-% \item Möglichst serverless (wenig Maintenance Aufwand)
-% \item skalierbarkeit auf 0 bis 10000
-% \end{itemize}
-
-% Anforderungen von Kunden
-% \begin{itemize}
-% \item Skalierbarkeit
-% \item pay for what you use (no dead infra)
-% \item transparente Fehler
-% \end{itemize}
-
-% \begin{itemize}
-%     \item Übertragbarkeit (ggf. zwischen Clouds)
-% \end{itemize}
-
-Vielleicht noch:
-Requirements:\footcite[Vgl.][]{Belur.2020}
-\begin{itemize}
-\item Unified experience for data ingestion and edge processing
-\item Versatile out-of-the-box connectivity
-\item Scalable stream processing with complex transformations
-\item Operationalized business rules and ML models
-\item Ability to handle unstructured data and schema drift:
-\item Reusability of processing logic
-\item Governance and lineage
-\end{itemize}
 
 \subsection{Featurevergleich}
 Es soll auf die Mindestverfügbarkeit folgender Fähigkeiten überprüft werden:
@@ -65,7 +35,7 @@ Es soll auf die Mindestverfügbarkeit folgender Fähigkeiten überprüft werden:
 \end{itemize}
 
 \subsection{Performancevergleich}
-Es muss mindestens die theoretische Verarbeitungslatenz verglichen werden
+Es sind die Angaben des Herstellers zu bewerten und eventuelle Nutzungsfälle aufzulisten, bei denen das Produkt/die Dienstleistung erfolgreich bei erhöhten Anforderungen (großes Datenvolumen, großer Durchsatz, ...) eingesetzt wurde.
 
 \subsection{Kostenvergleich}
 Um einen sinnvollen Kostenvergleich aufzustellen, sind folgende Annahmen zu treffen:

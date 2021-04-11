@@ -69,18 +69,11 @@ $input.Input1.value > $variable.threshold
 \end{figure}
 Sollte ein Alarmzustand erreicht werden, können andere Dienste wie Lambda oder \ac{SNS} zur Verarbeitung oder Benachrichtigung integriert werden.
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
 
 \subsubsection{Performancevergleich}
 Performancegarantien
@@ -139,21 +132,14 @@ In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Diens
 \footnotetext{Entnommen aus: \cite{Pogosova.28.05.2020}}
 Kinesis Data Streams unterteilt, wie in \autoref{abb:KinesisShards} gezeigt, Daten in einzelne Partitionen/Shards, in denen gleich partitionierte Datensätze verarbeitet werden können.\footcite[Vgl. auch im Folgenden][]{Pogosova.28.05.2020} Einzelne Shards verhalten sich dabei wie geordnete Warteschlangen und speichern die Nachrichten nach Eingangsdatum sortiert. 
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
 
 \subsubsection{Performancevergleich}
-Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Mittels des \enquote{enhanced fanout} kann Kinesis gleichzeitig 2MB an Durchsatz pro Sekunde zu konsumierenden Applikationen bereitstellen.\footcite[Vgl. auch im Folgenden][]{Hunt.2018} Gleichzeitig bietet \ac{AWS} laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} Trotz der Aussagen in der eigenen Dokumentation, dass die Ende zu Ende Verzögerung von Dateneinspeisung bis Konsumption typischerweise unter einer Sekunde liegt, was die eigentliche Garantie von 70 Milisekunden schon aufweicht  ist in der Kinesis \ac{SLA} nur eine Verfügbarkeit von 99,99\% pro Monat garantiert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ae}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ad}
+Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Mittels des \enquote{enhanced fanout} kann Kinesis gleichzeitig 2MB an Durchsatz pro Sekunde zu konsumierenden Applikationen bereitstellen.\footcite[Vgl. auch im Folgenden][]{Hunt.2018} Gleichzeitig bietet \ac{AWS} laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} Trotz der Aussagen in der eigenen Dokumentation, dass die Ende zu Ende Verzögerung von Dateneinspeisung bis Konsumption typischerweise unter einer Sekunde liegt, was die eigentliche Garantie von 70 Milisekunden schon aufweicht  ist in der Kinesis \ac{SLA} nur eine Verfügbarkeit von 99,99\% pro Monat garantiert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ae}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ad} Es ist Abwägungssache, ob der Subsekunden Latenz von Kinesis Data Streams Glauben geschenkt wird, beziehungsweise ob die Latenz im Subsekunden Bereich überhaupt relevant ist, oder ob alles kleiner fünf Sekunden als nahe genug an der Echtzeit akzeptiert wird.
 
 \subsubsection{Kostenvergleich}
 \begin{table}[H]
@@ -191,18 +177,11 @@ Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS
 \label{abb:GrobArchitekturLambda}
 \end{figure}
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
 
 \subsubsection{Performancevergleich}
 Performancegarantien
@@ -290,18 +269,11 @@ Bei \ac{MSK} handelt es sich um einen Managed Service für die Open Source Lösu
 
 Kafka hat eigene Verarbeitungslogiken integriert, mit welchen einige Analysen bereits durchgeführt werden können. Um diese in \ac{AWS} weiterverarbeiten zu können, müssen die Ergebnisse via der Integration mit Lambda oder der Integration mit \ac{EC2}, der Amazon Plattform für virtuelle Maschinen abgerufen werden.
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
 
 \subsubsection{Performancevergleich}
 Performancegarantien

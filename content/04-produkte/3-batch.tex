@@ -9,57 +9,43 @@ In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die Batch (\enquote{
 
 
 \subsection{Amazon Timestream}
+Timestream ist nach Aussage des Herstellers eine schneller, skalierbare und speziell für Zeitreihendaten entwickelte Datenbank, welche über \ac{AWS} als Dienstleistung bezogen werden kann.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.h} Timestream integriert zwei verschiedene Speichertypen, nämlich \ac{RAM}-basierten Speicher, in dem Daten, auf welche schnell zugegriffen werden sollen, gespeichert werden können und Festplatten-basierten Speicher, welcher für historische Daten dienen soll.
+Timestream besetzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funktionen zur Analyse von Zeitreihendaten erweitert wurde. Ein Beispiel für den Einsatz des \ac{SQL}-Dialekts zur Abfrage der Informationen für den Anwendungsfall, der zum Kostenvergleich beschrieben wurde, ist in \autoref{listing:timestream-kostenvergleich} zu sehen.
 
-
-
-
-
-
-
-Timestream ist nach Aussage des Herstellers eine schneller, skalierbare und speziell für Zeitreihendaten entwickelte Datenbank, welche über \ac{AWS} als Dienstleistung bezogen werden kann.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.h} Timestream integriert zwei verschiedene Speichertypen, nämlich \ac{RAM}-basierten Speicher, in dem Daten auf welche schnell zugegriffen werden sollen gespeichert werden können und Festplatten-basierten Speicher, welcher für historische Daten dienen soll.
-Timestream besetzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funktionen zur Analyse von Zeitreihendaten erweitert wurde. Ein Beispiel für den Einsatz des \ac{SQL}-Dialekts zur Kalkulation des 99. Perzentils ist in \autoref{lst:sql-timestream} gezeigt.
-
-\begin{listing}[H]
-\inputminted[frame=lines,breaklines=true]{sql}{code/timestream-example.sql}
-\caption{Berechnung des 99. Perzentils in Timestream}
-\label{lst:sql-timestream}
-\end{listing}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-DeviceType & measure\_name & binned\_timestamp & avg & p99 \\ \hline
-iotDemo & temperature & 2021-02-26 08:00:00.000000000 & 16.51 & 20.1 \\ \hline
-iotDemo & temperature & 2021-02-26 16:00:00.000000000 & 18.23 & 19.2 \\ \hline
-iotDemo & temperature & 2021-02-25 18:00:00.000000000 & 18.5 & 19.3 \\ \hline
-iotDemo & temperature & 2021-02-25 20:00:00.000000000 & 17.3 & 17.8 \\ \hline
-\end{tabular}
-\caption{Ausgabe der Datenbank bei Eingabe des oben gezeigten SQL-Statements}
-\label{tab:AusgabeSQL}
-\end{table}
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
-
-\subsubsection{Performancevergleich}
-\Todo{Performancegarantien}
-
-\subsubsection{Kostenvergleich}
 \begin{listing}[H]
 \inputminted[frame=lines,breaklines=true]{sql}{code/timestream-threshold.sql}
 \caption{Abfrage für Kostenvergleichs Usecase}
 \label{listing:timestream-kostenvergleich}
 \end{listing}
+
+Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in der Dokumentation selbst an, dass Lambda verwendet werden kann, um periodisch eine Abfrage in Timestream auszuführen und basierend auf dieser Anfrage Alarme via \ac{SNS} zu versenden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ag} Abgebildet ist diese Interaktion in \autoref{abb:TimestreamLAmbdaOrchestration}.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{graphics/Lambda-Timestream-Orchestration.pdf}
+\caption{Orchestrierung von zeitbasierten Timestream Abfragen}
+\label{abb:TimestreamLAmbdaOrchestration}
+\end{figure}
+
+\subsubsection{Featurevergleich}
+Perzentile lassen sich mit der eingebauten Funktion \mintinline{sql}{approx_percentile(x, percentage)} berechnen, der Mittelwert via \mintinline{sql}{avg(x)} oder \mintinline{sql}{geometric_mean(x)}
+
+Eine native Anomalieerkennung bietet Timestream nicht, jedoch kann die Machine Learning Dienstleistung Amazon SageMaker Daten von Timestream analysieren und Anomlieerkennung ausführen.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.aj} In SageMaker kann auch der nativ in Kinesis Data Analytics verbaute Random Cut Forest Algorithmus verwendet werden, um Anomalien zu erkennen. 
+
+Die Schwellwertüberschreitungserkennung ist mittels einer einfachen \mintinline{sql}{WHERE} Bedingung machbar.
+
+Ein gleitender Durchschnitt ist in Form eines geometrischen und arithmetischen Mittelwerts berechenbar unter Verwendung der Verarbeitungsfenster.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ah} Gleichzeitig unterstützt Amazon Timestream die Verwendung von Ableitungen als Werkzeug zur Trenderkennung.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ai}
+
+\subsubsection{Performancevergleich}
+Die \ac{SLA} von Timestream bietet allein 99,99\% Verfügbarkeit pro Verrechnungsmonat.\footcite[Vgl.][]{AmazonWebServicesInc..2020d} \ac{AWS} verspricht aber eine bis zu tausendfache Geschwindigkeitsverbesserung gegenüber relationalen Datenbanken.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ak}
+
+Mitbewerber von \ac{AWS} im Bereich der Zeitseriendatenbanken haben in ihren Tests festegestellt, dass Timestream langsamer als ihre Konkurrenzprodukte waren.\footcite[Vgl.][]{Booz.2020}\nzitat\footcite[Vgl.][]{Crate.ioInc..2020} Dabei sind die Testskripte von \citeauthor{Booz.2020} Open Source und damit die Messungen theoretisch reproduzierbar. Gleichzeitig gibt \ac{AWS} aber in einem Blogeintrag aus dem November an, Datensätze im Bereich von einem bis 21,7 TB analysieren zu können, ohne 100 Sekunden Ausführungszeit zu überschreiten.\footcite[Vgl.][]{Das.2020} Auch für diese Tests ist der Quellcode open source verfügbar.
+
+Es kann also keine finale Aussage über die genauen Performancegarantien getroffen werden, da entweder den Mittbewerbern von \ac{AWS} Glauben zu schenken ist, oder \ac{AWS} selber. Da es im kommerziellen Interesse aller Parteien liegt Timestream entweder auf- oder abzuwerten ist eine stichhaltige Aussage also nicht möglich.
+
+\subsubsection{Kostenvergleich}
+
 
 Timestream ist momentan noch nicht in Frankfurt verfügbar, weshalb die Kosten in der einzigen europäischen Zone mit verfügbarem Timestream, Irland, als Maßstab verwendet werden. Angenommen wird, dass die Daten eine Stunde im \ac{RAM} vorgehalten werden und danach in die Festplattenspeicherung überführt werden.
 
@@ -96,18 +82,11 @@ Amazon Athena ist nach Aussage des Herstellers ein voll verwalteter Query Dienst
 
 Bei verändernden Datenschemata wird empfohlen, den Dienst \ac{AWS} Glue Crawler komplementär einzusetzen, welcher die Schemata aus \ac{S3} automatisch extrahiert und in Athena hinterlegt. Andernfalls können die Schemata auch manuell hinterlegt werden.
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
 
 \subsubsection{Performancevergleich}
 
@@ -161,18 +140,11 @@ Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage
 Redshift bietet zusätzlich mit Redshift Spectrum einen Dienst an, welcher auf den ersten Blick dem in \autoref{chap:athena} vorgestellten Athena gleicht. Beide rufen via \ac{SQL} Daten von \ac{S3} ab und beide kosten 5\$/TB gescannte Daten.\footcite[Vgl. auch im Folgenden][]{Smallcombe.2020} Wichtige Unterschiede liegen dabei aber in der Art, wie Ressourcen verwaltet und genutzt werden können. Während Redshifft Spectrum nur in Kombination mit einem Redshift Cluster verwendet werden kann, funktioniert Athena ohne Kopplung an verwaltende Ressourcen. Gleichzeitig ist ein stärkerer Einfluss auf die Performance bei Redshift möglich, da man zusätzliche Clusterressourcen einfach provisionieren kann, während Athena vollständig von \ac{AWS} verwaltet wird. Entsprechend erlaubt Redshift Spectrum zwar größeren Einfluss auf die Performance von Datenabfragen, dieser Einfluss muss jedoch in Form von zusätzlich abzurechnenden Clusterressourcen abgerechnet werden, was Redshift für Anwendungsfälle, die keine gesichert gleichbleibende Performance benötigen, unattraktiv macht.
 
 
-\subsubsection{Featurevergleich} 
-\Todo{Erweitern}
-Robustness and fault tolerance
-Low latency reads and updates
-Scalability
-Generalization
-Extensibility
-Ad hoc queries
-Minimal maintenance
-Debuggability
-vorgestellte Auswertungen 
-Reusability of processing logic
+\subsubsection{Featurevergleich}
+Median und Quantile
+Anomaliedetektion
+Schwellwertüberschreitung
+Trenderkennung/gleitender Durchschnitt
 
 \subsubsection{Performancevergleich}
 \ac{AWS} sichert vertraglich für Redshift ebenfalls keine feste Performance im Rahmen des \acp{SLA} zu. Es werden allein Abschläge auf den zu zahlenden Preis angeboten, wenn die Verfügbarkeit des Dienstes unter 99,99\% des Monats lag.\footcite[Vgl.][]{AmazonWebServicesInc..2019b} Basierend auf den Leistungsdaten der Instanz, welche ausgewählt wurde, um Redshift zu betreiben und weiterer Faktoren, wie z.B. ob durch horizontale Skalierung mehrere Instanzen in einem Cluster zusammengefasst wurden, kann sich die Performance verändern. Zusätzlich sind wie bei vielen \ac{SQL}-basierten Datenbanken Optimierungen der Leistung durch Optimierung der gestellten Abfragen möglich.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ab} In der Erhebung von \citeauthor{Tan.2019} wurde Redshift (ohne Spectrum) ein Performancevorteil gegenüber Athena bescheinigt, während Spectrum schlechter abschnitt, als Redshift.\footcite[Vgl.][2176]{Tan.2019}
