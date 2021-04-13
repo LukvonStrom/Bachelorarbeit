@@ -1,0 +1,15 @@
+{
+    "Auswertungen": "\\begin{tabular}[c]{@{}l@{}}Auswertungen \\\\ (\\autoref{chap:auswertungsarten}) \\end{tabular}",
+    "Performancegarantien": "Performancegarantien",
+    "Robustheit & Fehlertoleranz": "\\begin{tabular}[c]{@{}l@{}}Robustheit \\& \\\\ Fehlertoleranz\\end{tabular}",
+    "Skalierbarkeit & serverlessness": "\\begin{tabular}[c]{@{}l@{}}Skalierbarkeit \\& \\\\ \\enquote{serverlessness}\\end{tabular}",
+    "Kosten": "Kosten",
+    "geringer Wartungsaufwand": "\\begin{tabular}[c]{@{}l@{}}geringer \\\\ Wartungsaufwand\\end{tabular}",
+    "Fehlertransparenz": "\\begin{tabular}[c]{@{}l@{}}Fehlertransparenz/ \\\\ Debugability\\end{tabular}",
+    "Erweiterbarkeit": "Erweiterbarkeit",
+    "Generalisierung": "Generalisierung",
+    "Integration mit AWS": "\\begin{tabular}[c]{@{}l@{}}Integration mit anderen \\\\ \\ac{AWS} Diensleistungen\\end{tabular}",
+    "Übertragbarkeit zwischen Clouds": "\\begin{tabular}[c]{@{}l@{}}Übertragbarkeit zwischen \\\\ Clouds (ISO 9126)\\end{tabular}",
+    "Summe": "Summe"
+}
+

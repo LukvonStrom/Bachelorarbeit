@@ -79,44 +79,50 @@
 \newcommand{\nzitat}{${}^{,}$}
 \newcommand{\coo}{\ensuremath{\mathrm{CO_2}}}
 
-\newcommand{\produktbewertung}[2]{
-\setsepchar{,}
-\readlist\arg{#2}
-% \ifthenelse{\equal{#1}{Produkt}}
-%     {}
-%     {\subsubsection{#1}}
+% \newcommand{\produktbewertung}[2]{
+% \setsepchar{,}
+% \readlist\arg{#2}
+% % \ifthenelse{\equal{#1}{Produkt}}
+% %     {}
+% %     {\subsubsection{#1}}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{Kriterium} & \multicolumn{1}{c|}{Priorität} & \multicolumn{1}{c|}{Punkte} \\ \hline
-Auswertungen nach \autoref{chap:auswertungsarten} & 11 & \cellcolor[HTML]{ECF4FF}\arg[1] \\ \hline
-Performancegarantien & 10 & \cellcolor[HTML]{ECF4FF}\arg[2] \\ \hline
-Robustheit \& Fehlertoleranz & 9 & \cellcolor[HTML]{ECF4FF}\arg[3] \\ \hline
-Skalierbarkeit \& \enquote{serverlessness} & 8 & \cellcolor[HTML]{ECF4FF}\arg[4] \\ \hline
-Kosten & 7 & \cellcolor[HTML]{ECF4FF}\arg[5] \\ \hline
-geringer Wartungsaufwand & 6 & \cellcolor[HTML]{ECF4FF}\arg[6] \\ \hline
-Fehlertransparenz & 5 & \cellcolor[HTML]{ECF4FF}\arg[7] \\ \hline
-Erweiterbarkeit & 4 & \cellcolor[HTML]{ECF4FF}\arg[8] \\ \hline
-Generalisierung & 3 & \cellcolor[HTML]{ECF4FF}\arg[9] \\ \hline
-Integration mit anderen \ac{AWS} Diensleistungen & 2 & \cellcolor[HTML]{ECF4FF}\arg[10] \\ \hline
-Übertragbarkeit zwischen Clouds (ISO 9126) & 1 & \cellcolor[HTML]{ECF4FF}\arg[11] \\ \hline
-\rowcolor[HTML]{ECF4FF} 
-\multicolumn{1}{|c|}{\cellcolor[HTML]{ECF4FF}Summe} & 66 & \arg[12] \\ \hline
-\end{tabular}
-\caption{Bewertungsmatrix #1}
-\label{tab:bewertungsmatrix-#1}
-\end{table}
-
-
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|l|l|l|}
+% \hline
+% \multicolumn{1}{|c|}{Kriterium} & \multicolumn{1}{c|}{Priorität} & \multicolumn{1}{c|}{#1} \\ \hline
+% Auswertungen nach \autoref{chap:auswertungsarten} & 11 & \cellcolor[HTML]{ECF4FF}\arg[1] \\ \hline
+% Performancegarantien & 10 & \cellcolor[HTML]{ECF4FF}\arg[2] \\ \hline
+% Robustheit \& Fehlertoleranz & 9 & \cellcolor[HTML]{ECF4FF}\arg[3] \\ \hline
+% Skalierbarkeit \& \enquote{serverlessness} & 8 & \cellcolor[HTML]{ECF4FF}\arg[4] \\ \hline
+% Kosten & 7 & \cellcolor[HTML]{ECF4FF}\arg[5] \\ \hline
+% geringer Wartungsaufwand & 6 & \cellcolor[HTML]{ECF4FF}\arg[6] \\ \hline
+% Fehlertransparenz & 5 & \cellcolor[HTML]{ECF4FF}\arg[7] \\ \hline
+% Erweiterbarkeit & 4 & \cellcolor[HTML]{ECF4FF}\arg[8] \\ \hline
+% Generalisierung & 3 & \cellcolor[HTML]{ECF4FF}\arg[9] \\ \hline
+% Integration mit anderen \ac{AWS} Diensleistungen & 2 & \cellcolor[HTML]{ECF4FF}\arg[10] \\ \hline
+% Übertragbarkeit zwischen Clouds (ISO 9126) & 1 & \cellcolor[HTML]{ECF4FF}\arg[11] \\ \hline
+% \rowcolor[HTML]{ECF4FF} 
+% \multicolumn{1}{|c|}{\cellcolor[HTML]{ECF4FF}Summe} & 66 & \arg[12] \\ \hline
+% \end{tabular}
+% \caption{Bewertungsmatrix #1}
+% \label{tab:bewertungsmatrix-#1}
+% \end{table}
 
 
-In \autoref{tab:bewertungsmatrix-#1} wird #1 gemäß der in \autoref{tab:einstufungen} eingeschränkten Bewertungen bewertet.
-}
+% In \autoref{tab:bewertungsmatrix-#1} wird #1 gemäß der in \autoref{tab:einstufungen} eingeschränkten Bewertungen bewertet.
+% }
 
 % \renewcommand{\clearpage}{}
 \renewcommand*{\lstlistingname}{Codebeispiel}
+
+%from https://groups.google.com/g/comp.text.tex/c/dOHk1iL9VKs/m/z7Yl8Kd0NUoJ
+\makeatletter
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 \futurelet
+\reserved@a\@xhline}
+\makeatother
+
 
 
 

@@ -1,0 +1,66 @@
+[
+    {
+        "Produkt":"Amazon~Timestream",
+        "values":{
+            "Auswertungen":1,
+            "Performancegarantien":1,
+            "Robustheit & Fehlertoleranz":1,
+            "Skalierbarkeit & serverlessness":1,
+            "Kosten":1,
+            "geringer Wartungsaufwand":1,
+            "Fehlertransparenz":1,
+            "Erweiterbarkeit":1,
+            "Generalisierung":1,
+            "Integration mit AWS":1,
+            "Übertragbarkeit zwischen Clouds":1
+        }
+    },
+    {
+        "Produkt":"Amazon~Redshift",
+        "values":{
+            "Auswertungen":1,
+            "Performancegarantien":1,
+            "Robustheit & Fehlertoleranz":1,
+            "Skalierbarkeit & serverlessness":1,
+            "Kosten":1,
+            "geringer Wartungsaufwand":1,
+            "Fehlertransparenz":1,
+            "Erweiterbarkeit":1,
+            "Generalisierung":1,
+            "Integration mit AWS":1,
+            "Übertragbarkeit zwischen Clouds":1
+        }
+    },
+    {
+        "Produkt":"Amazon~Athena",
+        "values":{
+            "Auswertungen":1,
+            "Performancegarantien":1,
+            "Robustheit & Fehlertoleranz":1,
+            "Skalierbarkeit & serverlessness":1,
+            "Kosten":1,
+            "geringer Wartungsaufwand":1,
+            "Fehlertransparenz":1,
+            "Erweiterbarkeit":1,
+            "Generalisierung":1,
+            "Integration mit AWS":1,
+            "Übertragbarkeit zwischen Clouds":1
+        }
+    },
+    {
+        "Produkt":"Amazon~Elasticsearch",
+        "values":{
+            "Auswertungen":1,
+            "Performancegarantien":1,
+            "Robustheit & Fehlertoleranz":1,
+            "Skalierbarkeit & serverlessness":1,
+            "Kosten":1,
+            "geringer Wartungsaufwand":1,
+            "Fehlertransparenz":1,
+            "Erweiterbarkeit":1,
+            "Generalisierung":1,
+            "Integration mit AWS":1,
+            "Übertragbarkeit zwischen Clouds":1
+        }
+    }
+]

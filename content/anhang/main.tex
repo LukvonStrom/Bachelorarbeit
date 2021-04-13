@@ -22,47 +22,28 @@
 
 
 
-\input{content/anhang/1-philipp}
-\pagebreak
-\input{content/anhang/2-peter}
-\pagebreak
-\input{content/anhang/3-ralph}
-\pagebreak
+\include{content/anhang/1-philipp}
 
-\anhang{AWS Well Architected Referenzarchitekturen}
-Folgend sind die Referenzarchitekturen aus dem \ac{AWS} Well Architected Framework - Analyticss Lens abgebildet.
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{graphics/AWS-Batch-Architecture.pdf}
-\caption[AWS Well Architected Batch Architektur]{AWS Well Architected Batch Architektur.\footnotemark}
-\label{abb:AWSWellArchitectedBatch}
-\end{figure}
-\footnotetext{Entnommen aus: \cite[][12]{Ravirala.2020}}
+\include{content/anhang/2-peter}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textheight,angle=90,origin=c]{graphics/AWS-Stream-Architecture.pdf}
-\caption[AWS Well Architected Stream/$\kappa$ Architektur]{AWS Well Architected Stream/$\kappa$ Architektur.\footnotemark}
-\label{abb:AWSWellArchitectedStream}
-\end{figure}
-\footnotetext{Entnommen aus: \cite[][15]{Ravirala.2020}}
+\include{content/anhang/3-ralph}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textheight,angle=90,origin=c]{graphics/AWS-Lambda-Architecture.pdf}
-\caption[AWS Well Architected $\lambda$ Architektur]{AWS Well Architected $\lambda$ Architektur.\footnotemark}
-\label{abb:AWSWellArchitectedLambda}
-\end{figure}
-\footnotetext{Entnommen aus: \cite[][18]{Ravirala.2020}}
+\include{content/anhang/4-aws-ra}
 
-\anhang{Berechnungsskript Dateigröße}\label{anhang:berechnung}
-Angefügt ist das verwendete Berechnungsskript für die Dateigröße, geschrieben in JavaScript, ausführbar mit der Node.JS Umgebung.
+\include{content/anhang/5-dateigroesse}
 
-\begin{listing}[H]
-\inputminted[frame=lines,breaklines=true]{javascript}{code/estimates/estimate.js}
-\caption{Berechnungsskript Dateigröße}
-\label{listing:js}
-\end{listing}
+\include{content/anhang/6-kriterien-priorisierung}
+
+
+% \anhang{Node-Red Sensor Simulator}\label{anhang:sensorsim}
+% Angefügt ist der Node-Red Export des Sensor Simulators, mit dem mehrere Sensoren simuliert werden können.
+
+
+% % \begin{listing}[H]
+% \inputminted[frame=lines,tabsize=2,breaklines]{json}{code/sensor-simulator/node-red.json}
+% \caption{Node-Red Sensorsimulator Export}
+% \label{listing:node-red-export}
+% \end{listing}
 
 
 

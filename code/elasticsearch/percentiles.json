@@ -1,0 +1,11 @@
+{
+  "size": 0,
+  "aggs": {
+    "load_time_outlier": {
+      "percentiles": {
+        "field": "load_time",
+        "percents": [ 25, 75, 95, 99, 99.9 ] 
+      }
+    }
+  }
+}

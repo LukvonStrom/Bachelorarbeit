@@ -1,0 +1,50 @@
+[
+    {
+        "Produkt":"X",
+        "values":{
+            "Auswertungen":0,
+            "Performancegarantien":0,
+            "Robustheit & Fehlertoleranz":0,
+            "Skalierbarkeit & serverlessness":0,
+            "Kosten":0,
+            "geringer Wartungsaufwand":0,
+            "Fehlertransparenz":0,
+            "Erweiterbarkeit":0,
+            "Generalisierung":0,
+            "Integration mit AWS":0,
+            "Übertragbarkeit zwischen Clouds":0
+        }
+    },
+    {
+        "Produkt":"Y",
+        "values":{
+            "Auswertungen":0,
+            "Performancegarantien":0,
+            "Robustheit & Fehlertoleranz":0,
+            "Skalierbarkeit & serverlessness":0,
+            "Kosten":0,
+            "geringer Wartungsaufwand":0,
+            "Fehlertransparenz":0,
+            "Erweiterbarkeit":0,
+            "Generalisierung":0,
+            "Integration mit AWS":0,
+            "Übertragbarkeit zwischen Clouds":0
+        }
+    },
+    {
+        "Produkt":"Z",
+        "values":{
+            "Auswertungen":0,
+            "Performancegarantien":0,
+            "Robustheit & Fehlertoleranz":0,
+            "Skalierbarkeit & serverlessness":0,
+            "Kosten":0,
+            "geringer Wartungsaufwand":0,
+            "Fehlertransparenz":0,
+            "Erweiterbarkeit":0,
+            "Generalisierung":0,
+            "Integration mit AWS":0,
+            "Übertragbarkeit zwischen Clouds":0
+        }
+    }
+]

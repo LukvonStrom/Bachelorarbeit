@@ -1,0 +1,231 @@
+[
+    {
+        "id": "deecd2bb.11469",
+        "type": "iot-simulator",
+        "z": "55f673d3.6f024c",
+        "name": "Geräte Simulator",
+        "options": [
+            {
+                "label": "Temperature",
+                "value": "24",
+                "range": "12"
+            },
+            {
+                "label": "Air_Quality",
+                "value": "50",
+                "range": "10"
+            },
+            {
+                "label": "UV_Index",
+                "value": "6",
+                "range": "4"
+            }
+        ],
+        "preOptions": [
+            {
+                "label": "Temperature",
+                "value": "24",
+                "range": "12"
+            },
+            {
+                "label": "Air_Quality",
+                "value": "50",
+                "range": "10"
+            },
+            {
+                "label": "UV_Index",
+                "value": "6",
+                "range": "4"
+            }
+        ],
+        "timestamp": true,
+        "allinone": true,
+        "optionEdited": false,
+        "x": 450,
+        "y": 420,
+        "wires": [
+            [
+                "c077ade6.ec0a"
+            ]
+        ]
+    },
+    {
+        "id": "c077ade6.ec0a",
+        "type": "function",
+        "z": "55f673d3.6f024c",
+        "name": "Nachricht für MQTT formatieren",
+        "func": "return Object.keys(msg.payload).map(key => {\n    if(key !== \"timestamp\"&& msg.payload[key]){\n        return {payload: msg.payload[key], topic: \"simulator/\"+key}\n    }\n        return null;\n\n}).filter(el => !!el)",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 447,
+        "y": 480,
+        "wires": [
+            [
+                "71be63ca.76d1fc"
+            ],
+            [
+                "71be63ca.76d1fc"
+            ],
+            [
+                "71be63ca.76d1fc"
+            ]
+        ]
+    },
+    {
+        "id": "1f12f998.16dd16",
+        "type": "inject",
+        "z": "55f673d3.6f024c",
+        "name": "Starte Intervall",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 266,
+        "y": 420,
+        "wires": [
+            [
+                "deecd2bb.11469"
+            ]
+        ]
+    },
+    {
+        "id": "71be63ca.76d1fc",
+        "type": "mqtt out",
+        "z": "55f673d3.6f024c",
+        "name": "An Broker via MQTT senden",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "961b203.2d19ae",
+        "x": 717,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c077ade6.ec1a",
+        "type": "iot-simulator",
+        "z": "55f673d3.6f024c",
+        "name": "Geräte Simulator",
+        "options": [
+            {
+                "label": "Temperature",
+                "value": "24",
+                "range": "12"
+            },
+            {
+                "label": "Air_Quality",
+                "value": "50",
+                "range": "10"
+            },
+            {
+                "label": "UV_Index",
+                "value": "6",
+                "range": "4"
+            }
+        ],
+        "timestamp": true,
+        "allinone": true,
+        "optionEdited": false,
+        "x": 450,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c077ade6.ec1b",
+        "type": "function",
+        "z": "55f673d3.6f024c",
+        "name": "Nachricht für MQTT formatieren",
+        "func": "return Object.keys(msg.payload).map(key => {   if(key !== \"timestamp\"&& msg.payload[key]){       return {payload: msg.payload[key], topic: \"simulator/\"+ey}   }       return null;\n\n}).filter(el => !!el)",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 447,
+        "y": 480,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c077ade6.ec1c",
+        "type": "inject",
+        "z": "55f673d3.6f024c",
+        "name": "Starte Intervall",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "once": false,
+        "onceDelay": 0.1,
+        "payloadType": "date",
+        "x": 266,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c077ade6.ec1d",
+        "type": "mqtt out",
+        "z": "55f673d3.6f024c",
+        "name": "An Broker via MQTT senden",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "961b203.2d19ae",
+        "x": 717,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "961b203.2d19ae",
+        "type": "mqtt-broker",
+        "name": "AWS",
+        "broker": "a1zz5wm0uw18fs-ats.iot.eu-west-1.amazonaws.com",
+        "port": "8883",
+        "tls": "4b188bc8.555a04",
+        "clientid": "Node-Red-Simulator",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "10",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "4b188bc8.555a04",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "Node-Red-Simulator.cert.pem",
+        "keyname": "Node-Red-Simulator.private.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": false
+    }
+]

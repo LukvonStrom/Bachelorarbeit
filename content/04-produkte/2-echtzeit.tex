@@ -96,9 +96,9 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{175,6445} \\ \hline
 \end{table}
 Die Preise sind der offiziellen Preisaufstellung von \ac{AWS} entnommen. \footcite[Vgl.][]{AmazonWebServicesInc..o.J.k}
 
-\subsubsection{Gesamtbewertung}
+% \subsubsection{Gesamtbewertung}
 
-\produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
+% \produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
 
 \subsection{Amazon Kinesis}
 
@@ -158,18 +158,18 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{45,51} \\ \hline
 \label{tab:kostenvergleich-Amazon~Kinesis}
 \end{table}
 
-Siehe \footcite[][]{AmazonWebServicesInc..o.J.l}\nzitat\footcite[AmazonWebServicesInc..o.J.m][]{}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..2017b}
+Siehe \footcite[Vgl.][]{AmazonWebServicesInc..o.J.l}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.m}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..2017b}
 
-\subsubsection{Gesamtbewertung}
-\produktbewertung{Amazon~Kinesis}{11,5,4,4,6,6,5,0,3,2,0,46}
+% \subsubsection{Gesamtbewertung}
+% \produktbewertung{Amazon~Kinesis}{11,5,4,4,6,6,5,0,3,2,0,46}
 
 \subsection{AWS Lambda}
 
 
-
-
-
-Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS} Dienstes. Innerhalb dieser Arbeit wird Lambda als einzige generelle Computing Plattform betrachtet, da Alternativen wie \ac{EC2}, welches virtuelle Maschinen anbietet oder \ac{ECS}, welches Container anbietet einen von einzelnen Events unabhängigen Lebenszyklus haben. So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert kontinuierlich und holen/ \enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. Lambda hingegen wird von unterstützenden Diensten zur Verarbeitung von Events aufgerufen. Dabei ist je nach Dienst einstellbar, ob ein Aufruf pro Event stattfinden soll, oder Events zu einer konfigurierbaren Anzahl gruppiert werden und dann an Lambda übergeben werden. Lambda eignet sich besonders für analytische Workloads, seit der kürzlichen Addition von Intels \ac{AVX2}, einem speziellen CPU-Instruktionssatz, der die Verarbeitung von Vektorinstruktionen, wie sie beispielsweise beim Machine Learning oder in der Statistik vorkommen, beschleunigt.\footcite[Vgl.][]{Beswick.24.11.2020} Aufgrund der zentralen Rolle im Bereich Compute bei \ac{AWS}, können viele Dienste Events an Lambda senden. In \autoref{abb:GrobArchitekturLambda} sind als Integrationsbeispiele die \acp{MoM} \ac{IoT} Core, MQ und Kinesis Data Streams als Eventlieferanten gezeigt.
+Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS} Dienstes. Innerhalb dieser Arbeit wird Lambda als einzige generelle Computing Plattform betrachtet, da Alternativen wie \ac{EC2}, welches virtuelle Maschinen anbietet oder \ac{ECS}, welches Container anbietet einen von einzelnen Events unabhängigen Lebenszyklus haben. 
+So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert kontinuierlich und holen/ \enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. Lambda hingegen wird von unterstützenden Diensten zur Verarbeitung von Events aufgerufen. 
+Dabei ist je nach Dienst einstellbar, ob ein Aufruf pro Event stattfinden soll, oder Events zu einer konfigurierbaren Anzahl gruppiert werden und dann an Lambda übergeben werden. Lambda eignet sich besonders für analytische Workloads, seit der kürzlichen Addition von Intels \ac{AVX2}.\footcite[Vgl. auch im Folgenden][]{Beswick.24.11.2020} \ac{AVX2} ist ein spezieller CPU-Instruktionssatz, der die Verarbeitung von Vektorinstruktionen, wie sie beispielsweise beim Machine Learning oder in der Statistik vorkommen, beschleunigt. 
+Aufgrund der zentralen Rolle im Bereich Compute bei \ac{AWS}, können viele Dienste Events an Lambda senden. In \autoref{abb:GrobArchitekturLambda} sind als Integrationsbeispiele die \acp{MoM} \ac{IoT} Core, MQ und Kinesis Data Streams als Eventlieferanten gezeigt.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/Lambda-general.pdf}
@@ -253,8 +253,8 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{0,0841335} \\ \hline
 \label{tab:kostenvergleich-AWS~Lambda~IOT~Sammelverarbeitung}
 \end{table}
 
-\subsubsection{Gesamtbewertung}
-\produktbewertung{AWS~Lambda}{8,10,9,6,7,6,0,0,3,2,1,52}
+% \subsubsection{Gesamtbewertung}
+% \produktbewertung{AWS~Lambda}{8,10,9,6,7,6,0,0,3,2,1,52}
 
 \subsection{Amazon MSK}
 
@@ -308,8 +308,8 @@ Lambda: Maximal 10.000 Events
 
 \footcite[Vgl.][]{AmazonWebServicesInc..o.J.o}\nzitat\footcite[Vgl.][]{Beswick.2020}
 
-\subsubsection{Gesamtbewertung}
-\produktbewertung{Amazon~MSK}{11,5,4,7,5,6,5,0,3,1,1,48}
+% \subsubsection{Gesamtbewertung}
+% \produktbewertung{Amazon~MSK}{11,5,4,7,5,6,5,0,3,1,1,48}
 % => binary protocol no \ac{MQTT} Support, redundant, only Lambda and EC2 conenctivity
 
 % \subsection{AWS Glue}
@@ -339,17 +339,20 @@ Lambda: Maximal 10.000 Events
 
 \subsection{Produktauswahl}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-Platz & Name & Summe \\ \hline
-1 & AWS Lambda & \cellcolor[HTML]{DAE8FC}52 \\ \hline
-% 2 & AWS Glue & \cellcolor[HTML]{DAE8FC}49 \\ \hline
-3 & Amazon MSK & \cellcolor[HTML]{DAE8FC}48 \\ \hline
-4 & AWS IoT Events & \cellcolor[HTML]{DAE8FC}47 \\ \hline
-5 & Amazon Kinesis & \cellcolor[HTML]{DAE8FC}46 \\ \hline
-\end{tabular}
-\caption{Produktreihenfolge Echtzeitprodukte}
-\label{tab:Reihenfolge-Echtzeit}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|l|l|l|}
+% \hline
+% Platz & Name & Summe \\ \hline
+% 1 & AWS Lambda & \cellcolor[HTML]{DAE8FC}52 \\ \hline
+% % 2 & AWS Glue & \cellcolor[HTML]{DAE8FC}49 \\ \hline
+% 3 & Amazon MSK & \cellcolor[HTML]{DAE8FC}48 \\ \hline
+% 4 & AWS IoT Events & \cellcolor[HTML]{DAE8FC}47 \\ \hline
+% 5 & Amazon Kinesis & \cellcolor[HTML]{DAE8FC}46 \\ \hline
+% \end{tabular}
+% \caption{Produktreihenfolge Echtzeitprodukte}
+% \label{tab:Reihenfolge-Echtzeit}
+% \end{table}
+
+\input{content/04-produkte/vergleiche/echtzeit-vergleich}
+

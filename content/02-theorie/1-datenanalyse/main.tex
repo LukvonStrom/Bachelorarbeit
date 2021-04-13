@@ -13,16 +13,16 @@ In \autoref{abb:BeispielZeitreihe} findet sich beispielhaft die Zeitreihe der zw
 
 Die möglichen Anwendungen in der Informatik sind ebenfalls vielzählig. So können über virtuelle oder physikalische Sensoren Messwerte, wie beispielsweise die CPU Auslastung eines gegebenen Servers über die Zeit oder Temperaturmessungen eines \ac{IoT} Gerätes über die Zeit gemacht und gespeichert werden.
 
-Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne der Messfrequenz, in welcher Daten betrachtet werden. \Todo{belegen} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und die zeitliche Distanz zwischen einzelnen Messwerten ist gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte einmal am Tag gesammelt erhoben wurden.
+Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne der Messfrequenz, in welcher Daten betrachtet werden. \Todo{belegen} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und die zeitliche Distanz zwischen einzelnen Messwerten ist gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
 
 Es ist von zwei vorliegenden Typen von Zeitreihendaten auszugehen. Zum einen existiert der mit Zeitstempel versehene Messwert, welcher einen oder in manchen Fällen auch mehrere diskrete Messwerte mit Zeitstempel der Erfassung übermittelt. 
 Zum anderen existieren auch Ereignisse, welche keine Messwerte enthalten, sondern Ergebnisse einer Vorauswertung innerhalb des übermittelnden Systems sind. 
 So wäre ein Ereignis beispielsweise ein niedriger Batteriestand eines verbundenen Sensors. 
-Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zeitstempel oder periodisch mit Zeitstempel bis zum beheben der Ursache versendet. \Todo{belegen}
+Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zeitstempel oder periodisch mit Zeitstempel bis zum Beheben der Ursache versendet. \Todo{belegen}
 
 \subsection{Analysewert verarbeiteter Daten}
 
-Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempos einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die Entscheidungstempos sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen Entscheidungstempi respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
+Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempi einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die \hyphenation{Entscheidungstempi} sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen \hyphenation{Entscheidungstempi} respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
 
 % \footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012}
 % The value of data diminishes based on the cadence of decisions. Decision tempos are
@@ -34,7 +34,7 @@ Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentni
 
 
 
-Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \autoref{abb:DataHalflife} gezeigten Befragungsergebnisse von \citeauthor{NucleusResarchInc..2012}, Daten nach maximal 30 Minuten die Hälfte des Wertes eingebüßt.\footcite[Vgl. auch im Folgenden][6]{NucleusResarchInc..2012} Für operative Entscheidungstempi ist die durchschnittliche Halbwertszeit nach acht Stunden erreicht, für strategische Entscheidungstempi nach ca. 56 Stunden, also nach über 2 Tagen.
+Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \autoref{abb:DataHalflife} gezeigten Befragungsergebnisse von \citeauthor{NucleusResarchInc..2012}, Daten nach maximal 30 Minuten die Hälfte des Wertes eingebüßt.\footcite[Vgl. auch im Folgenden][6]{NucleusResarchInc..2012} Für operative \hyphenation{Entscheidungstempi} ist die durchschnittliche Halbwertszeit nach acht Stunden erreicht, für strategische \hyphenation{Entscheidungstempi} nach ca. 56 Stunden, also nach über 2 Tagen.
 
 
 
@@ -45,7 +45,7 @@ Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \aut
 \label{abb:DataHalflife}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{NucleusResarchInc..2012}}
-Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträumen, in denen die erhobenen Daten den höchsten Wert haben, ergibt sich die Notwendigkeit von verschiedenen Datenverarbeitungsstrategien, um entsprechend strategischen, taktischen und operativen Entscheidenden die werthaltigsten Daten als Entscheidungsgrundlage zu präsentieren.
+Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträumen, in denen die erhobenen Daten den höchsten Wert haben, ergibt sich die Notwendigkeit von verschiedenen Datenverarbeitungsstrategien, um entsprechend taktischen, operativen oder strategischen  Entscheidenden die werthaltigsten Daten als Entscheidungsgrundlage zu präsentieren.
 
 \subsection{Arten der Auswertung}\label{chap:auswertungsarten}
 Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die jeweilige Referenzarchitektur und die verwendeten Dienste fähig sind. Im Folgenden werden dazu einige einfachere Auswertungsmethoden für Zeitreihendaten vorgestellt. Die Zeitreihenanalyse und einsetzbare Werkzeuge werden im statistischen Sinn von weiterführenden Werken, wie von \citeauthor{Shumway.2017} behandelt. Es ist davon auszugehen, dass auch weiterführende Auswertungen wie fourieranalytischen Methoden, sofern in der jeweiligen Umgebung bereits vorhanden oder programmierbar, eingesetzt werden können.
@@ -55,7 +55,7 @@ Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die je
 Eine der wichtigsten statistischen Lageparameter sind die Quantile eines Datensatzes und der Median, welcher ein spezielles, 50 prozentiges Quantil ist. 
 Innerhalb eines gewissen Betrachtungsfensters können für Zeitreihendaten, wie für viele andere Datensätze auch, Quantile und der Median erfasst werden. 
 Das Quantil erfasst mit der jeweiligen Prozentangabe und dem zugehörigen, ermittelten Wert die Grenze an Werten, die kleiner sind. 
-Bei einem 75-\%-Quantil von zwei wären entsprechend nur 25\% der sich im Datensatz befindlichen Daten größer als zwei. 
+Bei einem 75-\%-Quantil von $2$ wären entsprechend nur 25\% der sich im Datensatz befindlichen Daten größer als $2$. 
 Da ein Median das 50-\%-Quantil ist, bildet der Median entsprechend die Grenze ab, bei welcher 50\% der Werte im Datensatz kleiner und der Rest größer ist. In \autoref{abb:quantile} sind das 25, 50 und 75-\%-Quantil auf einer modifizierten Sinusfunktion gezeigt.
 \begin{figure}[H]
 \centering
@@ -81,8 +81,8 @@ Gängig in der Datenanalyse als Sonderform der Quantile sind die sogenannten Per
 
 \subsubsection{Anomaliedetektion}
 Eine weitere gängige Datenanalysemethode ist die Anomaliedetektion. 
-Dabei kann als Anomalie jeder Datenpunkt gesehen werden, der die Komplexität eines Modells, welches die Daten beschreibt substantiell erhöhen würde.\footcite[Vgl.][]{Guha.2016} Verwandt ist dabei das Feld der \enquote{Ausreissererkennung}/outlier detection. 
-Verwendet werden können dabei diverseste Methodiken. Innerhalb von \ac{AWS} Produkten wird zur Anomalieerkennung ein Algorithmus basierend auf Random Cut Forest verwendet.\footcite[Vgl.][1]{Guha.2016} Weitere Methodiken wären aber auch Random Walk oder Logik basierend auf Standardannahmen.\footcite[Vgl.][]{Moonesinghe.2006}\nzitat\footcite[Vgl.][]{Angiulli.2008} Anomalien können kausal mit unterliegenden Problemen z.B. des Sensors zusammenhängen, weshalb es wichtig ist, auch abseits von den in \autoref{chap:schwellwert} gezeigten Schwellwertüberprüfungen die Daten auf Anomalien zu prüfen.
+Dabei kann als Anomalie jeder Datenpunkt gesehen werden, der die Komplexität eines Modells, welches die Daten beschreibt, substantiell erhöhen würde.\footcite[Vgl.][]{Guha.2016} Verwandt ist dabei das Feld der \enquote{Ausreissererkennung}/outlier detection. 
+Verwendet werden können dabei diverse Methodiken. Innerhalb von \ac{AWS} Produkten wird zur Anomalieerkennung ein Algorithmus basierend auf Random Cut Forest verwendet.\footcite[Vgl.][1]{Guha.2016} Weitere Methodiken wären aber auch Random Walk oder Logik basierend auf Standardannahmen.\footcite[Vgl.][]{Moonesinghe.2006}\nzitat\footcite[Vgl.][]{Angiulli.2008} Anomalien können kausal mit unterliegenden Problemen z.B. des Sensors zusammenhängen, weshalb es wichtig ist, auch abseits von den in \autoref{chap:schwellwert} gezeigten Schwellwertüberprüfungen die Daten auf Anomalien zu prüfen.
 
 \begin{figure}[H]
 \centering
@@ -134,7 +134,9 @@ Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, si
     \begin{axis}[
     xlabel=betrachtete Tage im Januar 2021,
     ylabel=Preis in \$,
-    legend pos=outer north east]
+    legend pos={outer north east},
+    legend cell align={left}
+]
         \addplot coordinates {
         	(25, 159.18)
         	(26, 150)
@@ -163,7 +165,7 @@ Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, si
         \addplot coordinates {
         (29,	317.232)
         };
-        \legend{Tageshöchstwerte von \$GME,gleitender Durchschnitt (Intervall: 2), gleitender Durchschnitt (Intervall: 3),gleitender Durchschnitt (Intervall: 4),gleitender Durchschnitt (Intervall: 5)};
+        \legend{Höchstwerte(\$) der Gamestop Aktie,Intervall - 2 Tage,Intervall - 3 Tage,Intervall - 4 Tage,Intervall - 5 Tage};
     \end{axis}
 \end{tikzpicture}
 \caption{Gleitender Durchschnitt des Tageshöchstwertes eines Aktienkurses}
@@ -188,7 +190,7 @@ Im Bereich der Streamingarchitekturen gibt es bereits etabblierte Referenzarchit
 \footnotetext{Mit Änderungen entnommen aus: \cite[][28]{Marz.2015}}
 % Lambda nach \citeauthor{Marz.2015}, siehe \footcite[Vgl.][28]{Marz.2015}
 
-Die von \citeauthor{Marz.2015} vorgestellte $\lambda$/Lambda-Architektur, welche in \autoref{abb:LambdaStreaming} gezeigt wird ist dabei eine der sehr bekannten Referenzarchitekturen. 
+Die von \citeauthor{Marz.2015} vorgestellte $\lambda$/Lambda-Architektur, welche in \autoref{abb:LambdaStreaming} gezeigt wird, ist dabei eine der sehr bekannten Referenzarchitekturen. 
 Der Name ist dabei nicht mit dem \ac{AWS} Dienst Lambda zu verwechseln, sondern ist wohl auf den gedrehten Buchstaben $\lambda$ zurückzuführen, also \reflectbox{\rotatebox[origin=c]{270}{$\lambda$}}.\footcite[Vgl. auch im Folgenden][]{Berle.27.11.2017} Die $\lambda$-Architektur sieht ausgehend von den hereingeladenen Daten zwei verschiedene Wege für die Daten vor. 
 Zum einen den \enquote{Speed Layer}, welcher Daten direkt nach Eingang verarbeitet und nicht im Layer selbst speichert, sondern nur Aggregate oder Ergebnisse zur Verfügung stellt. Zum anderen gibt es den \enquote{Batch layer}, in welchem Daten zuerst in einem Master dataset gespeichert werden und dann in einem festen Intervall (\enquote{Batch jobs}) ausgewertet werden. 
 Verschiedene Datenverarbeitungsintervalle machen speziell im Sinne der verschiedenen, in \autoref{abb:DataHalflife} gezeigten, Datenhalbwertszeiten Sinn. So sind manche Auswertungen, die präzise historische Daten benötigen, in einem Batch layer besser möglich als in einem speed layer. Der speed layer bietet dagegen durch die Geschwindigkeit der Auswertungen die Möglichkeit, agil auf erkannte Ereignisse oder Veränderungen im Generellen zu reagieren.
@@ -197,14 +199,14 @@ Verschiedene Datenverarbeitungsintervalle machen speziell im Sinne der verschied
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Kappa-Reference-Architecture.pdf}
-\caption[Die $\kappa$-Datenstreaming Referenzarchitetktur]{Die $\kappa$-Datenstreaming Referenzarchitetktur.\footnotemark}
+\caption[Die $\kappa$-Datenstreaming Referenzarchitetktur]{Die $\kappa$-Datenstreaming Referenzarchitektur.\footnotemark}
 \label{abb:KappaStreaming}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Kreps.2014}, \cite{Berle.27.11.2017}}
 
 Die $\kappa$/Kappa Referenzarchitektur von \citeauthor{Kreps.2014}, dargestellt in \autoref{abb:KappaStreaming} basiert auf der $\lambda$-Architektur, spart jedoch den \enquote{Batch layer} mit zugehörigen \enquote{Batch jobs} aus. 
 Das Konzept von Master Data existiert dabei weiterhin, jedoch in Form von Nachrichten, die in einem Messagebroker gespeichert werden. Analysen werden in Form von einzeln versionierten Jobs über die vorhandenen Werte erstellt. 
-Wird die Analyse in irgendeiner Weise verändert (z.B. durtch Codeanpassungen) werden alle zwischengespeicherten Nachrichten erneut durch eine neue, unveränderliche Version des Jobs analysiert. Diese Unveränderlichkeit hat den Vorteil, dass keine unerwünschten Seiteneffekte durch Analysen, die gegenseitig Ergebnisse überschreiben auftreten. 
+Wird die Analyse in irgendeiner Weise verändert (z.B. durch Codeanpassungen) werden alle zwischengespeicherten Nachrichten erneut durch eine neue, unveränderliche Version des Jobs analysiert. Diese Unveränderlichkeit hat den Vorteil, dass keine unerwünschten Seiteneffekte durch Analysen, die gegenseitig Ergebnisse überschreiben auftreten. 
 
 % Kappa nach \citeauthor{Kreps.2014},
 % siehe \footcite[Vgl.][]{Kreps.2014}
@@ -220,7 +222,7 @@ Wird die Analyse in irgendeiner Weise verändert (z.B. durtch Codeanpassungen) w
 \footnotetext{Mit Änderungen entnommen aus: \cite{Kreps.2014}}
 
 %\ac{OLAP}
-Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen, welche ein klassisches \ac{OLAP} Szenario aufzeigt. \Todo{Codd zitieren} Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditionellen Analytics weit verbreitet, bietet jedoch womöglich wichtige Einsichten erst nachdem die Datenhalbwertszeit bereits überschritten wurde.
+Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen, welche ein klassisches \ac{OLAP} Szenario aufzeigt. \Todo{Codd zitieren} Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditionellen Analytics weit verbreitet, bietet jedoch womöglich wichtige Einsichten erst, nachdem die Datenhalbwertszeit bereits überschritten wurde.
 
 % \Todo{Grafik Data Analytics Pipeline}
 % \begin{figure}[H]
