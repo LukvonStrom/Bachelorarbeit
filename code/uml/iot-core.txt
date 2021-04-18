@@ -1,0 +1,4 @@
+@startuml
+"IoT Core"->Verarbeitender: Daten
+Verarbeitender->Benachrichtigung: Alarmierung
+@enduml
