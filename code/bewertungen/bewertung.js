@@ -49,6 +49,13 @@ for (let { name, content } of vergleiche) {
         return produktObj
     }).sort((a, b) => (a.values.Summe < b.values.Summe) ? 1 : ((b.values.Summe < a.values.Summe) ? -1 : 0));
 
+    if(name !== "beispiel"){
+        console.log(capitalizeFirstLetter(name))
+    console.log(final.map(e => e.Produkt.replace(/\~/g, ' ')+ ":" + e.values.Summe.replace('\\cellcolor[HTML]{ECF4FF}', '')).join(', '))
+    console.log()
+    }
+    
+
     let rows = [];
     let headerstr = [`\\multicolumn{1}{|c|}{Kriterium}`, `\\multicolumn{1}{c!{\\vrule width 2pt}}{\\begin{tabular}[c]{@{}c@{}}max.\\\\Punkte\\end{tabular}}`];
     for (let { Produkt } of final) {
@@ -62,9 +69,16 @@ for (let { name, content } of vergleiche) {
         let beginning = [];
         beginning.push(mapping[key])
         beginning.push(max[key])
-        for (let { values } of final) {
+        for (let { Produkt, values } of final) {
             if (values[key] || typeof values[key] === 'number') {
-                beginning.push(values[key])
+                if(values[key] > max[key]){
+                    throw new Error(key+ " of " + Produkt + " is exceeding max range")
+                }
+                if (key === "Summe") {
+                beginning.push('\\textbf{'+values[key]+'}')
+                }else{
+                    beginning.push(values[key]) 
+                }
             }
         }
         let string = beginning.join(" & ");

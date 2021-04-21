@@ -1,5 +1,4 @@
 {
-  "size": 0,
   "aggs": {
     "load_time_outlier": {
       "percentiles": {

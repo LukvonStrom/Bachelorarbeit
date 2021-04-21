@@ -27,21 +27,37 @@ Zusätzlich haben sich folgende Anforderungen ergeben:
 \end{itemize}
 
 \section{Echtzeitverarbeitung}
-\textbf{Noch nicht final, soll zeigen wie es mal werden soll}
+\subsection{Ablauf}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/echtzeit-ra.pdf}
+\caption{Sequenzdiagramm}
+\label{abb:SequenceEchtzeitRA}
+\end{figure}
+
+\subsection{Interagierende Elemente}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Echtzeit-RA-Overview.pdf}
 \caption{Top Level View Referenzarchitektur}
 \label{abb:TopLevelEchtzeitRA}
 \end{figure}
+Variationspunkt 1: Rohdaten in \ac{S3} zu speichern kann Sinn machen, um die Daten später noch einmal analysieren zu können. Nimmt man aber die Theorie der Datenhalbwertszeit zur Hilfe, macht es vielleicht Sinn die Daten statdessen maximal 48h in Kinesis zwischenzuspeichern und auf \ac{S3} zu verzichten.
 
+Variationspunkt 2: \ac{DMS} ist in diesem Szenario dafür gedacht, einmal abgelegte Daten in S3 wieder in Kinesis Data Streams einspielen zu können. Je nach Szenario macht das, wie bei Variationspunkt 1 schon erläutert, wenig Sinn.
+
+Variationspunkt 3: QuickSight als \ac{AWS} native Dashboardlösung ist gut geeignet, um schnell Übersicht in Datenanalysen aus Kinesis Data Analytics zu bekommen. Alternativ können auch andere Visualisierungslösungen wie Tableau eingesetzt werden, welche gegebenenfalls jedoch nicht auf Kinesis Data Analytics zugreifen können. In solch einem Fall kann es Sinn machen, den aus Variationspunkt 1 bekannten \ac{S3} Bucket aufzusetzen, um Dashboards über die Rohdaten erstellen zu können.
+
+\subsection{Interagierende Elemente - Ebene 2}
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.33\textheight]{graphics/Echtzeit-RA-Elements.pdf}
 \caption{Interagierende Dienstelemente}
 \label{abb:ElementeEchtzeitRA}
 \end{figure}
+Variationspunkt 1: Die Anzahl an Shards ist esentiell für die Performance von Kinesis Data Streams. Für Workloads mit einem vorhersehbaren Workload ist eine Preis/Leistungs optimale Anzahl an Shards zu ermitteln und zu konfigurieren. Wenn der Workload nicht vorhersehbar ist oder schnell skalieren können soll, sind Alarme im AWS eigenen Monitoring Tool CloudWatch zu erstellen. Im Beispielusecase für die Kostenschätzung wäre beispielsweise ein einziger Shard (1MiB/Sekunde, 1000 Nachrichten eingehend) ausreichend, da Nachrichten mit einer Größe von 1KB, also \~1KiB geschrieben werden, bei einem Maximum von 200 pro Sekunde und einem Konsumenten. Es ist besonders auf die \enquote{WriteProvisionedThroughputExceeded} Metrik zu achten, welche bei höheren Werten anzeigt, dass das Hinzufügen von zusätzlichen Shards angebracht wäre. Ebenfalls ist die Metrik \enquote{Incoming Records} zu beachten. Verändert diese sich, deutet das auf einen Fehler im vorgelagerten \AWSIOT Core oder in einem Teil der Datenlieferanten hin.
 
+Variationspunkt 2: Der \ac{SQL} Programmcode, der in Kinesis Data Analytics läuft ist anzupassen. So sind Verarbeitungsfenster, Attributsnamen und aufgerufene Funktionen nach Anforderung zu ändern. Andernfalls kann auch die Funktionalität zur Ausführung eigenen Codes via Apache Flink in Kinesis Data Analytics genutzt werden (dies erlaubt Ausführung von Java, Scala, Python).
 
 
 \section{Batch Verarbeitung}

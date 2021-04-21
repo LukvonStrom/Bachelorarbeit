@@ -49,19 +49,23 @@ Timestream ist momentan noch nicht in Frankfurt verfügbar, weshalb die Kosten i
 %  Angenommen 8.640.000 (8,64 GB)/Monat 0,012GB/h 4,885056
 % Abfrage: 25,92 GB
 
-Ausgehend von dem beschriebenen Szenario lässt sich nicht genau errechnen, welche Datenmenge von den Anfragen genau erfasst wird. Dies ist dem Fakt geschuldet, dass Timestream die Daten optimiert abspeichert und nur den tatsächlichen Messwert speichert. Numerische Daten können als 32-bit int, als 64bit BigInt oder als 64bit double gespeichert werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.r}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.q} Wenn dazu ein String für die Sensorid im Stile \enquote{Sensor-123} angenommen wird, der 19 bytes zur Darstellung benötigt und der Zeitstempel addiert wird, der 8 bytes benötigt, ergibt sich eine Speicherbelegung von 91 Bytes. Speicherkosten werden aber bei Werten unter einem Kilobyte auf einen Kilobyte hochgerundet, weshalb dies in der Speicherrechnung keine Beachtung findet. Wenn man weitere Optimierungen, die die Abfrageengine mach,t außer Acht lässt, muss mit 0,78624GB pro abgefragtem Monat gerechnet werden.
+Ausgehend von dem beschriebenen Szenario lässt sich nicht genau errechnen, welche Datenmenge von den Anfragen genau erfasst wird. Dies ist dem Fakt geschuldet, dass Timestream die Daten optimiert abspeichert und nur den tatsächlichen Messwert speichert. Numerische Daten können als 32-bit int, als 64bit BigInt oder als 64bit double gespeichert werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.r}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.q} Wenn dazu ein String für die Sensorid im Stile \enquote{Sensor-123} angenommen wird, der 19 bytes zur Darstellung benötigt und der Zeitstempel addiert wird, der 8 bytes benötigt, ergibt sich eine Speicherbelegung von 91 Bytes. Speicherkosten werden aber bei Werten unter einem Kilobyte auf einen Kilobyte hochgerundet, weshalb dies in der Speicherrechnung keine Beachtung findet. Wenn man weitere Optimierungen, die die Abfrageengine macht außer Acht lässt, muss mit 0,78624GB pro abgefragtem Monat gerechnet werden.
 
-\Todo{Lambda Orchestration hinzufügen}
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
 Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
-Schreibzugriffe & 0,5654/Mio./KB & 4,885056 \\ \hline
-\begin{tabular}[c]{@{}l@{}}\ac{RAM} \\ Speicherung\end{tabular} & 0,0407/GB/h & 0,351648 \\ \hline
-\begin{tabular}[c]{@{}l@{}}Festplatten\\ Speicherung\end{tabular} & 0,0339/GB/Monat & 0,878688 \\ \hline
-Anfragen & \begin{tabular}[c]{@{}l@{}}0,011308/GB \\ abgefragt\end{tabular} & 25,6055095296 \\ \hline
-Summe & \cellcolor[HTML]{EFEFEF} & 31,7209015296 \\ \hline
+Schreibzugriffe & 0,5654/Mio./KB & 4,8851 \\ \hline
+\begin{tabular}[c]{@{}l@{}}\ac{RAM} \\ Speicherung\end{tabular} & 0,0407/GB/h & 0,3516 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Festplatten\\ Speicherung\end{tabular} & 0,0339/GB/Monat & 0,8787 \\ \hline
+Anfragen & \begin{tabular}[c]{@{}l@{}}0,011308/GB \\ abgefragt\end{tabular} & 25,6055 \\ \hline
+Step Functions & \begin{tabular}[c]{@{}l@{}}0,025/1000 \\ Zustandsübergänge\end{tabular} &  1,08\\ \hline
+Lambda Ausführungen & 0,0000002/Ausführung & 0,0002 \\ \hline
+Lambda \ac{RAM} & 0,0000000167/GB-Sekunde & 0,08 \\ \hline
+\ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & 0,02 \\ \hline
+Summe & \cellcolor[HTML]{EFEFEF} & 32,9011 \\ \hline
 \end{tabular}
 \caption{Kostenvergleich AWS~Timestream}
 \label{tab:kostenvergleich-AWS~Timestream}
@@ -205,7 +209,6 @@ Dies kann gewichtet oder ungewichtet erfolgen.
 
 \subsubsection{Kostenvergleich}
 Der \ac{AWS} OpenSearch Service wird auf unterliegenden \ac{EC2} Instanzen betrieben und wie diese in gewissen Klassen abgerechnet. Dabei stehen sowohl OnDemand Abrechnugsmodelle wie auch reservierte Kapazität zur Verfügung.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.w} Zusätzlicch steht mit \enquote{UltraWarm} eine besondere Instanzklasse zur Verfügung, welche für das Vorhalten großer Datenmengen konzipiert ist. Zusätzlich zu den Instanzen wird noch der verbrauchte \ac{EBS}-Speicherplatz abgerechnet. Dieser Speicherplatz kann in der Standard Klasse oder speziell für hohen Datendurchsatz (provisionierte \ac{IOPS}) gebucht werden. Der Speicherplatz für UltraWarm wird aber nicht via \ac{EBS} abgerechnet, sondern separat. Ebenfalls steht wieder ein \enquote{Free Tier} zur Verfügung, welches aus Vergleichsgründen nicht in die Berechnung einfliessen soll. Aus Vergleichsgründen kommen nur OnDemand abgerechnete Instanzen für den Vergleich in Frage. Für Vergleichszwecke soll eine t3.medium.elasticsearch Instanz geschätzt werden, welche mit 2 vCPUs und 4 GiB \ac{RAM} ausgestattet ist. Der provisionierte \ac{EBS}-Speicherplatz soll bei 10GB liegen.
-
 Benachrichtigungen werden über die native Integration von Kibana (Name nach Umbenennung: OpenSearch Dashboards) und \ac{SNS} abgewickelt, wobei Kibana die Wertüberwachung übernimmt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.x}
 
 \begin{table}[H]
@@ -227,8 +230,17 @@ Summe & \cellcolor[HTML]{EFEFEF} & 62,95\\ \hline
 
 \subsection{Produktauswahl}
 Der von \citeauthor{Tan.2019} konstatierte Preisvorteil von Redshift gegenüber Athena hat sich in dem durchgeführten Vergleich nicht gezeigt.\footcite[Vgl.][2178\psq]{Tan.2019} Dies könnte womöglich dem Fakt geschuldet sein, dass die Datenmengen der Studie einen \enquote{Break-even} Punkt überschritten haben, an dem das Athena Abrechnungsmodell im Vorteil gegenüber Redshift war.
-
 Die Performance der verglichenen Produkte variierte aufgrund verschiedener unterliegender Faktoren, wie beispielsweise provisionierter Leistung oder der Optimierung für spezifische Anfragen, was andere Anfragen verlangsamte. Letzten Endes ist es fraglich, ob \ac{OLAP} Analysen, die zeitgesteuert erstellt werden eine garantierte Performance im Sub-Sekunden Bereich brauchen, oder ob es reicht, die Analyse in längerer Zeit zu erledigen, da die Daten sowieso zeitversetzt sind.
+Übertragbare Produkte sind Amazon OpenSearch und Amazon Athena. OpenSearch, welches größtenteil Kompatibilität zu ElasticSearch hat (mit Ausnahme des Amazon eigenen Anomalieeerkennungsplugins) kann mit Anpassungen mit dem ElasticSearch Code in anderen Public Clouds verwendet werden. Da Athena auf Presto basiert, sind Abfragen kompatibel und portabel. Dies erfordert entsprechende Unterstützung für Presto in der Zielcloud oder eine eigene Installation.
+Bei den verglichenen Dioensten handelt es sich mit Ausnahme von OpenSearch um von Amazon teilweise oder komplett entwickelte properitäre Dienste, weshalb die Integration mit anderen \ac{AWS} Dienstleistungen gegeben ist. Auch OpenSearch wird mittlerweile, als Fork von Elasticsearch, hauptsächlich von \ac{AWS} betreut und ist bereits gut mit anderen Dienstleistungen integriert.
+Auch wenn die verglichenen Datenbankdienste für jeweils individuelle Zwecke entwickelt wurden, sind sie doch generalisiert für mehrere Usecases verwendbar und erweiterbar.
+Im Bereich Fehlertransparenz gab es Abzug für Athena, da fehlschlagende Abfragen nur mit generischen Fehlermeldungen beantwortet werden, was die Fehlersuche erschwert.
+Punktabzüge im Wartungsaufwand und der Skalierbarkeit gab es für die auf Instanzen basierenden Dienste OpenSearch und Redshift, welche durch die von Nutzenden vorzunehmende vertikale Skalierung einen höheren Wartungs- und Überprüfungsaufwand fordern, als Timestream und Athena, die verwaltet sind.
+Die Gesamtkosten scheinen bei Redshift zumindest im vorliegenden Fall, ohne konkrete Optimierungen besonders hoch zu sein, genauso wie bei Athena. Kostenführer ist Timestream, gefolgt von OpenSearch Service.
+Alle verglichenen Dienste können die Auswertungen in angemessener Zeit anfertigen. 
+Athena hat Punktabzüge im Bereich Robustheit \& Fehlertoleranz, da ein sich veränderndes Datenschema zu schwerwiegenderen Problemen führen kann.
+Alle Dienstleistungen bieten die gewünschten Auswertungen an, wenn auch über teilweise unterschiedliche Implementierungen, was toleriert werden kann.
+
 
 \input{content/04-produkte/vergleiche/batch-vergleich}
 

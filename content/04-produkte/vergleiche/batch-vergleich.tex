@@ -2,20 +2,20 @@
     \centering
     \begin{tabular}{|l|l!{\vrule width 2pt}l|l|l|l|}
     \hline
-\multicolumn{1}{|c|}{Kriterium} & \multicolumn{1}{c!{\vrule width 2pt}}{\begin{tabular}[c]{@{}c@{}}max.\\Punkte\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Timestream\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Redshift\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Athena\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Elasticsearch\end{tabular}} \\ \hline
-     \begin{tabular}[c]{@{}l@{}}Übertragbarkeit zwischen \\ Clouds (ISO 9126)\end{tabular} & 1 & 1 & 1 & 1 & 1 \\ \hline
-     \begin{tabular}[c]{@{}l@{}}Integration mit anderen \\ \ac{AWS} Diensleistungen\end{tabular} & 3 & 1 & 1 & 1 & 1 \\ \hline
-     Generalisierung & 4 & 1 & 1 & 1 & 1 \\ \hline
-     Erweiterbarkeit & 4 & 1 & 1 & 1 & 1 \\ \hline
-     \begin{tabular}[c]{@{}l@{}}Fehlertransparenz/ \\ Debugability\end{tabular} & 5 & 1 & 1 & 1 & 1 \\ \hline
-     \begin{tabular}[c]{@{}l@{}}geringer \\ Wartungsaufwand\end{tabular} & 7 & 1 & 1 & 1 & 1 \\ \hline
-     \begin{tabular}[c]{@{}l@{}}Skalierbarkeit \& \\ \enquote{serverlessness}\end{tabular} & 7 & 1 & 1 & 1 & 1 \\ \hline
-     Kosten & 7 & 1 & 1 & 1 & 1 \\ \hline
-     Performancegarantien & 8 & 1 & 1 & 1 & 1 \\ \hline
-     \begin{tabular}[c]{@{}l@{}}Robustheit \& \\ Fehlertoleranz\end{tabular} & 9 & 1 & 1 & 1 & 1 \\ \hline
-     \begin{tabular}[c]{@{}l@{}}Auswertungen \\ (\autoref{chap:auswertungsarten}) \end{tabular} & 11 & 1 & 1 & 1 & 1 \\ \hlinewd{2pt}
+\multicolumn{1}{|c|}{Kriterium} & \multicolumn{1}{c!{\vrule width 2pt}}{\begin{tabular}[c]{@{}c@{}}max.\\Punkte\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Timestream\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\OpenSearch\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Athena\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Amazon\\Redshift\end{tabular}} \\ \hline
+     \begin{tabular}[c]{@{}l@{}}Übertragbarkeit zwischen \\ Clouds (ISO 9126)\end{tabular} & 1 & 0 & 1 & 1 & 0 \\ \hline
+     \begin{tabular}[c]{@{}l@{}}Integration mit anderen \\ \ac{AWS} Diensleistungen\end{tabular} & 3 & 3 & 3 & 3 & 3 \\ \hline
+     Generalisierung & 4 & 4 & 4 & 4 & 4 \\ \hline
+     Erweiterbarkeit & 4 & 4 & 4 & 4 & 4 \\ \hline
+     \begin{tabular}[c]{@{}l@{}}Fehlertransparenz/ \\ Debugability\end{tabular} & 5 & 5 & 5 & 4 & 5 \\ \hline
+     \begin{tabular}[c]{@{}l@{}}geringer \\ Wartungsaufwand\end{tabular} & 7 & 7 & 5 & 7 & 5 \\ \hline
+     \begin{tabular}[c]{@{}l@{}}Skalierbarkeit \& \\ \enquote{serverlessness}\end{tabular} & 7 & 7 & 5 & 7 & 5 \\ \hline
+     Kosten & 7 & 7 & 6 & 5 & 4 \\ \hline
+     Performancegarantien & 8 & 8 & 8 & 8 & 8 \\ \hline
+     \begin{tabular}[c]{@{}l@{}}Robustheit \& \\ Fehlertoleranz\end{tabular} & 9 & 9 & 9 & 6 & 9 \\ \hline
+     \begin{tabular}[c]{@{}l@{}}Auswertungen \\ (\autoref{chap:auswertungsarten}) \end{tabular} & 11 & 11 & 11 & 11 & 11 \\ \hlinewd{2pt}
      \rowcolor[HTML]{ECF4FF}
-     Summe & 66 & \cellcolor[HTML]{ECF4FF}11 & \cellcolor[HTML]{ECF4FF}11 & \cellcolor[HTML]{ECF4FF}11 & \cellcolor[HTML]{ECF4FF}11 \\ \hline
+     Summe & 66 & \textbf{\cellcolor[HTML]{ECF4FF}65} & \textbf{\cellcolor[HTML]{ECF4FF}61} & \textbf{\cellcolor[HTML]{ECF4FF}60} & \textbf{\cellcolor[HTML]{ECF4FF}58} \\ \hline
 \end{tabular}
 \caption{Bewertungsmatrix~Batch}
 \label{tab:bewertungsmatrix-batch}

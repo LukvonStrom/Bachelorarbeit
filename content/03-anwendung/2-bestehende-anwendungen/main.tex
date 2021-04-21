@@ -1,8 +1,5 @@
-\section{Anwendungsfälle}
-In diesem Unterkapitel werden die bestehenden Anwedungsfälle erläutert, welche innerhalb der SPIRIT/21 Daten zur Analyse liefern können.
-%\subsection{Luftqualitätssensoren}
 
-\subsection{Raumklimamonitoring}
+\section{Raumklimamonitoring}
 Innerhalb des Hauptsitzes der SPIRIT/21 in Böblingen wurden im Rahmen der Covid-19 Bekämpfung Raumklimasensoren in allen Besprechungsräumen installiert, welche kontinuierlich die \coo{}-Konzentration der Raumluft messen. Die \coo{}-Konzentration dient dabei laut aktueller Studienlage als Messhilfe für die Konzentration von möglichen Virenaerosolen im Raum und zur Lüftungsindikation, wenn ein kritischer Wert überschritten wird.\footcite[Vgl.][]{Hartmann.2020}\nzitat\footcite[Vgl.][]{Peng.2020} Zur Messung wurden die \enquote{ERS-\coo{}} Sensoren von Elsys in den Besprechungsräumen installiert. Zum Zeitpunkt der Fertistellung dieser Arbeit existieren 8 Sensoren in Besprechungsräumen in Böblingen. Die Daten werden mittels dem Funkstandard \ac{LoRaWAN} an ein Gateway gesendet, welches die Daten mittels \ac{MQTT} an ein Backend, wie beispielsweise die Open Source Low-Code Plattform Node-Red übermittelt. 
 
 \begin{table}[H]
@@ -34,7 +31,7 @@ Nach Übermittlung in das Backend haben die Daten das in \autoref{tab:data-schem
 % Raum München
 % Raum Wien
 
-\subsection{Sensor Simulator}\label{chap:iotdevicesim}
+\section{Sensor Simulator}\label{chap:iotdevicesim}
 Mithilfe von Node-Red und der Erweiterung (in der Plattform auch \enquote{Knoten} genannt) \enquote{iot-device-simulator-1-mqtt} des Github Nutzenden phyunsj\footnote{Siehe auch \url{https://github.com/phyunsj/iot-device-simulator-1-mqtt}} kann ein \ac{IoT} Sensor simuliert werden, welcher in beliebiger Frequenz verschiedene Werte in festgelegten Bereichen generiert. Diese Werte bieten bei höherer Frequenz einen Anhaltspunkt, wie sich die Lösungen unter Last verhalten.
 \begin{figure}[H]
 \centering

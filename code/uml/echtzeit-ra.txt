@@ -1,0 +1,34 @@
+@startuml
+autonumber
+skinparam maxMessageSize 90
+boundary Sensor
+entity "IoT Core\nBroker"
+database "Simple\nStorage\nService"
+database "Kinesis\nData\nStreams"
+control "Kinesis\nData\nAnalytics"
+
+== Dateneinspeisung ==
+loop
+    Sensor -> "IoT Core\nBroker" : Messwerte
+    "IoT Core\nBroker" -> Sensor : OK
+end
+== Datenpersistenz ==
+loop
+"IoT Core\nBroker" -> "Simple\nStorage\nService" : Persistierung der Daten
+end
+== Datenanalyse ==
+group Übertragung
+"IoT Core\nBroker" -> "Kinesis\nData\nStreams" : Übertragung
+    loop
+        "Kinesis\nData\nStreams" -> "Kinesis\nData\nAnalytics" : Übertragung
+        "Kinesis\nData\nAnalytics" -> "Kinesis\nData\nStreams" : Nachfrage
+    end
+end
+group Analyse
+loop
+"Kinesis\nData\nAnalytics" -> "Kinesis\nData\nAnalytics" : Vergleich mit alten Werten
+end
+"Kinesis\nData\nAnalytics" --> "Simple\nNotification\nService" : Alarmierung
+"Kinesis\nData\nAnalytics" --> "QuickSight" : Visualisierung
+end
+@enduml

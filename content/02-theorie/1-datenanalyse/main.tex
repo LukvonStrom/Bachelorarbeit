@@ -70,7 +70,7 @@ Da ein Median das 50-\%-Quantil ist, bildet der Median entsprechend die Grenze a
         \addplot {0.5899082};
         \addplot {1.2392493};
         \addplot {1.72939505};
-        \legend{$\sin(x-1.6)+1$,25-\%-Quantil,Median (50-\%-Quantil),75-\%-Quantil}
+        \legend{Messwerte,25-\%-Quantil,Median (50-\%-Quantil),75-\%-Quantil}
     \end{axis}
 \end{tikzpicture}
 \caption{Median und Quantile angewendet auf abgewandelte Sinusfunktion}
@@ -118,7 +118,7 @@ Bei vielen gemessenen und sonstig erfassten Zeitreihendaten, bei denen akzeptier
         \addplot {sin(deg(x-1.6))+1}; 
         \addplot {1.75};
         \draw [line width=0.8mm, black](axis cs:3,0) -- node[right]{Karenzzeit} (axis cs:3,2);
-        \legend{$\sin(x-1.6)+1$,Schwellwert ($1.75$)}
+        \legend{Messwerte,Schwellwert ($1.75$)}
     \end{axis}
 \end{tikzpicture}
 \caption{Schwellwertüberschreitung mit Karenzzeit einer Sinusfunktion}

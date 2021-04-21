@@ -24,7 +24,7 @@ Da die Notebooks unter Python laufen können und ebenfalls pandas einbinden kön
 \subsubsection{Performancevergleich}
 Die \ac{SLA} von \AWSIOT Analytics garantiert einzig die 99,9\% Verfügbarkeit im Monat.\footcite[Vgl.][]{AmazonWebServicesInc..2019f} Es gibt auch \enquote{softe} Limits, welche auf Anfrage hochgesetzt werden können, welche einen Durchsatz von maximal 100.000 Nachrichten pro Sekunde vorsehen.\footcite[Vgl][]{AmazonWebServicesInc..o.J.av} Einzig die Performance der Analytics Compute Units ist doch vertikale Skalierung, also eine größere Buchung von Compute Units durch Nutzende beeinflussbar.
 
-\Todo{Case Study finden}
+Bei \AWSIOT Analytics ist laut \ac{AWS} mit einer Latenz von Minuten oder Sekunden zu rechnen, was hoch ist im Vergleich zu Kinesis, wo mit Sekunden oder Milisekunden Latenz zu rechnen ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ax}
 
 \subsubsection{Kostenvergleich}
 In \autoref{tab:kostenvergleich-AWS~IoT~Analytics} sind die kalkulierten Preise nach gängiger Preismatrix dargestellt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.i} Die Nutzung von externen Ausführungsdiensten (z.B. StepFunctions/Lambda) für \ac{SQL}-Abfragen ist nicht notwendig, da die Abfragen im Dienst selbst terminiert werden können.
@@ -35,7 +35,7 @@ In \autoref{tab:kostenvergleich-AWS~IoT~Analytics} sind die kalkulierten Preise 
 Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
 Datenspeicherung (roh+verarbeitet)  & \begin{tabular}[c]{@{}l@{}}0,03/GB (verarbeitet) \\ 0,023 (roh)\end{tabular} & 7,77  \\\hline
 Anfragenbearbeitung & \begin{tabular}[c]{@{}l@{}}0,00634/GB\end{tabular} & 121,50 \\ \hline
-\begin{tabular}[c]{@{}l@{}}Eigene Analyselogik \\ 960 Abfragen * \\5 Sekunden\end{tabular}  & 0,36/h & 0,48  \\\hline
+\begin{tabular}[c]{@{}l@{}}Eigene Analyselogik \\ 960 Abfragen * 5 Sekunden\end{tabular}  & 0,36/h & 0,48  \\\hline
 Summe & \cellcolor[HTML]{EFEFEF} & \underline{129,75}  \\\hline
 
 \end{tabular}

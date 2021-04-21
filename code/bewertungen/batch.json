@@ -1,66 +1,66 @@
 [
     {
         "Produkt":"Amazon~Timestream",
-        "values":{
-            "Auswertungen":1,
-            "Performancegarantien":1,
-            "Robustheit & Fehlertoleranz":1,
-            "Skalierbarkeit & serverlessness":1,
-            "Kosten":1,
-            "geringer Wartungsaufwand":1,
-            "Fehlertransparenz":1,
-            "Erweiterbarkeit":1,
-            "Generalisierung":1,
-            "Integration mit AWS":1,
-            "Übertragbarkeit zwischen Clouds":1
+        "values": {
+            "Übertragbarkeit zwischen Clouds":0,
+            "Integration mit AWS":3,
+            "Generalisierung":4,
+            "Erweiterbarkeit":4,
+            "Fehlertransparenz":5,
+            "geringer Wartungsaufwand":7,
+            "Skalierbarkeit & serverlessness":7,
+            "Kosten":7,
+            "Performancegarantien":8,
+            "Robustheit & Fehlertoleranz":9,
+            "Auswertungen":11
         }
     },
     {
         "Produkt":"Amazon~Redshift",
-        "values":{
-            "Auswertungen":1,
-            "Performancegarantien":1,
-            "Robustheit & Fehlertoleranz":1,
-            "Skalierbarkeit & serverlessness":1,
-            "Kosten":1,
-            "geringer Wartungsaufwand":1,
-            "Fehlertransparenz":1,
-            "Erweiterbarkeit":1,
-            "Generalisierung":1,
-            "Integration mit AWS":1,
-            "Übertragbarkeit zwischen Clouds":1
+        "values": {
+            "Übertragbarkeit zwischen Clouds":0,
+            "Integration mit AWS":3,
+            "Generalisierung":4,
+            "Erweiterbarkeit":4,
+            "Fehlertransparenz":5,
+            "geringer Wartungsaufwand":5,
+            "Skalierbarkeit & serverlessness":5,
+            "Kosten":4,
+            "Performancegarantien":8,
+            "Robustheit & Fehlertoleranz":9,
+            "Auswertungen":11
         }
     },
     {
         "Produkt":"Amazon~Athena",
-        "values":{
-            "Auswertungen":1,
-            "Performancegarantien":1,
-            "Robustheit & Fehlertoleranz":1,
-            "Skalierbarkeit & serverlessness":1,
-            "Kosten":1,
-            "geringer Wartungsaufwand":1,
-            "Fehlertransparenz":1,
-            "Erweiterbarkeit":1,
-            "Generalisierung":1,
-            "Integration mit AWS":1,
-            "Übertragbarkeit zwischen Clouds":1
+        "values": {
+            "Übertragbarkeit zwischen Clouds":1,
+            "Integration mit AWS":3,
+            "Generalisierung":4,
+            "Erweiterbarkeit":4,
+            "Fehlertransparenz":4,
+            "geringer Wartungsaufwand":7,
+            "Skalierbarkeit & serverlessness":7,
+            "Kosten":5,
+            "Performancegarantien":8,
+            "Robustheit & Fehlertoleranz":6,
+            "Auswertungen":11
         }
     },
     {
-        "Produkt":"Amazon~Elasticsearch",
-        "values":{
-            "Auswertungen":1,
-            "Performancegarantien":1,
-            "Robustheit & Fehlertoleranz":1,
-            "Skalierbarkeit & serverlessness":1,
-            "Kosten":1,
-            "geringer Wartungsaufwand":1,
-            "Fehlertransparenz":1,
-            "Erweiterbarkeit":1,
-            "Generalisierung":1,
-            "Integration mit AWS":1,
-            "Übertragbarkeit zwischen Clouds":1
+        "Produkt":"Amazon~OpenSearch",
+        "values": {
+            "Übertragbarkeit zwischen Clouds":1,
+            "Integration mit AWS":3,
+            "Generalisierung":4,
+            "Erweiterbarkeit":4,
+            "Fehlertransparenz":5,
+            "geringer Wartungsaufwand":5,
+            "Skalierbarkeit & serverlessness":5,
+            "Kosten":6,
+            "Performancegarantien":8,
+            "Robustheit & Fehlertoleranz":9,
+            "Auswertungen":11
         }
     }
 ]
