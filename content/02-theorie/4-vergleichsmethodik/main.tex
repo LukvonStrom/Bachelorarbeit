@@ -1,49 +1,56 @@
-\section{Vergleichsmethodik für die Produktauswahl}\label{chap:vergleichsmethodik}
+\section{Vergleichsmethodik für die Dienstauswahl}\label{chap:vergleichsmethodik}
 
-\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben folgende,erwünschte Eigenschaften eines Big Data Systems festgelegt (englisches Original geklammert):\footcite[Vgl.][7\psqq]{Marz.2015}
+\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben folgende,erwünschte Eigenschaften eines Big Data Systems festgelegt $\lbrack$\textit{englisches Original geklammert}$\rbrack$:\footcite[Vgl.][7\psqq]{Marz.2015}
 \begin{enumerate}
-\item Robustheit und Fehlertoleranz (Robustness and fault tolerance) - 
-Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also beispielsweise Analysecode \enquote{immutable} ist).
+\item Robustheit und Fehlertoleranz $\lbrack$\textit{Robustness and fault tolerance}$\rbrack$ - 
+Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also, dass beispielsweise Analysecode \enquote{immutable} ist).
 
-\item Lese- und Schreibzugriffe mit niedriger Latenz (Low latency reads and updates) - 
+\item Lese- und Schreibzugriffe mit niedriger Latenz $\lbrack$\textit{Low latency reads and updates}$\rbrack$ - 
 Lesezugriffe auf Daten sollen mit niedriger Latenz stattfinden. Wie bereits beschrieben, kann aufgrund der Messdistanz eine Aktualisierung von Daten durchaus längere Zeit benötigen, jedoch sollte ein Big Data System in der Lage sein, Datenaktualisierungen mit niedriger Latenz durchzuführen.
 
-\item Skalierbarkeit (Scalability) - 
-Das Big Data System sollte durch transparente oder intransparente Provisionierung weiterer Ressourcen in der Lage sein, gleiche Performance in verschiedenen Belastungssituationen zu liefern. Dies deckt sich mit einem der Kernversprechen der Public Clouds nach NIST Definition (\enquote{rapid elasticity}).\footcite[Vgl.][2]{Mell.2011}
+\item Skalierbarkeit $\lbrack$\textit{Scalability}$\rbrack$ - 
+Das Big Data System sollte durch transparente oder intransparente Provisionierung weiterer Ressourcen in der Lage sein, gleiche Performance in verschiedenen Belastungssituationen zu liefern. Dies deckt sich mit einem der Kernversprechen der Public Clouds nach NIST Definition $\lbrack$\textit{rapid elasticity}$\rbrack$.\footcite[Vgl.][2]{Mell.2011}
 
-\item Generalisierung (Generalization) - 
+\item Generalisierung $\lbrack$\textit{Generalization}$\rbrack$ - 
 Ein Big Data System sollte in der Lage sein, verschiedene Anwendungen zu unterstützen. Da die Zielsetzung dieser Bachelorarbeit auf Zeitreihendaten aufbaut, welche wie in \autoref{chap:GrundlagenDatenanalyse} gezeigt, einen großen Einsatzspielraum haben, ist diese Bedingung bei ausreichender Generalisierung der Referenzarchitekturen erfüllt.
 
-\item Erweiterbarkeit (Extensibility) - 
+\item Erweiterbarkeit $\lbrack$\textit{Extensibility}$\rbrack$ - 
 Das zu gestaltende Big Data System soll erweiterbar sein und neue Funktionen oder Änderungen ohne größeren Aufwand ermöglichen.
 
-\item Sofortige Abfrage (Ad hoc queries) - 
+\item Sofortige Abfrage $\lbrack$\textit{Ad hoc queries}$\rbrack$ - 
 Diverseste Abfragen sollen schnellstmöglich auf dem Datensatz der Big Data Anwendung möglich sein.
 
-\item geringer Wartungsaufwand (Minimal maintenance) - 
+\item geringer Wartungsaufwand $\lbrack$\textit{Minimal maintenance}$\rbrack$ - 
 Eine Big data Anwendung soll wartbar bleiben, indem Komplexität in den Kernkomponenten, welche nach Ansicht von \citeauthor{Marz.2015} zu erhöhtem Wartungsaufwand führt, möglichst gering ist.
 
-\item Fehlertransparenz (Debuggability) - 
+\item Fehlertransparenz $\lbrack$\textit{Debuggability}$\rbrack$ - 
 Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Werte entstanden sind, um mögliche Fehler verfolgen zu können.
 \end{enumerate}
 
-Um die auch folgenden Vergleiche aggregieren zu können und die Vergleichskiterien zu priorisieren, ist eine Umfrage durchzuführen. Diese Umfrage soll mindestens alle Stakeholder, die bereits interviewt wurden umfassen, könnte aber auch zusätzliches technisches Personal des \ac{NCS} Teams umfassen.
+Um die folgenden Vergleiche aggregieren zu können und die Vergleichskiterien zu priorisieren, ist eine Umfrage durchzuführen. Diese Umfrage soll mindestens alle Stakeholder, die bereits interviewt wurden umfassen, könnte aber auch zusätzliches technisches Personal des \ac{NCS} Teams umfassen.
 
 
-\subsection{Featurevergleich}
+\subsection{Features des Dienstes}
 Es soll auf die Mindestverfügbarkeit folgender Fähigkeiten überprüft werden:
 \begin{itemize}
 \item Auswertungen nach \autoref{chap:auswertungsarten}
 \end{itemize}
 
-\subsection{Performancevergleich}
-Es sind die Angaben des Herstellers zu bewerten und eventuelle Nutzungsfälle aufzulisten, bei denen das Produkt/die Dienstleistung erfolgreich bei erhöhten Anforderungen (großes Datenvolumen, großer Durchsatz, ...) eingesetzt wurde.
+\subsection{Performancegarantien}
+Es sind die Angaben des Herstellers zu bewerten und eventuelle Nutzungsfälle aufzulisten, bei denen der Dienst erfolgreich bei erhöhten Anforderungen (großes Datenvolumen, großer Durchsatz, ...) eingesetzt wurde.
 
-\subsection{Kostenvergleich}
+\subsection{Gesamtkosten}
 Um einen sinnvollen Kostenvergleich aufzustellen, sind folgende Annahmen zu treffen:
-Es existieren 200 Geräte/Sensoren. Es geht eine Nachricht mit einem kB pro Minute pro Gerät ein (0,0432 GB/Gerät/Monat und 8,64 GB/Monat).
-Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und wo möglich eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  Es ist die Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in € erfolgt bei \ac{AWS} bei Abrechnung) zu wählen alternativ ist die Region Irland (eu-west-1) bei Nichtverfügbarkeit der Diensleistung in Frankfurt zu wählen. Produkte, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden mit permanentem Speicher, der historische Daten speichert (\ac{S3}). Analysen, wo individuell auslösbar erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. Andernfalls wird angenommen, dass der Schwellwert 5 mal pro Gerät pro Monat überschritten wird (1000 Überschreitungen).
-Für die Zwischenspeicherung in \ac{S3}, wenn benötigt, wird folgendes Datenschema angenommen:
+
+\begin{itemize}
+\item Es existieren 200 Geräte/Sensoren. Es geht eine Nachricht mit einem kB pro Minute pro Gerät ein (0,0432 GB/Gerät/Monat und 8,64 GB/Monat).
+\item Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und, wo möglich, eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  
+\item Es ist die \ac{AWS}-Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in \texteuro{} erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Alternativ ist die Region Irland (eu-west-1) bei Nichtverfügbarkeit der Diensleistung in Frankfurt zu wählen. 
+\item Dienste, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden mit permanentem Speicher im \ac{S3}. 
+\item Analysen, die individuell auslösbar sind, erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. 
+\item Es wird angenommen, dass der Schwellwert 5 mal pro Gerät pro Monat überschritten wird (1000 Überschreitungen insgesamt).
+\item Für die Zwischenspeicherung in \ac{S3}, wenn benötigt, wird folgendes Datenschema angenommen:
+\end{itemize}
 
 \begin{listing}[H]
 \inputminted[frame=lines,breaklines=true]{json}{code/estimates/filtered-estimate.json}
@@ -63,4 +70,4 @@ Beispiel  & x\$/100.000 Datenpunkte & x\$  \\\hline
 \caption{Kostenvergleich Schema}
 \label{tab:kostenvergleich-schema}
 \end{table}
-Es sind alle Abrechnungsdimensionen in der in \autoref{tab:kostenvergleich-schema} gezeigten Form zu dokumentieren.
+Alle Abrechnungsdimensionen werden in der in \autoref{tab:kostenvergleich-schema} gezeigten Form dokumentiert.

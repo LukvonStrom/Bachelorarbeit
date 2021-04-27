@@ -21,7 +21,7 @@
 
 \LF Wenn man das auf mein Feld, die Cloud überträgt, wäre die Analyse \enquote{hinten raus} ja eine der Möglichkeiten für eine Referenzarchitektur.
 
-\PE Ja, aber du hast ja abgesehen davon auch in der Cloud Services, um dir deine Datenbeschaffung zu ermöglichen, wie z.B. den \AWSIOT Core, also den \ac{MQTT} Broker. An den kann man ja die Gatewayservices anknüpfen. Wenn ich mich richtig erinnere, bietet aber auch \ac{AWS} verwaltete Gatewayservices zur Datennormalisierung an. Letztenendes könnte man diese Architektur also auch komplett in \ac{AWS} abbilden.
+\PE Ja, aber du hast ja abgesehen davon auch in der Cloud Services, um dir deine Datenbeschaffung zu ermöglichen, wie z.B. den \AWSIOT{} Core, also den \ac{MQTT} Broker. An den kann man ja die Gatewayservices anknüpfen. Wenn ich mich richtig erinnere, bietet aber auch \ac{AWS} verwaltete Gatewayservices zur Datennormalisierung an. Letztenendes könnte man diese Architektur also auch komplett in \ac{AWS} abbilden.
 
 \LF Ja das wäre auch ein gute Option, ich denke aber, dass es nur bedingt Sinn macht das in \ac{AWS} nochmal komplett neuzubauen, da ihr ja schon einige laufenden Konverter habt, die die Daten der Sensoren in maschinenlesbare Formate umwandeln. Ausgehend von diesen umgewandelten Daten wäre aus meiner Sicht eine Analyse viel spannender.
 
@@ -87,14 +87,14 @@ Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das 
 
 \LF Verstehe, ja das sehe ich genau so. Ich hätte noch ein paar kleiner Fragen dabei, wo ich deine Priorisierung bräuchte. Ich habe ja die Qualitätskriterien von \citeauthor{Muller.2020}. Welche davon priorisierst du denn am höchsten oder was siehst du denn am wichtigsten?
 
-\PE Da Kriterium eins ist sehr wichtig. Verständlich für eine breite, und was wichtig ist eine heterogene Gruppe an Stakeholdern. Die Referenzarchitektur aus verschiedenen Perspektiven zu beleuchten ist wichtig. Was bei dir unter fünf steht, \enquote{akzeptabel}, das würde ich unter Akzeptanz sehen und als zweites einstufen. Damit hängen andere Kriterien zusammen. Es ist akzeptabel, wenn die Qualität stimmt. Zugänglichkeit und Zugriff durch die Mehrheit der Organisation führt zu einer hohen Akzeptanz. Adressierung der Hauptprobleme ist auch wichtig, weil sich die meisten Problemkategorien im \ac{IoT} Bereich auf wenige Kernprobleme herunterbrechen lässt. \\
+\PE Das Kriterium eins ist sehr wichtig. Verständlich für eine breite, und was wichtig ist eine heterogene Gruppe an Stakeholdern. Die Referenzarchitektur aus verschiedenen Perspektiven zu beleuchten ist wichtig. Was bei dir unter fünf steht, \enquote{akzeptabel}, das würde ich unter Akzeptanz sehen und als zweites einstufen. Damit hängen andere Kriterien zusammen. Es ist akzeptabel, wenn die Qualität stimmt. Zugänglichkeit und Zugriff durch die Mehrheit der Organisation führt zu einer hohen Akzeptanz. Adressierung der Hauptprobleme ist auch wichtig, weil sich die meisten Problemkategorien im \ac{IoT} Bereich auf wenige Kernprobleme herunterbrechen lässt. \\
 Ich würde mich nochmal korrigieren, das wäre meine Reihenfolge:
 \begin{enumerate}
     \item Verständlichkeit
     \item Adressierung der Hauptprobleme (daraus bedingt sich werstschöpfend für den Betrieb)
     \item Akzeptanz durch die Anwender (bedingt durch):
     \begin{enumerate}
-        \item zufriedenstellende Qualität des Produktes (hängt von up-to date und wartbar ab)
+        \item zufriedenstellende Qualität des Dienstes/Produktes (hängt von up-to date und wartbar ab)
         \item Qualität/\enquote{das es gescheit funktioniert}
         \item \textit{einfache} Zugänglichkeit durch Mehrheit der Organisation
     \end{enumerate}

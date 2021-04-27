@@ -1,0 +1,11 @@
+@startuml
+autonumber
+skinparam maxMessageSize 90
+boundary Sensor
+entity "IoT Core\nBroker"
+
+loop
+    Sensor -> "IoT Core\nBroker" : Messwerte
+    "IoT Core\nBroker" -> Sensor : OK
+end
+@enduml

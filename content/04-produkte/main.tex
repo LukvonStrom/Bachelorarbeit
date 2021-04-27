@@ -1,10 +1,10 @@
 \addtocontents{toc}{\protect\newpage}
-\chapter{Produkt-/Dienstleistungsauswahl}
-Im nachfolgenden Kapitel werden mittels der in \autoref{chap:vergleichsmethodik} vorgestellten Methodik die Produkte für die finalen Referenzarchitekturen unter den in \autoref{chap:rahmendatenverarbeitung} vorgestellten Rahmenbedingungen verglichen und ausgewählt.
+\chapter{Produkt-/Dienstauswahl}
+Im nachfolgenden Kapitel werden mittels der in \autoref{chap:vergleichsmethodik} vorgestellten Methodik die Dienste/Produkte für die finalen Referenzarchitekturen unter den in \autoref{chap:rahmendatenverarbeitung} vorgestellten Rahmenbedingungen verglichen und ausgewählt.
 
 \section{Angewandte Methodik}
 
-Grundlage der hier gezeigten Produktbewertungskriterien sind die in \autoref{chap:vergleichsmethodik} gezeigten Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \autoref{chap:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \enquote{serverlessness}, welches abgewertet werden soll, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Produkte nur zeitlich vorgeplante Auswertungen können, oder die Fähigkeit ausserhalb des eigenen Ausführungsplans Anfragen zu bearbeiten nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall diese bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Ausgehend von dieser Prioritätenliste wurde eine Umfrage zur Priorisierung durchgeführt, welche die final gewichtete Prioritätenliste ergibt. Diese Umfrage befindet sich mit Ergebnissen in \autoref{anhang:umfrage}. Insgesamt sind die Kriterien nach Priorität absteigend geordnet, welche gleichzeitig die Summe an Punkten darstellt, die vergeben werden kann für dieses Kriterium.
+Grundlage der hier gezeigten Bewertungskriterien sind die in \autoref{chap:vergleichsmethodik} gezeigten Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \autoref{chap:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \enquote{serverlessness}, welches nicht die volle Punktzahl erreichen kann, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Dienste nur zeitlich vorgeplante Auswertungen durchführen können, oder die Fähigkeit ausserhalb des eigenen Ausführungsplans Anfragen zu bearbeiten nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall diese bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Ausgehend von dieser Prioritätenliste wurde eine Umfrage zur Priorisierung durchgeführt, welche die final gewichtete Prioritätenliste ergibt. Diese Umfrage befindet sich mit Ergebnissen in \autoref{anhang:umfrage}. Insgesamt sind die Kriterien nach Priorität absteigend geordnet, welche gleichzeitig die Summe an Punkten darstellt, die maximal für dieses Kriterium zulässig sind.
 
 \input{content/04-produkte/vergleiche/beispiel-vergleich}
 
@@ -14,15 +14,15 @@ Ausgehend von der Gesamtsumme der Punkte kann eine Rangliste erstellt werden, we
 
 
 
-\section{Produkte für Echtzeitverarbeitung}\label{produkte:echtzeit}
+\section{Dienste für Echtzeitverarbeitung}\label{produkte:echtzeit}
 
 \input{content/04-produkte/1-echtzeit}
 
-\section{Produkte für Batchverarbeitung}
+\section{Dienste für Batchverarbeitung}
 
 \input{content/04-produkte/2-batch}
 
-\section{Produkte, die mehrere Modi unterstützen}
+\section{Dienste, die mehrere Modi unterstützen}
 \input{content/04-produkte/3-multimode}
 
 

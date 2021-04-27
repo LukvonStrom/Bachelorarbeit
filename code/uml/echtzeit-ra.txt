@@ -1,24 +1,17 @@
 @startuml
 autonumber
 skinparam maxMessageSize 90
-boundary Sensor
+skinparam sequenceMessageAlign center
 entity "IoT Core\nBroker"
-database "Simple\nStorage\nService"
-database "Kinesis\nData\nStreams"
-control "Kinesis\nData\nAnalytics"
+collections "Simple\nStorage\nService"
+queue "Kinesis\nData\nStreams"
+queue "Kinesis\nData\nAnalytics"
+boundary "Simple\nNotification\nService"
+control "QuickSight"
 
-== Dateneinspeisung ==
-loop
-    Sensor -> "IoT Core\nBroker" : Messwerte
-    "IoT Core\nBroker" -> Sensor : OK
-end
-== Datenpersistenz ==
-loop
-"IoT Core\nBroker" -> "Simple\nStorage\nService" : Persistierung der Daten
-end
-== Datenanalyse ==
 group Übertragung
 "IoT Core\nBroker" -> "Kinesis\nData\nStreams" : Übertragung
+"IoT Core\nBroker" -> "Simple\nStorage\nService" : Übertragung
     loop
         "Kinesis\nData\nStreams" -> "Kinesis\nData\nAnalytics" : Übertragung
         "Kinesis\nData\nAnalytics" -> "Kinesis\nData\nStreams" : Nachfrage
@@ -29,6 +22,7 @@ loop
 "Kinesis\nData\nAnalytics" -> "Kinesis\nData\nAnalytics" : Vergleich mit alten Werten
 end
 "Kinesis\nData\nAnalytics" --> "Simple\nNotification\nService" : Alarmierung
-"Kinesis\nData\nAnalytics" --> "QuickSight" : Visualisierung
 end
+"Kinesis\nData\nAnalytics" <-- "QuickSight" : Visualisierung
+"Simple\nStorage\nService" <-- "QuickSight" : Visualisierung
 @enduml

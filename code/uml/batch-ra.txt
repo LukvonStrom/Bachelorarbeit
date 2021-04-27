@@ -1,0 +1,24 @@
+@startuml
+autonumber
+skinparam maxMessageSize 90
+skinparam sequenceMessageAlign center
+entity "IoT Core\nBroker"
+control "Geplanter\nAufruf"
+control "Lambda"
+database "Timestream"
+boundary "Simple\nNotification\nService"
+control "QuickSight"
+
+group Übertragung
+"IoT Core\nBroker" -> "Timestream" : Übertragung
+end
+group Analyse
+loop alle x Minuten
+"Geplanter\nAufruf" -> "Lambda" : Aufruf
+"Lambda" -> "Timestream" : Abfrage
+"Timestream" -> "Lambda"  : Antwort
+"Lambda" --> "Simple\nNotification\nService" : Alarmierung
+end
+end
+"Timestream" <-- "QuickSight" : Visualisierung
+@enduml

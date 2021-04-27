@@ -4,7 +4,7 @@ Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die 
 
 
 
-\AWSIOT Analytics ist ein Dienst der \AWSIOT Produktfamilie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung von Daten an, bzw. bietet Schnittstellen, um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT Core für Analysen genutzt werden kann.
+\AWSIOT{} Analytics ist ein Dienst der \AWSIOT{} Familie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT{} Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung von Daten an, bzw. bietet Schnittstellen, um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT{} Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT{} Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT{} Core für Analysen genutzt werden kann.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Analytics-general.pdf}
@@ -14,19 +14,18 @@ Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die 
 In \autoref{abb:GrobArchitekturIoTAnalytics} ist die Grobarchitektur und Verknüpfung mit anderen Diensten unter Annahme der Vorraussetzungen aus \autoref{chap:rahmendatenverarbeitung} gezeigt. Datenliefernde Geräte, wie beispielsweise Sensoren, liefern Zeitreihen-Messwerte via dem \ac{MQTT} Protokoll an. Die Weiterleitung zu IoT Analytics erfolgt mittels einer eingerichteten Regel im \ac{IoT} Core Messagebroker, welche mittels eines Dialekts der \ac{SQL} Sprache gewisse Topics vorselektiert oder alle Topics zulässt.
 
 
-Für erweiterte Analysen stellt \AWSIOT Analytics sogenannte Notebooks zur Verfügung, die auf den \enquote{Jupyter Notebooks} basieren. Diese Notebooks werden verwendet, um Python Programmabläufe zu visualieieren und zu modularisieren. Da in den Jupyter Notebooks der volle Paketumfang von Python verfügbar ist, inklusive z.B. Machine Learning Bibliotheken wie Tensorflow, sind wesentlich erweiterte Analysen möglich. Die Ressourcen für Notebooks sind seperat zu provisionieren und werden in Analytics Compute Units abgerechnet, wobei eine Compute Unit 4vCPU-Kerne und 16 GB \ac{RAM} hat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.i} Diese Compute Units werden sekundengenau abgerechnet und kosten nur für die Laufzeit Geld.
+Für erweiterte Analysen stellt \AWSIOT{} Analytics sogenannte Notebooks zur Verfügung, die auf den \enquote{Jupyter Notebooks} basieren. Diese Notebooks werden verwendet, um Python Programmabläufe zu visualieieren und zu modularisieren. Da in den Jupyter Notebooks der volle Paketumfang von Python verfügbar ist, inklusive z.B. Machine Learning Bibliotheken wie Tensorflow, sind wesentlich erweiterte Analysen möglich. Die Ressourcen für Notebooks sind seperat zu provisionieren und werden in Analytics Compute Units abgerechnet, wobei eine Compute Unit 4vCPU-Kerne und 16 GB \ac{RAM} hat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.i} Diese Compute Units werden sekundengenau abgerechnet und kosten nur für die Laufzeit Geld.
 
-\subsubsection{Featurevergleich}
-Der \ac{SQL}-Analyseteil von IoT Analytics basiert wie Athena auf Presto und unterstützt die selben Funktionen und Operatoren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.au} Deshalb sind die Featureanforderungen schon erfüllt, es lassen sich jedoch noch Verbesserungen an den Ansätzen mittels der ebenfalls verfügbaren Notebooks machen.
+\subsubsection{Features des Dienstes}
+Der \ac{SQL}-Analyseteil von IoT Analytics basiert wie Athena auf Presto und unterstützt die selben Funktionen und Operatoren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.au} Entsprechend sind die Anforderungen im selben Grad erfüllt wie bei Athena. Da \AWSIOT{} Analytics aber über die selbst programmierbaren Notebooks verfügt, lassen sich Verbesserungen an den Ansätzen mittels einer eigenen, angepassten Implementierung einzelner Analysen machen.
 Da die Notebooks unter Python laufen können und ebenfalls pandas einbinden können, sind die selben Features wie bei \autoref{chap:vergleich-lambda} gegeben.
 
+\subsubsection{Performancegarantien}
+Die \ac{SLA} von \AWSIOT{} Analytics garantiert einzig die 99,9\% Verfügbarkeit im Monat.\footcite[Vgl.][]{AmazonWebServicesInc..2019f} Es gibt auch \enquote{softe} Limits, welche auf Anfrage hochgesetzt werden können, welche einen Durchsatz von maximal 100.000 Nachrichten pro Sekunde vorsehen.\footcite[Vgl][]{AmazonWebServicesInc..o.J.av} Einzig die Performance der Analytics Compute Units ist durch vertikale Skalierung, also eine größere Buchung von Compute Units durch Nutzende beeinflussbar.
 
-\subsubsection{Performancevergleich}
-Die \ac{SLA} von \AWSIOT Analytics garantiert einzig die 99,9\% Verfügbarkeit im Monat.\footcite[Vgl.][]{AmazonWebServicesInc..2019f} Es gibt auch \enquote{softe} Limits, welche auf Anfrage hochgesetzt werden können, welche einen Durchsatz von maximal 100.000 Nachrichten pro Sekunde vorsehen.\footcite[Vgl][]{AmazonWebServicesInc..o.J.av} Einzig die Performance der Analytics Compute Units ist doch vertikale Skalierung, also eine größere Buchung von Compute Units durch Nutzende beeinflussbar.
+Bei \AWSIOT{} Analytics ist laut \ac{AWS} mit einer Latenz von Minuten oder Sekunden zu rechnen, was hoch ist im Vergleich zu Kinesis, wo mit Sekunden oder Milisekunden Latenz zu rechnen ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ax}
 
-Bei \AWSIOT Analytics ist laut \ac{AWS} mit einer Latenz von Minuten oder Sekunden zu rechnen, was hoch ist im Vergleich zu Kinesis, wo mit Sekunden oder Milisekunden Latenz zu rechnen ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ax}
-
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
 In \autoref{tab:kostenvergleich-AWS~IoT~Analytics} sind die kalkulierten Preise nach gängiger Preismatrix dargestellt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.i} Die Nutzung von externen Ausführungsdiensten (z.B. StepFunctions/Lambda) für \ac{SQL}-Abfragen ist nicht notwendig, da die Abfragen im Dienst selbst terminiert werden können.
 \begin{table}[H]
 \centering
@@ -44,23 +43,18 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{129,75}  \\\hline
 \end{table}
  Das bestehende \enquote{Free Tier}, welches \ac{AWS} für den Dienst anbietet, wird ignoriert, da es nur in den ersten zwölf Monaten der Nutzung des Dienstes verrechnet wird. Bei \ac{S3} wird angenommen, dass die Standard Speicherklasse verwendet wird und Volumenrabattierungen bei Datenvolumina >50TB im Monat nicht relevant sind.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.j} Andere Speicherklassen sind günstiger, somit gibt die Schätzung eine Obergrenze für die \ac{S3} Preise. Es wurde ebenfalls keine eigene Logik in Notebooks kalkuliert, welche 0,36\$ pro Stunde und Compute Unit im Betrieb kosten würden. Dies ist dem Fakt geschuldet, dass für dieses Beispiel die Analysen mit \ac{SQL} bewältigbar sind.
 
-% \subsubsection{Gesamtbewertung}
-
-% \produktbewertung{AWS~IoT~Analytics}{8,10,7,7,7,5,5,4,2,1,0,57}
-% In \autoref{tab:bewertungsmatrix-AWS~IoT~Analytics} wird AWS~IoT~Analytics gemäß der in \autoref{tab:einstufungen} eingeschränkten Bewertungen bewertet.
-
-\subsection{Produktauswahl}
-Im Bereich Multimode gibt es nur ein zu vergleichendes Produkt, weshalb Abzüge nicht auf relativen Kriterien zu den anderen Produkten basieren, sondern auf absoluten Abzügen.
+\subsection{Auswahl}
+Im Bereich Multimode gibt es nur einen zu vergleichenden Dienst, weshalb Abzüge nicht auf relativen Kriterien zu den anderen Diensten basieren, sondern auf absoluten Abzügen.
 \input{content/04-produkte/vergleiche/multimode-vergleich}
 Im Folgenden werden die Einstufungsentscheidungen, die in \autoref{tab:bewertungsmatrix-multimode} zu sehen sind, erläutert.
 
-So ist beispielsweise klar, dass zwar bei \AWSIOT Analytics die Jupyter Notebooks plattformunabhängig sind, aber die \ac{SQL}-Statements nicht übertragbar sind und, da zwingend ein \AWSIOT Core Broker benötigt wird, ein großer Teil des Setups nicht übertragen werden kann (abgesehen davon, dass der Dienst von \ac{AWS} gemanaged ist und eine Übertragbarkeit nicht absehbar ist).
-\AWSIOT Analytics integriert sich gut mit anderen Dienstleistungen von AWS, z.B. mit \AWSIOT Core und den anderen \AWSIOT Diensten, SageMaker (dem Machine Learning Dienst), Quicksight (genutzt für Dashboards), Lambda, \ac{SNS} und weiteren.
-\AWSIOT Analytics ist speziell für \ac{IoT} Daten gebaut, weshalb Funktionalitäten eingebaut sind, die speziell in Kombination mit den anderen \AWSIOT Diensten Sinn machen. Die Verwendung dieser Funktionalitäten ist aber nicht zwingend notwendig. Es können auch andere Daten, z.B. IT-Monitoring eingespeist werden, wenn sie über \ac{MQTT} und den \AWSIOT Core Broker geladen werden.
-Die Erweiterbarkeit ist gegeben durch die Möglichkeiten, die \ac{SQL} in Verbindung mit der generischen Programmierbarkeit der Notebooks bietet und zusätzlich dadurch, dass durch die integrierrte Datenbank Daten erneut mit anderer Logik verarbeitet werden können.
-Durch Integration mit Cloudwatch, der Monitoring Lösung von \ac{AWS} sind ansteigende Fehlerraten leicht zu verzeichnen. Einzig, dass eingehende Daten einige Zeit benötigen, bis sie von der \AWSIOT Analytics Konsole angezeigt werden, könnte die Fehlersuche erschweren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.aw}
+So ist beispielsweise klar, dass zwar bei \AWSIOT{} Analytics die Jupyter Notebooks plattformunabhängig sind, aber die \ac{SQL}-Statements nicht übertragbar sind und, da zwingend ein \AWSIOT{} Core Broker benötigt wird, ein großer Teil des Setups nicht übertragen werden kann (abgesehen davon, dass der Dienst von \ac{AWS} gemanaged ist und eine Übertragbarkeit nicht absehbar ist).
+\AWSIOT{} Analytics integriert sich gut mit anderen Dienstleistungen von AWS, z.B. mit \AWSIOT{} Core und den anderen \AWSIOT{} Diensten, SageMaker (dem Machine Learning Dienst), Quicksight (genutzt für Dashboards), Lambda, \ac{SNS} und weiteren.
+\AWSIOT{} Analytics ist speziell für \ac{IoT} Daten gebaut, weshalb Funktionalitäten eingebaut sind, die speziell in Kombination mit den anderen \AWSIOT{} Diensten Sinn machen. Die Verwendung dieser Funktionalitäten ist aber nicht zwingend notwendig. Es können auch andere Daten, z.B. IT-Monitoring eingespeist werden, wenn sie über \ac{MQTT} und den \AWSIOT{} Core Broker geladen werden.
+Die Erweiterbarkeit ist gegeben durch die Möglichkeiten, die \ac{SQL} in Verbindung mit der generischen Programmierbarkeit der Notebooks bietet und zusätzlich dadurch, dass durch die integrierte Datenbank Daten erneut mit anderer Logik verarbeitet werden können.
+Durch Integration mit Cloudwatch, der Monitoring Lösung von \ac{AWS} sind ansteigende Fehlerraten leicht zu entdecken. Einzig, dass eingehende Daten einige Zeit benötigen, bis sie von der \AWSIOT{} Analytics Konsole angezeigt werden, könnte die Fehlersuche erschweren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.aw}
 Im Bereich \enquote{serverlessness} wurden Abzüge getätigt, da Analyitcs Compute Units nicht selbstständig skalieren.
 Da die Abfragekosten mittels \ac{SQL} proportional zu den anderen Kosten hoch erscheinen, wurden Abzüge gemacht.
-Die gesetzten Performancelimits des Dienstes erscheinen sinnvoll. Eine Fehlertoleranz ist gegeben, wenn der Anwender keine Fehler selbst einführt, oder \AWSIOT Analytics interne Fehler aufweist. Da alle Auswertugnen sogar in multiplen Wegen machbar sind, wurde die volle Punktzahl für diese Kategorie vergeben.
+Die gesetzten Performancelimits des Dienstes erscheinen sinnvoll. Eine Fehlertoleranz ist gegeben, wenn der Anwender keine Fehler selbst einführt, oder \AWSIOT{} Analytics interne Fehler aufweist. Da alle Auswertugnen sogar in multiplen Wegen machbar sind, wurde die volle Punktzahl für diese Kategorie vergeben.
 
 

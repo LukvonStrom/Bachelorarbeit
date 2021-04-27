@@ -2,7 +2,7 @@ In \autoref{abb:ProdukteRT} werden verwendbare Dienste von \ac{AWS}, gemeinsam m
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Overview-Realtime.pdf}
-\caption{Einsetzbare Produkte im Bereich Echtzeitverarbeitung}
+\caption{Einsetzbare Dienste im Bereich Echtzeitverarbeitung}
 \label{abb:ProdukteRT}
 \end{figure}
 
@@ -37,7 +37,7 @@ Anzahl der AWS-Dienste\textless{}5 & Integration mit AWS & 1 \\ \hline
 Anzahl der AWS-Dienste=0 & Integration mit AWS & 0 \\ \hline
 AWS-properitär & Übertragbarkeit & 0 \\ \hline
 \end{tabular}
-\caption{Spezielle Einstufungen einzelner Produktbesonderheiten}
+\caption{Spezielle Einstufungen einzelner Dienstbesonderheiten}
 \label{tab:einstufungen}
 \end{table}
 
@@ -48,8 +48,8 @@ AWS-properitär & Übertragbarkeit & 0 \\ \hline
 
 
 
-Im Rahmen der \AWSIOT Produktfamilie gibt es neben dem bereits angesprochenen \AWSIOT Analytics ebenfalls \AWSIOT Events.  
-Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt und verarbeitet werden sollen, indem Aktionen ausgelöst werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.b} Die Abläufe können dabei, ähnlich wie bei Node-Red graphisch konfiguriert werden. Unterstützte Aktionen von \AWSIOT Events sind beispielsweise der Aufruf von Lambda oder Benachrichtigung via \ac{SNS}.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ao}
+Im Rahmen der \AWSIOT{} Familie von Diensten gibt es neben dem bereits angesprochenen \AWSIOT{} Analytics ebenfalls \AWSIOT{} Events.  
+Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt und verarbeitet werden sollen, indem Aktionen ausgelöst werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.b} Die Abläufe können dabei, ähnlich wie bei Node-Red graphisch konfiguriert werden. Unterstützte Aktionen von \AWSIOT{} Events sind beispielsweise der Aufruf von Lambda oder Benachrichtigung via \ac{SNS}.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ao}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Events-general.pdf}
@@ -57,7 +57,7 @@ Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-
 \label{abb:GrobArchitekturIoTEvents}
 \end{figure}
 
-\AWSIOT Events basiert auf abgebildeten Zuständen, die basierend auf ihren Übergängen Aktionen auslösen. \autoref{abb:BeispielIoTEvents} zeigt 3 beispielhaft 3 definierte Zustandsübergänge in der Weboberfläche von \AWSIOT Events. Jeder Kreis, welcher einen Zustand simbolisiert, hat 3 eigene Ereignisse, nämlich OnEnter, OnInput und OnExit. Zusätzlich sind Zustände mit Zustandsübergangspfeilen verbunden, welche basierend auf einer Ausführungskondition ausgelöst werden. Eine solche Ausführungskondition (auch Trigger genannt) wäre beispielsweise \mintinline[breaklines]{javascript}{$input.Input1.value > $variable.threshold}. Insgesamt funktioniert \AWSIOT{} Events also wie ein deterministischer Automat, da Zustandsübergänge genau definiert sind.
+\AWSIOT{} Events basiert auf abgebildeten Zuständen, die basierend auf ihren Übergängen Aktionen auslösen. \autoref{abb:BeispielIoTEvents} zeigt 3 beispielhaft 3 definierte Zustandsübergänge in der Weboberfläche von \AWSIOT{} Events. Jeder Kreis, welcher einen Zustand simbolisiert, hat 3 eigene Ereignisse, nämlich OnEnter, OnInput und OnExit. Zusätzlich sind Zustände mit Zustandsübergangspfeilen verbunden, welche basierend auf einer Ausführungskondition ausgelöst werden. Eine solche Ausführungskondition (auch Trigger genannt) wäre beispielsweise \mintinline[breaklines]{javascript}{$input.Input1.value > $variable.threshold}. Insgesamt funktioniert \AWSIOT{} Events also wie ein deterministischer Automat, da Zustandsübergänge genau definiert sind.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/IoT-Events-Demo.png}
@@ -66,14 +66,15 @@ Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-
 \end{figure}
 Sollte ein Alarmzustand erreicht werden, können andere Dienste wie Lambda oder \ac{SNS} zur Verarbeitung oder Benachrichtigung integriert werden.
 
-\subsubsection{Featurevergleich}
+\subsubsection{Features des Dienstes}
 \AWSIOT{} Events unterstützt reine \enquote{if-then-else} Überprüfungen. Trotzdem sind Variablen zur Evaluation selbstgeschriebener Logik verfügbar, womit sich zumindest ein Teil der gewünschten Features umsetzen lässt. Fakt ist dennoch, dass nur Analysen in einem endlichen zeitlichen Fenster durchführbar sind, welches durch Eingangsfrequenz und Anzahl der verwendeten Variablen beschränkt ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.am} Eine Kalkulation eines Medians wäre (angenommen, dass die Werte sortiert gespeichert werden) wie folgt möglich, wenn 10 Variablen angenommen werden: \mintinline[breaklines]{javascript}{0.5*($variable.pastmeasure5 + $variable.pastmeasure6))}
-Abseits von Schwellwertüberprüfungen, welche vorher definiert wurden, ist \AWSIOT Events nur mit großem Aufwand bei beschränkter Evaluationssprache zu weitergehenden Auswertungen fähig, welche immer von dem Zeitfenster, welches die Variablen abdecken abhängig ist. Ebenfalls sind keine selbstständigen Algorithmen zur Anomalieerkennung integriert.
+Abseits von Schwellwertüberprüfungen, welche vorher definiert wurden, ist \AWSIOT{} Events nur mit großem Aufwand bei beschränkter Evaluationssprache zu weitergehenden Auswertungen fähig, welche immer von dem Zeitfenster, welches die Variablen abdecken abhängig ist. Ebenfalls sind keine selbstständigen Algorithmen zur Anomalieerkennung integriert.
 
-\subsubsection{Performancevergleich}
-\ac{AWS} gibt in der zu \AWSIOT{} Events zugehörigen \ac{SLA} keine Performancegarantien, sondern lediglich eine Verfügbarkeitsgarantie mit Pönalen in Form von Rückzahlungen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.an} \AWSIOT{} Events hat dazu noch Limitierungen, wie beispielsweise das unveränderliche Limit von 10 Nachrichten pro Sekunde, die an einen Detektor gesendet werden können (also bei denen eigene Logik ausgeführt werden kann) oder das anpassbare Limit von 1000 Nachrichten, die pro Sekunde insgesamt evaluiert werden können.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ap}
+\subsubsection{Performancegarantien}
+\ac{AWS} gibt in der zu \AWSIOT{} Events zugehörigen \ac{SLA} keine Performancegarantien, sondern lediglich eine Verfügbarkeitsgarantie mit Penalen in Form von Rückzahlungen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.an} \AWSIOT{} Events hat dazu noch Limitierungen, wie beispielsweise das unveränderliche Limit von 10 Nachrichten pro Sekunde, die an einen Detektor gesendet werden können (also bei denen eigene Logik ausgeführt werden kann) oder das anpassbare Limit von 1000 Nachrichten, die pro Sekunde insgesamt evaluiert werden können.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ap}
 
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
+Im Folgenden werden für den Beispielusecase entsprechend der offiziellen Preisaufstellung von \ac{AWS} die monatlichen Nutzungskosten berechnet. \footcite[Vgl.][]{AmazonWebServicesInc..o.J.k}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -89,11 +90,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{175,6445} \\ \hline
 \caption{Kostenvergleich AWS~IoT~Events}
 \label{tab:kostenvergleich-AWS~IoT~Events}
 \end{table}
-Die Preise sind der offiziellen Preisaufstellung von \ac{AWS} entnommen. \footcite[Vgl.][]{AmazonWebServicesInc..o.J.k}
 
-% \subsubsection{Gesamtbewertung}
-
-% \produktbewertung{AWS~IoT~Events}{9,10,9,8,7,3,5,0,0,1,0,47}
 
 \subsection{Amazon Kinesis}
 
@@ -106,9 +103,9 @@ Kinesis Data Analytics ist dafür ausgelegt, die Daten aus z.B. Kinesis Data Ana
 
 Kinesis Data Firehose dient dem Zweck, Daten aus z.B. Kinesis Data Analytics in Speichermedien/Datenbanken wie \ac{S3}, Redshift oder Elasticsearch Service zu übertragen.
 
-Amazon Kinesis ist im Gegensatz zu \AWSIOT Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis (Data Streams) älter als \AWSIOT Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis wirbt damit, dass Daten in 70 Milisekunden nach Eingang zum Konsum verfügbar sind.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af}
+Amazon Kinesis ist im Gegensatz zu \AWSIOT{} Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis (Data Streams) älter als \AWSIOT{} Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT{} Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis wirbt damit, dass Daten in 70 Milisekunden nach Eingang zum Konsum verfügbar sind.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af}
 
-Alternativ zur Kinesis Familie gibt es auch Open-Source Stream Analytics Produkte, wie von \citeauthor{Singh.2016} dargestellt.\footcite[Vgl.][]{Singh.2016} Diese kommen aufgrund der fehlenden Integration mit \ac{AWS} und des erhöhten Aufwands durch Eigenbetrieb nicht in Frage.
+Alternativ zur Kinesis Familie gibt es auch Open-Source Stream Analytics Dienste, wie von \citeauthor{Singh.2016} dargestellt.\footcite[Vgl.][]{Singh.2016} Diese kommen aufgrund der fehlenden Integration mit \ac{AWS} und des erhöhten Aufwands durch Eigenbetrieb nicht in Frage.
 
 \begin{figure}[H]
 \centering
@@ -116,7 +113,7 @@ Alternativ zur Kinesis Familie gibt es auch Open-Source Stream Analytics Produkt
 \caption{Grobarchitektur des Ablaufes für Kinesis Analytics}
 \label{abb:GrobArchitekturKinesisAnalytics}
 \end{figure}
-In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Dienste aus der Kinesis Familie mit anderen Diensten dargestellt. Angenommen werden dabei die in \autoref{chap:rahmendatenverarbeitung} erläuterten Rahmenbedingungen, weshalb \ac{IoT} Core als Message Broker eingesetzt ist. Wie in der in \autoref{productselection:iotanalytics} beschriebenen Architektur, muss auch hier für die Datenverarbeitung eine Regel im \ac{IoT} Core Broker angelegt werden, um relevante Nachrichten an Kinesis Data Streams weiterzuleiten.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.} Die tatsächliche Analyse übernimmt das komplementäre Produkt Kinesis Data Analytics.
+In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Dienste aus der Kinesis Familie mit anderen Diensten dargestellt. Angenommen werden dabei die in \autoref{chap:rahmendatenverarbeitung} erläuterten Rahmenbedingungen, weshalb \ac{IoT} Core als Message Broker eingesetzt ist. Wie in der in \autoref{productselection:iotanalytics} beschriebenen Architektur, muss auch hier für die Datenverarbeitung eine Regel im \ac{IoT} Core Broker angelegt werden, um relevante Nachrichten an Kinesis Data Streams weiterzuleiten.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.} Die tatsächliche Analyse übernimmt der komplementäre Dienst Kinesis Data Analytics.
 
 \begin{figure}[H]
 \centering
@@ -127,7 +124,7 @@ In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Diens
 \footnotetext{Entnommen aus: \cite{Pogosova.28.05.2020}}
 Kinesis Data Streams unterteilt, wie in \autoref{abb:KinesisShards} gezeigt, Daten in einzelne Partitionen/Shards, in denen gleich partitionierte Datensätze verarbeitet werden können.\footcite[Vgl. auch im Folgenden][]{Pogosova.28.05.2020} Einzelne Shards verhalten sich dabei wie geordnete Warteschlangen und speichern die Nachrichten nach Eingangsdatum sortiert. 
 
-\subsubsection{Featurevergleich}
+\subsubsection{Features des Dienstes}
 Folgend werden die Funktionen von Kinesis Data Analytics dargestellt. 
 
 Eine direkte Funktion um den Median oder Quantile zu berechnen, ist nicht vorhanden. \footcite[Vgl.][]{RyanN.2018} Statdessen ist aber eine Lösung mittels der \mintinline[breaklines]{sql}{group_rank} Funktion möglich, wie von \citeauthor{RyanN.2018} im \ac{AWS} Forum gezeigt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.as}\nzitat\footcite[Vgl.][]{RyanN.2018}
@@ -136,12 +133,14 @@ Die Schwellwertüberschreitungserkennung ist mittels einer \ac{SQL} \mintinline{
 Der gleitende Durchschnitt lässt sich für Intervalle mittels der \mintinline[breaklines]{sql}{EXP_AVG} Funktion berechnen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.aq}
 \citeauthor{Herman.2020} kritisiert bei Kinesis Data Analytics den angepassten \ac{SQL} Dialekt, welcher keine Interoperabilität zulässt und die fehlende Testbarkeit ausserhalb von \ac{AWS} Wekrzeugen.\footcite[Vgl.][]{Herman.2020}
 
-\subsubsection{Performancevergleich}
-Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Mittels des \enquote{enhanced fanout} kann Kinesis gleichzeitig 2MB an Durchsatz pro Sekunde zu konsumierenden Applikationen bereitstellen.\footcite[Vgl. auch im Folgenden][]{Hunt.2018} Gleichzeitig bietet \ac{AWS} laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} Trotz der Aussagen in der eigenen Dokumentation, dass die Ende zu Ende Verzögerung von Dateneinspeisung bis Konsumption typischerweise unter einer Sekunde liegt, was die eigentliche Garantie von 70 Milisekunden schon aufweicht  ist in der Kinesis \ac{SLA} nur eine Verfügbarkeit von 99,99\% pro Monat garantiert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ae}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ad} Es ist Abwägungssache, ob der Subsekunden Latenz von Kinesis Data Streams Glauben geschenkt wird, beziehungsweise ob die Latenz im Subsekunden Bereich überhaupt relevant ist, oder ob alles kleiner fünf Sekunden als nahe genug an der Echtzeit akzeptiert wird.
+\subsubsection{Performancegarantien}
+Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Mittels des \enquote{enhanced fanout} kann Kinesis gleichzeitig 2MB an Durchsatz pro Sekunde zu konsumierenden Applikationen bereitstellen.\footcite[Vgl. auch im Folgenden][]{Hunt.2018} Gleichzeitig bietet \ac{AWS} laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} 
+Laut der \ac{AWS}-eigenen Dokumentation liegt die Ende zu Ende Verzögerung von Dateneinspeisung bis Konsumption typischerweise unter einer Sekunde. Dies weicht das eigentliche Marketingversprechen von 70 Milisekunden schon auf.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ae}
+Die Kinesis \ac{SLA} enthält auch keine Klausel zur eigentlichen Performance, nur eine Garantie zur Verfügbarkeit von 99,99\% pro Monat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ad} Es ist Abwägungssache, ob der Subsekunden Latenz von Kinesis Data Streams Glauben geschenkt wird, beziehungsweise ob die Latenz im Subsekunden Bereich überhaupt relevant ist, oder ob alles kleiner fünf Sekunden als nahe genug an der Echtzeit akzeptiert wird.
 
 Es gab bis jetzt ein schweres Ereignis, bei dem Kinesis in einer Region für den Zeitraum von 12 Stunden beeinträchtigt war und andere, von Kinesis abhängige Dienste beeinträchtigte.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020e} Dieses Ereignis war jedoch auf die \enquote{us-east-1} Region begrenzt und die Auswirkungen konnten durch Migration auf andere Regionen, wie beispielsweise \enquote{eu-central-1} für Nutzende mitigiert werden.
 
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -152,23 +151,21 @@ Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
 \begin{tabular}[c]{@{}l@{}}Kinesis Data Analytics\\ Processing Unit\end{tabular} & 0,132/h & 32,12 \\ \hline
 \ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & \textless{}0,02 \\ \hline
 Lambda Ausführungen & \begin{tabular}[c]{@{}l@{}}0,0000002/Ausführung\\ 0,0000166667/Sekunde (angenommen: 5)\\ 0,0000000167/GB \acs{RAM}/ms\end{tabular} & 0,08 \\ \hline
-\ac{S3}-Speicher & 0,0245/GB Speicher & 0,0006 \\ \hline
 Summe & \cellcolor[HTML]{EFEFEF} & \underline{45,51} \\ \hline
 \end{tabular}
 \caption{Kostenvergleich Amazon~Kinesis}
 \label{tab:kostenvergleich-Amazon~Kinesis}
 \end{table}
 
-Siehe \footcite[Vgl.][]{AmazonWebServicesInc..o.J.l}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.m}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..2017b}
+Für die Gesamtschätzung wurde sowohl Kinesis Data Streams mit einem Shard angesetzt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.l} Zusätzlich wird angenommen, das \ac{SQL}-Statements ausgeführt werden, welche als \enquote{Processing units} abgerechnet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.m} Da Kinesis Data Analytics nicht selbstständig mit \ac{SNS} kommunizieren kann, wird Lambda als Weiterleitungsplattform für Alarme mit angesetzt.\footcite[Vgl.][]{AmazonWebServicesInc..2017b} 
 
-% \subsubsection{Gesamtbewertung}
-% \produktbewertung{Amazon~Kinesis}{11,5,4,4,6,6,5,0,3,2,0,46}
+
 
 \subsection{AWS Lambda}\label{chap:vergleich-lambda}
 
 
 Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS} Dienstes. Innerhalb dieser Arbeit wird Lambda als einzige generelle Computing Plattform betrachtet, da Alternativen wie \ac{EC2}, welches virtuelle Maschinen anbietet oder \ac{ECS}, welches Container anbietet einen von einzelnen Events unabhängigen Lebenszyklus haben. 
-So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert kontinuierlich und holen/ \enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. Lambda hingegen wird von unterstützenden Diensten zur Verarbeitung von Events aufgerufen. 
+So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert kontinuierlich und holen/ \enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen, sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. Lambda hingegen wird von unterstützenden Diensten zur Verarbeitung von Events aufgerufen. 
 Dabei ist je nach Dienst einstellbar, ob ein Aufruf pro Event stattfinden soll, oder Events zu einer konfigurierbaren Anzahl gruppiert werden und dann an Lambda übergeben werden. Lambda eignet sich besonders für analytische Workloads, seit der kürzlichen Addition von Intels \ac{AVX2}.\footcite[Vgl. auch im Folgenden][]{Beswick.24.11.2020} \ac{AVX2} ist ein spezieller CPU-Instruktionssatz, der die Verarbeitung von Vektorinstruktionen, wie sie beispielsweise beim Machine Learning oder in der Statistik vorkommen, beschleunigt. 
 Aufgrund der zentralen Rolle im Bereich Compute bei \ac{AWS}, können viele Dienste Events an Lambda senden. In \autoref{abb:GrobArchitekturLambda} sind als Integrationsbeispiele die \acp{MoM} \ac{IoT} Core, MQ und Kinesis Data Streams als Eventlieferanten gezeigt.
 \begin{figure}[H]
@@ -178,15 +175,15 @@ Aufgrund der zentralen Rolle im Bereich Compute bei \ac{AWS}, können viele Dien
 \label{abb:GrobArchitekturLambda}
 \end{figure}
 
-\subsubsection{Featurevergleich}
-Da Lambda eine programmierbare Plattform ist, welche mehrere Sprachen unterstützt, muss im Folgenden eine Programmiersprache angenommen werden. Da Python in einer Umfrage von Kaggle unter Datenwissenschaftlern die höchste Popularität bei der Sprache Python, gefolgt von \ac{SQL} ausgemacht haben, wird im Folgenden von der Verwendung der Programmiersprache Python ausgegangen (speziell auch, da sich eine Umsetzung mit \ac{SQL} in Lambda schwierig gestalten würde).\footcite[Vgl.][]{Hayes.2020} Gemäß einer Analyse des Entwicklerportals Stack Overflow ist das Paket \enquote{pandas} dabei die populärste Programmbibliothek für Datenwissenschaft.\footcite[Vgl.][]{Robinson.2017} Aus diesem Grund wird im Folgenden die Verwendung von Python mit pandas in Lambda angenommen. Angenommen wird, dass das an Lambda übermittelte Bearbeitungsfenster groß genug war, um Analysen zuzulassen.
+\subsubsection{Features des Dienstes}
+Da Lambda eine programmierbare Plattform ist, welche mehrere Sprachen unterstützt, muss im Folgenden eine Programmiersprache angenommen werden. Python hat in einer Umfrage von Kaggle unter Datenwissenschaftlern die höchste Popularität, gefolgt von \ac{SQL} ausgemacht. Aus diesem Grund wird im Folgenden von der Verwendung der Programmiersprache Python ausgegangen (speziell auch, da sich eine Umsetzung mit \ac{SQL} in Lambda schwierig gestalten würde).\footcite[Vgl.][]{Hayes.2020} Gemäß einer Analyse des Entwicklerportals Stack Overflow ist das Paket \enquote{pandas} dabei die populärste Programmbibliothek für Datenwissenschaft.\footcite[Vgl.][]{Robinson.2017} Aus diesem Grund wird im Folgenden die Verwendung von Python mit pandas in Lambda angenommen. Angenommen wird, dass das an Lambda übermittelte Bearbeitungsfenster groß genug war, um Analysen zuzulassen.
 \newcommand{\pandasmethod}[1]{\mintinline[breaklines]{python}{pandas.#1()}}
-In pandas können Quantile mittels der \pandasmethod{DataFrame.quantile} Methode berechnet werden.\footcite[Vgl.][]{o.V..o.J.c} Für den Median ist eine eigene Methode verfügbar, \pandasmethod{DataFrame.median}. \footcite[Vgl.][]{o.V..o.J.d} Der Median könnte natürlich auch via der \pandasmethod{DataFrame.quantile} MEthode berechnet werden.
-\citeauthor{Bartos.2019} haben den Random Cut Forest Algorithmus von \citeauthor{Guha.2016} in Python zur Verwendung mit pandas als seperate Bibliothek implementiert und OpenSource bereitgestellt.\footnote{Siehe: \url{https://github.com/kLabUM/rrcf}}\nzitat\footcite[Vgl.][]{Bartos.2019} Es gibt, wie bei den anderen Produkten gezeigt, viele weitere Methoden zur Anomalieerekennung, welche programmatisch implementiert werden könnten.
+In pandas können Quantile mittels der \pandasmethod{DataFrame.quantile} Methode berechnet werden.\footcite[Vgl.][]{o.V..o.J.c} Für den Median ist eine eigene Methode verfügbar, \pandasmethod{DataFrame.median}. \footcite[Vgl.][]{o.V..o.J.d}
+\citeauthor{Bartos.2019} haben den Random Cut Forest Algorithmus von \citeauthor{Guha.2016} in Python zur Verwendung mit pandas als seperate Bibliothek implementiert und OpenSource bereitgestellt.\footnote{Siehe: \url{https://github.com/kLabUM/rrcf}}\nzitat\footcite[Vgl.][]{Bartos.2019} Es gibt, wie bei den anderen Diensten gezeigt, viele weitere Methoden zur Anomalieerekennung, welche programmatisch implementiert werden könnten.
 Schwellwertüberschreitungen können mittels \pandasmethod{DataFrame.gt} überprüft werden, wobei \enquote{gt} für \enquote{greater-than} steht.\footcite[Vgl.][]{o.V..o.J.e}
-Ein exponentieller gleitender Durchschnitt lässt sich, wie von \citeauthor{Sharma.2019} gezeigt, mittels der folgenden, verketteten, Methoden berechnen: \pandasmethod{DataFrame.ewm().mean()}.\footcite[Vgl.][]{Sharma.2019} 
+Ein exponentieller gleitender Durchschnitt lässt sich, wie von \citeauthor{Sharma.2019} gezeigt, mittels der folgenden, verketteten, Methoden berechnen: \pandasmethod{DataFrame.ewm().mean}.\footcite[Vgl.][]{Sharma.2019} 
 
-\subsubsection{Performancevergleich}
+\subsubsection{Performancegarantien}
 \ac{AWS} bietet für Lambda in dem \ac{SLA} eine 99,\textbf{95} \% garantierte Verfügbarkeit an.\footcite[Vgl.][]{AmazonWebServicesInc..2019d}
 
 Die Zuweisung von \ac{RAM} und daran gekoppelt vCPUs erfolgt bei Lambda dynamisch und ist vom Nutzer einzustellen. Um dies für Nutzende einfacher zu machen, gibt es das Projekt Lambda Power Tuning, welches die optimale \ac{RAM}-/Leistungskonfiguration für Funktionen ermittelt durch mehrere Tests.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.at} Da höhere \ac{RAM} Einstellungen mehr kosten, kann für optimale Leistung oder für das Preis/Leistungsoptimum optimiert werden.
@@ -194,7 +191,7 @@ Die Zuweisung von \ac{RAM} und daran gekoppelt vCPUs erfolgt bei Lambda dynamisc
 Wie von \citeauthor{Madden.2019} gezeigt, eignet sich Lambda für die Verarbeitung großer Datensätze. 
 Dies wurde mit der Verarbeitung von 259 TB Daten in knapp 20 Minuten demonstriert.\footcite[Vgl. auch im Folgenden][]{Madden.2019} Speziell heben \citeauthor{Madden.2019} auch hervor, dass Lambda von keiner Last zu knapp zwei Millionen Einträgen pro Sekunde und zurück skaliert hat.
 
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
 \autoref{tab:kostenvergleich-AWS~Lambda~Maximal} zeigt die möglichen Kosten, wenn für jede eingehende Nachricht eine Lambdafunktion aufgerufen und ausgeführt wird (unabhängig davon, dass das mit den Standardeinstellungen für Parallelität nicht realisierbar wäre).
 \begin{table}[H]
 \centering
@@ -265,8 +262,6 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{0,1041} \\ \hline
 \label{tab:kostenvergleich-AWS~Lambda~IOT~Sammelverarbeitung}
 \end{table}
 
-% \subsubsection{Gesamtbewertung}
-% \produktbewertung{AWS~Lambda}{8,10,9,6,7,6,0,0,3,2,1,52}
 
 \subsection{Amazon MSK / ksqlDB}
 
@@ -282,20 +277,21 @@ Bei \ac{MSK} handelt es sich um einen Managed Service für die Open Source Lösu
 Kafka selber fungiert nur als Broker für Daten. Da sich aber im Laufe der Zeit im Kafka Ökosystem Angebote wie ksqlDB entwickelt haben, welche nur mit Kafka funktionieren werden diese betrachtet. Möglich, aber kostenintensiv (durch Weiterleitung \ac{IoT} Core  $\rightarrow$ MSK  $\rightarrow$ Lambda) wäre die Weiterleitung auch an Lambda. Stattdessen soll aber ksqlDB die Verarbeitung übernehmen. Dieses wird wie sein Vorgänger KSQL hautpsächlich von der Firma Confluent, Inc. als OpenSource entwickelt und dient der Verarbeitung von Kafka Daten mittels \ac{SQL} in Form einer Streamverarbeitung.\footcite[Vgl.][]{Kreps.2019}\nzitat\footcite[Vgl.][]{Narkhede.2017} KSQL/ksqlDB kann wie von \citeauthor{Penz.2020} gezeigt, in \ac{AWS} in einem Container in \ac{ECS} oder in einer virtuellen Maschine, in \ac{EC2} betrieben werden.
 
 
-\subsubsection{Featurevergleich}
+\subsubsection{Features des Dienstes}
 Im Folgenden wird der Featureumfang von ksqlDB näher beleuchtet.
 Die Berechnung eines Medians/von Perzentilen scheint in ksqlDB nicht trivial machbar zu sein.
 Wie von \citeauthor{Waehner.2018} gezeigt, ist es möglich in den ksql eigenen \acp{UDF}, in welchen eigener Code ausgeführt wird, Anomalieerkennung basierend auf Machine Learning durchzuführen.\footcite[Vgl.][]{Waehner.2018}
 Eine Schwellwertüberschreitung kann mittels einer \mintinline[breaklines]{sql}{WHERE} Bedingung festgestellt werden.
-Ein gleitender Durchschnitt kann ebenfalls mittels einer \ac{UDF} realisiert werden, welche diesen berechnet.\footcite[Vgl.][]{ConfluentInc..o.J.c}
+Ein gleitender Durchschnitt kann ebenfalls mittels einer \ac{UDF} realisiert werden.\footcite[Vgl.][]{ConfluentInc..o.J.c} 
+Diese berechnet den gleitenden Durchschnitt mit eigenem Code.
 
-\subsubsection{Performancevergleich}
+\subsubsection{Performancegarantien}
 Da die Ressourcen für ksqlDB selbst eingestellt werden können, ist eine absolute Performanceaussage nicht möglich. Zusätzlich müssen zugehörige Ressourcen entweder selbst verwaltet werden oder als managed service von Confluent bezogen werden.
 Die \ac{SLA} von \ac{MSK} definiert als Verfügbarkeitsziel 99,9\%, jedoch keine weiteren Performanceziele.\footcite[Vgl.][]{AmazonWebServicesInc..2019e} 
 Die Performance von \ac{MSK} ist aufgrund des unterliegenden Instanzmodells wesentlich durch die Nutzenden beeinflussbar und ggf. durch vertikale Skalierung verbesserbar.
 In einem Performancetest, den \ac{AWS} für \citeauthor{Statz.2019} durchgeführt hat, wurde als machbare Eingangsrate 310MB/Sekunde bei 15 provisionierten Brokern für möglich erklärt.\footcite[Vgl.][]{Statz.2019} 
 
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
 Wie von \citeauthor{Beswick.2020} dargestellt und in \autoref{abb:NetworkingMSK} gezeigt, muss MSK in mindestens zwei Availability Zones gestartet werden.\footcite[Vgl. auch im Folgenden][]{Beswick.2020} Dabei ist es für weniger kritische Systeme, wie hier gezeigt möglich, nur ein \ac{NAT}-Gateway zu verwenden, welches Konnektivität zum Internet ermöglicht (ohne eingehenden Traffic zu erlauben). Für kritische Lasten sollte ksqldb und das \ac{NAT}-Gateway in das zweite Subnetz repliziert werden.
 \begin{figure}[H]
 \centering
@@ -328,15 +324,10 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{168,104} \\ \hline
 In einem Vergleich zwischen \ac{AWS} und dem Mitbewerber Confluent, stellte \citeauthor{Statz.2019} in einer Modellrechnung fest, dass \ac{AWS} preisgünstiger war.\footcite[Vgl.][]{Statz.2019}
 
 
-% \subsubsection{Gesamtbewertung}
-% \produktbewertung{Amazon~MSK}{11,5,4,7,5,6,5,0,3,1,1,48}
-% => binary protocol no \ac{MQTT} Support, redundant, only Lambda and EC2 conenctivity
-
 % \subsection{AWS Glue}
 % Mittels dem \ac{AWS} Glue Dienst, welcher diverse \ac{ETL} Dienste, wie beispielsweise Datenkatalogisierung und Datentransformation basierend auf dem Apache Spark Ökosystem anbietet, können ebenfalls Streams analysiert werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.d}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020} Basierend auf der Apache Spark Structured 
 % Streaming-Engine können nach Aussage des Herstellers Daten aus Kinesis oder Kafka (und damit aus \ac{MSK}) geladen werden. Nachfolgend werden die eingehenden Daten mittels sogenannter Jobs analysiert/transformiert, welche in Sprachen wie Scala, Java, Python oder R geschrieben sein können. Nach Abschluss der Analyse können die Daten in \ac{S3} oder in eine \ac{JDBC} kompatible Datenbank (z.B. MySQL, PostgreSQL, Amazon Redshift, Oracle Databse, ...) geladen werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.e} Die Interaktion zwischen eigener Logik und AWS Glue erfolgt via \acp{API} von Apache Spark, die entsprechende Kentnisse zur Interaktion mit den Daten erfordern.
 
-% \produktbewertung{AWS~Glue}{8,10,9,6,4,4,5,0,2,1,0,49}
 
 % \begin{table}[H]
 % \centering
@@ -357,10 +348,10 @@ In einem Vergleich zwischen \ac{AWS} und dem Mitbewerber Confluent, stellte \cit
 
 
 
-\subsection{Produktauswahl}
-Da Kafka übertragbar ist, genauso wie der Programmcode von Lambda, wurden bei beiden Diensten kein Punktabzug für die Übertragbarkeit vorgenommen. Alle Produkte mit Ausnahme von der Kombination aus \ac{MSK} und ksqlDB integrieren sich gut mit dem Dienstleistungsumfang von \ac{AWS}. Speziell ist dabei Lambda zu erwähnen, welches als generalistische Plattform mit einigen Diensten interagieren kann. Da \ac{IoT} Events speziell auf die Erkennung von Ereignissen anhand von \enquote{if-then-else} Bedingungen entwickelt wurde, sind kaum andere, generalisiertere Anwendungsfälle realisierbar. Ebenfalls ist eine Erweiterbarkeit mit \AWSIOT Events nicht gegeben und auch eine Erfüllung der vorgegebenen Auswertungen ist nur mit höchster Implementierungskreativität in Teilen machbar. Abzüge zur Fehlertransparenz gab es bei allen Dienstleistungen, speziell auch in Lambda, da Fehlertriage nur durch Replikation der Inputs und Debugging des Codes machbar ist. Da bei Kinesis Data Streams die Shards manuell skaliert werden müssen, wurden Abzüge beim Wartungsaufwand und der Skalierbarkeit gemacht. Da der Wartungsaufwand bei Lambda stark von der Stabilität des laufenden Programmcodes abhängig ist und genau überprüft werden muss , ob Fehler bei der Verarbeitung auftreten, wurden Abzüge gemacht. \ac{MSK} mit ksqlDB zu skalieren ist eine aufwändige Aufgabe, welche häufiges nachjustieren und viel Zeit erfordert. Im Gegensatz dazu ist \AWSIOT Events nur zu warten, wenn das Nachrichtenformat vom initial konfigurierten abweicht. Da Lambda und \AWSIOT Events serverless bzw. im Fall von \AWSIOT Events auch vollständig verwaltet sind, ist die Skalierbarkeit und \enquote{serverlessness} gegeben. Kinesis hat im Normalbetrieb die geringsten monatlichen Kosten, während es bei Lambda von der konkreten Konfiguration udn der Anzahl an übermittelten Nachrichten abhängig ist, wie hoch die Kosten ausfallen. \AWSIOT Events ist im Vergleich zu den anderen Produkten Preis/Leistungs-technisch stark unterlegen. Bei \ac{MSK} wurden Abzüge gemacht, da viele einzeln zu skalierende Teile, die einzeln teurer werden könnten abgerechnet werden und mindestens zwei Broker betrieben werden müssen. Kinesis ist ein System, was überwiegend stabil läuft und auch vor nutzerverursachten Fehlern gefeit ist, was einer der Gründe sein Dürfte, weshalb andere \ac{AWS} Dienste auf Kinesis aufbauen. Lambda hingegen ist je nach Ausgestaltung des Programmcodes nicht besonders fehlertolerant. Da \ac{MSK} aus Redundanzgründen in mindestens zwei Availability Zones gestartet werden muss, ist es per se auch robust, jedoch kommt durch ksqlDB ein weiterer \enquote{Point of failure} hinzu, welcher mit größerem Aufwand robust und fehlertolerant gemacht werden muss. \AWSIOT Events ist sehr robust und fehlertolerant, da es komplett verwaltet wird und die einzigen Fehler durch Nutzende eingeführt werden können. 
+\subsection{Auswahl}
+Da Kafka übertragbar ist, genauso wie der Programmcode von Lambda, wurden bei beiden Diensten kein Punktabzug für die Übertragbarkeit vorgenommen. Alle Dienste mit Ausnahme von der Kombination aus \ac{MSK} und ksqlDB integrieren sich gut mit dem Dienstleistungsumfang von \ac{AWS}. Speziell ist dabei Lambda zu erwähnen, welches als generalistische Plattform mit vielen Diensten interagieren kann. Da \ac{IoT} Events speziell auf die Erkennung von Ereignissen anhand von \enquote{if-then-else} Bedingungen entwickelt wurde, sind kaum andere, generalisiertere Anwendungsfälle realisierbar. Ebenfalls ist eine Erweiterbarkeit mit \AWSIOT{} Events nicht gegeben und auch eine Erfüllung der vorgegebenen Auswertungen ist nur mit höchster Implementierungskreativität in Teilen machbar. Abzüge zur Fehlertransparenz gab es bei allen Dienstleistungen, speziell auch in Lambda, da Fehlertriage nur durch Replikation der Inputs und Debugging des Codes machbar ist. Da bei Kinesis Data Streams die Shards manuell skaliert werden müssen, wurden Abzüge beim Wartungsaufwand und der Skalierbarkeit gemacht. Da der Wartungsaufwand bei Lambda stark von der Stabilität des laufenden Programmcodes abhängig ist und genau überprüft werden muss , ob Fehler bei der Verarbeitung auftreten, wurden Abzüge gemacht. \ac{MSK} mit ksqlDB zu skalieren ist eine aufwändige Aufgabe, welche häufiges nachjustieren und viel Zeit erfordert. Im Gegensatz dazu ist \AWSIOT{} Events nur zu warten, wenn das Nachrichtenformat vom initial konfigurierten abweicht. Da Lambda und \AWSIOT{} Events serverless bzw. im Fall von \AWSIOT{} Events auch vollständig verwaltet sind, ist die Skalierbarkeit und \enquote{serverlessness} gegeben. Kinesis hat im Normalbetrieb die geringsten monatlichen Kosten, während es bei Lambda von der konkreten Konfiguration udn der Anzahl an übermittelten Nachrichten abhängig ist, wie hoch die Kosten ausfallen. \AWSIOT{} Events ist im Vergleich zu den anderen Diensten Preis/Leistungs-technisch stark unterlegen. Bei \ac{MSK} wurden Abzüge gemacht, da viele einzeln zu skalierende Teile, die einzeln teurer werden könnten abgerechnet werden und mindestens zwei Broker betrieben werden müssen. Kinesis ist ein System, was überwiegend stabil läuft und auch vor nutzerverursachten Fehlern gefeit ist, was einer der Gründe sein dürfte, weshalb andere \ac{AWS} Dienste auf Kinesis aufbauen. Lambda hingegen ist je nach Ausgestaltung des Programmcodes nicht besonders fehlertolerant. Da \ac{MSK} aus Redundanzgründen in mindestens zwei Availability Zones gestartet werden muss, ist es per se auch robust, jedoch kommt durch ksqlDB ein weiterer \enquote{Point of failure} hinzu, welcher mit größerem Aufwand robust und fehlertolerant gemacht werden muss. \AWSIOT{} Events ist sehr robust und fehlertolerant, da es komplett verwaltet wird und die einzigen Fehler durch Nutzende eingeführt werden können. 
 
 \input{content/04-produkte/vergleiche/echtzeit-vergleich}
 
-Insgesamt ist der präfferierte Dienst aus der Echtzeitkategorie, wie in \autoref{tab:bewertungsmatrix-echtzeit} zu sehen, Kinesis.
+Insgesamt ist der präferierte Dienst aus der Echtzeitkategorie, wie in \autoref{tab:bewertungsmatrix-echtzeit} zu sehen, Kinesis.
 

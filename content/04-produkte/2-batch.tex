@@ -3,7 +3,7 @@ In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die Batch (\enquote{
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Overview-DB.pdf}
-\caption{Einsetzbare Produkte im Bereich Datenbankverarbeitung}
+\caption{Einsetzbare Dienste im Bereich Datenbankverarbeitung}
 \label{abb:ProdukteDB}
 \end{figure}
 
@@ -18,7 +18,7 @@ Timestream besitzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funkti
 \label{listing:timestream-kostenvergleich}
 \end{listing}
 
-Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in der Dokumentation selbst an, dass Lambda verwendet werden kann, um periodisch eine Abfrage in Timestream auszuführen und basierend auf dieser Anfrage Alarme via \ac{SNS} zu versenden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ag} Abgebildet ist diese Interaktion in \autoref{abb:TimestreamLAmbdaOrchestration}.
+Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in der Dokumentation an, dass Lambda verwendet werden kann, um periodisch eine Abfrage in Timestream auszuführen und basierend auf dieser Anfrage Alarme via \ac{SNS} zu versenden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ag} Abgebildet ist diese Interaktion in \autoref{abb:TimestreamLAmbdaOrchestration}.
 
 
 \begin{figure}[H]
@@ -28,20 +28,20 @@ Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in de
 \label{abb:TimestreamLAmbdaOrchestration}
 \end{figure}
 
-\subsubsection{Featurevergleich}
+\subsubsection{Features des Dienstes}
 Perzentile lassen sich mit der eingebauten Funktion \mintinline{sql}{approx_percentile(x, percentage)} berechnen, der Mittelwert via \mintinline{sql}{avg(x)} oder \mintinline{sql}{geometric_mean(x)}
-Eine native Anomalieerkennung bietet Timestream nicht, jedoch kann die Machine Learning Dienstleistung Amazon SageMaker Daten von Timestream analysieren und Anomlieerkennung ausführen.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.aj} In SageMaker kann auch der nativ in Kinesis Data Analytics verbaute Random Cut Forest Algorithmus verwendet werden, um Anomalien zu erkennen. Andernfalls kann, wie von \citeauthor{Salgado.2019} beschrieben, eine einfache Anomalieerkennung durch Überprüfung des Wertes auf Lage ziwschen 25. und 75. Quantil erfolgen.\footcite[Vgl.][]{Salgado.2019}
+Eine native Anomalieerkennung bietet Timestream nicht, jedoch kann die Machine Learning Dienstleistung Amazon SageMaker Daten von Timestream analysieren und Anomalieerkennung ausführen.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.aj} In SageMaker kann auch der nativ in Kinesis Data Analytics verbaute Random Cut Forest Algorithmus verwendet werden, um Anomalien zu erkennen. Andernfalls kann, wie von \citeauthor{Salgado.2019} beschrieben, eine einfache Anomalieerkennung durch Überprüfung des Wertes auf Lage zwischen 25. und 75. Quantil erfolgen.\footcite[Vgl.][]{Salgado.2019}
 Die Schwellwertüberschreitungserkennung ist mittels einer einfachen \mintinline{sql}{WHERE} Bedingung machbar.
 Ein gleitender Durchschnitt ist, wie von \citeauthor{Ross.2020} gezeigt, in SQL mittels der Bearbeitungsfenster, die Timestream, wie viele andere \ac{SQL} Implementierungen anbietet, möglich.\footcite[Vgl.][]{Ross.2020} Gleichzeitig unterstützt Amazon Timestream die Verwendung von Ableitungen als Werkzeug zur Trenderkennung.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ai}
 
-\subsubsection{Performancevergleich}
+\subsubsection{Performancegarantien}
 Die \ac{SLA} von Timestream bietet allein 99,99\% Verfügbarkeit pro Verrechnungsmonat.\footcite[Vgl.][]{AmazonWebServicesInc..2020d} \ac{AWS} verspricht aber eine bis zu tausendfache Geschwindigkeitsverbesserung gegenüber relationalen Datenbanken.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ak}
 
-Mitbewerber von \ac{AWS} im Bereich der Zeitseriendatenbanken haben in ihren Tests festegestellt, dass Timestream langsamer als ihre Konkurrenzprodukte waren.\footcite[Vgl.][]{Booz.2020}\nzitat\footcite[Vgl.][]{Crate.ioInc..2020} Dabei sind die Testskripte von \citeauthor{Booz.2020} Open Source und damit die Messungen theoretisch reproduzierbar. Gleichzeitig gibt \ac{AWS} aber in einem Blogeintrag aus dem November an, Datensätze im Bereich von einem bis 21,7 TB analysieren zu können, ohne 100 Sekunden Ausführungszeit zu überschreiten.\footcite[Vgl.][]{Das.2020} Auch für diese Tests ist der Quellcode open source verfügbar.
+Mitbewerber von \ac{AWS} im Bereich der Zeitseriendatenbanken haben in ihren Tests festegestellt, dass Timestream langsamer als ihre Konkurrenzdienste/Konkurrenzprodukte waren.\footcite[Vgl.][]{Booz.2020}\nzitat\footcite[Vgl.][]{Crate.ioInc..2020} Dabei sind die Testskripte von \citeauthor{Booz.2020} Open Source und damit die Messungen theoretisch reproduzierbar. Gleichzeitig gibt \ac{AWS} aber in einem Blogeintrag aus dem November an, Datensätze im Bereich von einem bis 21,7 TB analysieren zu können, ohne 100 Sekunden Ausführungszeit zu überschreiten.\footcite[Vgl.][]{Das.2020} Auch für diese Tests ist der Quellcode open source verfügbar.
 
-Es kann also keine finale Aussage über die genauen Performancegarantien getroffen werden, da entweder den Mitbewerbern von \ac{AWS} Glauben zu schenken ist, oder \ac{AWS} selber. Da es im kommerziellen Interesse aller Parteien liegt Timestream entweder auf- oder abzuwerten ist eine stichhaltige Aussage also nicht möglich.
+Es kann keine finale Aussage über die genauen Performancegarantien getroffen werden, da entweder den Mitbewerbern von \ac{AWS} Glauben zu schenken ist, oder \ac{AWS} selber. Da es im kommerziellen Interesse aller Parteien liegt Timestream entweder auf- oder abzuwerten ist eine stichhaltige Aussage nicht möglich.
 
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
 
 
 Timestream ist momentan noch nicht in Frankfurt verfügbar, weshalb die Kosten in der einzigen europäischen Zone mit verfügbarem Timestream, Irland, als Maßstab verwendet werden. Angenommen wird, dass die Daten eine Stunde im \ac{RAM} vorgehalten werden und danach in die Festplattenspeicherung überführt werden.
@@ -71,34 +71,31 @@ Summe & \cellcolor[HTML]{EFEFEF} & 32,9011 \\ \hline
 \label{tab:kostenvergleich-AWS~Timestream}
 \end{table}
 
-% \subsubsection{Gesamtbewertung}
-% \produktbewertung{Amazon~Timestream}{x,10,7,8,7,5,3,4,2,1,0,x}
-
-\subsection{Amazon Athena}\label{chap:athena}
+\subsection{Amazon Athena/Amazon S3}\label{chap:athena}
 
 
 Amazon Athena ist nach Aussage des Herstellers ein voll verwalteter Query Dienst, welcher das Durchsuchen von großen Datenmengen im \ac{S3} Speicherdienst möglich macht.\footcite[Vgl.][]{Barr.2016} Athena basiert dabei auf dem ursprünglich von Facebook entwickelten Presto, welches mittlerweile Open Source ist. Innerhalb von Athena können Daten verschiedener Formate (\ac{CSV}, Apache Parquet, Apache ORC, \ac{JSON}, ...) mittels \ac{SQL} verarbeitet werden. Zusätzlich ist seit November 2020 mittels der sogenannten \enquote{Federated Queries} auch die Abfrage von anderen Datenquellen wie Apache HBase, Amazon Document DB oder von Datenquellen, die durch eigenentwickelte Verbindungselemente verknüpft werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.s} Technisch werden diese Federated Queries via Lambda abgewickelt.
 
 Bei verändernden Datenschemata wird empfohlen, den Dienst \ac{AWS} Glue Crawler komplementär einzusetzen, welcher die Schemata aus \ac{S3} automatisch extrahiert und in Athena hinterlegt. Andernfalls können die Schemata auch manuell hinterlegt werden.
 
-\subsubsection{Featurevergleich}
-Die technische Grundlage für Athena, Presto bietet mit \mintinline{sql}{approx_percentile(x, percentage)} eine Funktion zur Kalkulation von Perzentilen an.\footcite[Vgl.][]{ThePrestoFoundation.o.J.}
+\subsubsection{Features des Dienstes}
+Die technische Grundlage für Athena, ist das OpenSource Projekt Presto. Dieses bietet mit \mintinline{sql}{approx_percentile(x, percentage)} eine Funktion zur Kalkulation von Perzentilen an.\footcite[Vgl.][]{ThePrestoFoundation.o.J.}
 Eine Möglichkeit, um Anomalien in Athena zu erkennen, ist es alle Werte, die ausserhalb der Spanne zwischen dem 25. und 75. Quantil liegen als Anomalie zu klassifizieren.\footcite[Vgl.][]{Salgado.2019} Dies wäre mit der \mintinline{sql}{approx_percentile(x, percentage)} Funktion von Athena machbar. Andernfalls könnte wie von \citeauthor{Megler.2016} vorgeschlagen, der Amazon \ac{EMR} Dienst benutzt werden, um Anomalien mittels der Bildung von Clustern und der Kalkulation der Distanz von Werten zu diesen Clustern zu detektieren.\footcite[Vgl.][]{Megler.2016}
 Schwellwertüberschreitungen können via einer \mintinline{sql}{WHERE} Bedingung, wie bei Timestream auch, erkannt werden.
 Wie bei Timestream auch kann nach der Methode von \citeauthor{Ross.2020} ein gleitender Durchschnitt mittels der Verarbeitungsfenster kalkuliert werden.\footcite[Vgl.][]{Ross.2020}
 
-\subsubsection{Performancevergleich}
+\subsubsection{Performancegarantien}
 
 \citeauthor{Hartland.2018} beschreiben einen Anwendungsfall, in dem sie Athena zur Analyse von Logdaten innerhalb der Datenanalyseinfrastruktur des ATLAS Experiments am Large Hadron Collider im CERN Forschungszentrum bei Genf verwenden.\footcite[Vgl.][]{Hartland.2018}
 
 Gleichzeitig stellen \citeauthor{Hartland.2018} auch fest, dass es Teil des Entwicklungsprozesses ist, die Anfragen zu  optimieren, um Kosten zu sparen.\footcite[Vgl.][5]{Hartland.2018} Dies entstammt der Natur von \ac{SQL} basierten Abfragemechanismen, da verschiedene Abfragestile und Operationen auf verschieden viele Speicherpartitionen zugreifen müssen. Da Athena nach Volumen der Speicherzugriffe abrechnet, kann es also sinnvoll sein, den Speicher nach Abfragearten zu partitionieren oder die Abfragen zu optimieren. Dazu können der im April 2021 vorgestellten \mintinline{sql}{EXPLAIN} \ac{SQL}-Befehl und die damit zusammenhängenden query execution plans verwendet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2021} Diese zeigen nach Aussage von \ac{AWS} auf, wie eine Abfrage ausgeführt werden würde und wie Laufzeiten optimiert werden können.
 
-Die reale Performance der bearbeiteten Anfragen garantiert \ac{AWS} nicht. Da Athena ein serverless Dienst ist, dessen unterleigende Kapazität vollständig von \ac{AWS} verwaltet wird, können Nutzende keinen Einfluss auf die provisionierten Ressourcen nehmen. Zusätzlich hängt die Performance stark von der Partitionierung der Daten und der Kompression ab.\footcite[Vgl.][]{Levy.2021} Zusätzlich zu beachten ist, dass Athena eine Limitierung von 20 (25 in der North Virginia Region) parallel laufenden/wartenden Anfragen hat und Anfragen nach 30 Minuten Laufzeit abgebrochen werden. \footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.ac} Diese Limitierungen können jedoch auf Anfrage erhöht werden.
+Die reale Performance der bearbeiteten Anfragen garantiert \ac{AWS} nicht. Da Athena ein serverless Dienst ist, dessen unterliegende Kapazität vollständig von \ac{AWS} verwaltet wird, können Nutzende keinen Einfluss auf die provisionierten Ressourcen nehmen. Zusätzlich hängt die Performance stark von der Partitionierung der Daten und der Kompression ab.\footcite[Vgl.][]{Levy.2021} Zusätzlich zu beachten ist, dass Athena eine Limitierung von 20 (25 in der North Virginia Region) parallel laufenden/wartenden Anfragen hat und Anfragen nach 30 Minuten Laufzeit abgebrochen werden. \footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.ac} Diese Limitierungen können jedoch auf Anfrage erhöht werden.
 
 Amazon garantiert vertraglich keine Performance, sondern nur die 99,99\% Verfügbarkeit des Dienstes in dem \ac{SLA}.\footcite[Vgl.][]{AmazonWebServicesInc..2019c} In Vergleichen von \citeauthor{Levy.2019} und \citeauthor{Khadtare.2018} mit dem Mitbewerber Google BigQuery zeigte Athena schlechtere Performance, gemessen an den Antwortzeiten der Abfragen, war aber günstiger.\footcite[Vgl.][]{Levy.2019}\nzitat\footcite[Vgl.][]{Khadtare.2018} Da \ac{AWS} Ende 2020 mit Athena engine version 2 wesentliche Performanceverbesserungen angekündigt hat, ist außerdem fraglich, ob die Daten noch aktuell sind.\footcite[Vgl.][]{AmazonWebServicesInc..2020c}
 
-\subsubsection{Kostenvergleich}
-Für die Folgende Kostenbewertung wird angenommen, dass Athena die Daten aus \ac{S3} indiziert, welche im \ac{JSON} Format gespeichert werden. Zu beachten ist, dass effizientere Formate wie CSV, oder sogar Apache Parquet und ORC, welche komprimiert Daten speichern können, verwendet werden  könnten. Verwendung von Parquet oder ORC würde laut \ac{AWS} 30-90\% Kosten sparen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Gleichzeitig kann aber eine Speicherung im \ac{JSON} Format via \AWSIOT{} Rule erfolgen, ohne dass weitere Verarbeitung notwendig ist.
+\subsubsection{Gesamtkosten}
+Für die folgende Kostenbewertung wird angenommen, dass Athena die Daten aus \ac{S3} indiziert, welche im \ac{JSON} Format gespeichert werden. Zu beachten ist, dass effizientere Formate wie CSV, oder sogar Apache Parquet und ORC, welche komprimiert Daten speichern können, verwendet werden  könnten. Verwendung von Parquet oder ORC würde laut \ac{AWS} 30-90\% Kosten sparen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Gleichzeitig kann aber eine Speicherung im \ac{JSON} Format via \AWSIOT{} Rule erfolgen, ohne dass weitere Verarbeitung notwendig ist.
 
 
 \begin{figure}[H]
@@ -127,34 +124,31 @@ Summe & \cellcolor[HTML]{EFEFEF} &  122,60\\ \hline
 \end{table}
 
 
-% \subsubsection{Gesamtbewertung}
-% \produktbewertung{Amazon~Athena}{x,x,x,x,x,x,x,x,x,x,x,x}
-
 
 \subsection{Amazon Redshift}
 
-Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage des Herstellers \enquote{enterprise-level} ist und auf ein Datenvolument von Petabytes skalieren kann. \footcite[Vgl.][1]{AmazonWebServicesInc..o.J.g} Redshift ist dabei ein klassisches \ac{OLAP} Produkt, welches für eine Vielzahl verschiedener Daten effizient Auswertungen bereitstellen kann. Redshift basiert auf der bekannten Open Source Datenbank PostgreSQL, weicht jedoch in der Implementierung diverser Kommandos und Features ab, die das Amazon als irrelevant für \ac{OLAP} Anwendungen hält.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}\nzitat\footcite[Vgl.][428\psqq]{AmazonWebServicesInc..o.J.g} Kern von Redshift sind sogenannte Cluster, welche aus einer oder mehrerer Berechnungsknoten (\enquote{compute nodes}) und Anführerknoten(\enquote{leader nodes}) besteht. Applikationen interagieren allein mit den Anführerknoten, die existierenden Berechnungsknoten sind zwar transparent für die Anwendung, werden jedoch von den Anführerknoten mit Ausführungsplänen versorgt, die diese entwickelt um Anfragen effizient zu verarbeiten.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}
+Amazon Redshift ist der Data Warehouse Dienst von \ac{AWS}, welcher nach Aussage des Herstellers \enquote{enterprise-level} ist und auf ein Datenvolumen von Petabytes skalieren kann. \footcite[Vgl.][1]{AmazonWebServicesInc..o.J.g} Redshift ist dabei ein klassischer \ac{OLAP} Dienst, welcher für eine Vielzahl verschiedener Daten effizient Auswertungen bereitstellen kann. Redshift basiert auf der bekannten Open Source Datenbank PostgreSQL, weicht jedoch in der Implementierung diverser Kommandos und Features ab, die Amazon als irrelevant für \ac{OLAP} Anwendungen hält.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}\nzitat\footcite[Vgl.][428\psqq]{AmazonWebServicesInc..o.J.g} Kern von Redshift sind sogenannte Cluster, welche aus einer oder mehrerer Berechnungsknoten (\enquote{compute nodes}) und Anführerknoten (\enquote{leader nodes}) besteht. Applikationen interagieren allein mit den Anführerknoten, die existierenden Berechnungsknoten sind zwar transparent für die Anwendung, werden jedoch von den Anführerknoten mit Ausführungsplänen versorgt, die diese entwickelt um Anfragen effizient zu verarbeiten.\footcite[Vgl.][4]{AmazonWebServicesInc..o.J.g}
 
 Redshift bietet zusätzlich mit Redshift Spectrum einen Dienst an, welcher auf den ersten Blick dem in \autoref{chap:athena} vorgestellten Athena gleicht. Beide rufen via \ac{SQL} Daten von \ac{S3} ab und beide kosten 5\$/TB gescannte Daten.\footcite[Vgl. auch im Folgenden][]{Smallcombe.2020} Wichtige Unterschiede liegen dabei aber in der Art, wie Ressourcen verwaltet und genutzt werden können. Während Redshifft Spectrum nur in Kombination mit einem Redshift Cluster verwendet werden kann, funktioniert Athena ohne Kopplung an verwaltende Ressourcen. Gleichzeitig ist ein stärkerer Einfluss auf die Performance bei Redshift möglich, da man zusätzliche Clusterressourcen einfach provisionieren kann, während Athena vollständig von \ac{AWS} verwaltet wird. Entsprechend erlaubt Redshift Spectrum zwar größeren Einfluss auf die Performance von Datenabfragen, dieser Einfluss muss jedoch in Form von zusätzlich abzurechnenden Clusterressourcen abgerechnet werden, was Redshift für Anwendungsfälle, die keine gesichert gleichbleibende Performance benötigen, unattraktiv macht.
 
 
-\subsubsection{Featurevergleich}
+\subsubsection{Features des Dienstes}
 Redshift verfügt über die Funktionen \mintinline[breaklines]{sql}{APPROXIMATE PERCENTILE_DISC(percentile)} und \\ \mintinline[breaklines]{sql}{PERCENTILE_CONT(percentile)}, welche Perzentile kalkulieren können durch Annahme einer diskreten oder kontinuierlichen Datenverteilung.
 
-Wie bereits bei Timestream und Athena gezeigt, kann \citeauthor{Salgado.2019}s Vorschlag verwendet werden, um alle Werte, ausserhalb der Spanne zwischen dem 25. und 75. Quantil liegen als Anomalie zu klassifizieren.\footcite[Vgl.][]{Salgado.2019} Obenstehende Perzentilfunktionen könnten dafür genutzt werden. Wie bereits bei Timestream und Athena vorgeschlagen, könnten auch externe Tools verwendet werden, um Anomalien mittels MAchine Learning oder statistischen Methoden zu entdecken. Eine weitere Möglichkeit wäre die mittlere absolute Abweichung vom Median in einem Verarbeitungsfenster zu analysieren und größere Abweichungen als Anomalie anzuerkennen.\footcite[Vgl.][]{Peak.2017}
+Wie bereits bei Timestream und Athena gezeigt, kann \citeauthor{Salgado.2019}s Vorschlag verwendet werden, um alle Werte, ausserhalb der Spanne zwischen dem 25. und 75. Quantil liegen als Anomalie zu klassifizieren.\footcite[Vgl.][]{Salgado.2019} Obenstehende Perzentilfunktionen könnten dafür genutzt werden. Wie bereits bei Timestream und Athena vorgeschlagen, könnten auch externe Tools verwendet werden, um Anomalien mittels Machine Learning oder statistischen Methoden zu entdecken. Eine weitere Möglichkeit wäre die mittlere absolute Abweichung vom Median in einem Verarbeitungsfenster zu analysieren und größere Abweichungen als Anomalie anzuerkennen.\footcite[Vgl.][]{Peak.2017}
 Schwellwertüberschreitungen können via einer \mintinline{sql}{WHERE} Bedingung, wie bei Timestream und Athena auch, erkannt werden.
 Wie bei Timestream und Athena kann nach der Methode von \citeauthor{Ross.2020} ein gleitender Durchschnitt mittels der Verarbeitungsfenster kalkuliert werden.\footcite[Vgl.][]{Ross.2020}\nzitat\footcite[Vgl.][]{Ubiq.o.J.} Diese Methode wird auch von \citeauthor{Ubiq.o.J.} für Redshift vorgeschlagen.\footcite[Vgl.][]{Ubiq.o.J.}
 
-\subsubsection{Performancevergleich}
+\subsubsection{Performancegarantien}
 \ac{AWS} sichert vertraglich für Redshift ebenfalls keine feste Performance im Rahmen des \acp{SLA} zu. Es werden allein Abschläge auf den zu zahlenden Preis angeboten, wenn die Verfügbarkeit des Dienstes unter 99,99\% des Monats lag.\footcite[Vgl.][]{AmazonWebServicesInc..2019b} Basierend auf den Leistungsdaten der Instanz, welche ausgewählt wurde, um Redshift zu betreiben und weiterer Faktoren, wie z.B. ob durch horizontale Skalierung mehrere Instanzen in einem Cluster zusammengefasst wurden, kann sich die Performance verändern. Zusätzlich sind wie bei vielen \ac{SQL}-basierten Datenbanken Optimierungen der Leistung durch Optimierung der gestellten Abfragen möglich.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ab} In der Erhebung von \citeauthor{Tan.2019} wurde Redshift (ohne Spectrum) ein Performancevorteil gegenüber Athena bescheinigt, während Spectrum schlechter abschnitt, als Redshift.\footcite[Vgl.][2176]{Tan.2019}
 
 
-\subsubsection{Kostenvergleich}
+\subsubsection{Gesamtkosten}
 Im Vergleich von \citeauthor{Gupta.2015}, bei dem alle Autoren \ac{AWS} angehören, bescheinigen sie Redshift ein \enquote{disruptives} Preismodell gegenüber anderer DataWarehouse Lösungen.\footcite[Vgl.][]{Gupta.2015} Ob für den Usecase dieser Arbeit Redshift ebenfalls ein \enquote{disruptives} und ansprechendes Preismodell hat, soll im Folgenden erläutert werden.
 
 Da Redshift Spectrum durch die zusätzlich zu provisionierenden Clusterresourcen einen Kostennachteil hat, wie auch von \citeauthor{Tan.2019} festgestellt, wird von einem Kostenvergleich für Spectrum abgesehen.\footcite[Vgl.][2178]{Tan.2019}
 
-Stattdessen werden die Kosten für ein \enquote{shared-nothing}\footcite[Vgl.][2172]{Tan.2019} Redshift \ac{OLAP} Cluster berrechnet. Dabei ist zu beachten, dass \AWSIOT{} keine direkte Rule bietet, um Daten in Redshift abzulegen. Stattdessen müssen die Daten via Kinesis Data Firehose oder \ac{AWS} Lambda eingefügt werden. Zum Zwecke der Datenübertragung wird in diesem Fall Kinesis Data Firehose kalkuliert. Wie bei Elasticsearch Service gibt es auch bei Redshift verschiedene unterliegende Instanzen zur Auswahl.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.z} Im Vergleich werden, den Empfehlungen von \ac{AWS} folgend, eine Instanz der \ac{DC2} Klasse verwendet, welche sich für unkomprimierte Datenmengen kleiner ein TB eignen. Die kleinste verfügbare \ac{DC2} Instanz ist \enquote{dc2.large} mit 2 vCPUs, 15GiB Hauptspeicher und ~160 GB Festplattenspeicher. Redshift muss innerhalb eines \acp{VPC} gestartet werden, um Netzwerkisolation sicherzustellen. Aus diesem Grund muss ein Aufpreis auf Kinesis Data Firehose zu zahlen, welches Datenübertragung in ein \ac{VPC} mit einem Aufschlag berechnet.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.y} Kinesis Data Firehose rundet dazu noch Daten zu den nächsten 5 KB auf, was eine effektive Datenmenge von 41,77GB ergibt.
+Stattdessen werden die Kosten für ein \enquote{shared-nothing}\footcite[Vgl.][2172]{Tan.2019} Redshift \ac{OLAP} Cluster berrechnet. Dabei ist zu beachten, dass \AWSIOT{} keine direkte Regel bietet, um Daten in Redshift abzulegen. Stattdessen müssen die Daten via Kinesis Data Firehose oder \ac{AWS} Lambda eingefügt werden. Zum Zwecke der Datenübertragung wird in diesem Fall Kinesis Data Firehose kalkuliert. Wie bei Elasticsearch Service gibt es auch bei Redshift verschiedene unterliegende Instanzen zur Auswahl.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.z} Im Vergleich werden, den Empfehlungen von \ac{AWS} folgend, eine Instanz der \ac{DC2} Klasse verwendet, welche sich für unkomprimierte Datenmengen kleiner ein TB eignen. Die kleinste verfügbare \ac{DC2} Instanz ist \enquote{dc2.large} mit 2 vCPUs, 15GiB Hauptspeicher und ~160 GB Festplattenspeicher. Redshift muss innerhalb eines \acp{VPC} gestartet werden, um Netzwerkisolation sicherzustellen. Aus diesem Grund ist ein Aufpreis auf Kinesis Data Firehose zu zahlen, welches Datenübertragung in ein \ac{VPC} mit einem Aufschlag berechnet.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.y} Kinesis Data Firehose rundet dazu noch Daten zu den nächsten 5 KB auf, was eine effektive Datenmenge von 41,77GB ergibt.
 
 Zusätzlich müssen Lambda Ausführung dazu gerechnet werden, die die Ausführungen der hinterlegten \ac{SQL} Abfragen zur Auswertung ausführen und danach \ac{SNS} benachrichtigen.
 
@@ -179,7 +173,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & 243,920192 \\ \hline
 
 Amazon OpenSearch Service ist die verwaltetete Variante des Elasticsearch Forks von Amazon, OpenSearch.\footcite[Vgl. auch im Folgenden][]{Meadows.2021} OpenSearch Service, dessen Namensänderung weg von Elasticsearch Service im April 2021 angekündigt wurde, bietet die Datenbank Elasticsearch als Service an, welche ursprünglich von Elastic entwickelt wurde. Elasticsearch ist dabei nach Aussage des Herstellers eine verteilte, freie und offene Analytics- und Suchplattform für viele verschiedenen Datenformen.\footcite[Vgl.][]{ElasticsearchInc..o.J.} Elasticsearch basiert auf der Open Source Bibliothek Apache Lucene, welche besonders für Suchabfragen in großen Datenmengen optimiert ist. Elasticsearch geniesst neben der Popularität im Bereich Logverarbeitung und Monitoring auch Beliebtheit als \ac{IIoT} Datenbank.\footcite[Vgl.][]{Mantfeld.2019}\nzitat\footcite[Vgl.][]{Bajer.2017}
 
-\subsubsection{Featurevergleich}
+\subsubsection{Features des Dienstes}
 Da der OpenSearch Fork von Amazon auf der Elasticsearch Basis basiert, und \ac{AWS} explizit plant, vorest keine \ac{API} Abweichungen zur bereits bekannten \ac{API} einzubauen, werden im Folgenden die Elasticsearch Fähigkeiten dargestellt.\footcite[Vgl.][]{Meadows.2021}
 
 Mithilfe der \enquote{Percentiles aggregation} können beliebige Perzentile eines Datensatzes berechnet werden. Dies wird in \autoref{listing:percentiles-elasticsearch} mit der Elasticsearch eigenen Abfragesprache gezeigt. 
@@ -204,11 +198,11 @@ In Elasticsearch kann ein gleitender Durchschnitt mittels der eigenen Abfragespr
 
 Dies kann gewichtet oder ungewichtet erfolgen.
 
-\subsubsection{Performancevergleich}
+\subsubsection{Performancegarantien}
 \ac{AWS} sichert vertraglich für OpenSearch Service ebenfalls keine feste Performance im Rahmen des \acp{SLA} zu. Auch hier werden nur Abschläge auf den zu zahlenden Preis angeboten, wenn die Verfügbarkeit des Dienstes unter 99,99\% des Monats lag.\footcite[Vgl.][]{AmazonWebServicesInc..2019} Da OpenSearch Service ein Instanzbasiertes Modell verfolgt, sind eventuelle Performanceprobleme jedoch durch einen Wechsel auf eine Instanzklasse mit stärkerer Rechenleistung (vCPUs) oder Hauptspeicher (\ac{RAM}) lösbar. Dabei zeigt der Anwendungsfall der Mayo Klinik, den \citeauthor{Chen.2017} vorstellen, dass die unterliegende Software, Elasticsearch, auch mit Datensätzen von mehr als 25 Millionen \ac{JSON}-Einträgen Anfragen mit einer Latenz von weniger als 0,2 Sekunden beantworten kann.\footcite[Vgl.][]{Chen.2017}
 
-\subsubsection{Kostenvergleich}
-Der \ac{AWS} OpenSearch Service wird auf unterliegenden \ac{EC2} Instanzen betrieben und wie diese in gewissen Klassen abgerechnet. Dabei stehen sowohl OnDemand Abrechnugsmodelle wie auch reservierte Kapazität zur Verfügung.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.w} Zusätzlicch steht mit \enquote{UltraWarm} eine besondere Instanzklasse zur Verfügung, welche für das Vorhalten großer Datenmengen konzipiert ist. Zusätzlich zu den Instanzen wird noch der verbrauchte \ac{EBS}-Speicherplatz abgerechnet. Dieser Speicherplatz kann in der Standard Klasse oder speziell für hohen Datendurchsatz (provisionierte \ac{IOPS}) gebucht werden. Der Speicherplatz für UltraWarm wird aber nicht via \ac{EBS} abgerechnet, sondern separat. Ebenfalls steht wieder ein \enquote{Free Tier} zur Verfügung, welches aus Vergleichsgründen nicht in die Berechnung einfliessen soll. Aus Vergleichsgründen kommen nur OnDemand abgerechnete Instanzen für den Vergleich in Frage. Für Vergleichszwecke soll eine t3.medium.elasticsearch Instanz geschätzt werden, welche mit 2 vCPUs und 4 GiB \ac{RAM} ausgestattet ist. Der provisionierte \ac{EBS}-Speicherplatz soll bei 10GB liegen.
+\subsubsection{Gesamtkosten}
+Der \ac{AWS} OpenSearch Service wird auf unterliegenden \ac{EC2} Instanzen betrieben und wie diese in gewissen Klassen abgerechnet. Dabei stehen sowohl OnDemand Abrechnugsmodelle wie auch reservierte Kapazität zur Verfügung.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.w} Zusätzlich steht mit \enquote{UltraWarm} eine besondere Instanzklasse zur Verfügung, welche für das Vorhalten großer Datenmengen konzipiert ist. Zusätzlich zu den Instanzen wird noch der verbrauchte \ac{EBS}-Speicherplatz abgerechnet. Dieser Speicherplatz kann in der Standard Klasse oder speziell für hohen Datendurchsatz (provisionierte \ac{IOPS}) gebucht werden. Der Speicherplatz für UltraWarm wird aber nicht via \ac{EBS} abgerechnet, sondern separat. Ebenfalls steht wieder ein \enquote{Free Tier} zur Verfügung, welches aus Vergleichsgründen nicht in die Berechnung einfliessen soll. Aus Vergleichsgründen kommen nur OnDemand abgerechnete Instanzen für den Vergleich in Frage. Für Vergleichszwecke soll eine t3.medium.elasticsearch Instanz geschätzt werden, welche mit 2 vCPUs und 4 GiB \ac{RAM} ausgestattet ist. Der provisionierte \ac{EBS}-Speicherplatz soll bei 10GB liegen.
 Benachrichtigungen werden über die native Integration von Kibana (Name nach Umbenennung: OpenSearch Dashboards) und \ac{SNS} abgewickelt, wobei Kibana die Wertüberwachung übernimmt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.x}
 
 \begin{table}[H]
@@ -225,21 +219,20 @@ Summe & \cellcolor[HTML]{EFEFEF} & 62,95\\ \hline
 \label{tab:kostenvergleich-Amazon~Elasticsearch~Service}
 \end{table}
 
-% \subsubsection{Gesamtbewertung}
-% \produktbewertung{Amazon~Elasticsearch}{x,x,x,x,x,x,x,x,x,x,x,x}
 
-\subsection{Produktauswahl}
+
+\subsection{Auswahl}
 Der von \citeauthor{Tan.2019} konstatierte Preisvorteil von Redshift gegenüber Athena hat sich in dem durchgeführten Vergleich nicht gezeigt.\footcite[Vgl.][2178\psq]{Tan.2019} Dies könnte womöglich dem Fakt geschuldet sein, dass die Datenmengen der Studie einen \enquote{Break-even} Punkt überschritten haben, an dem das Athena Abrechnungsmodell im Vorteil gegenüber Redshift war.
-Die Performance der verglichenen Produkte variierte aufgrund verschiedener unterliegender Faktoren, wie beispielsweise provisionierter Leistung oder der Optimierung für spezifische Anfragen, was andere Anfragen verlangsamte. Letzten Endes ist es fraglich, ob \ac{OLAP} Analysen, die zeitgesteuert erstellt werden eine garantierte Performance im Sub-Sekunden Bereich brauchen, oder ob es reicht, die Analyse in längerer Zeit zu erledigen, da die Daten sowieso zeitversetzt sind.
-Übertragbare Produkte sind Amazon OpenSearch und Amazon Athena. OpenSearch, welches größtenteil Kompatibilität zu ElasticSearch hat (mit Ausnahme des Amazon eigenen Anomalieeerkennungsplugins) kann mit Anpassungen mit dem ElasticSearch Code in anderen Public Clouds verwendet werden. Da Athena auf Presto basiert, sind Abfragen kompatibel und portabel. Dies erfordert entsprechende Unterstützung für Presto in der Zielcloud oder eine eigene Installation.
-Bei den verglichenen Dioensten handelt es sich mit Ausnahme von OpenSearch um von Amazon teilweise oder komplett entwickelte properitäre Dienste, weshalb die Integration mit anderen \ac{AWS} Dienstleistungen gegeben ist. Auch OpenSearch wird mittlerweile, als Fork von Elasticsearch, hauptsächlich von \ac{AWS} betreut und ist bereits gut mit anderen Dienstleistungen integriert.
+Die Performance der verglichenen Dienste variierte aufgrund verschiedener unterliegender Faktoren, wie beispielsweise provisionierter Leistung oder der Optimierung für spezifische Anfragen, was andere Anfragen verlangsamte. Letzten Endes ist es fraglich, ob \ac{OLAP} Analysen, die zeitgesteuert erstellt werden eine garantierte Performance im Sub-Sekunden Bereich brauchen, oder ob es reicht, die Analyse in längerer Zeit zu erledigen, da die Daten sowieso zeitversetzt sind.
+Übertragbare Dienste/Produkte sind Amazon OpenSearch und Amazon Athena. OpenSearch, welches größtenteil Kompatibilität zu ElasticSearch hat (mit Ausnahme des Amazon eigenen Anomalieeerkennungsplugins) kann mit Anpassungen mit dem ElasticSearch Code in anderen Public Clouds verwendet werden. Da Athena auf Presto basiert, sind Abfragen kompatibel und portabel. Dies erfordert entsprechende Unterstützung für Presto in der Zielcloud oder eine eigene Installation.
+Bei den verglichenen Diensten handelt es sich mit Ausnahme von OpenSearch um von Amazon teilweise oder komplett entwickelte properitäre Dienste, weshalb die Integration mit anderen \ac{AWS} Dienstleistungen gegeben ist. Auch OpenSearch wird mittlerweile, als Fork von Elasticsearch, hauptsächlich von \ac{AWS} betreut und ist bereits gut mit anderen Dienstleistungen integriert.
 Auch wenn die verglichenen Datenbankdienste für jeweils individuelle Zwecke entwickelt wurden, sind sie doch generalisiert für mehrere Usecases verwendbar und erweiterbar.
 Im Bereich Fehlertransparenz gab es Abzug für Athena, da fehlschlagende Abfragen nur mit generischen Fehlermeldungen beantwortet werden, was die Fehlersuche erschwert.
 Punktabzüge im Wartungsaufwand und der Skalierbarkeit gab es für die auf Instanzen basierenden Dienste OpenSearch und Redshift, welche durch die von Nutzenden vorzunehmende vertikale Skalierung einen höheren Wartungs- und Überprüfungsaufwand fordern, als Timestream und Athena, die verwaltet sind.
 Die Gesamtkosten scheinen bei Redshift zumindest im vorliegenden Fall, ohne konkrete Optimierungen besonders hoch zu sein, genauso wie bei Athena. Kostenführer ist Timestream, gefolgt von OpenSearch Service.
 Alle verglichenen Dienste können die Auswertungen in angemessener Zeit anfertigen. 
 Athena hat Punktabzüge im Bereich Robustheit \& Fehlertoleranz, da ein sich veränderndes Datenschema zu schwerwiegenderen Problemen führen kann.
-Alle Dienstleistungen bieten die gewünschten Auswertungen an, wenn auch über teilweise unterschiedliche Implementierungen, was toleriert werden kann.
+Alle Dienste bieten die gewünschten Auswertungen an. Technisch sind aufgrund der unterschiedliche Implementierungen trotzdem Unterschiede vorhanden. Dies kann aber toleriert werden.
 
 
 \input{content/04-produkte/vergleiche/batch-vergleich}

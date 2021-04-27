@@ -21,7 +21,7 @@ for (let i = 1; i <= sensorcount; i++) {
 }
 
 let filtered = result.filter(element =>
-    (element.deviceId == "Sensor-1" || element.deviceId == "Sensor-2")
+    (element.deviceId == "Sensor-1")
     && element.timestamp == "2021-01-01T01:00:00.000Z")
 
 const estimatePath = path.join(__dirname, '/estimate.json')

@@ -15,27 +15,52 @@ Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodel
 \caption{Ergebnisse der Interviews}
 \label{abb:DimensionenUebersicht}
 \end{figure}
-Durch die Interviews liessen sich folgende Durchschnitte errechnen: Dekompositionstiefe wurde im Schnitt mit $3,\overline{3}$ bewertet. Die Anwendbarkeit wurde ebenfalls mit $3,\overline{3}$ bewertet. Die Allgemeingültigkeit hingegen hat nur einen Schnitt von $3$/5. Entsprechend sollten Dekompositionstiefe und Anwendbarkeit priorisiert werden.
+Durch die Interviews liessen sich folgende Durchschnitte errechnen: Dekompositionstiefe wurde im Schnitt mit $3,\overline{3}$ bewertet. Die Anwendbarkeit wurde ebenfalls mit $3,\overline{3}$ bewertet. Die Allgemeingültigkeit hingegen hat nur einen Schnitt von $3$. Entsprechend sollten Dekompositionstiefe und Anwendbarkeit priorisiert werden, während die Referenzarchitektur organisationsspezifischer sein darf. 
+In den folgenden Referenzarchitekturen wird in mehrere Dekompositionen unterteilt. In der Datenverarbeitungssequenz werden mit Hilfe eines Sequenzdiagramms die Abläufe zur Datenverarbeitung mit dem zu betrachtenden Dienst, ausgehend von \AWSIOT{} Core als Messagebroker gezeigt.
+Die Verteilungssicht soll sowohl die Interaktion der Dienste untereinander, als auch grob das durchzuführende Deployment zeigen. Die Bausteinsicht zeigt wichtige Elemente der einzelnen Dienste auf, die konkret untereinander interagieren. So ist die konkrete Untereinheit, die Daten von \AWSIOT{} Core an andere Dienste versendet eine \AWSIOT{} Core Rule, welche aufzuzeigen wäre. 
+Für die Operations wird vorausgesetzt, dass der \ac{AWS}-native Dienst CloudWatch zur Überwachung eingesetzt wird. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.66\textwidth]{graphics/CloudWatch-Monitoring}
+\caption{CloudWatch Monitoring}
+\label{abb:CloudWatchMonitoring}
+\end{figure}
+CloudWatch erfasst zentralisiert Metriken aller Dienste und löst bei nutzerdefinierten Überschreitungen einen Alarm aus, welcher dann via \ac{SNS} versendet werden kann (siehe \autoref{abb:CloudWatchMonitoring}).
+
+
 
 Zusätzlich haben sich folgende Anforderungen ergeben:
 \begin{itemize}
-\item Anwendbarkeit auf Monitoring (klassische IT)
+\item Anwendbarkeit auf Monitoring (klassische IT) (Anhang: 1,3)
 \item Anwendbarkeit auf Sensordaten (\ac{IoT})
 \item Wertschöpfung für den Betrieb wichtig
 \item akzeptabel und problemlösend für Domäne
 \item Handling von Events, Messwerten und \enquote{Streaming}
 \end{itemize}
 
+% \begin{figure}[H]
+% \centering
+% \includegraphics[height=0.3\textheight]{graphics/dateneinspeisung.pdf}
+% \caption{Sequenzdiagramm Dateneinspeisung}
+% \label{abb:SequenceEinspeisung}
+% \end{figure}
+
+Im Folgenden werden die Referenzarchitekturen entworfen und miteinander verglichen, um mögliche Stärken und Einsatzgebiete zu identifizieren.
+
 \section{Echtzeitverarbeitung}
-\subsection{Ablauf}
+Aufgrund des in \autoref{tab:bewertungsmatrix-echtzeit} durchgeführten Vergleiches, den Kinesis (Data Streams und Analytics) anführte, wird im Folgenden die Referenzarchitektur für die Echtzeitverarbeitung mit Kinesis Data Streams und Analytics entworfen. 
+
+\subsection{Datenverarbeitungssequenz}
+In \autoref{abb:SequenceEchtzeitRA} wird die durchlaufene Sequenz für eingehende Daten gezeigt. Nach initialer Übertragung via \ac{MQTT} an \AWSIOT{} Core, folgt die Übertragung in Kinesis Data Streams, welche die Daten gepuffert an Kinesis Data Analytics sendet. 
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{graphics/echtzeit-ra.pdf}
-\caption{Sequenzdiagramm}
+\includegraphics[height=0.66\textheight]{graphics/echtzeit-ra.pdf}
+\caption{Sequenzdiagramm Echtzeitreferenzarchitektur}
 \label{abb:SequenceEchtzeitRA}
 \end{figure}
 
-\subsection{Interagierende Elemente}
+\subsection{Verteilungssicht}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Echtzeit-RA-Overview.pdf}
@@ -46,24 +71,79 @@ Variationspunkt 1: Rohdaten in \ac{S3} zu speichern kann Sinn machen, um die Dat
 
 Variationspunkt 2: \ac{DMS} ist in diesem Szenario dafür gedacht, einmal abgelegte Daten in S3 wieder in Kinesis Data Streams einspielen zu können. Je nach Szenario macht das, wie bei Variationspunkt 1 schon erläutert, wenig Sinn.
 
-Variationspunkt 3: QuickSight als \ac{AWS} native Dashboardlösung ist gut geeignet, um schnell Übersicht in Datenanalysen aus Kinesis Data Analytics zu bekommen. Alternativ können auch andere Visualisierungslösungen wie Tableau eingesetzt werden, welche gegebenenfalls jedoch nicht auf Kinesis Data Analytics zugreifen können. In solch einem Fall kann es Sinn machen, den aus Variationspunkt 1 bekannten \ac{S3} Bucket aufzusetzen, um Dashboards über die Rohdaten erstellen zu können.
+Variationspunkt 3: QuickSight als \ac{AWS} native Dashboardlösung ist gut geeignet, um schnell Übersicht in Datenanalysen aus Kinesis Data Analytics zu bekommen. Alternativ können auch andere Visualisierungslösungen wie Tableau eingesetzt werden, welche gegebenenfalls jedoch nicht auf Kinesis Data Analytics zugreifen können. Ein weiterer managed Service, den \ac{AWS} für Dashboards anbietet, ist der Amazon Managed Service for Grafana, welcher das Open Source Visualisierungstool Grafana mit den \ac{AWS} eigenen Metriken integriert.\footcite[Vgl.][]{Dutt.2020} In solch einem Fall kann es Sinn machen, den aus Variationspunkt 1 bekannten \ac{S3} Bucket aufzusetzen, um Dashboards über die Rohdaten erstellen zu können. 
 
-\subsection{Interagierende Elemente - Ebene 2}
+\subsection{Bausteinssicht}
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.33\textheight]{graphics/Echtzeit-RA-Elements.pdf}
+\includegraphics[width=\textwidth]{graphics/Echtzeit-RA-Elements.pdf}
 \caption{Interagierende Dienstelemente}
 \label{abb:ElementeEchtzeitRA}
 \end{figure}
-Variationspunkt 1: Die Anzahl an Shards ist esentiell für die Performance von Kinesis Data Streams. Für Workloads mit einem vorhersehbaren Workload ist eine Preis/Leistungs optimale Anzahl an Shards zu ermitteln und zu konfigurieren. Wenn der Workload nicht vorhersehbar ist oder schnell skalieren können soll, sind Alarme im AWS eigenen Monitoring Tool CloudWatch zu erstellen. Im Beispielusecase für die Kostenschätzung wäre beispielsweise ein einziger Shard (1MiB/Sekunde, 1000 Nachrichten eingehend) ausreichend, da Nachrichten mit einer Größe von 1KB, also \~1KiB geschrieben werden, bei einem Maximum von 200 pro Sekunde und einem Konsumenten. Es ist besonders auf die \enquote{WriteProvisionedThroughputExceeded} Metrik zu achten, welche bei höheren Werten anzeigt, dass das Hinzufügen von zusätzlichen Shards angebracht wäre. Ebenfalls ist die Metrik \enquote{Incoming Records} zu beachten. Verändert diese sich, deutet das auf einen Fehler im vorgelagerten \AWSIOT Core oder in einem Teil der Datenlieferanten hin.
+Variationspunkt 1: Die Anzahl an Shards ist essentiell für die Performance von Kinesis Data Streams. Für Workloads mit einem vorhersehbaren Workload ist Anzahl an Shards nach einem Preis/Leistungs Optimum zu ermitteln und zu konfigurieren. Wenn der Workload nicht vorhersehbar ist oder schnell skalieren können soll, sind Alarme im AWS eigenen Monitoring Tool CloudWatch zu erstellen. Im Beispielusecase für die Kostenschätzung ist ein einziger Shard (1MiB/Sekunde, 1000 Nachrichten eingehend) ausreichend. Dies ist bedingt, da Nachrichten mit einer Größe von 1KB, also \~1KiB geschrieben werden, bei einem Maximum von 200 pro Sekunde und einem Konsumenten. Es ist besonders auf die \enquote{WriteProvisionedThroughputExceeded} Metrik zu achten, welche bei höheren Werten anzeigt, dass das Hinzufügen von zusätzlichen Shards angebracht wäre. Ebenfalls ist die Metrik \enquote{Incoming Records} zu beachten. Verändert diese sich, deutet das auf einen Fehler im vorgelagerten \AWSIOT{} Core oder in einem Teil der Datenlieferanten hin.
+
 
 Variationspunkt 2: Der \ac{SQL} Programmcode, der in Kinesis Data Analytics läuft ist anzupassen. So sind Verarbeitungsfenster, Attributsnamen und aufgerufene Funktionen nach Anforderung zu ändern. Andernfalls kann auch die Funktionalität zur Ausführung eigenen Codes via Apache Flink in Kinesis Data Analytics genutzt werden (dies erlaubt Ausführung von Java, Scala, Python).
+
+Variationspunkt 3: Aufgrund der Notwendigkeit einer Lambda Funktion, um Alarme zu versenden, kann der Code selbst gestaltet werden. Wichtig ist dabei, dass Kinesis Data Analytics die Zustellung von Datensätzen wiederholt, wenn die Lambdafunktion als Rückgabewert ein Array mit den Ids und dem Status wie folgt zurückgibt: \mintinline[breaklines]{json}{[{"recordId": "<ID>", "result": "DeliveryFailed"}]}.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ay} Die übermittelten Alarme lassen dabei Möglichkeit zur Anpassung. So kann neben dem Titel der Nachricht auch der eigentliche Inhalt angepasst werden. 
+
+Variationspunkt 4: \ac{SNS} unterstützt mehrere Protokolle für die Übermittlung von Nachrichten. Es können HTTP Webhooks genauso wie mobile Pushbenachrichtigungen oder auch Emails versendet werden. Welches Protokoll mit welchem Verteiler zu wählen ist, muss im \ac{SNS} Topic eingestellt werden. Innerhalb der Cloud Native Solution der SPIRIT/21 hat sich bewährt, den Versand via Email zu nutzen und als Ziel den Email-Verteiler eines Monitoring Teams innerhalb des Tools Microsoft Teams einzustellen. Microsoft Teams zeigt eingegangene Emails an den Emailverteiler dann als Chatnachricht innerhalb des Teams an und benachrichtigt alle Teilnehmenden.
+
+\subsection{Anforderungen}
+\begin{itemize}
+\item Anwendbarkeit auf Monitoring (klassische IT)
+\item Anwendbarkeit auf Sensordaten (\ac{IoT})
+\item Wertschöpfung für den Betrieb wichtig
+\item akzeptabel und problemlösend für Domäne
+\item Handling von Events, Messwerten und \enquote{Streaming}
+\item automatisierte Operative Entscheidungen
+\end{itemize}
+
+\subsection{Operations}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Dienst & Metrik \\ \hline
+\multirow{2}{*}{Kinesis Data Streams} & WriteProvisionedThroughputExceeded \\ \cline{2-2} 
+ & PutRecords.ThrottledRecords \\ \hline
+\ac{SNS} & NumberOfNotificationsFailed \\ \hline
+\multirow{2}{*}{\AWSIOT{} Core (Rules)} & RuleMessageThrottled \\ \cline{2-2} 
+ & Failure \\ \hline
+\multirow{3}{*}{Kinesis Data Analytics} & MillisBehindLatest \\ \cline{2-2} 
+ & LambdaDelivery.DeliveryFailedRecords \\ \cline{2-2} 
+ & LambdaDelivery.Duration \\ \hline
+\end{tabular}
+\caption{CloudWatch Metriken}
+\label{tab:cloudwatch-metrics}
+\end{table}
+In \autoref{tab:cloudwatch-metrics} sind die zu überwachenden Metriken von Kinesis Data Streams, \ac{SNS}, \AWSIOT{} Core und Kinesis Data Analytics gezeigt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bb}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bc}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.az}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ay}
+
+All the Kinesis Streams metrics, both basic and enhanced, are emitted once a minute. So, when you have spiky traffic, the metrics won’t reflect the entire picture So, pay close attention to the WriteProvisionedThroughputExceeded and PutRecords.ThrottledRecords metrics at all times\footcite[Vgl.][]{Pogosova.28.05.2020}
+
+\Todo{Kinesis Data Retention}
+
+
+\subsection{Knowhow}
+Wie bereits beschrieben, bietet Kinesis Data Streams keine automatisierte Skalierung der Shards an. Dieses Problem wurde durch die Gemeinschaft aus Nutzenden und Programmierenden in vielerlei Art adressiert. Der von \citeauthor{AmazonWebServices.2018} vorgestellte, \ac{AWS} eigene Ansatz basiert auf CloudWatch Alarmen, die basierend auf den IncomingBytes und IncomingRecords Shards eine Lambda auslösen, welche die Skalierung verwaltet.\footcite[Vgl.][]{AmazonWebServices.2018}\nzitat\footnote{Siehe auch: \url{https://github.com/aws-samples/aws-application-auto-scaling-kinesis}} \citeauthor{Pogosova.28.05.2020} kritisert, dass die Menge von fünf Diensten, die diese Lösung benötigt, kaum als autoscaling zu bezeichnen ist.\footcite[Vgl.][]{Pogosova.28.05.2020} \citeauthor{Stanley.2019} schlägt zur Lösung des Problems eine Lösung und eine Beispielimplementation in Python vor, die ebenfalls auf CloudWatch Alarmen basiert, aber eine \ac{MoM} zwischenschaltet, die dann eine Lambdafunktion ausführt.\footcite[Vgl.][]{Stanley.2019} \citeauthor{Prasath.2019} setzt auf einen vergleichbaren Ansatz wie \citeauthor{Stanley.2019}, nur dass keine konkrete Implementierung vorgeschlagen wird.\footcite[Vgl.][]{Prasath.2019} \citeauthor{Cui.2017} modifiziert den Ansatz unter Berücksichtigung des Faktes, dass das herunterskalieren von Shards teurer sein könnte, wenn der Datendurchsatz nicht genau bekannt ist.\footcite[Vgl. auch im Folgendn][]{Cui.2017} Zur Mitigation schlägt \citeauthor{Cui.2017} eine Herunterskalierung durch einen CloudWatch Auslöser vor, der erst 36h später auslöst.
+
+
+Innerhalb des MQTT Protkolls, das \AWSIOT{} Core in Teilen implementiert ist für die zwei  \ac{QoS} Modi 0 und 1 eine \enquote{at-least-once} Semantik vorgesehen.\footcite[Vgl. auch im Folgenden][]{OASISOpenConsortium.2014} Der \ac{QoS} Modus 2, welcher eine \enquote{exactly-once} Semantik garantiert, wird von \AWSIOT{} Core nicht unterstützt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bd} Zusätzlich ist eine \enquote{exactly-once} Semantik bei der Ausführung von \AWSIOT{} Core Rules nicht garantiert. Wenn doppelte Werte für Auswertungen nicht tolerierbar sind, muss entsprechend eine Deduplizierung eingeführt werden. Aufgrund des technischen Aufwandes, der hinter einer Deduplizierung und garantierter Idempotenz steht, muss genau abgewogen werden, ob die fachlichen Seite des Anwendungsfalls eine doppelte Verarbeitung mancher Records nicht tolerieren kann. So wäre beispielsweise ein doppelter Messwert, der eine Überschreitung anzeigt wenig kritisch. Bei Aggregationen wie dem gleitenden Durchschnitt verringert der Einfluss eines einzelnen doppelten Wertes eines Sensors sich mit wachsender Anzahl $n$ der angeschlossenen Sensoren. 
 
 
 \section{Batch Verarbeitung}
 
+\subsection{Ablauf}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/batch-ra.pdf}
+\caption{Sequenzdiagramm Batch Verarbeitung}
+\label{abb:SequenceBatchRA}
+\end{figure}
 
+\subsection{Interagierende Elemente}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/DB-RA-Overview.pdf}
@@ -71,14 +151,34 @@ Variationspunkt 2: Der \ac{SQL} Programmcode, der in Kinesis Data Analytics läu
 \label{abb:TopLevelDBRA}
 \end{figure}
 
+Variationspunkt 1: Hier wird eine Dashboardinglösung, im speziellen der \ac{AWS} eigenen Dienst QuickSight eingeplant. Dies erfolgt, damit Benachrichtigungen, die via \ac{SNS} versendet werden, leicht für die Benachrichtigten nachvollziehbar sind. Wenn also beispielsweise eine Anomalie erkannt wurde, kann dies mit einer Visualisierung nachvollzogen werden, um dann entsprechend handeln zu können. Wichtig ist, dass die Visualisierung sowohl von den Originaldaten aus dem Speicher von \AWSIOT{} Analytics gespeist wird, als auch aus der Analyse. Eine Visualisierung könnte wie folgt aussehen:
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/QuickSight-Beispiel.png}
+\caption{Dashboard in Quicksight}
+\label{abb:DashboardDBRA}
+\end{figure}
 
+Hier könnten Benachrichtigte direkt ablesen, dass ständige Schwellwert-Alarme am Morgen ihre Berechtigung hatten, da der Schwellwert erst gegen 14.30 Uhr unterschritten wurde. Entsprechend Maßnahmen, wie beispielsweise die gezielte Belüftung des Raums, in welchem dieser Sensor war, hätten eingeleitet werden können.
+
+\subsection{Interagierende Elemente - Ebene 2}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/DB-RA-Elements.pdf}
 \caption{Interagierende Dienstelemente}
 \label{abb:ElementeDBRA}
 \end{figure}
+
+\subsection{Anforderungen}
+\begin{itemize}
+\item Anwendbarkeit auf Monitoring (klassische IT)
+\item Anwendbarkeit auf Sensordaten (\ac{IoT})
+\item Wertschöpfung für den Betrieb wichtig
+\item akzeptabel und problemlösend für Domäne
+\item Handling von Events, Messwerten und \enquote{Streaming}
+\item automatisierte Operative Entscheidungen
+\end{itemize}
 
 \section{Einsatzszenarien der Referenzmodelle}
 
