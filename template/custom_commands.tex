@@ -78,11 +78,15 @@
 \newcommand{\AWSIOT}{\ac{AWS}~\ac{IoT}}
 \newcommand{\nzitat}{${}^{,}$}
 \newcommand{\coo}{\ensuremath{\mathrm{CO_2}}}
+\newcommand{\TodoW}[1]{
+\PackageWarning{BA-Todos}{Todo-#1} 
+\Todo{#1}
+}
 
 % \renewcommand{\clearpage}{}
 \renewcommand*{\lstlistingname}{Codebeispiel}
 
-%from https://groups.google.com/g/comp.text.tex/c/dOHk1iL9VKs/m/z7Yl8Kd0NUoJ
+%from https://groups.google.com/g/comp.text.tex/c/dOHk1iL9VKs/m/z7Yl8Kd0NUoJ - \hlinewd
 \makeatletter
 \def\hlinewd#1{%
 \noalign{\ifnum0=`}\fi\hrule \@height #1 \futurelet

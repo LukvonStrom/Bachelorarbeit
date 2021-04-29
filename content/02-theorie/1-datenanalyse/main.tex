@@ -13,12 +13,12 @@ In \autoref{abb:BeispielZeitreihe} findet sich beispielhaft die Zeitreihe der zw
 
 Die möglichen Anwendungen in der Informatik sind ebenfalls vielzählig. So können über virtuelle oder physikalische Sensoren Messwerte, wie beispielsweise die CPU Auslastung eines gegebenen Servers über die Zeit oder Temperaturmessungen eines \ac{IoT} Gerätes über die Zeit gemacht und gespeichert werden. So nehmen mit zunehmender Digitalisierung von Fertigungslinien in Fabriken auch die Messwerte von Sensoren zu, die dort übermittelt und ausgewertet werden müssen.
 
-Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne der Messfrequenz, in welcher Daten betrachtet werden. \Todo{belegen} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und die zeitliche Distanz zwischen einzelnen Messwerten ist gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich, einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
+Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne der Messfrequenz, in welcher Daten betrachtet werden. \TodoW{belegen} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und die zeitliche Distanz zwischen einzelnen Messwerten ist gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich, einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
 
 Es ist von zwei vorliegenden Typen von Zeitreihendaten auszugehen. Zum einen existiert der mit Zeitstempel versehene Messwert, welcher einen oder in manchen Fällen auch mehrere diskrete Messwerte mit Zeitstempel der Erfassung übermittelt. 
 Zum anderen existieren auch Ereignisse, welche keine Messwerte enthalten, sondern Ergebnisse einer Vorauswertung innerhalb des übermittelnden Systems sind. 
 So wäre ein Ereignis beispielsweise ein niedriger Batteriestand eines verbundenen Sensors. 
-Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zeitstempel oder periodisch mit Zeitstempel bis zum Beheben der Ursache versendet. \Todo{belegen}
+Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zeitstempel oder periodisch mit Zeitstempel bis zum Beheben der Ursache versendet.\footnote{Siehe auch Anhang~\autoref{chap:interview-peter-24.03.2021}}
 
 \subsection{Analysewert verarbeiteter Daten}
 
@@ -220,25 +220,12 @@ Wird die Analyse in irgendeiner Weise verändert (z.B. durch Codeanpassungen) we
 
 Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen. Diese ist im Stile des von \citeauthor{Codd.1993} geprägten \ac{OLAP} gehalten. Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditioneller Datenanalyse weit verbreitet, bietet jedoch womöglich wichtige Einsichten erst, nachdem die Datenhalbwertszeit bereits überschritten wurde.
 
-% \Todo{Grafik Data Analytics Pipeline}
-% \begin{figure}[H]
-% \centering
-% \includegraphics[width=\textwidth]{graphics/DataPipeline.pdf}
-% \caption[Aufbau und Ablauf in einer Data Pipeline]{Aufbau und Ablauf in einer Data Pipeline.\footnotemark}
-% \label{abb:DataPipeline}
-% \end{figure}
-% \footnotetext{Mit Änderungen entnommen aus: \cite[][]{}}
-% \Todo{Quellenangabe}
-
-
 
 \subsection{Echtzeitverarbeitung}
 Gemäß der in \autoref{abb:KappaStreaming} gezeigten $\kappa$-Architektur gibt es Nutzungsfälle, in welchen eine reine Echtzeitauswertung basierend auf einer Datenquelle, wie beispielsweise einem Messagebroker, Sinn machen kann. \citeauthor{Belur.2020} sieht dabei vier verschiedene Verwendungszwecke, in welchen die niedrige Verarbeitungslatenz besonders wichtig ist und den maximalen Wert aus den Daten zieht.\footcite[Vgl. auch im Folgenden][]{Belur.2020} Durch Echtzeitreporting und die Erstellung von Dashboards können aktuelle Daten schnell übersichtlich aufbereitet werden. Mittels erstellter Regeln, die Schwellwertüberschreitungen und Anomalien detektieren, können Nutzende benachrichtigt werden, sobald es zu einer Abweichung kommt. Ebenfalls sinnvoll ist der Einsatz von Machine Learning zum Auffinden von Mustern in Daten, was verbesserte Anomalierkennung, Vorhersagen und ähnliche Features ermöglicht. Ein weiterer valider Usecase der $\kappa$-Architektur ist die Transformation von Daten in gewisse Zielformate, um beispielsweise Drittsysteme anzusprechen.
 
 
-
-
 \subsection{Batch Verarbeitung}
 
 Gemäß der in \autoref{abb:OLAPStreaming} gezeigten \ac{OLAP} Architektur, gibt es, wie für die Echtzeitverarbeitung auch nutzende Unternehmen, die ein Entscheidungstempo mit weiterem Horizont haben. Für diese Entscheidungstypen ist dabei wichtig, dass eine Analyse möglichst viele historische Daten umfasst. Es ist dabei aber zweitrangig, wie zeitnah diese erstellt werden kann. 
-Eine gängige Möglichkeit um effizient alte Daten zu analysieren, stellen \ac{OLAP} Datenbanken dar, welche durch spezielle Indexstrukturen und Optimierungen auf komplexe lesende Abfragen bei großen Datenmengen optimiert wurden. \Todo{belegen} Mittels dieser \ac{OLAP} Datenbanken lassen sich dank der jeweiligen Abfragesprachen und -dialekte komplizierte Abfragen realisieren. Bekanntes Beispiel für so eine Abfragesprache wäre \ac{SQL}, welche einige verschiedene Implementierungen (Dialekte) hat, die verwendet werden können. 
+Eine gängige Möglichkeit um effizient alte Daten zu analysieren, stellen \ac{OLAP} Datenbanken dar, welche durch spezielle Indexstrukturen und Optimierungen auf komplexe lesende Abfragen bei großen Datenmengen optimiert wurden. \footcite[Vgl.][5\psq]{Codd.1993} Mittels dieser \ac{OLAP} Datenbanken lassen sich dank der jeweiligen Abfragesprachen und -dialekte komplizierte Abfragen realisieren. Bekanntes Beispiel für so eine Abfragesprache wäre \ac{SQL}, welche einige verschiedene Implementierungen (Dialekte) hat, die verwendet werden können. 
