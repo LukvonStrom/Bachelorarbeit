@@ -15,10 +15,10 @@ node code/bewertungen/bewertung.js
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-echo "Plant UML"
-java -jar dependencies/plantuml.jar -nbthread auto -charset utf-8 -tpdf -o "../../graphics/" "./code/uml/" >NUL
+@REM echo "Plant UML"
+@REM java -jar dependencies/plantuml.jar -nbthread auto -charset utf-8 -tpdf -o "../../graphics/" "./code/uml/" >NUL
 
-if %errorlevel% neq 0 exit /b %errorlevel%
+@REM if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo "Adding changes"
 

@@ -1,6 +1,7 @@
 citavi/*.bib
 citavi/node_modules/
 transcription/
+tikz/
 *.aux
 *.app
 *.glo

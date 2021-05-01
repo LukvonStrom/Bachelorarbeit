@@ -10,3 +10,4 @@ GROUP BY DeviceType,
   measure_name,
   BIN(time, 120m) 
 ORDER BY ABS(avg - p99) DESC
+

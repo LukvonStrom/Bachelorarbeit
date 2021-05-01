@@ -5,32 +5,11 @@ In \autoref{abb:ProdukteRT} werden verwendbare Dienste von \ac{AWS}, gemeinsam m
 \caption{Einsetzbare Dienste im Bereich Echtzeitverarbeitung}
 \label{abb:ProdukteRT}
 \end{figure}
-\TodoW{Brauchen wir die Grafik?}
 
 \TodoW{Hier noch besserer Übergang}
 
 Innerhalb des \ac{IoT} Core Brokers ist es möglich, Regeln zu definieren, die einzelne Nachrichten aus Topics in andere Dienste weiterzuleiten. Dazu müssen besagte Nachrichten selektiert werden, was mittels eines SQL Dialekts möglich ist. Eine beispielhafte Selektion könnte folgendermaßen aussehen: \mintinline[breaklines]{sql}{SELECT * FROM 'iot-demo-sensor' WHERE device <> 'test'}
 Alle Attribute jeder Nachricht, die Nicht vom Gerät test stammen, aus dem Topic iot-demo-sensor werden dabei selektiert und können dann z.B. weitergeleitet werden.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\rowcolor[HTML]{ECF4FF} 
-Begründung & Kriterium & Bewertung \\ \hline
-Einsatz von Code & Robustness and fault tolerance & 8 \\ \hline
-Einsatz von Code, statische Analyse & Ad hoc queries & 0 \\ \hline
-Anzahl der AWS-Dienste\textless{}5 & Integration mit AWS & 1 \\ \hline
-Anzahl der AWS-Dienste=0 & Integration mit AWS & 0 \\ \hline
-AWS-properitär & Übertragbarkeit & 0 \\ \hline
-\end{tabular}
-\caption{Spezielle Einstufungen einzelner Dienstbesonderheiten}
-\label{tab:einstufungen}
-\end{table}
-
-\TodoW{Überprüfen: Passen die noch?}
-
-
 
 \subsection{AWS IoT Events}
 
@@ -92,7 +71,7 @@ Kinesis Data Analytics ist dafür ausgelegt, die Daten aus z.B. Kinesis Data Ana
 
 Kinesis Data Firehose dient dem Zweck, Daten aus z.B. Kinesis Data Analytics in Speichermedien/Datenbanken wie \ac{S3}, Redshift oder Elasticsearch Service zu übertragen.
 
-Amazon Kinesis ist im Gegensatz zu \AWSIOT{} Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis (Data Streams) älter als \AWSIOT{} Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT{} Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis wirbt damit, dass Daten in 70 Milisekunden nach Eingang zum Konsum verfügbar sind.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af}
+Amazon Kinesis Data Analytics ist im Gegensatz zu \AWSIOT{} Analytics nicht allein auf die Analyse von \ac{IoT} Daten spezialisiert. Kinesis eignet sich vielmehr für generelle Analysen von allerlei Streamingdaten. Zusätzlich ist Amazon Kinesis (Data Streams) älter als \AWSIOT{} Analytics und bildet die technische Grundlage für die Verarbeitung \AWSIOT{} Events.\footcite[Vgl.][]{Pogosova.28.05.2020} Kinesis Data Streams wirbt damit, dass Daten in 70 Milisekunden nach Eingang zum Konsum verfügbar sind.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af}
 
 Alternativ zur Kinesis Familie gibt es auch Open-Source Stream Analytics Dienste, wie von \citeauthor{Singh.2016} dargestellt.\footcite[Vgl.][]{Singh.2016} Diese kommen aufgrund der fehlenden Integration mit \ac{AWS} und des erhöhten Aufwands durch Eigenbetrieb nicht in Frage.
 
@@ -102,7 +81,8 @@ Alternativ zur Kinesis Familie gibt es auch Open-Source Stream Analytics Dienste
 \caption{Grobarchitektur des Ablaufes für Kinesis Analytics}
 \label{abb:GrobArchitekturKinesisAnalytics}
 \end{figure}
-In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Dienste aus der Kinesis Familie mit anderen Diensten dargestellt. Angenommen werden dabei die in \autoref{chap:rahmendatenverarbeitung} erläuterten Rahmenbedingungen, weshalb \ac{IoT} Core als Message Broker eingesetzt ist. Wie in der in \autoref{productselection:iotanalytics} beschriebenen Architektur, muss auch hier für die Datenverarbeitung eine Regel im \ac{IoT} Core Broker angelegt werden, um relevante Nachrichten an Kinesis Data Streams weiterzuleiten.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.} Die tatsächliche Analyse übernimmt der komplementäre Dienst Kinesis Data Analytics.
+In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Dienste aus der Kinesis Familie mit anderen Diensten dargestellt. Angenommen werden dabei die in \autoref{chap:rahmendatenverarbeitung} erläuterten Rahmenbedingungen, weshalb \ac{IoT} Core als Message Broker eingesetzt ist. Wie in der in \autoref{productselection:iotanalytics} beschriebenen Architektur, muss auch hier für die Datenverarbeitung eine Regel im \ac{IoT} Core Broker angelegt werden, um relevante Nachrichten an Kinesis Data Firehose weiterzuleiten.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.} Die tatsächliche Analyse übernimmt der komplementäre Dienst Kinesis Data Analytics. 
+In diesem Fall wurde angenommen, dass Kinesis Data Firehose die Datenübertragung vornimmt, da bei Kinesis Data Streams einzelne Shards, wie in \autoref{abb:KinesisShards} gezeigt, zu verwalten sind. Die Wahl von Kinesis Data Firehose bringt den NAchteil mit sich, dass die Daten nicht in Kinesis aufbewahrt werden können, was bei Data Streams möglich ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bh} Da die Daten aber in \ac{S3} von Kinesis Data Firehose persistiert werden und einzig das Volumen der durchgeleiteten Daten abgerechnet wird, ist die Verwendung von Firehose statt Streams unkomplizierter. Trotzdem kann, wenn benötigt Firehose mit Data Streams ersetzt werden, da beide mit Kinesis Data Analytics kompatibel sind.
 
 \begin{figure}[H]
 \centering
@@ -111,9 +91,8 @@ In \autoref{abb:GrobArchitekturKinesisAnalytics} ist das Zusammenspiel der Diens
 \label{abb:KinesisShards}
 \end{figure}
 \footnotetext{Entnommen aus: \cite{Pogosova.28.05.2020}}
-Kinesis Data Streams unterteilt, wie in \autoref{abb:KinesisShards} gezeigt, Daten in einzelne Partitionen/Shards, in denen gleich partitionierte Datensätze verarbeitet werden können.\footcite[Vgl. auch im Folgenden][]{Pogosova.28.05.2020} Einzelne Shards verhalten sich dabei wie geordnete Warteschlangen und speichern die Nachrichten nach Eingangsdatum sortiert. 
 
-Kinesis unterstützt eine erweiterte Aufbewahrung $\lbrack$\textit{Data Retention}$\rbrack$, bei welcher Daten bis maximal 365 Tage nach initialem Einspielen erneut an Konsumenten wie Kinesis Data Analytics zur Verarbeitung gesendet werden können. Dies zieht Zusatzkosten nach sich. Treten jedoch Fehler in einer Analyse auf, kann diese für den gewählten Aufbewahrungszeitraum wiederholt werden.
+Kinesis Data Streams unterstützt, im Gegensatz zu Data Firehose, eine erweiterte Aufbewahrung $\lbrack$\textit{Data Retention}$\rbrack$, bei welcher Daten bis maximal 365 Tage nach initialem Einspielen erneut an Konsumenten wie Kinesis Data Analytics zur Verarbeitung gesendet werden können. Dies zieht Zusatzkosten nach sich. Treten jedoch Fehler in einer Analyse auf, kann diese für den gewählten Aufbewahrungszeitraum wiederholt werden.
 
 Kinesis Data Analytics unterstützt sowohl die Datenanalyse mittels \ac{SQL} als auch mittels der programmatischen Schnittstellen, die das Open Source Projekt Apache Flink anbietet.\footcite[Vgl.][]{AmazonWebServicesInc..2020f} Der Analysecode, der die Schnittstellen von Flink verwendet, kann in Java, Scala oder Python geschrieben sein.
 
@@ -126,14 +105,35 @@ Der gleitende Durchschnitt lässt sich für Intervalle mittels der \mintinline[b
 \citeauthor{Herman.2020} kritisiert bei Kinesis Data Analytics den angepassten \ac{SQL} Dialekt, welcher keine Interoperabilität zulässt und die fehlende Testbarkeit außerhalb von \ac{AWS} Werkzeugen.\footcite[Vgl.][]{Herman.2020}
 
 \subsubsection{Performancegarantien}
-Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Mittels des \enquote{enhanced fanout} kann Kinesis gleichzeitig 2MB an Durchsatz pro Sekunde zu konsumierenden Applikationen bereitstellen.\footcite[Vgl. auch im Folgenden][]{Hunt.2018} Gleichzeitig bietet \ac{AWS} laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} 
+Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Da Kinesis Data Firehose auf Kinesis Data Streams aufbaut, ist ähnliches für Data Firehose anzunehmen\footcite[Vgl.][]{Pogosova.28.05.2020} 
+% Mittels des \enquote{enhanced fanout} kann Kinesis gleichzeitig 2MB an Durchsatz pro Sekunde zu konsumierenden Applikationen bereitstellen.\footcite[Vgl. auch im Folgenden][]{Hunt.2018} 
+\ac{AWS} bietet laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} 
 Laut der \ac{AWS}-eigenen Dokumentation liegt die Ende zu Ende Verzögerung von Dateneinspeisung bis Konsumption typischerweise unter einer Sekunde. Dies weicht das eigentliche Marketingversprechen von 70 Milisekunden schon auf.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ae}
-Die Kinesis \ac{SLA} enthält auch keine Klausel zur eigentlichen Performance, nur eine Garantie zur Verfügbarkeit von 99,99\% pro Monat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ad} Es ist Abwägungssache, ob der Subsekunden Latenz von Kinesis Data Streams Glauben geschenkt wird, beziehungsweise ob die Latenz im Subsekunden Bereich überhaupt relevant ist, oder ob alles kleiner fünf Sekunden als nahe genug an der Echtzeit akzeptiert wird.
+Die Kinesis \ac{SLA} enthält auch keine Klausel zur eigentlichen Performance, nur eine Garantie zur Verfügbarkeit von 99,99\% pro Monat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ad} 
+% Es ist Abwägungssache, ob der Subsekunden Latenz von Kinesis Data Streams Glauben geschenkt wird, beziehungsweise ob die Latenz im Subsekunden Bereich überhaupt relevant ist, oder ob alles kleiner fünf Sekunden als nahe genug an der Echtzeit akzeptiert wird.
 
 Es gab bis jetzt ein schweres Ereignis, bei dem Kinesis in einer Region für den Zeitraum von 12 Stunden beeinträchtigt war und andere, von Kinesis abhängige Dienste beeinträchtigte.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020e} Dieses Ereignis war jedoch auf die \enquote{us-east-1} Region begrenzt und die Auswirkungen konnten durch Migration auf andere Regionen, wie beispielsweise \enquote{eu-central-1} für Nutzende mitigiert werden.
 
 \subsubsection{Gesamtkosten}
-Für die Gesamtschätzung wurde Kinesis Data Streams mit einem Shard sowie Kinesis Data Analytics angesetzt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.l} Zusätzlich wurde angenommen, dass Analysen mittels \ac{SQL} erfolgen, da wie gezeigt genügend der erwünschten Features vorhanden sind.
+Für die Gesamtschätzung wurde Kinesis Data Firehose mit Streaming zu \ac{S3} und Kinesis Data Analytics angesetzt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bi} Zusätzlich wurde angenommen, dass Analysen mittels \ac{SQL} erfolgen, da wie gezeigt genügend der erwünschten Features vorhanden sind. Kinesis Data Firehose rundet Datensätze auf die nächsten 5KB auf.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
+Kinesis Data Firehose & 0,033/GB & 1,38 \\ \hline
+\ac{S3}-Speicher & 0,0245/GB Speicher & 0,64 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Kinesis Data Analytics\\ Processing Unit\end{tabular} & 0,132/h & 32,12 \\ \hline
+\ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & \textless{}0,02 \\ \hline
+Lambda Ausführungen & \begin{tabular}[c]{@{}l@{}}0,0000002/Ausführung\\ 0,0000166667/Sekunde (angenommen: 5)\\ 0,0000000167/GB \acs{RAM}/ms\end{tabular} & 0,08 \\ \hline
+Summe & \cellcolor[HTML]{EFEFEF} & \underline{34,24} \\ \hline
+\end{tabular}
+\caption{Kostenvergleich Amazon~Kinesis}
+\label{tab:kostenvergleich-Amazon~Kinesis}
+\end{table}
+ Zusätzlich wird angenommen, das \ac{SQL}-Statements ausgeführt werden, welche als \enquote{Processing units} abgerechnet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.m} Da Kinesis Data Analytics nicht selbstständig mit \ac{SNS} kommunizieren kann, wird Lambda als Weiterleitungsplattform für Alarme mit angesetzt.\footcite[Vgl.][]{AmazonWebServicesInc..2017b} 
+
+Preise für Kinesis Data Streams wären die Folgenden, unter der Annahme, dass \ac{S3} wegfällt, da Kinesis Data Streams die Daten selber zwischenspeichern kann:\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.l}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -146,11 +146,10 @@ Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
 Lambda Ausführungen & \begin{tabular}[c]{@{}l@{}}0,0000002/Ausführung\\ 0,0000166667/Sekunde (angenommen: 5)\\ 0,0000000167/GB \acs{RAM}/ms\end{tabular} & 0,08 \\ \hline
 Summe & \cellcolor[HTML]{EFEFEF} & \underline{45,51} \\ \hline
 \end{tabular}
-\caption{Kostenvergleich Amazon~Kinesis}
-\label{tab:kostenvergleich-Amazon~Kinesis}
+\caption{Kostenvergleich Amazon~Kinesis~Data~Streams}
+\label{tab:kostenvergleich-Amazon~Kinesis~Data~Streams}
 \end{table}
 
- Zusätzlich wird angenommen, das \ac{SQL}-Statements ausgeführt werden, welche als \enquote{Processing units} abgerechnet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.m} Da Kinesis Data Analytics nicht selbstständig mit \ac{SNS} kommunizieren kann, wird Lambda als Weiterleitungsplattform für Alarme mit angesetzt.\footcite[Vgl.][]{AmazonWebServicesInc..2017b} 
 
 
 
@@ -342,7 +341,7 @@ In einem Vergleich zwischen \ac{AWS} und dem Mitbewerber Confluent, stellte \cit
 
 
 \subsection{Auswahl}
-Da Kafka übertragbar ist, genauso wie der Programmcode von Lambda, wurden bei beiden Diensten kein Punktabzug für die Übertragbarkeit vorgenommen. Alle Dienste mit Ausnahme von der Kombination aus \ac{MSK} und ksqlDB integrieren sich gut mit dem Dienstleistungsumfang von \ac{AWS}. Speziell ist dabei Lambda zu erwähnen, welches als generalistische Plattform mit vielen Diensten interagieren kann. Da \ac{IoT} Events speziell auf die Erkennung von Ereignissen anhand von \enquote{if-then-else} Bedingungen entwickelt wurde, sind kaum andere, generalisiertere Anwendungsfälle realisierbar. Ebenfalls ist eine Erweiterbarkeit mit \AWSIOT{} Events nicht gegeben und auch eine Erfüllung der vorgegebenen Auswertungen ist nur mit höchster Implementierungskreativität in Teilen machbar. Abzüge zur Fehlertransparenz gab es bei allen Dienstleistungen, speziell auch in Lambda, da Fehlertriage nur durch Replikation der Inputs und Debugging des Codes machbar ist. Da bei Kinesis Data Streams die Shards manuell skaliert werden müssen, wurden Abzüge beim Wartungsaufwand und der Skalierbarkeit gemacht. Da der Wartungsaufwand bei Lambda stark von der Stabilität des laufenden Programmcodes abhängig ist und genau überprüft werden muss , ob Fehler bei der Verarbeitung auftreten, wurden Abzüge gemacht. \ac{MSK} mit ksqlDB zu skalieren ist eine aufwändige Aufgabe, welche häufiges nachjustieren und viel Zeit erfordert. Im Gegensatz dazu ist \AWSIOT{} Events nur zu warten, wenn das Nachrichtenformat vom initial konfigurierten abweicht. Da Lambda und \AWSIOT{} Events serverless bzw. im Fall von \AWSIOT{} Events auch vollständig verwaltet sind, ist die Skalierbarkeit und \enquote{serverlessness} gegeben. Kinesis hat im Normalbetrieb die geringsten monatlichen Kosten, während es bei Lambda von der konkreten Konfiguration udn der Anzahl an übermittelten Nachrichten abhängig ist, wie hoch die Kosten ausfallen. \AWSIOT{} Events ist im Vergleich zu den anderen Diensten Preis/Leistungs-technisch stark unterlegen. Bei \ac{MSK} wurden Abzüge gemacht, da viele einzeln zu skalierende Teile, die einzeln teurer werden könnten abgerechnet werden und mindestens zwei Broker betrieben werden müssen. Kinesis ist ein System, was überwiegend stabil läuft und auch vor nutzerverursachten Fehlern gefeit ist, was einer der Gründe sein dürfte, weshalb andere \ac{AWS} Dienste auf Kinesis aufbauen. Lambda hingegen ist je nach Ausgestaltung des Programmcodes nicht besonders fehlertolerant. Da \ac{MSK} aus Redundanzgründen in mindestens zwei Availability Zones gestartet werden muss, ist es per se auch robust, jedoch kommt durch ksqlDB ein weiterer \enquote{Point of failure} hinzu, welcher mit größerem Aufwand robust und fehlertolerant gemacht werden muss. \AWSIOT{} Events ist sehr robust und fehlertolerant, da es komplett verwaltet wird und die einzigen Fehler durch Nutzende eingeführt werden können. 
+Da Kafka übertragbar ist, genauso wie der Programmcode von Lambda, wurden bei beiden Diensten kein Punktabzug für die Übertragbarkeit vorgenommen. Alle Dienste mit Ausnahme von der Kombination aus \ac{MSK} und ksqlDB integrieren sich gut mit dem Dienstleistungsumfang von \ac{AWS}. Speziell ist dabei Lambda zu erwähnen, welches als generalistische Plattform mit vielen Diensten interagieren kann. Da \ac{IoT} Events speziell auf die Erkennung von Ereignissen anhand von \enquote{if-then-else} Bedingungen entwickelt wurde, sind kaum andere, generalisiertere Anwendungsfälle realisierbar. Ebenfalls ist eine Erweiterbarkeit mit \AWSIOT{} Events nicht gegeben und auch eine Erfüllung der vorgegebenen Auswertungen ist nur mit höchster Implementierungskreativität in Teilen machbar. Abzüge zur Fehlertransparenz gab es bei allen Dienstleistungen, speziell auch in Lambda, da Fehlertriage nur durch Replikation der Inputs und Debugging des Codes machbar ist. Da statt Kinesis Data Streams Kinesis Data Firehose für den Vergleich angenommen wurde, welches nicht manuell skaliert werden muss, wurden keine Abzüge beim Wartungsaufwand und der Skalierbarkeit gemacht. Da der Wartungsaufwand bei Lambda stark von der Stabilität des laufenden Programmcodes abhängig ist und genau überprüft werden muss, ob Fehler bei der Verarbeitung auftreten, wurden Abzüge gemacht. \ac{MSK} mit ksqlDB zu skalieren ist eine aufwändige Aufgabe, welche häufiges nachjustieren und viel Zeit erfordert. Im Gegensatz dazu ist \AWSIOT{} Events nur zu warten, wenn das Nachrichtenformat vom initial konfigurierten abweicht. Da Lambda und \AWSIOT{} Events serverless bzw. im Fall von \AWSIOT{} Events auch vollständig verwaltet sind, ist die Skalierbarkeit und \enquote{serverlessness} gegeben. Kinesis hat im Normalbetrieb die geringsten monatlichen Kosten, während es bei Lambda von der konkreten Konfiguration und der Anzahl an übermittelten Nachrichten abhängig ist, wie hoch die Kosten ausfallen. \AWSIOT{} Events ist im Vergleich zu den anderen Diensten Preis/Leistungs-technisch stark unterlegen. Bei \ac{MSK} wurden Abzüge gemacht, da viele einzeln zu skalierende Teile, die einzeln teurer werden könnten abgerechnet werden und mindestens zwei Broker betrieben werden müssen. Kinesis ist ein System, was überwiegend stabil läuft und auch vor Nutzerverursachten Fehlern gefeit ist, was einer der Gründe sein dürfte, weshalb andere \ac{AWS} Dienste auf Kinesis aufbauen. Trotzdem wurde ein Punkt beim Wartungsaufwand abgezogen, da im Falle eines Ausfalles von Kinesis schnell agiert werden muss, um neu eintreffende Daten nicht zu verlieren. Lambda hingegen ist je nach Ausgestaltung des Programmcodes nicht besonders fehlertolerant. Da \ac{MSK} aus Redundanzgründen in mindestens zwei Availability Zones gestartet werden muss, ist es standardmäßig robust, jedoch kommt durch ksqlDB ein weiterer \enquote{Point of failure} hinzu, welcher mit größerem Aufwand robust und fehlertolerant gemacht werden muss. \AWSIOT{} Events ist sehr robust und fehlertolerant, da es komplett verwaltet wird und die einzigen Fehler durch Nutzende eingeführt werden können. 
 
 \input{content/04-produkte/vergleiche/echtzeit-vergleich}
 

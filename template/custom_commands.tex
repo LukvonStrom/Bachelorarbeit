@@ -83,6 +83,8 @@
 \Todo{#1}
 }
 
+\newcommand{\anhangref}[1]{Anhang~\ref{#1}}
+
 % \renewcommand{\clearpage}{}
 \renewcommand*{\lstlistingname}{Codebeispiel}
 
@@ -94,6 +96,19 @@
 \makeatother
 
 
+\providecommand\phantomsection{}
+
+\makeatletter
+\newcommand{\textlabel}[2]{%
+  \protected@edef\@currentlabel{#2}% Set target label
+  \phantomsection% Correct hyper reference link
+  #1\label{#2}% Print and store label
+}
+\makeatother
+
+\newcommand{\vp}[1]{\textlabel{\protect\textbf{Variationspunkt~#1}}{Variationspunkt~#1}}
+
+\newcommand{\vpref}[1]{\ref{Variationspunkt~#1}}
 
 
 

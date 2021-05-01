@@ -3,7 +3,7 @@ autonumber
 skinparam maxMessageSize 90
 skinparam sequenceMessageAlign center
 entity "IoT Core\nBroker"
-control "Geplanter\nAufruf"
+control "EventBridge\nRule\n(cron)"
 control "Lambda"
 database "Timestream"
 boundary "Simple\nNotification\nService"
@@ -14,7 +14,7 @@ group Übertragung
 end
 group Analyse
 loop alle x Minuten
-"Geplanter\nAufruf" -> "Lambda" : Aufruf
+"EventBridge\nRule\n(cron)" -> "Lambda" : Aufruf
 "Lambda" -> "Timestream" : Abfrage
 "Timestream" -> "Lambda"  : Antwort
 "Lambda" --> "Simple\nNotification\nService" : Alarmierung

@@ -7,9 +7,6 @@ In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die Batch (\enquote{
 \label{abb:ProdukteDB}
 \end{figure}
 
-\TodoW{brauchen wir das wirklich?}
-
-
 \subsection{Amazon Timestream}
 Timestream ist nach Aussage des Herstellers eine schneller, skalierbare und speziell für Zeitreihendaten entwickelte Datenbank, welche über \ac{AWS} als Dienstleistung bezogen werden kann.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.h} Timestream integriert zwei verschiedene Speichertypen, nämlich \ac{RAM}-basierten Speicher, in dem Daten, auf welche schnell zugegriffen werden sollen, gespeichert werden können und Festplatten-basierten Speicher, welcher für historische Daten dienen soll.
 Timestream besitzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funktionen zur Analyse von Zeitreihendaten erweitert wurde. 
@@ -23,14 +20,14 @@ Timestream besitzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funkti
 % \label{listing:timestream-kostenvergleich}
 % \end{listing}
 
-Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in der Dokumentation an, dass Lambda verwendet werden kann, um periodisch eine Abfrage in Timestream auszuführen und basierend auf dieser Anfrage Alarme via \ac{SNS} zu versenden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ag} Abgebildet ist diese Interaktion in \autoref{abb:TimestreamLAmbdaOrchestration}.
+Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in der Dokumentation an, dass Lambda verwendet werden kann, um periodisch eine Abfrage in Timestream auszuführen und basierend auf dieser Anfrage Alarme via \ac{SNS} zu versenden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ag} Abgebildet ist diese Interaktion in \autoref{abb:TimestreamLambdaOrchestration}.
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.45\textwidth]{graphics/Lambda-Timestream-Orchestration.pdf}
 \caption{Orchestrierung von zeitbasierten Timestream Abfragen}
-\label{abb:TimestreamLAmbdaOrchestration}
+\label{abb:TimestreamLambdaOrchestration}
 \end{figure}
 
 \subsubsection{Features des Dienstes}
@@ -77,11 +74,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & 32,9011 \\ \hline
 \end{table}
 
 \subsection{Amazon Athena/Amazon S3}\label{chap:athena}
-
-
 Amazon Athena ist nach Aussage des Herstellers ein voll verwalteter Query Dienst, welcher das Durchsuchen von großen Datenmengen im \ac{S3} Speicherdienst möglich macht.\footcite[Vgl.][]{Barr.2016} Athena basiert dabei auf dem ursprünglich von Facebook entwickelten Presto, welches mittlerweile Open Source ist. Innerhalb von Athena können Daten verschiedener Formate (\ac{CSV}, Apache Parquet, Apache ORC, \ac{JSON}, ...) mittels \ac{SQL} verarbeitet werden. Zusätzlich ist seit November 2020 mittels der sogenannten \enquote{Federated Queries} auch die Abfrage von anderen Datenquellen wie Apache HBase, Amazon Document DB oder von Datenquellen, die durch eigenentwickelte Verbindungselemente verknüpft werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.s} Technisch werden diese Federated Queries via Lambda abgewickelt.
-
-Bei verändernden Datenschemata wird empfohlen, den Dienst \ac{AWS} Glue Crawler komplementär einzusetzen, welcher die Schemata aus \ac{S3} automatisch extrahiert und in Athena hinterlegt. Andernfalls können die Schemata auch manuell hinterlegt werden.
 
 \begin{figure}[H]
 \centering
@@ -89,7 +82,9 @@ Bei verändernden Datenschemata wird empfohlen, den Dienst \ac{AWS} Glue Crawler
 \caption{Grobarchitektur des Ablaufes für Athena}
 \label{abb:GrobArchitekturAthena}
 \end{figure}
-\TodoW{In Text einbauen}
+
+In \autoref{abb:GrobArchitekturAthena} wird die Grobarchitektur unter Einsatz von \AWSIOT{} Core, \ac{S3}, Athena und StepFunctions gezeigt. StepFunctions dient als Orchestrierungsdienst, für die wiederholte Ausführung der Abfragen und entsprechende Weiterleitung an \ac{SNS}.
+Bei verändernden Datenschemata wird empfohlen, den Dienst \ac{AWS} Glue Crawler komplementär einzusetzen, welcher die Schemata aus \ac{S3} automatisch extrahiert und in Athena hinterlegt. Andernfalls können die Schemata auch manuell hinterlegt werden.
 
 \subsubsection{Features des Dienstes}
 Die technische Grundlage für Athena, ist das OpenSource Projekt Presto. Dieses bietet mit \mintinline{sql}{approx_percentile(x, percentage)} eine Funktion zur Kalkulation von Perzentilen an.\footcite[Vgl.][]{ThePrestoFoundation.o.J.}
@@ -118,7 +113,7 @@ Für die folgende Kostenbewertung wird angenommen, dass Athena die Daten aus \ac
 % \end{figure}
 % \TodoW{Bild horizontal}
 
-In \autoref{tab:kostenvergleich-Amazon~Athena} wird davon ausgegangen, dass 2MB an Daten im Zeitraum von 10 Minuten neu hinzukommen. Da aber eine Historie gebildet werden soll, müssen sowieso die gesamten dreimonatigen historischen Daten abgefragt werden. Ausgehend von 200 kB pro Minute von allen Geräten ergeben sich 25,92 GB Datenvolumen an historischen Daten, welche 960 mal im Monat abgefragt werden sollen. Athena rundet dabei auf das nächste MegaByte auf und hat ein Minimum von 10 MB erfasster Daten pro Anfrage.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Das Datenschema für Athena stellt Glue bereit, welches Kosten für Abfragen aus dem Datenkatalog und Speicherkosten für den Datenkatalog erhebt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.u} Zur Orchestrierung wird ein Ablauf als Zustandsmaschine in StepFunctions abgebildet, welches für jeden Zustandsübergang eine Gebühr erhebt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.v}
+In \autoref{tab:kostenvergleich-Amazon~Athena} wird davon ausgegangen, dass 2MB an Daten im Zeitraum von 10 Minuten neu hinzukommen. Da aber eine Historie gebildet werden soll, müssen sowieso die gesamten dreimonatigen historischen Daten abgefragt werden. Ausgehend von 200 kB pro Minute von allen Geräten ergeben sich 25,92 GB \ac{S3}-Datenvolumen an historischen Daten, welche 960 mal im Monat abgefragt werden sollen. Athena rundet dabei auf das nächste MegaByte auf und hat ein Minimum von 10 MB erfasster Daten pro Anfrage.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Das Datenschema für Athena stellt Glue bereit, welches Kosten für Abfragen aus dem Datenkatalog und Speicherkosten für den Datenkatalog erhebt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.u} Zur Orchestrierung wird ein Ablauf als Zustandsmaschine in StepFunctions abgebildet, welches für jeden Zustandsübergang eine Gebühr erhebt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.v}
 
 \begin{table}[H]
 \centering
@@ -126,11 +121,12 @@ In \autoref{tab:kostenvergleich-Amazon~Athena} wird davon ausgegangen, dass 2MB 
 \hline
 Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
 Athena Abfragen & \begin{tabular}[c]{@{}l@{}}0,005/TB \\ abgefragte Daten\end{tabular} &  121,50\\ \hline
+\ac{S3}-Speicher & 0,0245/GB Speicher & 0,64 \\ \hline
 \begin{tabular}[c]{@{}l@{}}Glue Data Catalog\\ Speicher\end{tabular} & 1/100.000 Objekte &  \textless 0,0001\\ \hline
 \begin{tabular}[c]{@{}l@{}}Glue Data Catalog\\ Abfragen\end{tabular} & 1/Million Abfragen &  \textless 0,0001\\ \hline
 Step Functions & \begin{tabular}[c]{@{}l@{}}0,025/1000 \\ Zustandsübergänge\end{tabular} &  1,08\\ \hline
 \ac{SNS} (Push) & \begin{tabular}[c]{@{}l@{}}0,00002/Nachricht\\ (angenommen 5 Alarme/Gerät/Monat)\end{tabular} & 0,02 \\ \hline
-Summe & \cellcolor[HTML]{EFEFEF} &  122,60\\ \hline
+Summe & \cellcolor[HTML]{EFEFEF} &  123,24\\ \hline
 \end{tabular}
 \caption{Kostenvergleich Amazon~Athena}
 \label{tab:kostenvergleich-Amazon~Athena}
@@ -150,7 +146,8 @@ Redshift bietet zusätzlich mit Redshift Spectrum einen Dienst an, welcher auf d
 \caption{Grobarchitektur des Ablaufes für Redshift}
 \label{abb:GrobArchitekturRedshift}
 \end{figure}
-\TodoW{In Text einbauen}
+
+In \autoref{abb:GrobArchitekturRedshift} ist beispielhaft die Verwendung von Redshift mit \ac{S3} (ohne Spectrum) gezeigt. Dabei lädt Redshift die Daten von \ac{S3} und löscht diese anschliessend. Anfragen werden via der \ac{JDBC}-Schnittstelle von Redshift mit Lambda getätigt und ausgewertet. Alternativ könnte Kinesis Data Firehose zum Laden der Daten in Redshift zum Einsatz kommen.
 
 
 \subsubsection{Features des Dienstes}
@@ -200,12 +197,12 @@ Amazon OpenSearch Service ist die verwaltetete Variante des Elasticsearch Forks 
 \caption{Grobarchitektur des Ablaufes für OpenSearch Service}
 \label{abb:GrobArchitekturOpenSearch}
 \end{figure}
-\TodoW{In Text einbauen}
+Wie in \autoref{abb:GrobArchitekturOpenSearch} gezeigt, kann OpenSearch/Elasticsearch Service nativ via \AWSIOT{} Core Daten empfangen. Lambda dient zur Orchestrierung der Abfragen und zur folgenden Auswertung.
 
 \subsubsection{Features des Dienstes}
 Da der OpenSearch Fork von Amazon auf der Elasticsearch Basis basiert, und \ac{AWS} explizit plant, vorest keine \ac{API} Abweichungen zur bereits bekannten \ac{API} einzubauen, werden im Folgenden die Elasticsearch Fähigkeiten dargestellt.\footcite[Vgl.][]{Meadows.2021}
 
-Mithilfe der \enquote{Percentiles aggregation} können beliebige Perzentile eines Datensatzes berechnet werden. Dies wird in \autoref{listing:percentiles-elasticsearch} im Anhang~\ref{anhang:elastic-code} mit der Elasticsearch eigenen Abfragesprache gezeigt. 
+Mithilfe der \enquote{Percentiles aggregation} können beliebige Perzentile eines Datensatzes berechnet werden. Dies wird in \autoref{listing:percentiles-elasticsearch} im \anhangref{anhang:elastic-code} mit der Elasticsearch eigenen Abfragesprache gezeigt. 
 In Elasticsearch/OpenSearch Service ist aufgrund von Amazon eigenen Anpassungen eine Anomalieerkennung basierend auf Random Cut Forest verfügbar.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.al}
 Alternativ lassen sich basierend auf der mittleren absolute Abweichung vom Median mit Elasticsearch eigenen Mitteln ebenfalls Aussreisser/Anomalien erkennen.\footcite[Vgl.][]{ElasticsearchInc..o.J.c} 
 In der Elasticsearch eigenen Abfrage gibt es mit dem \mintinline{sql}{minimum_should_match} Parameter, eine Möglichlkeit Abfragen auf Schwellwertüberschreitungen zu stellen.\footcite[Vgl.][]{ElasticsearchInc..o.J.e}
