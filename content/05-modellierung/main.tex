@@ -3,8 +3,25 @@ In diesem Kapitel sollen die Anforderungen aus den Interviews praktisch erhoben 
 \section{Anforderungserhebung}
 \input{content/05-modellierung/1-anforderungserhebung}
 
-\section{Echtzeitverarbeitung}
+\section{Echtzeitverarbeitung}\label{chap:ra-rt}
 \input{content/05-modellierung/2-echtzeitverarbeitung}
 
 \section{Batch Verarbeitung}
 \input{content/05-modellierung/3-batch}
+
+\section{Einsatzszenarien der Referenzarchitekturen}
+Im Folgenden soll beleuchtet werden, wofür sich welche der beiden entwickelten Referenzarchitekturen besser eignet.
+Für das Monitoring eignet sich die in \autoref{chap:ra-rt} beschriebene Referenzarchitektur besser, da eine enge Integration sowohl mit CloudWatch Metrics als auch CloudWatch Logs besteht. So lassen sich Analysen zu in der \ac{AWS}-Cloud laufenden Workloads einfach durchführen.
+
+\TodoW{Vergleich RA - Deadline 03.05.}
+
+\begin{itemize}
+\item Wertschöpfung für das Unternehmen wichtig\\
+\TodoW{Interview}
+Siehe \anhangref{anhang:interview-philipp-xx.04.2021}
+\item akzeptabel und problemlösend für Domäne\\
+\TodoW{ausfüllen}
+\end{itemize}
+
+Da die Referenzarchitekturen als verteilte Systeme mit mehreren Diensten diverse Fehlerquellen haben können, die sich dann symptomatisch in den gezeigten Metriken bemerkbar machen, sind genaue Tests zum Verständnis der fehlerzustände wichtig. Im Rahmen des \textit{Chaos Engineerings} lassen sich gezielt Fehler in das System einführen um die Resilienz gegenüber diversester Fehlerquellen zu testen.\footcite[Vgl.][]{Augsten.2020} Bei den vorgestellten Referenzarchitekturen ist es zu empfehlen, regelmäßige Chaos Experimente durchzuführen um gezielt Fehlerszenarien wie doppelte Nachrichten, hohe Latenzen zwischen Diensten oder die temporäre Nichtverfügbarkeit einzelner Dienste zu simulieren und gezielt den Einfluss messen zu können. Folgend können Erkentnisse für den besseren Betrieb einer resilienten Dateninfrastruktur abgeleitet udn dokumentiert werden. Für \ac{AWS} gibt es den Dienst Fault Injection Simulator, welcher Fehler in Schnittstellen zwischen Diensten erzeugen kann und gezielt auch einzelne Infrastrukturkomponenten beeinträchtigen kann.\footcite[Vgl.][]{Barr.2021b} Unter Verwendung dieses Dienstes ist es möglich, die beschriebenen Chaos Experimente durchzuführen.
+

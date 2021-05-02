@@ -46,9 +46,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{129,75}  \\\hline
 \subsection{Auswahl}
 Im Bereich Multimode gibt es nur einen zu vergleichenden Dienst, weshalb Abzüge nicht auf relativen Kriterien zu den anderen Diensten basieren, sondern auf absoluten Abzügen.
 \input{content/04-produkte/vergleiche/multimode-vergleich}
-Im Folgenden werden die Einstufungsentscheidungen, die in \autoref{tab:bewertungsmatrix-multimode} zu sehen sind, erläutert.
-
-So ist beispielsweise klar, dass zwar bei \AWSIOT{} Analytics die Jupyter Notebooks plattformunabhängig sind, aber die \ac{SQL}-Statements nicht übertragbar sind und, da zwingend ein \AWSIOT{} Core Broker benötigt wird. Aufgrund dieses \textit{vendor-lockins} kann ein großer Teil des Setups nicht übertragen werden.
+Klar ist, dass zwar bei \AWSIOT{} Analytics die Jupyter Notebooks plattformunabhängig sind, aber die \ac{SQL}-Statements nicht übertragbar sind und zwingend ein \AWSIOT{} Core Broker benötigt wird. Aufgrund dieses \textit{vendor-lockins} kann ein großer Teil des Setups nicht übertragen werden.
 \AWSIOT{} Analytics integriert sich gut mit anderen Dienstleistungen von AWS, z.B. mit \AWSIOT{} Core und den anderen \AWSIOT{} Diensten, SageMaker, QuickSight , Lambda, \ac{SNS} und weiteren.
 \AWSIOT{} Analytics ist speziell für \ac{IoT} Daten gebaut, weshalb Funktionalitäten eingebaut sind, die speziell in Kombination mit den anderen \AWSIOT{} Diensten Sinn machen. Die Verwendung dieser Funktionalitäten ist aber nicht zwingend notwendig. Es können auch andere Daten, z.B. IT-Monitoring eingespeist werden, wenn sie über \ac{MQTT} und den \AWSIOT{} Core Broker geladen werden.
 Die Erweiterbarkeit ist gegeben durch die Möglichkeiten, die \ac{SQL} in Verbindung mit der generischen Programmierbarkeit der Notebooks bietet und zusätzlich dadurch, dass durch die integrierte Datenbank Daten erneut mit anderer Logik verarbeitet werden können.

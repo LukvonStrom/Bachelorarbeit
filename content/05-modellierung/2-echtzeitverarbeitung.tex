@@ -80,11 +80,6 @@ Insgesamt scheint die Kinesis Dienstfamilie gut geeignet, um sowohl Logs als bes
 \item Anwendbarkeit auf Sensordaten (\ac{IoT})\\
 Kinesis ist generalisiert ausgelegt, durch die Integration mit \AWSIOT{} Core wird jedoch die Verarbeitung von \ac{IoT} Daten leicht gemacht. 
 
-\item Wertschöpfung für das Unternehmen wichtig\\
-\TodoW{Interview}
-Siehe \anhangref{anhang:interview-philipp-xx.04.2021}
-\item akzeptabel und problemlösend für Domäne\\
-\TodoW{ausfüllen}
 \item Handling von Events, Messwerten und \enquote{Streaming}\\
 Da die Verarbeitungslogik in Kinesis Data Analytics selbst zu schreiben ist, ist die unterschiedliche Behandlung von Events, niedrigfrequenten Messwerten und Streaming implementierungsabhängig. Dabei wäre es zu empfehlen ein Attribut in die übermittelten Nachrichten einzufügen, welches den geanauen Typ der Nachricht definiert und entsprechende Verarbeitungslogiken vereinfacht. Zu diesem Zweck soll das Attribut \mintinline[breaklines]{json}{{"messageType": "<string>"}} dienen. Für Events, die Definitionsgemäß keinen Messwert beinhalten, ist das Attribut mit dem Wert \mintinline[breaklines]{json}{{"messageType": "event"}} zu belegen. Messwerte sollen \mintinline[breaklines]{json}{{"messageType": "meas_low_freq"}} als Wert verwenden. Für hochfrequentes Streaming ist \mintinline[breaklines]{json}{{"messageType": "meas_high_freq"}} zu verwenden.
 

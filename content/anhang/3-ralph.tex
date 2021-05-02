@@ -29,15 +29,32 @@
 
 \LF Wir haben ja jetzt schon ein wenig Richtung \ac{IIoT} Daten geschaut. Speziell die Problematik mit den Auswertungen ist da wichtig. Entsprechend dem Datenhalbwertszeitmodell hat es ja drei verschiedene Entscheidertypen, die Daten in unterschiedlicher Zeit benötigen und Entscheidungen treffen. Taktische Entscheider brauchen Daten sehr schnell und trifft auch schnell Entscheidungen. Operative Entscheider brauchen Daten nicht unbedingt nahe Echtzeit und haben einen erweiterten Entscheidungshorizont auf Tage oder Wochen. Strategische Entscheider haben einen wesentlich größeren Entscheidungshorizont gleichzeitig aber auch geringere Anforderungen an die \enquote{Echtzeitigkeit} der Daten. Welche siehst du denn als am wichtigsten an oder für welche würdest du im \ac{IoT} Bereich optimieren?
 
-\RB Ich denke die sind alle gleich wichtig. Im operativen Entscheidungsmodus sollten die Entscheidungsregeln idealerweise automatisiert sein. Einen ausgelösten Feuermelder mit einer Email an einen Verantwortlichen zu koppeln, macht weniger Sinn, als beispielsweise die Werksfeuerwehr zu rufen.
+\RB Ich denke die sind alle gleich wichtig. Im operativen Entscheidungsmodus sollten die Entscheidungsregeln idealerweise automatisiert sein. Einen ausgelösten Feuermelder mit einer Email an einen Verantwortlichen zu koppeln, macht weniger Sinn, als beispielsweise die Werksfeuerwehr zu rufen. Bei unseren bisherigen Projekten ist Latenz nicht so wichtig - da die Geräte bei Bedarf Nachrichten senden oder in Intervallen von 50/60 Sekunden. Latetnz wird aber wieder wichtig, wenn man beispielsweise einen Wassersensor hat, der eine Aktion in der Businesslogik auslöst, die das Wasser bei Kontakt abstellt. Von den historischen Daten kann man ein Dashboard befüllen, wo ein Entscheider einmal die Woche drüberschaut und Entscheidungen trifft. Dann gibt es noch langfristige Usecases - Billing Daten beispielsweise interessieren den Kunden nur einmal im Monat.
 
-\TodoW{fertig machen}
+\LF Okay, verstehe. Ein bisschen von der Technik weg - es gibt ja Qualitätskriterien zu Referenzarchitekturen - die hatte ich dir schon gesendet. Wie siehst du denn die?
+
+\RB Ich bin da noch eher klassisch. Wenn du jetzt die ISO 9126 anschaust für Qualität von Softwaresystemen (\textit{siehe \autoref{abb:ISO9126}}), hast du noch ein paar andere Kriterien. Was ist denn zufriedenstellende Qualität? Wenn der Kunde zufrieden ist, ist es dann zufriedenstellend? Qualitätsmerkmale sind immer schwammig, weil es nicht \enquote{die Qualität} gibt. Es gibt nur eine passende Architektur, die eine passt besser, die andere schlechter. Qualität ist nicht absolut, sondern relativ anhand von Kriterien. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/ISO-9126.pdf}
-\caption[Qualitätskriterien nach ISO9126]{Qualitätskriterien nach ISO9126.\footnotemark}
+\caption[Qualitätskriterien nach ISO 9126]{Qualitätskriterien nach ISO 9126.\footnotemark}
 \label{abb:ISO9126}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Johner.2018}}
+
+\LF Ja, für mich gehts darum zu erfahren, welche Kriterien da für den maximierten Nutzen für unsere Zielstakeholder am wichtigsten sind.
+
+\RB Übertragbarkeit zwischen Usecases ist wichtig. Gleichzeitig muss man aber schauen, dass man sich nicht zu sehr fokussiert auf ein Qualitätskriterium. Wenn man beispielsweise bewusst auf single-instance Datenbanken verzichtet und diese immer im Cluster errichtet, erhöht das die Zuverlässigkeit, sprengt aber vielleicht den Preisrahmen des Usecases. 
+
+\LF Da möchte ich mit den Variationspunkten ansetzen, wo ich Entscheidungsoptionen aufzeige wie man die Referenzarchitektur instanziieren kann.
+
+\RB Das Problem ist ja, dass man meistens mit mehr Qualitätskriterien, die man berücksichtigt das Resultat teurer wird.
+
+\LF Da macht das KISS Prinzip dann eher Sinn, oder?
+
+\RB Genau. Der Kunde sollte halt immer den Mehrwert sehen hinter den extra Features die man implementiert. Achte auch auf die Zuverlässigkeit und Modifizierbarkeit.
+
+(0:30)
+\TodoW{fertig machen}
 

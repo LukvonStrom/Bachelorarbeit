@@ -2,7 +2,7 @@ Für diese Referenzarchitektur käme sowohl der Dienst der Multimode Klasse, \AW
 Diese Referenzarchitektur entspricht dem in \autoref{chap:bestehende_ras} vorgestellten Konzept einer \ac{OLAP}-Architektur.
 
 \subsection{Datenverarbeitungssequenz}
-
+In \autoref{abb:SequenceBatchRA} ist die Datenverarbeitungssequenz der Referenzarchitektur zu sehen. Die Daten werden mittels einer properitären Verbindung von \AWSIOT{} Core an Timestream überspielt und von Timestream gespeichert. In einem regelmäßigen Intervall (ähnlich zu den \textit{cron-jobs} auf Linux) wird eine Lambda Funktion aufgerufen. Diese fragt Timestream ab, interpretiert die Resultate und löst im Alarmfall Nachrichten an \ac{SNS} aus. QuickSight greift als Visualisierungslösung, wenn gewünscht, auf den gesamten Datenbestand von Timestream zu. Dies passiert entweder beim Abruf von nutzerersstellten Dashboards oder durch periodisches Laden von Daten in den Quickshight eigenen Cache, genannt \textit{SPICE}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/batch-ra.pdf}
@@ -10,28 +10,27 @@ Diese Referenzarchitektur entspricht dem in \autoref{chap:bestehende_ras} vorges
 \label{abb:SequenceBatchRA}
 \end{figure}
 
+
+
 \subsection{Verteilungssicht}
+In der folgenden \autoref{abb:TopLevelDBRA} ist die Verteilungssicht der Referenzarchitektur gemeinsam mit den Variationspunkten gezeigt. Variationspunkte mit Präfix G können dabei auch auf bereits definierte Variationspunkte der Echtzeitreferenzarchitektur referenzieren.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/DB-RA-Overview.pdf}
-\caption{Top Level View Referenzarchitektur}
+\caption{Verteilungssicht}
 \label{abb:TopLevelDBRA}
 \end{figure}
 
-\vp{D1}: Hier wird eine Dashboardinglösung, im speziellen der \ac{AWS} eigenen Dienst QuickSight eingeplant. Dies erfolgt, damit Benachrichtigungen, die via \ac{SNS} versendet werden, leicht für die Benachrichtigten nachvollziehbar sind. Wenn also beispielsweise eine Anomalie erkannt wurde, kann dies mit einer Visualisierung nachvollzogen werden, um dann entsprechend zu handeln. Wichtig ist, dass die Visualisierung sowohl von den Originaldaten aus dem Speicher von \AWSIOT{} Analytics gespeist wird, als auch aus der Analyse. Eine Visualisierung sieht wie folgt aus:
+\vp{D1}: EventBridge bietet den zeitlich geplanten Aufruf von Zielen wie Lambda an. Wenn keine kontinuierliche Überwachung gewünscht ist, kann die Lambda auch auf Bedarf ausgelöst werden. Dies wäre beispielsweise durch ein vorgelagertes API Gateway möglich. Über dieses muss dann der Zeitraum übergeben werden, für welchen die aktuelle Analyse durchgeführt werden soll.
 
-\textbf{Variationspunkt G2:} Siehe \vpref{G2}. Aber auch: native Integration mit Grafana/ Amazon Managed service for Grafana
+\textbf{Variationspunkt G2:} Hier wird eine Dashboardinglösung, im speziellen der \ac{AWS} eigenen Dienst QuickSight vorgesehen. Dies erfolgt, damit Benachrichtigungen, die via \ac{SNS} versendet werden, leicht für die Benachrichtigten nachvollziehbar sind. Wenn also beispielsweise eine Anomalie erkannt wurde, kann dies mit einer Visualisierung nachvollzogen werden, um dann entsprechend zu handeln. Wichtig ist, dass die Visualisierung sowohl von den Originaldaten aus dem Speicher von \AWSIOT{} Analytics gespeist wird, als auch aus der Analyse. Das für und wieder des Einsatzes wurde auch bereits in \vpref{G2} der Echtzeitarchitektur diskutiert. Alternativ ist Timestream auch mit Grafana und damit dem Managed Service von Grafana integriert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bm}\nzitat\footcite[Vgl.][]{Dutt.2020} Grafana kann dabei ebenfalls als Dashboardinglösung verwendet werden und kostet dabei das selbe wie die Standard Edition von Quicksight, nämlich 9\$ für Nutzende monatlich.\footcite[Vgl. auch im Foglenden][]{AmazonWebServicesInc..o.J.bn}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bo} Erweiterte Kapazitäten bei QuickSight kosten 18\$ pro Monat für Nutzende. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{graphics/QuickSight-Beispiel.png}
-\caption{Dashboard in Quicksight}
-\label{abb:DashboardDBRA}
-\end{figure}
 
-Hier können Benachrichtigte direkt ablesen, dass ständige Schwellwert-Alarme am Morgen ihre Berechtigung hatten, da der Schwellwert erst gegen 14.30 Uhr unterschritten wurde. Entsprechend Maßnahmen, wie beispielsweise die gezielte Belüftung des Raums, in welchem dieser Sensor war, können eingeleitet werden.
+
+% Hier können Benachrichtigte direkt ablesen, dass ständige Schwellwert-Alarme am Morgen ihre Berechtigung hatten, da der Schwellwert erst gegen 14.30 Uhr unterschritten wurde. Entsprechend Maßnahmen, wie beispielsweise die gezielte Belüftung des Raums, in welchem dieser Sensor war, können eingeleitet werden.
 
 \subsection{Bausteinsicht}
+In der folgenden \autoref{abb:ElementeDBRA} wird die Bausteinsicht als tiefere Dekomposition der Verteilungssicht, samt Variationspunkten dargestellt.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/DB-RA-Elements.pdf}
@@ -39,28 +38,55 @@ Hier können Benachrichtigte direkt ablesen, dass ständige Schwellwert-Alarme a
 \label{abb:ElementeDBRA}
 \end{figure}
 
-\vp{E1}:  Datenretention in Mem => Preis/Leistungsbalance
+\vp{E1}: Timestream bietet aktuell zwei Speicherklassen an und hat eine Speicherklasse, die für die Zukunft angekündigt ist. Aktuell verfügbar sind \ac{RAM}-basierter Speicher, der teurer ist und magnetischer \ac{HDD}-Speicher, der günstiger ist. Mittels sogenannter \textit{retention policies} können Daten zwischen den Speicherklassen verschoben werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bp} Dabei können Daten vom \ac{RAM}-Speicher in den \ac{HDD}-Speicher verschoben werden und vom \ac{HDD}-Speicher gelöscht werden. Beim finalen Löschen der Daten sind die jeweiligen Anforderungen an Datenaufbewahrung der instanziierenden Architektur zu beachten. So können beispielsweise Langzeitanalysen notwendig sein, die auf einen Datenbestand von mehreren Monaten oder Jahren zugreifen müssen. Da Timestream aber auch nach Speicher abgerechnet wird, sind \textit{retention policies} sowohl von \ac{RAM} zu \ac{HDD} als auch zur Löschung von Inhalt vom \ac{HDD}-Speicher einzurichten. Zu beachten ist, dass die Gesamtaufbewahrungsdauer sich aus der Summe beider Aufbewahrungszeiten ergibt. Die Einstellung der \ac{RAM} zu \ac{HDD} retention policy ist abhängig von \vpref{E2} und \vpref{E5}, da je nach Abfragerhythmus und abgefragter Datenmenge für Analysen eine verlängerte Aufbewahrung im \ac{RAM} zur beschleunigten Analyse sinnvoll ist. Für die \ac{SQL}-Abfragen wird kein Unterschied zwischen Speicherart gemacht, bis auf die technisch bedingte höhere Ausführugnsdauer auf \ac{HDD}-Speichern.
+% Datenretention in Mem => Preis/Leistungsbalance
 
-\vp{E2}: Selbst zu schreibende \ac{SQL}-Abfragen - Thema Queryoptimierung
+\vp{E2}: \ac{SQL}-Abfragen in Timestream sind auf mehrere Arten optimierbar. Zum einen wird die abgefragte Datenmenge in Rechnung gestellt, was eine präzise Einschränkung der Abfrage mit \mintinline[breaklines]{sql}{WHERE} Bedingungen und einem genauen \mintinline[breaklines]{sql}{SELECT} notwendig macht. Zusätzlich ist die Datenabfrage in zwei Modellen möglich: dem flachen Modell und dem Zeitreihenmodell. \footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bq} Das flache Modell schreibt, wie in \autoref{tab:flat-timestream} gezeigt, für jeden Messwert eine eigene Zeile. Entsprechend muss der Messwert in der \mintinline[breaklines]{sql}{WHERE} Bedingung spezifiziert werden.
 
-\vp{E3}: Selbst zu schreibende Lambda Funktion siehe \anhangref{anhang:batch-codesample}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+time & \begin{tabular}[c]{@{}l@{}}Dimension A\\ (Sensorname)\end{tabular} & measure\_name & \begin{tabular}[c]{@{}l@{}}measure\_value\\ ::double\end{tabular} & \begin{tabular}[c]{@{}l@{}}measure\_value\\ ::bigint\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}2021-05-10\\ 23:59:59\end{tabular} & sensora & co2 & null & 500 \\ \hline
+\begin{tabular}[c]{@{}l@{}}2021-05-10\\ 23:59:59\end{tabular} & sensorb & temperature & 25.5 & null \\ \hline
+\end{tabular}
+\caption{Beispiel flaches Datenabrufmodell}
+\label{tab:flat-timestream}
+\end{table}
 
-\vp{E4}: Custom Dashboards
+Gegensätzlich dazu gibt das Zeitreihenmodell, welches sich beispielsweise mit der \\ \mintinline[breaklines]{sql}{CREATE_TIME_SERIES} Funktion erzeugen lässt \ac{JSON} Arrays zurück. Diese sehen wie folgt aus: \mintinline[breaklines]{json}{[{"time":"2021-05-10 23:59:59","value":500}]}. Timestream bietet für diese Zeitreihen spezielle Funktionen, wie beispielsweise die Interpolation fehlender Werte an.
 
-\vp{E5}: Anpassen nach cron schedule oder fixierte Rate alle x Minuten, Stunden, Tage
+
+%Selbst zu schreibende \ac{SQL}-Abfragen - Thema Queryoptimierung
+
+\vp{E3}: Der Programmcode und die Laufzeit der Lambdafunktion in diesem Variationspunkt sind je nach Anforderungen und Kentnissen des Implementierungsteams bei der Instanziierung dieser Referenzarchitektur anzupassen/neu zu schreiben. In \anhangref{anhang:batch-codesample} ist beispielhaft eine Lambdafunktion, geschrieben in Javascript für die Node.js Laufzeitumgebung gezeigt. Diese Lambdafunktion sendet eine \ac{SQL}-Abfrage zur Zählung von schwellwertüberschreitenden Werten einzelner Sensoren. Folgend werden die Ergebnisse ausgewertet und für jeden Sensor mit überschreitenden Messwerten eine Benachrichtigung via SNS und ein \textit{shutdown}-Befehl an den Sensor via \ac{MQTT} versendet.
+% Selbst zu schreibende Lambda Funktion siehe \anhangref{anhang:batch-codesample}
+
+\vp{E4}: Unabhängig von dem in \vpref{G2} gewählten Dienst ist es möglich, individuelle Dashboards mit unterschiedlichen Interaktionsmöglichkeiten zu erstellen. So können beispielsweise sogenannte \textit{drill-downs} den Nutzenden Entscheidungsträgern helfen, dynamisch die Datenbereiche anzupassen. Ein Dashboard in QuickSight kann beispielsweise wie folgt aussehen:
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{graphics/QuickSight-Beispiel.png}
+\caption{Dashboard in Quicksight}
+\label{abb:DashboardDBRA}
+\end{figure}
+
+% Custom Dashboards
+
+\vp{E5}: EventBridge regeln können unterschiedlich eingestellt werden. Abhängig von den Anforderungen der instanziierenden Architektur, kann entweder ein Aufruf alle x Minuten, Stunden oder Tage eingestellt werden, oder für mehr Anpassung eine Rate mittels einer abgewandelten, \textit{cron}-Syntax konfiguriert werden. Ein cron-Ausdruck um die Regel alle 10 Minuten an Werktagen zwischen 9 und 17.00 Uhr auszulösen sähe wie folgt aus: \mintinline[breaklines]{bash}{0/10 9-17 ? * MON-FRI *}. Der Ausdruck wird in \ac{UTC}-Zeit ausgeführt, was eine ein- oder zweistündige Verschiebung von der deutschen Zeit bedeutet.
+% Anpassen nach cron schedule oder fixierte Rate alle x Minuten, Stunden, Tage
 
 \textbf{Variationspunkt G5}: Siehe \vpref{G5}
 
 \subsection{Anforderungen}
 \begin{itemize}
 \item Anwendbarkeit auf Monitoringdaten (IT)
-Funktioniert nicht mit Logs nur mit Metriken
+Timestream unterstüzt wie die Kinesis Familie diverse Zeitreihendaten. Es ist ebenfalls prinzipiell möglich Logdaten aufzubewahren, da der interne Datentyp \textit{varchar} Strings mit bis zu 2 GB Länge erlaubt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.br} Da aber große Datenmengen in einzelnen Variablen durch die doppelten Kosten für Speicherung und Abfrage sich weniger eignen als beispielsweise numerische Messwerte, sollte auf die Anwendung auf Logs verzichtet werden.
+
+Die Nutzung zur Speicherung von Metriken hingegen ist explizit im Rahmen von \textit{DevOps}-Anwendungsfällen für Timestream vorgesehen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ak}\nzitat\footcite[Vgl.][]{Das.2020} Ohne spezialisierte Applikation, die beispielsweise in Kinesis Data Analytics mit Flink Laufzeitumgebung laufen könnte und von Kinesis Data Firehose gespeist wird, ist es jedoch nicht möglich CloudWatch Metriken in Timestream zu laden.\footcite[Vgl.][]{Riddle.2021} Alternativ können Metriken wie von \citeauthor{Pochiraju.2020} vorgeschlagen, über \ac{MQTT} und \AWSIOT{} Core in Timestream eingespeist werden.\footcite[Vgl.][]{Pochiraju.2020} Das eine eigene Applikation verwendet werden muss, um Daten via Kinesis oder \ac{MQTT} einzuspeisen, wertet die Tauglichkeit für Monitoring-Usecases gegenüber der Echtzeitarchitektur ab.
+
 
 \item Anwendbarkeit auf Sensordaten (\ac{IoT})
-
-\item Wertschöpfung für das Unternehmen wichtig
-
-\item akzeptabel und problemlösend für Domäne
 
 \item Handling von Events, Messwerten und \enquote{Streaming}
 
@@ -71,6 +97,8 @@ Wie in \anhangref{anhang:batch-codesample} gezeigt möglich.
 \end{itemize}
 
 \subsection{Operations}
+In \autoref{tab:cloudwatch-metrics-db} sind die zu überwachenden Cloud-Watch Metriken der in der Referenzarchitektur verwendeten Dienste gezeigt. Dies umfasst TimeStream, Lambda, \ac{SNS}, \AWSIOT{} Core und EventBridge.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.be}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bf}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bc}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.az}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bl}
+
 
 \begin{table}[H]
 \centering
@@ -95,35 +123,27 @@ Dienst & Metrik & Ursache & Detektionsart \\ \hline
  & Throttles & Benutzungsfehler & Schwellwert \\ \hline
  
 \rowcolor[HTML]{F5F5F5} 
-\multirow{2}{*}{EventBridge} & FailedInvocations & Dienstfehler & Anomalie \\ \cline{2-4} 
- & ThrottledRules & Dienstfehler & Schwellwert \\ \hline
- 
- 
+\cellcolor[HTML]{F5F5F5} & FailedInvocations & Dienstfehler & Anomalie \\ \cline{2-4} 
+\rowcolor[HTML]{F5F5F5} 
+\multirow{-2}{*}{EventBridge} & ThrottledRules & Dienstfehler & Schwellwert \\ \hline
 \end{tabular}
 \caption{CloudWatch Metriken}
 \label{tab:cloudwatch-metrics-db}
 \end{table}
 
+\AWSIOT{} Core, \ac{SNS} und Timestream übermittelt Metriken in einminütiger Auflösung.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.az}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..2021b}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.be} 
+Bei Lambda können die übermittelten Metriken bis nach Ende einer Ausführung übermittelt werden, weshalb die Auflösung der Metriken unpräzise sein kann. Insgesamt lässt sich aufgrund der teilweise verketteten Metriken leicht erkennen, wenn kaskadierende Fehler auftreten. So sind beispielsweise \textit{FailedInvocations} von EventBridge ein Hinweis darauf, dass es Probleme bei der Ausführung von Lambda Funktionen gab.
 
-TimeStream \footcite[Vgl.][]{AmazonWebServicesInc..o.J.be}
-Lambda \footcite[Vgl.][]{AmazonWebServicesInc..o.J.bf}
-\ac{SNS} \footcite[Vgl.][]{AmazonWebServicesInc..o.J.bc}
-\AWSIOT{} Core \footcite[Vgl.][]{AmazonWebServicesInc..o.J.az}
-EventBridge \footcite[Vgl.][]{AmazonWebServicesInc..o.J.bl}
+
 
 \subsection{Know-how}
-TimeStream nur in eu-west-1
+Während Timestream zum Start 2020 allein in Irland (eu-west-1) für die EU verfügbar war, ist Timestream für die Region eu-central-1 (Frankfurt) mittlerweile verfügbar.\footcite[Vgl.][]{AmazonWebServicesInc..2020g}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.q} Dies erleichtert die Integration in bestehende Dienste, die bereits in Frankfurt provisioniert wurden.
 
-Datenspeicherungsoptimierung
+% Datenspeicherungsoptimierung
 
-Datenspeicherung in Dimensionen und Attributen
+% Datenspeicherung in Dimensionen und Attributen
+Zeitreihen mit Messwerten und Metadaten werden innerhalb von Timestream als Dimensionen oder Messwerte hinterlegt. Dimensionen und Messwerte haben jeweils einen Namen und einen Wert. Dabei sind als Dimensionen alle Metadaten des übermittelnden Sensors oder der übermittelnden Applikation denkbar. Beispiele für solche Dimensionen wären Name oder Standort, während Messwerte beispielsweise \coo{} Messungen, Temperaturen, CPU Auslastung oder \ac{RAM}-Verbrauch sein können. Timestream rechnet pro Schreibzugriff die Summe aller Namen von Dimensionen und Messwerten und deren Werte (inklusive der Zeitdimension mit aktuellem Zeitstempel) als Speicherplatz ab.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bs} Bei gruppierten Schreibzugriffen können gemeinsame Attribute und Werte zusammengefasst werden, um die Anzahl an Schreibzugriffen zu vermindern.
+Aus der Unterteilung in Messwerte und Dimensionen ergeben sich auch Optimierungen der Datenmodellierung. So gibt es beispielsweise die Möglichkeit, derivative Werte, sofern sie eine niedrige Kardinalität besitzen als Dimensionen statt als Messwerte zu speichern.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bt} Dies bringt aber den Nachteil mit sich, dass entsprechend drei verschiedene Zeitreihen entstehen würden, was bei der Abfrage zu beachten ist. Da Dimensionsnamen ebenfalls Speicherplatz verbrauchen, sind die Namen entsprechend des KISS-Prinzips/Ockhams Rasiermesser zu gestalten und die einfachste und kürzeste Variante auszuwählen. Bei der Datenmodellierung ist auch zu beachten, dass Messwerte entsprechend ihres eigentlichen Datentyps gespeichert werden und keine unbeabsichtigte Konversion in z.B. das \textit{varchar} Format auftritt. Da Messwerte bei Erstanlage eines Messwertes in einer Tabelle fest mit einem Datentypen assoziiert werden, ist eine Neuanlage mit entsprechender Datenmigration notwendig um Fehler zu korrigieren.
 
 
-\section{Einsatzszenarien der Referenzmodelle}
 
-
-Chaos Engineering nicht vergessen \footcite[Vgl.][]{Augsten.2020}
-
-Innerhalb dieser Arbeit wurden Referenzarchitekturen für die Verarbeitung in der Cloud konstruiert. Ein Trend, der dabei ausgespart wurde, ist das sogenannte \enquote{Fog computing}. Nach der Definition von \citeauthor{Vaquero.2014} ist Fog computing ein Szenario, in dem heterogene, allgegenwärtige und dezentralisierte Geräte kommunizieren und kooperieren um Speicher- und Verarbeitungsaufgaben zu übernehmen.\footcite[Vgl.][30\psq]{Vaquero.2014} In der Praxis führt dies dazu, dass Verarbeitungsaufgaben in Teilen, angelehnt an das \enquote{Edge computing} von der Cloud in Richtung der Geräte ausgelagert wird.\footcite[Vgl.][]{Bonomi.2012} Dies geschieht dabei beispielsweise an Netzwerkgateways, die sowieso mit der Cloud kommunizieren und folgend nur noch bereits ausgewertete Daten übertragen.
-
-Gateways mit GreenGrass \footcite[][]{Shankar.2020}
