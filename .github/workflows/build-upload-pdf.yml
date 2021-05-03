@@ -12,6 +12,10 @@ jobs:
           root_file: latex-vorlage.tex
           extra_system_packages: "py-pygments"
           latexmk_shell_escape: true
+      - name: Rename and copy
+        run: |
+          mv latex-vorlage.pdf Bachelorarbeit.pdf
+          cp Bachelorarbeit.pdf docs/Bachelorarbeit.pdf
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.2
@@ -33,16 +37,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./latex-vorlage.pdf
+          asset_path: ./Bachelorarbeit.pdf
           asset_name: Bachelorarbeit.pdf
           asset_content_type: application/pdf
-      - name: copy file
-        uses: canastro/copy-file-action@master
-        with:
-          source: "Bachelorarbeit.pdf"
-          target: "docs/Bachelorarbeit.pdf"
       - name: Deploy 
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: docs # The folder the action should deploy.
+          branch: gh-pages
+          folder: docs
