@@ -21,16 +21,6 @@ $v_{dd}$ (Spannung)         & Integer  & mV                \\ \hline
 \TodoW{Notwendig??}
 Nach Übermittlung in das Backend haben die Daten das in \autoref{tab:data-schema-elsys} gezeigte Format. Auf diesem normalisierten Format, welches dann in \ac{JSON}-Syntax übergeben wird, können diverse Analysen zur \coo{} Konzentration in den Räumen, Belegung und ähnlichem durchgeführt werden. Das Datenübermittlungsintervall der Geräte beträgt 3 Minuten, wobei jedoch anzumerken ist, dass die Geräte nicht synchron alle 3 Minuten Daten senden, sondern jeweils einen eigenen Senderythmus haben.
 
-% Küche
-% Raum eBusiness
-% Raum Berlin
-% Raum Böblingen
-% Raum Dresden
-% Raum Düsseldorf
-% Raum Hannover
-% Raum München
-% Raum Wien
-
 \section{Sensor Simulator}\label{chap:iotdevicesim}
 Mithilfe von Node-RED und der Erweiterung (in der Plattform auch \enquote{Knoten} genannt) \enquote{iot-device-simulator-1-mqtt} des Github Nutzenden phyunsj\footnote{Siehe auch \url{https://github.com/phyunsj/iot-device-simulator-1-mqtt}} kann ein \ac{IoT} Sensor simuliert werden, welcher in beliebiger Frequenz verschiedene Werte in festgelegten Bereichen generiert. Diese Werte bieten bei höherer Frequenz einen Anhaltspunkt, wie sich die Lösungen unter Last verhalten.
 \begin{figure}[H]

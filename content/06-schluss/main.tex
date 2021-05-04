@@ -1,11 +1,22 @@
 \chapter{Schlussbetrachtung}
 \TodoW{Schluss schreiben}
+\section{Zusammenfassung}
+Das Ziel dieser Arbeit bestand darin, die gängigen Dienste im \ac{AWS} Umfeld zur Zeitreihenverarbeitung zu evaluieren und folgend Referenzarchitekturen zu konstruieren. Mittels mehrerer Interviews wurden Anforderungen an die Referenzarchitekturen und deren Gestaltung erhoben, welche später in den Konstruktionsprozess eingeflossen sind. 
+Für die spätere Konstruktion wurden bekannte Architekturmuster mittels Literaturrecherche dargestellt. Theoretische Grundlagen zum Wert von Daten über die Zeit und zur Konstruktion von Referenzarchitekturen inklusive der Systematik der Variationspunkte wurden mittels Literaturrecherche dargestellt. Nach einer Darstellung von bereits existierenden Anwendungsfällen, wurden mittels einer Umfrage die Kriterien für den folgenden Dienstvergleich priorisiert. Folgend wurde ein Dienstvergleich für die relevanten Dienste von \ac{AWS} durchgeführt.
 
-\section{Fazit}
+Nach durchgeführtem Dienstvergleich konnten mit den Resultaten zwei Referenzarchitekturen für Echtzeit- und Batchverarbeitung von Zeitreihendaten konstruiert und in verschiedenen Dekompositionssichten dargestellt werden.
 
-\section{Handlungsempfehlung}
+Dank weiteren Gesprächen mit diversen Stakeholdern konnte festgestellt werden, das die Referenzarchitekturen nutzenstiftend sind und künftig eingesetzt werden sollen.
+
+Mittels der open-source vorliegenden Referenzarchitekturen können künftig interne Usecases und Kundenusecases im Bereich Zeitreihenverarbeitung in \ac{AWS} leichter umgesetzt werden, da es eine klar definierte Referenzarchitektur mit definierten Variationspunkten gibt.
+
+
+
+\section{Kritische Reflexion}
+
+
 
 \section{Ausblick}
 Innerhalb dieser Arbeit wurden Referenzarchitekturen für die Verarbeitung in der Cloud konstruiert. Ein Trend, der dabei ausgespart wurde, weil sich wichtige Komponenten nicht in der Cloud befinden, ist das sogenannte \enquote{Fog computing}. Nach der Definition von \citeauthor{Vaquero.2014} ist Fog computing ein Szenario, in dem heterogene, allgegenwärtige und dezentralisierte Geräte kommunizieren und kooperieren um Speicher- und Verarbeitungsaufgaben zu übernehmen.\footcite[Vgl.][30\psq]{Vaquero.2014} In der Praxis führt dies dazu, dass Verarbeitungsaufgaben in Teilen, angelehnt an das \enquote{Edge computing} von der Cloud in Richtung der Geräte ausgelagert wird.\footcite[Vgl.][]{Bonomi.2012} Dies geschieht dabei beispielsweise an Netzwerkgateways, die sowieso mit der Cloud kommunizieren und folgend nur noch bereits ausgewertete Daten übertragen. \ac{AWS} bietet mit dem Dienst Greengrass bereits eine Softwareplattform an, die auf diversen qualifizierten Gateways läuft.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bu} Durch die lokale Ausführung von Code könnten Schwachstellen adressiert werden, wie beispielsweise schlechte Netzkonnektivität. So kann Code, der auf Greengrass ausgeführt wird in Form von Containern oder lokalen Lambdafunktionen Benachrichtigungen lokal ohne Konnektivität zur Cloud versenden und beispielsweise Aktoren auslösen. Dies würde die gezeigten Referenzarchitekturen ergänzen. Dass mit Greengrass Anomaliedetektion möglich ist, wurde auch von \citeauthor{Shankar.2020} gezeigt.\footcite[Vgl.][]{Shankar.2020}
 
-Publikation intern - Confluence (und ggf. GitHub?)
+Anschließend zur Abgabe der Bachelorarbeit wird das GitHub Repository mit dem Quelltext der Bachelorarbeit veröffentlicht. Zusätzlich werden die Referenzarchitekturen an mehreren internen Stellen wie dem internen Wissensmanagement Confluence abgelegt, um einfache Zugänglichkeit zu gewährleisten.
