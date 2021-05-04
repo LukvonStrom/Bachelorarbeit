@@ -11,15 +11,6 @@ In \autoref{abb:ProdukteDB} werden verwendbare Dienste für die Batch (\enquote{
 Timestream ist nach Aussage des Herstellers eine schneller, skalierbare und speziell für Zeitreihendaten entwickelte Datenbank, welche über \ac{AWS} als Dienstleistung bezogen werden kann.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.h} Timestream integriert zwei verschiedene Speichertypen, nämlich \ac{RAM}-basierten Speicher, in dem Daten, auf welche schnell zugegriffen werden sollen, gespeichert werden können und Festplatten-basierten Speicher, welcher für historische Daten dienen soll.
 Timestream besitzt zusätzlich einen eigenen \ac{SQL}-Dialekt, welcher um Funktionen zur Analyse von Zeitreihendaten erweitert wurde. 
 
-
-% Ein Beispiel für den Einsatz des \ac{SQL}-Dialekts zur Abfrage der Informationen für den Anwendungsfall, der zum Kostenvergleich beschrieben wurde, ist in \autoref{listing:timestream-kostenvergleich} zu sehen.
-
-% \begin{listing}[H]
-% \inputminted[frame=lines,breaklines=true]{sql}{code/timestream-threshold.sql}
-% \caption{Abfrage für Kostenvergleichs Usecase}
-% \label{listing:timestream-kostenvergleich}
-% \end{listing}
-
 Timestream ist nicht selbst in der Lage, Abfragen zu planen. \ac{AWS} gibt in der Dokumentation an, dass Lambda verwendet werden kann, um periodisch eine Abfrage in Timestream auszuführen und basierend auf dieser Anfrage Alarme via \ac{SNS} zu versenden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ag} Abgebildet ist diese Interaktion in \autoref{abb:TimestreamLambdaOrchestration}.
 
 
@@ -47,9 +38,6 @@ Es kann keine finale Aussage über die genauen Performancegarantien getroffen we
 
 
 Timestream ist momentan noch nicht in Frankfurt verfügbar, weshalb die Kosten in der einzigen europäischen Zone mit verfügbarem Timestream, Irland, als Maßstab verwendet werden. Angenommen wird, dass die Daten eine Stunde im \ac{RAM} vorgehalten werden und danach in die Festplattenspeicherung überführt werden.
-
-%  Angenommen 8.640.000 (8,64 GB)/Monat 0,012GB/h 4,885056
-% Abfrage: 25,92 GB
 
 Ausgehend von dem beschriebenen Szenario lässt sich nicht genau errechnen, welche Datenmenge von den Anfragen genau erfasst wird. Dies ist dem Fakt geschuldet, dass Timestream die Daten optimiert abspeichert und nur den tatsächlichen Messwert speichert. Numerische Daten können als 32-bit int, als 64bit BigInt oder als 64bit double gespeichert werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.r}\nzitat\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.q} Wenn dazu ein String für die Sensorid im Stile \enquote{Sensor-123} angenommen wird, der 19 bytes zur Darstellung benötigt und der Zeitstempel addiert wird, der 8 bytes benötigt, ergibt sich eine Speicherbelegung von 91 Bytes. Speicherkosten werden aber bei Werten unter einem Kilobyte auf einen Kilobyte hochgerundet, weshalb dies in der Speicherrechnung keine Beachtung findet. Wenn man weitere Optimierungen, die die Abfrageengine macht außer Acht lässt, muss mit 0,78624GB pro abgefragtem Monat gerechnet werden.
 
@@ -104,14 +92,6 @@ Amazon garantiert vertraglich keine Performance, sondern nur die 99,99\% Verfüg
 
 \subsubsection{Gesamtkosten}
 Für die folgende Kostenbewertung wird angenommen, dass Athena die Daten aus \ac{S3} indiziert. Dort liegen die Daten im \ac{JSON} Format gespeichert vor. Zu beachten ist, dass effizientere Formate wie CSV, oder sogar Apache Parquet und ORC verfügbar sind. Diese können komprimiert Daten speichern. Eine Verwendung von Parquet oder ORC würde laut \ac{AWS} 30-90\% Kosten sparen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Gleichzeitig kann aber eine Speicherung im \ac{JSON} Format via \AWSIOT{} Rule erfolgen, ohne dass weitere Verarbeitung notwendig ist.
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[height=0.45\textheight]{graphics/Step-Function-Athena.pdf}
-% \caption{Beispiel Step Function State Machine}
-% \label{abb:StepFunctionExample}
-% \end{figure}
-% \TodoW{Bild horizontal}
 
 In \autoref{tab:kostenvergleich-Amazon~Athena} wird davon ausgegangen, dass 2MB an Daten im Zeitraum von 10 Minuten neu hinzukommen. Da aber eine Historie gebildet werden soll, müssen sowieso die gesamten dreimonatigen historischen Daten abgefragt werden. Ausgehend von 200 kB pro Minute von allen Geräten ergeben sich 25,92 GB \ac{S3}-Datenvolumen an historischen Daten, welche 960 mal im Monat abgefragt werden sollen. Athena rundet dabei auf das nächste MegaByte auf und hat ein Minimum von 10 MB erfasster Daten pro Anfrage.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.t} Das Datenschema für Athena stellt Glue bereit, welches Kosten für Abfragen aus dem Datenkatalog und Speicherkosten für den Datenkatalog erhebt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.u} Zur Orchestrierung wird ein Ablauf als Zustandsmaschine in StepFunctions abgebildet, welches für jeden Zustandsübergang eine Gebühr erhebt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.v}
 
@@ -209,14 +189,6 @@ In der Elasticsearch eigenen Abfrage gibt es mit dem \mintinline{sql}{minimum_sh
 Gleichzeitig können in Kibana/Open Search Dashboards Schwellwerte mit Alarmen konfiguriert werden.\footcite[Vgl.][]{Handler.2019}
 In Elasticsearch kann ein gleitender Durchschnitt mittels der eigenen Abfragesprache kalkuliert werden. Die Berechnung kann gewichtet oder ungewichtet erfolgen.
 
-% \begin{listing}[H]
-% \inputminted[frame=lines,breaklines=true]{json}{code/elasticsearch/mavg.json}
-% \caption[gleitender Durchschnitt Elasticsearch]{gleitender Durchschnitt Elasticsearch.\footnotemark}
-% \label{listing:mavg-elasticsearch}
-% \end{listing}
-% \footnotetext{Entnommen aus: \cite{ElasticsearchInc..o.J.d}}
-
-
 
 \subsubsection{Performancegarantien}
 \ac{AWS} sichert vertraglich für OpenSearch Service ebenfalls keine feste Performance im Rahmen des \acp{SLA} zu. Auch hier werden nur Abschläge auf den zu zahlenden Preis angeboten, wenn die Verfügbarkeit des Dienstes unter 99,99\% des Monats lag.\footcite[Vgl.][]{AmazonWebServicesInc..2019} Da OpenSearch Service ein Instanzbasiertes Modell verfolgt, sind eventuelle Performanceprobleme jedoch durch einen Wechsel auf eine Instanzklasse mit stärkerer Rechenleistung (vCPUs) oder Hauptspeicher (\ac{RAM}) lösbar. Dabei zeigt der Anwendungsfall der Mayo Klinik, den \citeauthor{Chen.2017} vorstellen, dass die unterliegende Software, Elasticsearch, auch mit Datensätzen von mehr als 25 Millionen \ac{JSON}-Einträgen Anfragen mit einer Latenz von weniger als 0,2 Sekunden beantworten kann.\footcite[Vgl.][]{Chen.2017}
@@ -253,7 +225,7 @@ Die Gesamtkosten scheinen bei Redshift zumindest im vorliegenden Fall, ohne konk
 Alle verglichenen Dienste können die Auswertungen in angemessener Zeit anfertigen. 
 Athena hat Punktabzüge im Bereich Robustheit \& Fehlertoleranz, da ein sich veränderndes Datenschema zu schwerwiegenderen Problemen führen kann.
 Alle Dienste bieten die gewünschten Auswertungen an. Technisch sind aufgrund der unterschiedliche Implementierungen trotzdem Unterschiede vorhanden.
-
+\TodoW{Ergebnis klarer rausheben (S)}
 
 \input{content/04-produkte/vergleiche/batch-vergleich}
 

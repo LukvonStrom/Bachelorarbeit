@@ -1,13 +1,41 @@
-\anhang{Experteninterview Philipp A.}\label{anhang:interview-philipp-xx.04.2021}
+\anhang{Gespräch Philipp A.}\label{anhang:interview-philipp-03.05.2021}
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|l|X|}
 \hline
-    Datum                  & xx.04.2021 \\ \hline
+    Datum                  & 03.05.2021 \\ \hline
     Thema                  & Review Referenzarchitekturen \\ \hline
     \begin{tabular}[c]{@{}l@{}}Teilnehmende,\\ Position\end{tabular} & \begin{tabular}[c]{@{}l@{}}Lukas Fruntke, Verfasser\\ Philipp A., Cloud Solution Architekt - \ac{NCS}\end{tabular}\\ \hline
 \end{tabularx}
-% \caption{Interviewübersicht Philip A.}
-% \label{tab:interviewuebersicht-philipp-xx.04.2021}
 \end{table}
 
-\TodoW{transkribieren}
+\LF Herzlich willkommen zum zweiten Interview, lieber Philipp! Vielen Dank, dass du die Zeit gefunden hast. Ich würde gerne mit dir über die Referenzarchitekturen in \autoref{chap:ra-rt} und \autoref{chap:ra-batch} reden, die ich gestaltet habe. Ich würde von dir gerne wie du die siehst, was dein Feedback dazu ist. Ich beziehe mich hier auf folgenden Stand der Bachelorarbeit und der Referenzarchitekturen: \url{https://github.com/LukvonStrom/Bachelorarbeit/commit/1527391}. Ich würde gerne von dir erfahren: Wie siehst du die Referenzarchitekturen in ihrem aktuellen Zustand? Sind die für dich verständlich?
+
+\PA Bezug nehmend auf den GitHub Commit Status, den du eben erwähnt hast, habe ich mir die beiden Referenzarchitekturen für Batch und Echtzeitverarbeitung angesehen. Ich sehe für beide eine Verständlichkeit gegeben, eine gute Aufteilung in die verschiedenen Sichten/Sequenzen und klare Empfehlungen bzw. Vorgaben und Hinweise. Es gibt ausreichend Variationspunkte, um die Referenzarchitekturen entsprechend anzupassen. 
+
+\LF Wenn du das jetzt aus einer Qualitätssicht sehen müsstest, ist dann die Qualität der Referenzarchitekturen für dich zufriedenstellend? Würdest du die Referenzarchitekturen jetzt so produktiv instanziieren und nutzen? 
+
+\PA Genau, würde ich. Das war ja auch das Ziel der Arbeit, dass man daraus eigenständige Architekturen entwickeln kann. Die Qualitätskriterien sehe ich als gegeben an. Du hast ja verschiedene Kriterien dafür berücksichtigt und ausgearbeitet, was alles Qualitätskriterien sind. Das sehe ich als eingehalten. 
+
+\LF Das heißt, für dich ist die Referenzarchitektur akzeptabel und künftig anwendbar, wenn ich das so zusammenfassen darf?
+
+\PA Genau.
+
+\LF Empfindest du die Referenzarchitektur als \textit{up-to-date}, insofern, dass sie den neuesten Entwicklungen bei \ac{AWS} folgt?
+
+\PA Ja, das sind die momentan aktuellsten \ac{AWS} Services hier eingesetzt, mit den aktuellsten \ac{API}-Versionen davon, folgen dem \ac{AWS}-Well Architected Framework und es ist nichts deprecated oder im Begriff, aus dem \ac{AWS}-Servicekatalog zu verschwinden.
+
+\LF Die Arbeit soll ja Open-Source werden. Findest du dann insgesamt, dass die Arbeit wartbar ist, dadurch dass der Quelltext im \LaTeX - Format offenliegt und die Bilder als .drawio Datei verfügbar sind, wo man über die Zeit Änderungen einpflegen kann?
+
+\PA Ja durchaus, die Dokumentation ist gut bearbeitbar und die Bilder sind alle quelloffen und bearbeitbar. Insofern denke ich, können die Referenzarchitekturen auch weiter wachsen und weiter entwickelt werden.
+
+\LF Ich denke da spezifisch an einen Fork, um die Abgabeversion nicht weiter zu verändern, aber der SPIRIT/21 trotzdem zu ermöglichen, Veränderungen an den draw.io Diagrammen und dem Text vorzunehmen.
+
+\PA Das macht ja am meisten Sinn, das unter dem SPIRIT/21 Git zu forken.
+
+\LF Perfekt. Insgesamt würde ich gerne nochmal auf die Historie der Themenvergabe intern eingehen. Wenn ich mich richtig erinnere, hast du im ersten Interview gesagt, dass es einen Need für diese Referenzarchitekturen gibt und die SPIRIT/21 einen Wert aus diesen schöpft.
+
+\PA Genau, das war ja auch der Grund der Arbeit, dass wir gesagt haben, wir wollen hier nen Mehrwert schaffen für die SPIRIT/21, der uns in Zukunft bei ähnlichen Fragestellungen hilft. Ich denke mit den Referenzarchitekturen, so wie sie aktuell sind - akzeptabel, wartbar, verwendbar, qualitätssicher, erweiterbar ist dieser Mehrwert durchaus geschaffen.
+
+\LF Okay, dann vielen Dank für die Bewertung meiner Referenzarchitekturen und vielen Dank, dass du dich als Interviewpartner bereitgestellt hast.
+
+\PA Sehr gerne, kein Problem.

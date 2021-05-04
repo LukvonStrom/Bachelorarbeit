@@ -20,19 +20,9 @@ Zum anderen existieren auch Ereignisse, welche keine Messwerte enthalten, sonder
 So wäre ein Ereignis beispielsweise ein niedriger Batteriestand eines verbundenen Sensors. 
 Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zeitstempel oder periodisch mit Zeitstempel bis zum Beheben der Ursache versendet.\footnote{Siehe auch \anhangref{anhang:interview-peter-24.03.2021}}
 
-\subsection{Analysewert verarbeiteter Daten}
+\subsection{Analysewert verarbeiteter Daten}\label{chap:datenwert}
 
 Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempi einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die Entscheidungstempi sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen Entscheidungstempi respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
-
-% \footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012}
-% The value of data diminishes based on the cadence of decisions. Decision tempos are
-% tactical (driving process changes in near real time), operational (driving changes that take
-% days or weeks to implement), or strategic (driving changes that become part of a quarterly
-% or longer planning and implementation process). The concept of half life, with diminishing
-% value curves based on a company’s decision tempo, can be used to help companies
-% measure the impact of prioritizing their data management and analytics investments. 
-
-
 
 Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \autoref{abb:DataHalflife} gezeigten Befragungsergebnisse von \citeauthor{NucleusResarchInc..2012}, Daten nach maximal 30 Minuten die Hälfte des Wertes eingebüßt.\footcite[Vgl. auch im Folgenden][6]{NucleusResarchInc..2012} Für operative Entscheidungstempi ist die durchschnittliche Halbwertszeit nach acht Stunden erreicht, für strategische Entscheidungstempi nach ca. 56 Stunden, also nach über 2 Tagen.
 
@@ -172,7 +162,6 @@ Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, si
 \label{abb:gleitendeDurchschnitte}
 \end{figure}
 
-% $M_t = (\sum_{T=1}^{t-1}  x_T + x_t )\cdot \frac{1}{T + t}$
 
 
 
@@ -188,7 +177,6 @@ Im Bereich der Streamingarchitekturen gibt es bereits etablierte Referenzarchite
 \label{abb:LambdaStreaming}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite[][28]{Marz.2015}}
-% Lambda nach \citeauthor{Marz.2015}, siehe \footcite[Vgl.][28]{Marz.2015}
 
 Die von \citeauthor{Marz.2015} vorgestellte $\lambda$/Lambda-Architektur, welche in \autoref{abb:LambdaStreaming} gezeigt wird, ist dabei eine der sehr bekannten Referenzarchitekturen. 
 Der Name ist dabei nicht mit dem \ac{AWS} Dienst Lambda zu verwechseln, sondern ist wohl auf den gedrehten Buchstaben $\lambda$ zurückzuführen, also \reflectbox{\rotatebox[origin=c]{270}{$\lambda$}}.\footcite[Vgl. auch im Folgenden][]{Berle.27.11.2017} Die $\lambda$-Architektur sieht, ausgehend von den hereingeladenen Daten, zwei verschiedene Wege für die Daten vor. 

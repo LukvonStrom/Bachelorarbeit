@@ -25,9 +25,7 @@ Ein Referenzmodell kann nach \citeauthor{vomBrocke.2003} nicht objektiv allgemei
 Der IEEE Standard 1471-2000 definiert Architektur im Kontext von softwareintensiven Systemen wie folgt:
 \enquote{The fundamental organization of a system embodied in its components, their relationships
 to each other, and to the environment, and the principles guiding its design and evolution.} \footcite[][3]{IEEEComputerSociety.2000}. Als softwareintensives System kann jedes System gesehen werden, bei dem Software essentielle Einflüsse auf das Design, die Erstellung, das Deployment oder die Evolution des Systems hat.\footcite[Vgl.][1]{IEEEComputerSociety.2000}
-
 Wird dieser Architekturbegriff auf bekannte Bereitstellungsmodi aus der Cloud, wie \ac{SaaS}, \ac{PaaS}, \ac{IaaS} oder \ac{FaaS} angewendet, wird klar, dass von einer Architektur im Sinne des IEEE Standards 1471-2000 ausgegangen werden kann, sobald Software involviert ist. Im Rahmen dieser Arbeit werden auch Dienste, die sich nach der NIST Cloud Definition unter \ac{SaaS} Dienste zählen lassen, behandelt. Als \ac{SaaS} Dienst gilt dabei jeder Dienst, bei dem Nutzende die unterliegende Infrastruktur nicht verwalten und die Applikation nur über limitierte Konfigurationen verwalten können. Sollte aber die Konfiguration mittels einer Programmiersprache bzw. Datenabfragesprache wie \ac{SQL} erfolgen, ist die Bedingung erfüllt, dass Software wesentliche Einflüsse auf das System hat.
-
 
 \citeauthor{Gallagher.2000} definiert eine Referenzarchitektur als eine generalisierte Architektur mehrerer Endsysteme, die eine oder mehrere Domänen teilen.\footcite[Vgl. auch im Folgenden][3]{Gallagher.2000} Die Referenzarchitektur definiert nach Sicht des Autors dabei die gemeinsame Infrastruktur der Endsysteme und die Schnitstellen der Komponenten, die in den Endsystemen enthalten sein sollen. Dabei ist eine Referenzarchitektur zu instanziieren, um eine spezifische Softwarearchitektur zu erstellen. Gallagher definiert die Aufgaben einer Referenzarchitektur wie folgt: Zum einen werden übergreifende Funktionen und Konfigurationen generalisiert und extrahiert und zum anderen wird eine kosteneffiziente und verlässliche Basis geschaffen, um Zielsysteme abzuleiten/zu instanziieren.\footcite[Vgl.][3]{Gallagher.2000}
 
@@ -36,38 +34,36 @@ Wird dieser Architekturbegriff auf bekannte Bereitstellungsmodi aus der Cloud, w
 Nach \citeauthor{Angelov.2012} gibt es zwei Typen und damit verbundene Zielsetzungen der Referenzarchitektur: Die standardisierende Referenzarchitektur, welche darauf zielt eine Standardarchitektur für spezielle Anwendungsfälle zu schaffen und die unterstützende/erleichternde Referenzarchitektur, welche Personen in Architekturrollen unterstützen sollen, ähnliche Probleme leichter zu lösen.\footcite[Vgl. auch im Folgenden][S.~422~ff.]{Angelov.2012} Nach \citeauthor{Angelov.2012} sind standardisierende Referenzarchitekturen nicht zur Verwendung von innovativen, also kaum getesteten oder noch nicht von Experten akzeptierten Elementen geeignet. Die unterstützenden/erleichternden Referenzarchitekturen hingegen können solche innovativen Elemente durchaus verwenden und auch eine Technologievorauswahl treffen.
 
 Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorischen Rahmenbedingungen, in welchen ein Referenzmodell eingesetzt werden soll, analysiert werden.\footcite[Vgl.][]{vomBrocke.2004}
-
-%\TodoW{What are inputs of a Reference Architecture? - Muller.2020}
 \citeauthor{Muller.2020} empfiehlt, eine Referenzarchitektur zur Generalisierung von vorhandenen Architekturen zu verwenden.\footcite[Vgl. auch im Folgenden][7]{Muller.2020} Für neue Technologien und Applikationen, die bislang in der Form kaum verwendet wurden, schlägt \citeauthor{Muller.2020} stattdessen ein inkrementelles Vorgehen vor. Das inkrementelle Vorgehen von \citeauthor{Muller.2020} beinhaltet dabei die Erstellung von Prototypen und Einholung von Feedback der Zielstakeholder. 
 
-
 \subsection{Diskussion der Qualitätskriterien der Referenzarchitekturen}\label{chap:qualitycriteria}
-\citeauthor{Muller.2020} schlägt sieben Qualitätskriterien vor, welche von einer guten Referenzarchitektur erfüllt werden sollten:\footcite[Vgl. auch im Folgenden][8]{Muller.2020}
+\citeauthor{Muller.2020} schlägt sieben Qualitätskriterien vor, welche von einer guten Referenzarchitektur erfüllt werden sollten \englishquote{englisches Original geklammert}:\footcite[Vgl. auch im Folgenden][8]{Muller.2020}
 \begin{enumerate}
-\item Verständlichkeit für eine breite, heterogene Gruppe an Stakeholdern (Kunden, Projektmanager, Entwickler, etc.)
-\item Zugänglichkeit und Zugriff durch die Mehrheit der Organisation
-\item Adressierung der Hauptprobleme der spezifischen Problemdomäne
-\item Zufriedenstellende Qualität
-\item akzeptabel
-\item \enquote{up-to-date} und wartbar
-\item wertschöpfend für den Betrieb
+\item Verständlichkeit für eine breite, heterogene Gruppe an Stakeholdern (Kunden, Projektmanager, Entwickler, etc.) \englishquote{understandable for a broad set of heterogeneous stakeholders}
+\item Zugänglichkeit und Zugriff durch die Mehrheit der Organisation \englishquote{accessible and actually read/seen by majority of the organization}
+\item Adressierung der Hauptprobleme der spezifischen Problemdomäne \englishquote{addresses the key issues of the specific domain}
+\item Zufriedenstellende Qualität \englishquote{satisfactory quality}
+\item akzeptabel \englishquote{acceptable}
+\item \enquote{up-to-date} und wartbar \englishquote{up-to-date and maintainable}
+\item wertschöpfend für den Betrieb \englishquote{adds value to the business}
 \end{enumerate}
+Die Erfüllung dieser Qualitätskriterien wird auf unterschiedliche Weise gemessen. Die Erfüllung der Kriterien 1, 3, 4 und 5 soll durch Interviews diverser Stakeholder der Cloud-Entwicklung gezeigt werden. Dabei wird auf einen fixierten Versionspunkt der Referenzarchitekturen referenziert. In den Interviews sollen die Stakeholder unformalisiert nach ihrem Eindruck zum Erfüllungsgrad der Qualitätskriterien befragt werden. Die Kriterien 2, 6 und 7 können durch einen Fachbeweis erfüllt werden. Dieses Vorgehen entspricht in Teilen dem inkrementellen Vorgehen von \citeauthor{Muller.2020}.
 
-\ac{AWS} definiert im Rahmen des sogenannten Well Architected Frameworks für verschiedene \enquote{Lenses}, also Spezialisierungen, Themenfelder, die bei exzellenten Architekturen zu beachten sind. Für Datenanalysen gibt es die Analytics Lens, welche entsprechend für Referenzarchitekturen genauso Anwendung finden sollte. Kriterien sind dabei die Folgenden:\footcite[Vgl.][6]{Ravirala.2020}:
-\begin{enumerate}
-\item Automate data ingestion
-\item Design ingestion for failures and duplicates => Siehe Robustness and fault tolerance
-\item Preserve original source data
-\item Describe data with metadata
-\item Establish data lineage
-\item Use the right ETL tool for the job
-\item Orchestrate ETL workflows
-\item Tier storage appropriately
-\item Secure, protect, and manage your entire analytics pipeline
-\item Design for scalable and reliable analytics pipelines => Scalability, robustness and fault tolerance
-\end{enumerate}
+% Für die technischen Aspekte der Referenzarchitekturen definiert \ac{AWS} im Rahmen des sogenannten Well Architected Frameworks Themenfelder, die bei exzellenten Architekturen zu beachten sind. Für Datenanalysen gibt es die Analytics Lens, welche entsprechend für Referenzarchitekturen genauso Anwendung finden sollte. Kriterien sind dabei die Folgenden:\footcite[Vgl.][6]{Ravirala.2020}
+% \begin{enumerate}
+% \item Automatisierte Datenaufnahme \englishquote{Automate data ingestion}
+% \item Gestaltung der Datenaufnahme für Fehler und Duplikate \englishquote{Design ingestion for failures and duplicates}
+% \item Aufbewahrung der originalen Daten \englishquote{Preserve original source data}
+% \item Beschreibung der Daten mit Metadaten \englishquote{Describe data with metadata}
+% \item Beschreibung der Datenherkunft \englishquote{Establish data lineage}
+% \item Nutzung des richtigen \ac{ETL} Tools \englishquote{Use the right ETL tool for the job}
+% \item Orchestrierung von \ac{ETL} Workflows \englishquote{Orchestrate ETL workflows}
+% \item Errichtung von angemessenen Speicherebenen \englishquote{Tier storage appropriately}
+% \item Sicherung und Verwaltung der gesamten Analysepipeline \englishquote{Secure, protect, and manage your entire analytics pipeline}
+% \item Gestaltung von skalierbaren und verlässlichen Pipelines \englishquote{Design for scalable and reliable analytics pipelines} 
+% \end{enumerate}
 
-\TodoW{In Text einbetten, Erklärung welche passen}
+% \TodoW{In Text einbetten, Erklärung welche passen}
 
 \subsection{Vorgehensmodell}
 
@@ -120,14 +116,13 @@ Wie von \citeauthor{Muller.2020} vorgeschlagen und im vorherigen Unterkapitel er
 
 Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[Vgl.][24\psqq]{Webber.2001} Mittels der Variationspunkte kann eine statische Referenzarchitektur konstruiert werden, welche an spezifisch definierten Punkten angepasst werden muss, um einzigartige Architekturen zu erzeugen.\footcite[Vgl.][24]{Webber.2001} Dabei gibt es vier verschiedene Ansichten, aus denen Variationspunkte definiert werden können:\footcite[Vgl.][25\psq]{Webber.2001}
 \begin{enumerate}
-\item \label{view:first} Requirement-Variation-Point View
-\item \label{view:second} Component-Variation-Point View
-\item \label{view:third} Static-Variation-Point View
-\item \label{view:fourth} Dynamic-Variation-Point View
+\item \label{view:first} Anforderungs-Variationspunktsicht \englishquote{Requirement-Variation-Point View}
+\item \label{view:second} Komponenten-Variationspunktsicht \englishquote{Component-Variation-Point View}
+\item \label{view:third} statische Variationspunktsicht \englishquote{Static-Variation-Point View}
+\item \label{view:fourth} dynamische Variationspunktsicht\englishquote{Dynamic-Variation-Point View}
 \end{enumerate}
-Dabei sind für diese Arbeit, in der keine implementierungsnahe (im Sinne von Programmierung) Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht aus \autoref{view:first} und \autoref{view:second} wichtig. Die statische und dynamische Variationspunktsicht aus \autoref{view:third} und \autoref{view:fourth} agieren stärker auf Implementierungsebene.\footcite[Vgl. auch im Folgenden][25\psq]{Webber.2001} Auf dieser können beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann. Gleichzeitig kann die Verhaltensweise des Programms auch durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden.
+Dabei sind für diese Arbeit, in der keine implementierungsnahe (im Sinne von Programmierung) Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht wichtig. Die statische und dynamische Variationspunktsicht agieren stärker auf Implementierungsebene.\footcite[Vgl. auch im Folgenden][25\psq]{Webber.2001} Auf dieser können beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann. Gleichzeitig kann die Verhaltensweise des Programms auch durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden.
 
-\renewcommand\#{\protect\scalebox{0.8}{\protect\raisebox{0.4ex}{\char"0023}}}
 
 Variationspunkte können, wie in \autoref{abb:Variationspunkte} dargestellt innerhalb der verschiedenen, dargestellten Schichten wie folgt dargestellt werden:
 \begin{figure}[H]
@@ -138,12 +133,4 @@ Variationspunkte können, wie in \autoref{abb:Variationspunkte} dargestellt inne
 \end{figure}
 In den Architekturebenen werden entsprechend die Variationspunkte mit alphanumerischen Identifikationen versehen. So können gleiche Variationspunkte in mehreren Dekompositionen referenziert werden.
 
-
-
-
-
-% Überleitung => generelle Referenzmodelle 
-% => Empfehlungscharakter 
-% => Anwendung Architektur 
-% => Unterlegung Arc42 als Modellierungssprache
 
