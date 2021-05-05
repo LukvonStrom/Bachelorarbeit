@@ -4,15 +4,32 @@ Im nachfolgenden Kapitel werden mittels der in \autoref{chap:vergleichsmethodik}
 
 \section{Angewandte Methodik}
 
-Grundlage der hier gezeigten Bewertungskriterien sind die in \autoref{chap:vergleichsmethodik} gezeigten Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \anhangref{anhang:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \enquote{serverlessness}, welches nicht die volle Punktzahl erreichen kann, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Dienste nur zeitlich vorgeplante Auswertungen durchführen können, oder die Fähigkeit ausserhalb des eigenen Ausführungsplans Anfragen zu bearbeiten nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall diese bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Ausgehend von dieser Prioritätenliste wurde eine Umfrage zur Priorisierung durchgeführt, welche die final gewichtete Prioritätenliste ergibt. Diese Umfrage befindet sich mit Ergebnissen in \anhangref{anhang:umfrage}. Insgesamt sind die Kriterien nach Priorität absteigend geordnet, welche gleichzeitig die Summe an Punkten darstellt, die maximal für dieses Kriterium zulässig sind.
+Grundlage der hier gezeigten Bewertungskriterien sind die in \autoref{chap:vergleichsmethodik} gezeigten Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \anhangref{anhang:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \enquote{serverlessness}, welches nicht die volle Punktzahl erreichen kann, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Dienste nur zeitlich vorgeplante Auswertungen durchführen können, oder die Fähigkeit außerhalb des eigenen Ausführungsplans Anfragen zu bearbeiten, nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall diese bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Ausgehend von dieser Prioritätenliste wurde eine Umfrage zur Priorisierung durchgeführt, welche die finalen Prioritätengewichte, wie in \autoref{tab:umfragen-auswertungen} gezeigt, ergibt. 
 
-\TodoW{Umfrage rausarbeiten (S)}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Kriterium & \begin{tabular}[c]{@{}l@{}}Durchschnitt\\ ($n=6$)\end{tabular} & \begin{tabular}[c]{@{}l@{}}finale\\ Prioritäten\end{tabular} \\ \hline
+Übertragbarkeit zwischen Clouds (ISO 9126) & 1,00 & 1 \\ \hline
+Integration mit AWS & 3,17 &  3\\ \hline
+Generalisierung & 4,33 &  4\\ \hline
+Erweiterbarkeit & 4,33 &  4\\ \hline
+Fehlertransparenz / \enquote{Debuggability} & 4,67 &  5\\ \hline
+geringer Wartungsaufwand & 6,5 &  7\\ \hline
+Skalierbarkeit  \& \enquote{serverlessness} & 7,17 &  7\\ \hline
+Kosten & 7,33 &  7\\ \hline
+Performancegarantien & 8,0 &  8\\ \hline
+Robustheit \& Fehlertoleranz & 8,83 &  9\\ \hline
+unterstützt Auswertungen (\autoref{chap:auswertungsarten}) & 10,67 & 11 \\ \hlinewd{2pt}
+\rowcolor[HTML]{ECF4FF}
+Summe & & 66\\ \hline
+\end{tabular}
+\caption{Auswertungen der Umfragen}
+\label{tab:umfragen-auswertungen}
+\end{table}
 
-\input{content/04-produkte/vergleiche/beispiel-vergleich}
-
-\TodoW{Beispielmatrix behalten so?}
-
-Die Ergebnisse der Bewertung werden, wie in \autoref{tab:bewertungsmatrix-beispiel} gezeigt, dargestellt.  Da innerhalb der Kategorien ähnliche Funktionsweisen vorliegen können, die zu einer Abwertung führen, wird eine solche generelle Einschränkung für die Kategorie zur Einleitung vorgenommen.
+Die Ergebnisse der Umfrage sind in \autoref{tab:umfragen-auswertungen} dargestellt. Die Beschreibung des Vorgehens ist in \anhangref{anhang:umfrage}. Insgesamt sind die Kriterien nach Priorität absteigend geordnet, welche gleichzeitig die Summe an Punkten darstellt, die maximal für dieses Kriterium zulässig sind.
 
 Ausgehend von der Gesamtsumme der Punkte kann eine Rangliste erstellt werden, welche Dienstleistungen für die Referenzarchitektur verwendet werden können.
 

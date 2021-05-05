@@ -13,10 +13,11 @@ Wie in \autoref{theorie:referenzmodellierung} beschrieben, müssen Referenzmodel
 \label{abb:DimensionenUebersicht}
 \end{figure}
 Durch die Interviews liessen sich folgende Durchschnitte errechnen: Dekompositionstiefe wurde im Schnitt mit $3,\overline{3}$ bewertet. Die Anwendbarkeit wurde ebenfalls mit $3,\overline{3}$ bewertet. Die Allgemeingültigkeit hingegen hat nur einen Schnitt von $3$. Entsprechend sollten Dekompositionstiefe und Anwendbarkeit priorisiert werden, während die Referenzarchitektur organisationsspezifischer sein darf. 
-In den folgenden Referenzarchitekturen wird in mehrere Dekompositionen unterteilt. In der Datenverarbeitungssequenz werden mit Hilfe eines Sequenzdiagramms die Abläufe zur Datenverarbeitung mit dem zu betrachtenden Dienst, ausgehend von \AWSIOT{} Core als Messagebroker gezeigt.
-Die Verteilungssicht soll sowohl die Interaktion der Dienste untereinander, als auch grob das durchzuführende Deployment zeigen. Die Bausteinsicht zeigt wichtige Elemente der einzelnen Dienste auf, die konkret untereinander interagieren. So ist die konkrete Untereinheit, die Daten von \AWSIOT{} Core an andere Dienste versendet eine \AWSIOT{} Core Rule, welche aufzuzeigen wäre. \TodoW{Genauere Auswirkungen}
 
-Für die Operations wird vorausgesetzt, dass der \ac{AWS}-native Dienst CloudWatch zur Überwachung eingesetzt wird. 
+In den folgenden Referenzarchitekturen wird in mehrere Dekompositionen unterteilt. In der Datenverarbeitungssequenz werden mit Hilfe eines Sequenzdiagramms die Abläufe zur Datenverarbeitung mit dem zu betrachtenden Dienst, ausgehend von \AWSIOT{} Core als Messagebroker, gezeigt.
+Die Verteilungssicht soll sowohl die Interaktion der Dienste untereinander, als auch grob das durchzuführende Deployment zeigen. Die Bausteinsicht zeigt wichtige Elemente der einzelnen Dienste auf, die konkret untereinander interagieren. So ist die konkrete Untereinheit, die Daten von \AWSIOT{} Core an andere Dienste versendet, eine \AWSIOT{} Core Rule, welche aufzuzeigen wäre.
+
+Für das Monitoringkonzept wird vorausgesetzt, dass der \ac{AWS}-native Dienst CloudWatch zur Überwachung eingesetzt wird. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.66\textwidth]{graphics/CloudWatch-Monitoring}
@@ -28,12 +29,14 @@ CloudWatch erfasst zentralisiert Metriken aller Dienste und löst bei nutzerdefi
 
 
 Zusätzlich haben sich folgende Anforderungen ergeben:
-\begin{itemize}
+\begin{enumerate}
 \item Anwendbarkeit auf Monitoringdaten (IT) (\anhangref{anhang:interview-philipp-22.03.2021}, \anhangref{anhang:interview-peter-24.03.2021})
 \item Anwendbarkeit auf Sensordaten (\ac{IoT}) (\anhangref{anhang:interview-philipp-22.03.2021}, \anhangref{anhang:interview-peter-24.03.2021}, \anhangref{anhang:interview-ralph-24.03.2021})
-\item Wertschöpfung für das Unternehmen wichtig
-\item akzeptabel und problemlösend für Domäne
 \item Handling von Events, Messwerten und \enquote{Streaming} (\anhangref{anhang:interview-peter-24.03.2021})
-\end{itemize}
+\item Automatisierte operative Entscheidungen
+\item \label{anforderung:wertschöpfung} Wertschöpfung für das Unternehmen wichtig
+\item \label{anforderung:akzeptabel} akzeptabel und problemlösend für Domäne
+\item \label{anforderung:zugänglichkeit} Zugänglichkeit und zugang durch Mehrheit der Organisation
+\end{enumerate}
 
 Im Folgenden werden die Referenzarchitekturen entworfen und miteinander verglichen, um mögliche Stärken und Einsatzgebiete zu identifizieren. Einige der Anforderungen, wie die Wertschöpfung werden nicht für beide Referenzarchitekturen einzeln, sondern gesammelt erfasst.

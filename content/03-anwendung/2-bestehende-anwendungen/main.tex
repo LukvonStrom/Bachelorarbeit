@@ -18,7 +18,6 @@ $v_{dd}$ (Spannung)         & Integer  & mV                \\ \hline
 \label{tab:data-schema-elsys}
 \end{table}
 \footnotetext{Mit Änderungen entnommen aus: \cite{ELSYS.2019}}
-\TodoW{Notwendig??}
 Nach Übermittlung in das Backend haben die Daten das in \autoref{tab:data-schema-elsys} gezeigte Format. Auf diesem normalisierten Format, welches dann in \ac{JSON}-Syntax übergeben wird, können diverse Analysen zur \coo{} Konzentration in den Räumen, Belegung und ähnlichem durchgeführt werden. Das Datenübermittlungsintervall der Geräte beträgt 3 Minuten, wobei jedoch anzumerken ist, dass die Geräte nicht synchron alle 3 Minuten Daten senden, sondern jeweils einen eigenen Senderythmus haben.
 
 \section{Sensor Simulator}\label{chap:iotdevicesim}
@@ -30,6 +29,6 @@ Mithilfe von Node-RED und der Erweiterung (in der Plattform auch \enquote{Knoten
 \label{abb:DeviceSimFlow}
 \end{figure}
 
-In \autoref{abb:DeviceSimFlow} ist ein Screenshot des Node-RED Flows zu sehen, in dem die verschiedenen Knoten, die jeweils eigene Aufgaben übernehmen, gezeigt sind. Da der Gerätesimulator die Nachrichten falsch formattiert übergibt, ist es notwendig, eigene Logik zur Reformattierung für den Transfer mit \ac{MQTT} einzusetzen. Diese ist mit einem $f$ gekennzeichnet.
+In \autoref{abb:DeviceSimFlow} ist ein Screenshot des Node-RED Flows zu sehen, in dem die verschiedenen Knoten, die jeweils eigene Aufgaben übernehmen, gezeigt sind. Da der Gerätesimulator die Nachrichten falsch formatiert übergibt, ist es notwendig, eigene Logik zur Reformattierung für den Transfer mit \ac{MQTT} einzusetzen. Diese ist mit einem $f$ gekennzeichnet.
 
 

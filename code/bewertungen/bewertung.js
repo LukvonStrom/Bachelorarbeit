@@ -96,6 +96,8 @@ for (let { name, content } of vergleiche) {
 ${rows.join('\n     ')}
 ${footer}`
 
+console.log(Object.keys(max).map(e => `\\subsubsection{${e}}`))
+
 
     fs.writeFileSync(path.join(__dirname, `../../content/04-produkte/vergleiche/${name}-vergleich.tex`), result)
 

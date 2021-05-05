@@ -1,0 +1,10 @@
+\anhang{AWS IoT Analytics} \label{anhang:vergleich-iot-analytics}
+
+\anhangteil{Features des Dienstes}
+Der \ac{SQL}-Analyseteil von IoT Analytics basiert wie Athena auf Presto und unterstützt die selben Funktionen und Operatoren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.au} Entsprechend sind die Anforderungen im selben Grad erfüllt wie bei Athena. Da \AWSIOT{} Analytics aber über die selbst programmierbaren Notebooks verfügt, lassen sich Verbesserungen an den Ansätzen mittels einer eigenen, angepassten Implementierung einzelner Analysen machen.
+Da die Notebooks unter Python laufen können und ebenfalls pandas einbinden können, sind die selben Features wie bei \autoref{chap:vergleich-lambda} gegeben.
+
+\anhangteil{Dienstleistungsumfang}
+Die \ac{SLA} von \AWSIOT{} Analytics garantiert einzig die 99,9\% Verfügbarkeit im Monat.\footcite[Vgl.][]{AmazonWebServicesInc..2019f} Es gibt auch \textit{soft-limits}, welche auf Anfrage hochgesetzt werden können, welche einen Durchsatz von maximal 100.000 Nachrichten pro Sekunde vorsehen.\footcite[Vgl][]{AmazonWebServicesInc..o.J.av} Einzig die Performance der Analytics Compute Units ist durch vertikale Skalierung, also eine größere Buchung von Compute Units durch Nutzende beeinflussbar.
+
+Bei \AWSIOT{} Analytics ist laut \ac{AWS} mit einer Latenz von Minuten oder Sekunden zu rechnen, was hoch ist im Vergleich zu Kinesis, wo mit Sekunden oder Milisekunden Latenz zu rechnen ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ax}

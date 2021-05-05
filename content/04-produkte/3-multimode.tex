@@ -16,15 +16,6 @@ In \autoref{abb:GrobArchitekturIoTAnalytics} ist die Grobarchitektur und Verknü
 
 Für erweiterte Analysen stellt \AWSIOT{} Analytics sogenannte Notebooks zur Verfügung, die auf den \enquote{Jupyter Notebooks} basieren. Diese Notebooks werden verwendet, um Python Programmabläufe zu visualieieren und zu modularisieren. Da in den Jupyter Notebooks der volle Paketumfang von Python verfügbar ist, inklusive z.B. Machine Learning Bibliotheken wie Tensorflow, sind wesentlich erweiterte Analysen möglich. Die Ressourcen für Notebooks sind seperat zu provisionieren und werden in Analytics Compute Units abgerechnet, wobei eine Compute Unit 4vCPU-Kerne und 16 GB \ac{RAM} hat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.i} Diese Compute Units werden sekundengenau abgerechnet und kosten nur für die Laufzeit Geld.
 
-\subsubsection{Features des Dienstes}
-Der \ac{SQL}-Analyseteil von IoT Analytics basiert wie Athena auf Presto und unterstützt die selben Funktionen und Operatoren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.au} Entsprechend sind die Anforderungen im selben Grad erfüllt wie bei Athena. Da \AWSIOT{} Analytics aber über die selbst programmierbaren Notebooks verfügt, lassen sich Verbesserungen an den Ansätzen mittels einer eigenen, angepassten Implementierung einzelner Analysen machen.
-Da die Notebooks unter Python laufen können und ebenfalls pandas einbinden können, sind die selben Features wie bei \autoref{chap:vergleich-lambda} gegeben.
-
-\subsubsection{Performancegarantien}
-Die \ac{SLA} von \AWSIOT{} Analytics garantiert einzig die 99,9\% Verfügbarkeit im Monat.\footcite[Vgl.][]{AmazonWebServicesInc..2019f} Es gibt auch \textit{soft-limits}, welche auf Anfrage hochgesetzt werden können, welche einen Durchsatz von maximal 100.000 Nachrichten pro Sekunde vorsehen.\footcite[Vgl][]{AmazonWebServicesInc..o.J.av} Einzig die Performance der Analytics Compute Units ist durch vertikale Skalierung, also eine größere Buchung von Compute Units durch Nutzende beeinflussbar.
-
-Bei \AWSIOT{} Analytics ist laut \ac{AWS} mit einer Latenz von Minuten oder Sekunden zu rechnen, was hoch ist im Vergleich zu Kinesis, wo mit Sekunden oder Milisekunden Latenz zu rechnen ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ax}
-
 \subsubsection{Gesamtkosten}
 In \autoref{tab:kostenvergleich-AWS~IoT~Analytics} sind die kalkulierten Preise nach gängiger Preismatrix dargestellt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.i} Die Nutzung von externen Ausführungsdiensten (z.B. StepFunctions/Lambda) für \ac{SQL}-Abfragen ist nicht notwendig, da die Abfragen im Dienst selbst terminiert werden können.
 \begin{table}[H]
@@ -42,6 +33,9 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{129,75}  \\\hline
 \label{tab:kostenvergleich-AWS~IoT~Analytics}
 \end{table}
  Das bestehende \enquote{Free Tier}, welches \ac{AWS} für den Dienst anbietet, wird ignoriert, da es nur in den ersten zwölf Monaten der Nutzung des Dienstes verrechnet wird. Bei \ac{S3} wird angenommen, dass die Standard Speicherklasse verwendet wird und Volumenrabattierungen bei Datenvolumina >50TB im Monat nicht relevant sind.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.j} Andere Speicherklassen sind günstiger, somit gibt die Schätzung eine Obergrenze für die \ac{S3} Preise. Es wurde ebenfalls keine eigene Logik in Notebooks kalkuliert, welche 0,36\$ pro Stunde und Compute Unit im Betrieb kosten würden. Dies ist dem Fakt geschuldet, dass für dieses Beispiel die Analysen mit \ac{SQL} bewältigbar sind.
+ 
+\subsubsection{Weitere Evaluationen}
+Die Performance und Verfügbarkeit sowie die Features werden in \anhangref{anhang:vergleich-iot-analytics} diskutiert.
 
 \subsection{Auswahl}
 Im Bereich Multimode gibt es nur einen zu vergleichenden Dienst, weshalb Abzüge nicht auf relativen Kriterien zu den anderen Diensten basieren, sondern auf absoluten Abzügen.
@@ -53,8 +47,17 @@ Die Erweiterbarkeit ist gegeben durch die Möglichkeiten, die \ac{SQL} in Verbin
 Durch Integration mit Cloudwatch, der Monitoring Lösung von \ac{AWS} sind ansteigende Fehlerraten leicht zu entdecken. Einzig, dass eingehende Daten einige Zeit benötigen, bis sie von der \AWSIOT{} Analytics Konsole angezeigt werden, kann die Fehlersuche erschweren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.aw}
 Im Bereich \enquote{serverlessness} wurden Abzüge getätigt, da Analyitcs Compute Units nicht selbstständig skalieren.
 Da die Abfragekosten mittels \ac{SQL} proportional zu den anderen Kosten hoch erscheinen, wurden Abzüge gemacht.
-Die gesetzten Performancelimits des Dienstes erscheinen sinnvoll. Eine Fehlertoleranz ist gegeben, wenn der Anwender keine Fehler selbst einführt, oder \AWSIOT{} Analytics interne Fehler aufweist. Da alle Auswertugnen sogar in multiplen Wegen machbar sind, wurde die volle Punktzahl für diese Kategorie vergeben.
+Die gesetzten Performancelimits des Dienstes erscheinen sinnvoll. Eine Fehlertoleranz ist gegeben, wenn der Anwender keine Fehler selbst einführt, oder \AWSIOT{} Analytics interne Fehler aufweist. Da alle Auswertungen sogar in multiplen Wegen machbar sind, wurde die volle Punktzahl für diese Kategorie vergeben. Im Vergleich zu den spezialisierteren Diensten, die dem $kappa$ oder \ac{OLAP} Muster folgen, schneidet \AWSIOT{} Analytics schlechter ab. Dies ist bedingt durch die wesentlich höheren monatlichen Kosten, genauso wie durch eine fehlende Garantie der schnellen Datenverarbeitung, zu welcher Kinesis fähig ist. Das $lambda$ Pattern scheint in dieser Implementierung ein nachteiliger Kompromiss aus der Kombination von $kappa$ und \ac{OLAP} zu sein.
 
-\TodoW{Klarer rausheben ob Multimode oder Spezialprodukte (S)}
-
-
+\subsubsection{Übertragbarkeit zwischen Clouds}
+\subsubsection{Integration mit AWS}
+\subsubsection{Generalisierung}
+\subsubsection{Erweiterbarkeit}
+\subsubsection{Fehlertransparenz}
+\subsubsection{geringer Wartungsaufwand}
+\subsubsection{Skalierbarkeit \& serverlessness}
+\subsubsection{Kosten}
+\subsubsection{Performancegarantien}
+\subsubsection{Robustheit \& Fehlertoleranz}
+\subsubsection{Auswertungen}
+\subsubsection{Summe}

@@ -4,14 +4,14 @@
 \hline
     Datum                  & 24.03.2021 \\ \hline
     Thema                  & Initiales Anforderungsinterview \\ \hline
-    \begin{tabular}[c]{@{}l@{}}Teilnehmende,\\ Position\end{tabular} & \begin{tabular}[c]{@{}l@{}}Lukas Fruntke, Verfasser\\ Peter E., Head of Solution - \ac{IIoT}\end{tabular}\\ \hline
+    \begin{tabular}[c]{@{}l@{}}Teilnehmende,\\ Position\end{tabular} & \begin{tabular}[c]{@{}l@{}}Lukas Fruntke, Verfasser\\ Peter E., Head of Solution - \acf{IIoT}\end{tabular}\\ \hline
 \end{tabularx}
 \end{table}
 \newcommand{\PE}{\textbf{Peter E.:}~}
 
 \LF Hallo Peter, herzlichen Dank dass du dir die Zeit genommen hast mir als Interviewapartner zur Verfügung zu stehen! Kannst du bitte kurz beschreiben, welche Rolle du in der SPIRIT inne hast und wie deine Rolle mit Zeitreihendaten und Referenzarchitekturen zusammenhängt?
 
-\PE Meine Rolle in der SPIRIT ist laut offizieller Bezeichnung Head of Solution \ac{IIoT} und Automation. Das heißt ich kümmere mich um die gesamten \ac{IIoT} Projekte, die in der SPIRIT abgewickelt werden. Sei das Geschäftsentwicklung, Kundenbetreuung, Personalaufbau, Presales, ... oder anderes. Wir beschäftigen uns hauptsächlich mit der Digitalisierung von Städten, z.B. mit der Prozessoptimierung im Energie- und Versorgungsbereich. Dabei digitalisieren wir die ganzen Strom-, Gas-, Wasserzähler und lesen diese via Funk aus. Ich arbeite eigentlich ausschliesslich mit Zeitreihendaten, weil ein typisches Merkmal von \ac{IoT} Projekten ist, dass diese gesammelt und auf verschiedenste Arten ausgewertet werden. 
+\PE Meine Rolle in der SPIRIT ist laut offizieller Bezeichnung Head of Solution \ac{IIoT} und Automation. Das heißt ich kümmere mich um die gesamten \ac{IIoT} Projekte, die in der SPIRIT abgewickelt werden. Sei das Geschäftsentwicklung, Kundenbetreuung, Personalaufbau, Presales, ... oder anderes. Wir beschäftigen uns hauptsächlich mit der Digitalisierung von Städten, z.B. mit der Prozessoptimierung im Energie- und Versorgungsbereich. Dabei digitalisieren wir die ganzen Strom-, Gas-, Wasserzähler und lesen diese via Funk aus. Ich arbeite eigentlich ausschliesslich mit Zeitreihendaten, weil ein typisches Merkmal von den \ac{IoT} Projekten unserer \ac{IIoT} Solution ist, dass diese gesammelt und auf verschiedenste Arten ausgewertet werden. 
 
 \LF Verstehe. Das Ziel meiner Bachelorarbeit ist ja, Referenzarchitekturen für die Verarbeitung von Zeitreihendaten in der Cloud, speziell in \ac{AWS} zu konstruieren. Wo siehst du denn Einsatzbereiche für solche Referenzarchitekturen, also Kundencases o.ä.? 
 
@@ -39,19 +39,19 @@
 
 \LF Ja, das ist eine Möglichkeit. Ich möchte mir aber auch Streamingdaten vom Broker direkt anschauen. Für Anwendungsfälle wie Schwellenwerte brauche ich die Daten nicht in der Datenbank, sondern kann schon vorher sagen, ob man einen Alarm auslösen muss.
 
-\PE Ja wobei du bei der Schwellwertanalyse natürlich Karenzzeiten beachten musst. Wenn beispielsweise in einem Kühlhaus ein Temperatursensor vorne an der Tür ist und du einen Alarm auf 0 \textdegree{}C hast. Dann reicht es, wenn die Tür zum Ent- oder Beladen aufgemacht wird, um den Alarm auszulösen. Ohne Karenzzeit hat man hier nen Alarmzustand, mit entsprechender Karenzzeit von beispielsweise 10 Minuten verhindert man solche Fehlauslösung.
+\PE Ja, wobei du bei der Schwellwertanalyse natürlich Karenzzeiten beachten musst. Wenn beispielsweise in einem Kühlhaus ein Temperatursensor vorne an der Tür ist und du einen Alarm auf 0 \textdegree{}C hast. Dann reicht es, wenn die Tür zum Ent- oder Beladen aufgemacht wird, um den Alarm auszulösen. Ohne Karenzzeit hat man hier nen Alarmzustand, mit entsprechender Karenzzeit von beispielsweise 10 Minuten verhindert man solche Fehlauslösung.
 
-\LF Ja, das müsste man aber auch in einer Echtzeitpipeline abbilden können. Generell geht es darum sich die verscheidenen Verarbeitungswege von Daten in \ac{AWS} anzuschauen. 
+\LF Ja, das müsste man aber auch in einer Echtzeitpipeline abbilden können. Generell geht es darum, sich die verschiedenen Verarbeitungswege von Daten in \ac{AWS} anzuschauen. 
 
 \PE Okay, dann musst du aber bei der Datenquelle Unterscheidungen treffen. Es gibt zum einen diskrete Daten, wie beispielsweise Zählertelegramme von Wasserzählern. Dieser \enquote{beamt} ein Telegramm raus, in fünf Minuten das nächste und so weiter. Das ist kein kontinuierlicher Strom, sondern der sendet immer ein Datenpaket in einem Zeitabstand $x$. Oder man bekommt Daten von einem Sensor, wenn sich etwas ändert. Das sind keine Streamingdaten, sondern Zeitreihendaten. Ich weiß dabei nicht, ob man kontinuierliche Daten über \ac{MQTT} übermitteln kann.
 
 Es gibt drei verschiedene Datenkategorien. Das eine sind Events. Das heißt die Infrastruktur meldet einen Status oder ein Ereigniss, auf dass dann in einer Infrastruktur reagiert wird. Diese Events sind auch Zeitreihendaten. Wenn wir in die IT schauen, gibt es in einem Server Events, wo beispielsweise übermittelt wird \enquote{Meine Platte ist voll}. Dieses Event wird alle paar Minuten übermittelt, weil es beispielsweise ein Schwellwert ist. Diese Ereignisse enthalten keine Messwerte, sondern sind ein Ergebniss einer Messwertauswertung. Trotzdem laufen sie als Zeitreihendaten ein, weil sie hintereinander kommen, wie Messwerte auch. In einer Auswertung dieser Daten könnte man die dann deduplizieren oder eine Korrelation zu Metadaten machen. Wenn in einem Rechner z.B. die Gehäusetemperatur und die CPU und weiteres zu hoch ist, lässt das auf überhohe Last schliessen. 
 
-Der nächste Typ wäre Metriken, also Messwerte. Aus der Auswertung dieser Werte kann man dann selbst solche Events generieren. Das ist dann aber die Aufgabe der eigenen Auswertungslogik. Messwerte können diskret haben, wenn diese in einem zeitlichen Abstand kommen. 
+Der nächste Typ wäre Metriken, also Messwerte. Aus der Auswertung dieser Werte kann man dann selbst solche Events generieren. Das ist dann aber die Aufgabe der eigenen Auswertungslogik. Messwerte können diskret sein, wenn diese in einem zeitlichen Abstand kommen. 
 
-Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das ist dann Streaming.  Das betrifft nicht nur IoT sondern Automatisierungstechnik generell. Bei diesen drei Arten unterscheidet sich jeweils die Verarbeitung. Gestreamte Messwerte wären beispielsweise, wenn man aneiner stromporduzierenden Windturbine hängt. Dabei misst man in einem relativ engen Zeitraster, wie der Verlauf der Leistungskurve aussieht. Oder man misst, wie die Stromkurve oder die Phasenverschiebung aussieht. Die Daten sind sehr eng zeitlich gerastert, damit man auch kleinste Änderungen mitbekommt. 
+Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das ist dann Streaming.  Das betrifft nicht nur \ac{IoT}, sondern Automatisierungstechnik generell. Bei diesen drei Arten unterscheidet sich jeweils die Verarbeitung. Gestreamte Messwerte wären beispielsweise, wenn man aneiner stromporduzierenden Windturbine hängt. Dabei misst man in einem relativ engen Zeitraster, wie der Verlauf der Leistungskurve aussieht. Oder man misst, wie die Stromkurve oder die Phasenverschiebung aussieht. Die Daten sind sehr eng zeitlich gerastert, damit man auch kleinste Änderungen mitbekommt. 
 
-\LF Du machst also den Unterschied zwischen diskreten Messwerten und \enquote{Streamingdaten} abhängig von der Messdistanz, weenn ich das richtig verstehe?
+\LF Du machst also den Unterschied zwischen diskreten Messwerten und \enquote{Streamingdaten} abhängig von der Messdistanz, wenn ich das richtig verstehe?
 
 \PE Richtig. Im Prinzip kann man sagen, wenn die Daten einen gewissen zeitlichen Abstand unterschreiten, kann man von einem Stream sprechen. 
 
@@ -59,9 +59,9 @@ Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das 
 
 \PE Genau, und wenn du einen Milisekundenabstand hast, dann bist du sozusagen im Streaming mode. Da muss dann deine Infrastruktur dahinter permanent auf Höhe sein, damit die ja nix verpasst. 
 
-\LF Ja, das ist einer der Punkte wo aus meiner Sicht die Cloud interessant wird.
+\LF Ja, das ist einer der Punkte, wo aus meiner Sicht die Cloud interessant wird.
 
-\PE Ja, aber die Cloud wird auch schon bei Daten interessant, wenn ein hohes Volumen von vielen Devices eintrifft. Wenn man beispielsweise eine Stadt nimmt, die Smart Meter breit einsetzt, dann haben die bei einer größeren Stadt über 70.000 Devices verteilt. Die senden dann vielleicht nur alle 15 Minuten ein Messwert. Wenn aber jetzt ein Stromzähler pro Telegram 50 Bytes sendet, alle 15 Minuten und das multipliziert mit 70.000 ist die Cloud schon sehr interessant.
+\PE Ja, aber die Cloud wird auch schon bei Daten interessant, wenn ein hohes Volumen von vielen Devices eintrifft. Wenn man beispielsweise eine Stadt nimmt, die Smart Meter breit einsetzt, dann haben die bei einer größeren Stadt über 70.000 Devices verteilt. Die senden dann vielleicht nur alle 15 Minuten ein Messwert. Wenn aber jetzt ein Stromzähler pro Telegram 50 Bytes sendet, alle 15 Minuten und das multipliziert mit 70.000, ist die Cloud schon sehr interessant.
 
 \LF Ja, das sehe ich auch so. Es kommt ja zum einen auf die Menge $n$ der Sensoren an und zum anderen eben auf die Messdistanz.
 
@@ -89,7 +89,7 @@ Es gibt aber auch Sensoren die \enquote{kontinuierliche} Messwerte liefern. Das 
 Ich würde mich nochmal korrigieren, das wäre meine Reihenfolge:
 \begin{enumerate}
     \item Verständlichkeit
-    \item Adressierung der Hauptprobleme (daraus bedingt sich werstschöpfend für den Betrieb)
+    \item Adressierung der Hauptprobleme (daraus bedingt sich wertschöpfend für den Betrieb)
     \item Akzeptanz durch die Anwender (bedingt durch):
     \begin{enumerate}
         \item zufriedenstellende Qualität des Dienstes/Produktes (hängt von up-to date und wartbar ab)

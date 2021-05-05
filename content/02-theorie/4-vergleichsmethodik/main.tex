@@ -21,46 +21,47 @@ Das zu gestaltende Big Data System soll erweiterbar sein und neue Funktionen ode
 Diverseste Abfragen sollen schnellstmöglich auf dem Datensatz der Big Data Anwendung möglich sein.
 
 \item geringer Wartungsaufwand \englishquote{Minimal maintenance} - 
-Eine Big data Anwendung soll wartbar bleiben, indem Komplexität in den Kernkomponenten, welche nach Ansicht von \citeauthor{Marz.2015} zu erhöhtem Wartungsaufwand führt, möglichst gering ist.
+Eine Big data Anwendung soll wartbar bleiben, indem die Komplexität in den Kernkomponenten, welche nach Ansicht von \citeauthor{Marz.2015} zu erhöhtem Wartungsaufwand führt, möglichst gering ist.
 
 \item Fehlertransparenz \englishquote{Debuggability} - 
 Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Werte entstanden sind, um mögliche Fehler verfolgen zu können.
 \end{enumerate}
 
-Um die folgenden Vergleiche aggregieren zu können und die Vergleichskiterien zu priorisieren, ist eine Umfrage durchzuführen. Diese Umfrage soll mindestens alle Stakeholder, die bereits interviewt wurden umfassen, könnte aber auch zusätzliches technisches Personal des \ac{NCS} Teams umfassen. \TodoW{deutlich ausbauen}
+Um die Vergleiche durchführen zu können, ist eine Priorisierung aller Kriterien notwendig. Zu diesem Zweck wird eine Umfrage mit mehreren Stakeholdern (mindestens $n=4$) durchgeführt. Diese Umfrage soll mindestens alle Stakeholder, die bereits interviewt wurden umfassen, kann aber auch zusätzliches technisches Personal des \ac{NCS} Teams inkludieren. Ausgehend von den priorisierten Kriterien kann eine gewichtete Bewertung der verglichenen Dienste erfolgen.
 
 
 \subsection{Features des Dienstes}
 Es soll auf die Mindestverfügbarkeit folgender, in \autoref{chap:auswertungsarten} beschriebenen Analysen überprüft werden:
 
-\begin{itemize}
+\begin{enumerate}
 \item Median und Quantile
 \item Anomaliedetektion
 \item Schwellwertüberschreitung
 \item Trenderkennung/gleitender Durchschnitt
-\end{itemize}
+\end{enumerate}
 
-Dabei ist zu dokumentieren, ob und in welcher Form der Dienst die Analysen unterstützt.
+Dabei ist zu dokumentieren, ob und in welcher Form der Dienst die Analysen unterstützt. Wenn Hilfsdienste wie Lambda benötigt werden, ist dies ebenfalls zu dokumentieren.
 
-
-\TodoW{ausbauen}
-
-\subsection{Performancegarantien}
-Es sind die Angaben des Herstellers zu bewerten und eventuelle Nutzungsfälle aufzulisten, bei denen der Dienst erfolgreich bei erhöhten Anforderungen (großes Datenvolumen, großer Durchsatz, etc.) eingesetzt wurde. Wenn vertragliche Garantien der Betreiber existieren, sollen diese ebenfalls dokumentiert werden.
+\subsection{Dienstleistungsumfang}
+Es sind die Angaben des Herstellers zu bewerten und eventuelle Nutzungsfälle aufzulisten, bei denen der Dienst erfolgreich bei erhöhten Anforderungen (großes Datenvolumen, großer Durchsatz, etc.) eingesetzt wurde. Wenn vertragliche Garantien der Betreiber existieren, sollen diese ebenfalls dokumentiert werden. Dies kann sowohl Performancegarantien als auch Verfügbarkeiten oder andere Garantien, die im Rahmen des Bezugs der Dienstleistung erteilt wurden, umfassen.
 
 \subsection{Gesamtkosten}
-Um einen sinnvollen Kostenvergleich aufzustellen, sind folgende Annahmen zu treffen:
+Um einen sinnvollen Kostenvergleich aufzustellen, sind die folgenden Annahmen zu treffen.
 
-\begin{itemize}
-\item Es existieren 200 Geräte/Sensoren. Es geht eine Nachricht mit einem kB pro Minute pro Gerät ein (0,0432 GB/Gerät/Monat und 8,64 GB/Monat).
-\item Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und, wo möglich, eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  
-\item Es ist die \ac{AWS}-Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in \texteuro{} erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Alternativ ist die Region Irland (eu-west-1) bei Nichtverfügbarkeit der Diensleistung in Frankfurt zu wählen. 
-\item Dienste, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden mit permanentem Speicher im \ac{S3}. 
-\item Analysen, die individuell auslösbar sind, erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. 
-\item Es wird angenommen, dass der Schwellwert 5 mal pro Gerät pro Monat überschritten wird (1000 Überschreitungen insgesamt).
-\item Für die Zwischenspeicherung in \ac{S3}, wenn benötigt, wird folgendes Datenschema angenommen:
-\end{itemize}
 
+Es existieren 200 Geräte/Sensoren. Es geht eine Nachricht mit einem kB pro Minute pro Gerät ein (0,0432 GB/Gerät/Monat und 8,64 GB/Monat).
+
+Es ist eine Vergleichsoperation auf einen Schwellwert auszuführen und, wo möglich, eine Zählung aller Schwellwertüberschreitungen der letzten drei Monate durchzuführen (historische Daten also mindestens 25,92 GB).  
+
+Es ist die \ac{AWS}-Region Frankfurt (eu-central-1) mit Abrechnungswährung US-Dollar (Umrechnung in \texteuro{} erfolgt bei \ac{AWS} bei Abrechnung) zu wählen. Alternativ ist die Region Irland (eu-west-1) bei Nichtverfügbarkeit der Diensleistung in Frankfurt zu wählen. 
+
+Dienste, die diese Analyse alleine nicht bewerkstelligen können, müssen unter zusätzlicher Verwendung von Rechendiensten wie Lambda oder \ac{EC2} angesetzt werden mit permanentem Speicher im \ac{S3}. 
+
+Analysen, die individuell auslösbar sind, erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. 
+
+Es wird angenommen, dass der Schwellwert 5 mal pro Gerät pro Monat überschritten wird (1000 Überschreitungen insgesamt).
+
+Für die Zwischenspeicherung in \ac{S3}, wenn benötigt, wird folgendes Datenschema angenommen:
 \begin{listing}[H]
 \inputminted[frame=lines,breaklines=true]{json}{code/estimates/filtered-estimate.json}
 \caption[Beispiel JSON]{Beispiel \ac{JSON}}

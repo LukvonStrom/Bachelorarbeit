@@ -1,5 +1,5 @@
 \chapter{Schlussbetrachtung}
-\TodoW{Schluss schreiben}
+Folgend sollen die Ergebnisse der Arbeit zusammengefasst und kritisch reflektiert werden. Anschliessend wird ein Ausblick auf zukünftige Initiativen gegeben.
 \section{Zusammenfassung}
 Das Ziel dieser Arbeit bestand darin, die gängigen Dienste im \ac{AWS} Umfeld zur Zeitreihenverarbeitung zu evaluieren und folgend Referenzarchitekturen zu konstruieren. Mittels mehrerer Interviews wurden Anforderungen an die Referenzarchitekturen und deren Gestaltung erhoben, welche später in den Konstruktionsprozess eingeflossen sind. 
 Für die spätere Konstruktion wurden bekannte Architekturmuster mittels Literaturrecherche dargestellt. Theoretische Grundlagen zum Wert von Daten über die Zeit und zur Konstruktion von Referenzarchitekturen inklusive der Systematik der Variationspunkte wurden mittels Literaturrecherche dargestellt. Nach einer Darstellung von bereits existierenden Anwendungsfällen, wurden mittels einer Umfrage die Kriterien für den folgenden Dienstvergleich priorisiert. Folgend wurde ein Dienstvergleich für die relevanten Dienste von \ac{AWS} durchgeführt.
@@ -13,10 +13,22 @@ Mittels der open-source vorliegenden Referenzarchitekturen können künftig inte
 
 
 \section{Kritische Reflexion}
+Innerhalb dieser Arbeit wurden Referenzarchitekturen für die Verarbeitung in der Cloud konstruiert. Ein Trend, der dabei ausgespart wurde, weil sich wichtige Komponenten nicht in der Cloud befinden, ist das sogenannte \enquote{Fog computing}. Nach der Definition von \citeauthor{Vaquero.2014} ist Fog computing ein Szenario, in dem heterogene, allgegenwärtige und dezentralisierte Geräte kommunizieren und kooperieren um Speicher- und Verarbeitungsaufgaben zu übernehmen.\footcite[Vgl.][30\psq]{Vaquero.2014} In der Praxis führt dies dazu, dass Verarbeitungsaufgaben in Teilen, angelehnt an das \enquote{Edge computing} von der Cloud in Richtung der Geräte ausgelagert wird.\footcite[Vgl.][]{Bonomi.2012} Dies geschieht dabei beispielsweise an Netzwerkgateways, die sowieso mit der Cloud kommunizieren und folgend nur noch bereits ausgewertete Daten übertragen. 
+
+\TodoW{Monitoringkonzept - Maßnahmen fehlen}
+
+\TodoW{Interviews sind z.T. thematisch ausgeschlagen}
+
+\TodoW{AWS Well-Architected Qualitätskriterien}
+
 
 
 
 \section{Ausblick}
-Innerhalb dieser Arbeit wurden Referenzarchitekturen für die Verarbeitung in der Cloud konstruiert. Ein Trend, der dabei ausgespart wurde, weil sich wichtige Komponenten nicht in der Cloud befinden, ist das sogenannte \enquote{Fog computing}. Nach der Definition von \citeauthor{Vaquero.2014} ist Fog computing ein Szenario, in dem heterogene, allgegenwärtige und dezentralisierte Geräte kommunizieren und kooperieren um Speicher- und Verarbeitungsaufgaben zu übernehmen.\footcite[Vgl.][30\psq]{Vaquero.2014} In der Praxis führt dies dazu, dass Verarbeitungsaufgaben in Teilen, angelehnt an das \enquote{Edge computing} von der Cloud in Richtung der Geräte ausgelagert wird.\footcite[Vgl.][]{Bonomi.2012} Dies geschieht dabei beispielsweise an Netzwerkgateways, die sowieso mit der Cloud kommunizieren und folgend nur noch bereits ausgewertete Daten übertragen. \ac{AWS} bietet mit dem Dienst Greengrass bereits eine Softwareplattform an, die auf diversen qualifizierten Gateways läuft.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bu} Durch die lokale Ausführung von Code könnten Schwachstellen adressiert werden, wie beispielsweise schlechte Netzkonnektivität. So kann Code, der auf Greengrass ausgeführt wird in Form von Containern oder lokalen Lambdafunktionen Benachrichtigungen lokal ohne Konnektivität zur Cloud versenden und beispielsweise Aktoren auslösen. Dies würde die gezeigten Referenzarchitekturen ergänzen. Dass mit Greengrass Anomaliedetektion möglich ist, wurde auch von \citeauthor{Shankar.2020} gezeigt.\footcite[Vgl.][]{Shankar.2020}
+
+\ac{AWS} bietet mit dem Dienst Greengrass bereits eine Softwareplattform an, die auf diversen qualifizierten Gateways läuft.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bu} Durch die lokale Ausführung von Code könnten Schwachstellen adressiert werden, wie beispielsweise schlechte Netzkonnektivität. So kann Code, der auf Greengrass ausgeführt wird in Form von Containern oder lokalen Lambdafunktionen Benachrichtigungen lokal ohne Konnektivität zur Cloud versenden und beispielsweise Aktoren auslösen. Dies würde die gezeigten Referenzarchitekturen ergänzen. Dass mit Greengrass Anomaliedetektion möglich ist, wurde auch von \citeauthor{Shankar.2020} gezeigt.\footcite[Vgl.][]{Shankar.2020}
+\TodoW{Evaluation von Greengrass}
 
 Anschließend zur Abgabe der Bachelorarbeit wird das GitHub Repository mit dem Quelltext der Bachelorarbeit veröffentlicht. Zusätzlich werden die Referenzarchitekturen an mehreren internen Stellen wie dem internen Wissensmanagement Confluence abgelegt, um einfache Zugänglichkeit zu gewährleisten.
+
+\TodoW{CDK Implementierung}

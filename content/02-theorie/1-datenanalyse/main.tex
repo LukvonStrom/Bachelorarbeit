@@ -2,18 +2,18 @@
 
 Mathematisch ausgedrückt besteht eine Zeitreihe (im Englischen auch \enquote{time series} genannt) aus einer endlichen Menge an zeitlich aufsteigend sortierten Messwerten $x_{t_1},x_{t_2},...,x_{t_T};  x_{t_k} \in \mathbb{R}^n, k=1,2,...,T$, wofür $t_1 < t_2 < t_T $ gilt.\footcite[Vgl.][1]{Deistler.2018b} 
 Zeitreihendaten sind in verschiedenen Feldern zu finden, beispielsweise im Bereich der Aktienmärkte, wo die Preise der einzelnen Kurse abgebildet werden, im Bereich der Gesundheitsforschung, wo die Ansteckungsrate ansteckender Krankheiten wie Covid-19 verfolgt wird oder im Bereich der Sozialwissenschaften, in welchen der Verlauf von Geburtsraten über die Zeit analysiert werden soll.\footcite[Vgl.][1]{Shumway.2017b} 
-In \autoref{abb:BeispielZeitreihe} findet sich beispielhaft die Zeitreihe der zwei messbaren Feinstaubkategorien von null bis ein Uhr am 01.01.2020 in Stuttgart.
+In \autoref{abb:BeispielZeitreihe} findet sich beispielhaft die Zeitreihe der zwei messbaren Feinstaubkategorien von null bis ein Uhr am 01.01.2020 in Stuttgart. Dabei sind \ac{PM} 2.5 und \ac{PM} 10 standardisierte Partikelgrößen, die zur Messung von Feinstaub verwendet werden.\footcite[Vgl.][]{EnvironmentalProtectionAgency.o.J.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{graphics/Feinstaub-Stuttgart.png}
+\includegraphics[height=0.4\textheight]{graphics/Feinstaub-Stuttgart.png}
 \caption{Beispielhafte Feinstaubwerte in der Stunde nach Silvester 2020 in Stuttgart-Mitte}
 \label{abb:BeispielZeitreihe}
 \end{figure}
 
 Die möglichen Anwendungen in der Informatik sind ebenfalls vielzählig. So können über virtuelle oder physikalische Sensoren Messwerte, wie beispielsweise die CPU Auslastung eines gegebenen Servers über die Zeit oder Temperaturmessungen eines \ac{IoT} Gerätes über die Zeit gemacht und gespeichert werden. So nehmen mit zunehmender Digitalisierung von Fertigungslinien in Fabriken auch die Messwerte von Sensoren zu, die dort übermittelt und ausgewertet werden müssen.
 
-Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne der Messfrequenz, in welcher Daten betrachtet werden. \TodoW{belegen} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und die zeitliche Distanz zwischen einzelnen Messwerten ist gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich, einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
+Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne des Abstands zwischen einzelnen Messungen.\footcite[Vgl. auch im Folgenden][201\psq]{Mosler.2006} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und übermittelt. Die zetlichen Abstände sind gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich, einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
 
 Es ist von zwei vorliegenden Typen von Zeitreihendaten auszugehen. Zum einen existiert der mit Zeitstempel versehene Messwert, welcher einen oder in manchen Fällen auch mehrere diskrete Messwerte mit Zeitstempel der Erfassung übermittelt. 
 Zum anderen existieren auch Ereignisse, welche keine Messwerte enthalten, sondern Ergebnisse einer Vorauswertung innerhalb des übermittelnden Systems sind. 
@@ -194,7 +194,7 @@ Verschiedene Datenverarbeitungsintervalle machen speziell im Sinne der verschied
 
 Die $\kappa$/Kappa Referenzarchitektur von \citeauthor{Kreps.2014}, dargestellt in \autoref{abb:KappaStreaming} basiert auf der $\lambda$-Architektur, spart jedoch den \enquote{Batch layer} mit zugehörigen \enquote{Batch jobs} aus. 
 Das Konzept von einem Master Dataset existiert dabei weiterhin, jedoch in Form von Nachrichten, die in einem Messagebroker gespeichert werden. Analysen werden in Form von einzeln versionierten Jobs über die vorhandenen Werte erstellt. 
-Wird die Analyse in irgendeiner Weise verändert (z.B. durch Codeanpassungen) werden alle zwischengespeicherten Nachrichten erneut durch eine neue, unveränderliche Version des Jobs analysiert. Diese Unveränderlichkeit hat den Vorteil, dass keine unerwünschten Seiteneffekte durch Analysen, die gegenseitig Ergebnisse überschreiben, auftreten. 
+Wird die Analyse in irgendeiner Weise verändert (z.B. durch Codeanpassungen), werden alle zwischengespeicherten Nachrichten erneut durch eine neue, unveränderliche Version des Jobs analysiert. Diese Unveränderlichkeit hat den Vorteil, dass keine unerwünschten Seiteneffekte durch Analysen, die gegenseitig Ergebnisse überschreiben, auftreten. 
 
 
 
@@ -216,4 +216,4 @@ Gemäß der in \autoref{abb:KappaStreaming} gezeigten $\kappa$-Architektur gibt 
 \subsection{Batch Verarbeitung}
 
 Gemäß der in \autoref{abb:OLAPStreaming} gezeigten \ac{OLAP} Architektur, gibt es, wie für die Echtzeitverarbeitung auch nutzende Unternehmen, die ein Entscheidungstempo mit weiterem Horizont haben. Für diese Entscheidungstypen ist dabei wichtig, dass eine Analyse möglichst viele historische Daten umfasst. Es ist dabei aber zweitrangig, wie zeitnah diese erstellt werden kann. 
-Eine gängige Möglichkeit um effizient alte Daten zu analysieren, stellen \ac{OLAP} Datenbanken dar, welche durch spezielle Indexstrukturen und Optimierungen auf komplexe lesende Abfragen bei großen Datenmengen optimiert wurden. \footcite[Vgl.][5\psq]{Codd.1993} Mittels dieser \ac{OLAP} Datenbanken lassen sich dank der jeweiligen Abfragesprachen und -dialekte komplizierte Abfragen realisieren. Bekanntes Beispiel für so eine Abfragesprache wäre \ac{SQL}, welche einige verschiedene Implementierungen (Dialekte) hat, die verwendet werden können. 
+Eine gängige Möglichkeit, um effizient alte Daten zu analysieren, stellen \ac{OLAP} Datenbanken dar, welche durch spezielle Indexstrukturen und Optimierungen auf komplexe lesende Abfragen bei großen Datenmengen optimiert wurden. \footcite[Vgl.][5\psq]{Codd.1993} Mittels dieser \ac{OLAP} Datenbanken lassen sich dank der jeweiligen Abfragesprachen und -dialekte komplizierte Abfragen realisieren. Bekanntes Beispiel für so eine Abfragesprache wäre \ac{SQL}, welche einige verschiedene Implementierungen (Dialekte) hat, die verwendet werden können. 
