@@ -1,0 +1,19 @@
+@startuml
+autonumber
+skinparam maxMessageSize 90
+skinparam sequenceMessageAlign center
+collections "Simple\nStorage\nService"
+queue "Kinesis\nData\nAnalytics"
+boundary "Lambda"
+boundary "Simple\nNotification\nService"
+control "QuickSight"
+group Analyse
+loop
+"Kinesis\nData\nAnalytics" -> "Kinesis\nData\nAnalytics" : Vergleich mit alten Werten
+end
+"Kinesis\nData\nAnalytics" --> "Lambda" : Alarmierung
+"Lambda" --> "Simple\nNotification\nService" : Alarmierung
+end
+"Kinesis\nData\nAnalytics" <-- "QuickSight" : Visualisierung
+"Simple\nStorage\nService" <-- "QuickSight" : Visualisierung
+@enduml

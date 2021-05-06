@@ -1,28 +1,26 @@
-\TodoW{Kitt der Anhänge mit Auswertungen}
+\anhang{Weitere Auswertungen Batch}\label{anhang:vergleich-batch}
+In den folgenden Anhangteilen sind weitere Auswertungen für die Dienste der Batch Kategorie dargestellt.
 
-\anhang{Amazon Timestream}\label{anhang:vergleich-timestream}
-\anhangteil{Features des Dienstes}
+\ftanhang{Amazon~Timestream}
 Perzentile lassen sich mit der eingebauten Funktion \mintinline{sql}{approx_percentile(x, percentage)} berechnen, der Mittelwert via \mintinline{sql}{avg(x)} oder \mintinline{sql}{geometric_mean(x)}
 Eine native Anomalieerkennung bietet Timestream nicht, jedoch kann die Machine Learning Dienstleistung Amazon SageMaker Daten von Timestream analysieren und Anomalieerkennung ausführen.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.aj} In SageMaker kann auch der nativ in Kinesis Data Analytics verbaute Random Cut Forest Algorithmus verwendet werden, um Anomalien zu erkennen. Andernfalls kann, wie von \citeauthor{Salgado.2019} beschrieben, eine einfache Anomalieerkennung durch Überprüfung des Wertes auf Lage zwischen dem 25. und 75. Quantil erfolgen.\footcite[Vgl.][]{Salgado.2019}
 Die Schwellwertüberschreitungserkennung ist mittels einer einfachen \mintinline{sql}{WHERE} Bedingung machbar.
 Ein gleitender Durchschnitt ist, wie von \citeauthor{Ross.2020} gezeigt, in SQL mittels der Bearbeitungsfenster, die Timestream, wie viele andere \ac{SQL} Implementierungen anbietet, möglich.\footcite[Vgl.][]{Ross.2020} Gleichzeitig unterstützt Amazon Timestream die Verwendung von Ableitungen als Werkzeug zur Trenderkennung.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ai}
 
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{Amazon~Timestream}
 Die \ac{SLA} von Timestream bietet allein 99,99\% Verfügbarkeit pro Verrechnungsmonat.\footcite[Vgl.][]{AmazonWebServicesInc..2020d} \ac{AWS} verspricht aber eine bis zu tausendfache Geschwindigkeitsverbesserung gegenüber relationalen Datenbanken.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ak}
 
 Mitbewerber von \ac{AWS} im Bereich der Zeitseriendatenbanken haben in ihren Tests festgestellt, dass Timestream langsamer als ihre Konkurrenzdienste/Konkurrenzprodukte waren.\footcite[Vgl.][]{Booz.2020}\nzitat\footcite[Vgl.][]{Crate.ioInc..2020} Dabei sind die Testskripte von \citeauthor{Booz.2020} Open Source und damit die Messungen theoretisch reproduzierbar. Gleichzeitig gibt \ac{AWS} aber in einem Blogeintrag aus dem November an, Datensätze im Bereich von einem bis 21,7 TB analysieren zu können, ohne 100 Sekunden Ausführungszeit zu überschreiten.\footcite[Vgl.][]{Das.2020} Auch für diese Tests ist der Quellcode open source verfügbar.
 
 Es kann keine finale Aussage über die genauen Dienstleistungsumfang getroffen werden, da entweder die Daten der Mitbewerber von \ac{AWS} als gültig anzunehmen sind, oder die Daten von \ac{AWS} selbst. Da es im kommerziellen Interesse aller Parteien liegt Timestream entweder auf- oder abzuwerten, ist eine finale Aussage nicht möglich.
 
-\anhang{Amazon Athena/Amazon S3}\label{anhang:vergleich-athena}
-\anhangteil{Features des Dienstes}
+\ftanhang{Amazon~Athena/Amazon~S3}
 Die technische Grundlage für Athena, ist das OpenSource Projekt Presto. Dieses bietet mit \mintinline{sql}{approx_percentile(x, percentage)} eine Funktion zur Kalkulation von Perzentilen an.\footcite[Vgl.][]{ThePrestoFoundation.o.J.}
 Eine Möglichkeit, um Anomalien in Athena zu erkennen, ist es alle Werte, die außerhalb der Spanne zwischen dem 25. und 75. Quantil liegen, als Anomalie zu klassifizieren.\footcite[Vgl.][]{Salgado.2019} Dies wäre mit der \mintinline{sql}{approx_percentile(x, percentage)} Funktion von Athena machbar. Andernfalls könnte wie von \citeauthor{Megler.2016} vorgeschlagen, der Amazon \ac{EMR} Dienst benutzt werden, um Anomalien mittels der Bildung von Clustern und der Kalkulation der Distanz von Werten zu diesen Clustern zu detektieren.\footcite[Vgl.][]{Megler.2016}
 Schwellwertüberschreitungen können via einer \mintinline{sql}{WHERE} Bedingung, wie bei Timestream auch, erkannt werden.
 Wie bei Timestream auch kann nach der Methode von \citeauthor{Ross.2020} ein gleitender Durchschnitt mittels der Verarbeitungsfenster kalkuliert werden.\footcite[Vgl.][]{Ross.2020}
 
-\anhangteil{Dienstleistungsumfang}
-
+\dlanhang{Amazon~Athena/Amazon~S3}
 \citeauthor{Hartland.2018} beschreiben einen Anwendungsfall, in dem sie Athena zur Analyse von Logdaten innerhalb der Datenanalyseinfrastruktur des ATLAS Experiments am Large Hadron Collider im CERN Forschungszentrum bei Genf verwenden.\footcite[Vgl.][]{Hartland.2018}
 
 Gleichzeitig stellen \citeauthor{Hartland.2018} auch fest, dass es Teil des Entwicklungsprozesses ist, die Anfragen zu  optimieren, um Kosten zu sparen.\footcite[Vgl.][5]{Hartland.2018} Dies entstammt der Natur von \ac{SQL} basierten Abfragemechanismen, da verschiedene Abfragestile und Operationen auf verschieden viele Speicherpartitionen zugreifen müssen. Da Athena nach Volumen der Speicherzugriffe abrechnet, kann es also sinnvoll sein, den Speicher nach Abfragearten zu partitionieren oder die Abfragen zu optimieren. Dazu können der im April 2021 vorgestellten \mintinline{sql}{EXPLAIN} \ac{SQL}-Befehl und die damit zusammenhängenden query execution plans verwendet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2021} Diese zeigen nach Aussage von \ac{AWS} auf, wie eine Abfrage ausgeführt werden würde und wie Laufzeiten optimiert werden können.
@@ -31,29 +29,25 @@ Die reale Performance der bearbeiteten Anfragen garantiert \ac{AWS} nicht. Da At
 
 Amazon garantiert vertraglich keine Performance, sondern nur die 99,99\% Verfügbarkeit des Dienstes in dem \ac{SLA}.\footcite[Vgl.][]{AmazonWebServicesInc..2019c} In Vergleichen von \citeauthor{Levy.2019} und \citeauthor{Khadtare.2018} mit dem Mitbewerber Google BigQuery zeigte Athena schlechtere Performance, gemessen an den Antwortzeiten der Abfragen, war aber günstiger.\footcite[Vgl.][]{Levy.2019}\nzitat\footcite[Vgl.][]{Khadtare.2018} Da \ac{AWS} Ende 2020 mit Athena engine version 2 wesentliche Performanceverbesserungen angekündigt hat, ist nicht bekannt, ob die Daten noch aktuell sind.\footcite[Vgl.][]{AmazonWebServicesInc..2020c}
 
-\anhang{Amazon Redshift}\label{anhang:vergleich-redshift}
-
-\anhangteil{Features des Dienstes}
+\ftanhang{Amazon~Redshift}
 Redshift verfügt über die Funktionen \mintinline[breaklines]{sql}{APPROXIMATE PERCENTILE_DISC(percentile)} und \\ \mintinline[breaklines]{sql}{PERCENTILE_CONT(percentile)}, welche Perzentile kalkulieren können durch Annahme einer diskreten oder kontinuierlichen Datenverteilung.
 
 Wie bereits bei Timestream und Athena gezeigt, kann \citeauthor{Salgado.2019}s Vorschlag verwendet werden, um alle Werte, ausserhalb der Spanne zwischen dem 25. und 75. Quantil liegen als Anomalie zu klassifizieren.\footcite[Vgl.][]{Salgado.2019} Obenstehende Perzentilfunktionen könnten dafür genutzt werden. Wie bereits bei Timestream und Athena vorgeschlagen, könnten auch externe Tools verwendet werden, um Anomalien mittels Machine Learning oder statistischen Methoden zu entdecken. Eine weitere Möglichkeit wäre die mittlere absolute Abweichung vom Median in einem Verarbeitungsfenster zu analysieren und größere Abweichungen als Anomalie anzuerkennen.\footcite[Vgl.][]{Peak.2017}
 Schwellwertüberschreitungen können via einer \mintinline{sql}{WHERE} Bedingung, wie bei Timestream und Athena auch, erkannt werden.
 Wie bei Timestream und Athena kann nach der Methode von \citeauthor{Ross.2020} ein gleitender Durchschnitt mittels der Verarbeitungsfenster kalkuliert werden.\footcite[Vgl.][]{Ross.2020}\nzitat\footcite[Vgl.][]{Ubiq.o.J.} Diese Methode wird auch von \citeauthor{Ubiq.o.J.} für Redshift vorgeschlagen.\footcite[Vgl.][]{Ubiq.o.J.}
 
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{Amazon~Redshift}
 \ac{AWS} sichert vertraglich für Redshift ebenfalls keine feste Performance im Rahmen des \acp{SLA} zu. Es werden allein Abschläge auf den zu zahlenden Preis angeboten, wenn die Verfügbarkeit des Dienstes unter 99,99\% des Monats lag.\footcite[Vgl.][]{AmazonWebServicesInc..2019b} Basierend auf den Leistungsdaten der Instanz, welche ausgewählt wurde, um Redshift zu betreiben und weiterer Faktoren, wie z.B. ob durch horizontale Skalierung mehrere Instanzen in einem Cluster zusammengefasst wurden, kann sich die Performance verändern. Zusätzlich sind wie bei vielen \ac{SQL}-basierten Datenbanken Optimierungen der Leistung durch Optimierung der gestellten Abfragen möglich.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ab} In der Erhebung von \citeauthor{Tan.2019} wurde Redshift (ohne Spectrum) ein Performancevorteil gegenüber Athena bescheinigt, während Spectrum schlechter abschnitt, als Redshift.\footcite[Vgl.][2176]{Tan.2019}
 
-\anhang{Amazon OpenSearch Service}\label{anhang:vergleich-opensearch}
-\anhangteil{Features des Dienstes}
+\ftanhang{Amazon~OpenSearch~Service}
 Da der OpenSearch Fork von Amazon auf der Elasticsearch Basis basiert, und \ac{AWS} explizit plant, vorest keine \ac{API} Abweichungen zur bereits bekannten \ac{API} einzubauen, werden im Folgenden die Elasticsearch Fähigkeiten dargestellt.\footcite[Vgl.][]{Meadows.2021}
 
-Mithilfe der \enquote{Percentiles aggregation} können beliebige Perzentile eines Datensatzes berechnet werden. Dies wird in \autoref{listing:percentiles-elasticsearch} im \anhangref{anhang:elastic-code} mit der Elasticsearch eigenen Abfragesprache gezeigt. 
+Mithilfe der \enquote{Percentiles aggregation} können beliebige Perzentile eines Datensatzes berechnet werden.
 In Elasticsearch/OpenSearch Service ist aufgrund von Amazon eigenen Anpassungen eine Anomalieerkennung basierend auf Random Cut Forest verfügbar.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.al}
 Alternativ lassen sich basierend auf der mittleren absolute Abweichung vom Median mit Elasticsearch eigenen Mitteln ebenfalls Aussreisser/Anomalien erkennen.\footcite[Vgl.][]{ElasticsearchInc..o.J.c} 
 In der Elasticsearch eigenen Abfrage gibt es mit dem \mintinline{sql}{minimum_should_match} Parameter, eine Möglichlkeit Abfragen auf Schwellwertüberschreitungen zu stellen.\footcite[Vgl.][]{ElasticsearchInc..o.J.e}
 Gleichzeitig können in Kibana/Open Search Dashboards Schwellwerte mit Alarmen konfiguriert werden.\footcite[Vgl.][]{Handler.2019}
 In Elasticsearch kann ein gleitender Durchschnitt mittels der eigenen Abfragesprache kalkuliert werden. Die Berechnung kann gewichtet oder ungewichtet erfolgen.
 
-
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{Amazon~OpenSearch~Service}
 \ac{AWS} sichert vertraglich für OpenSearch Service ebenfalls keine feste Performance im Rahmen des \acp{SLA} zu. Auch hier werden nur Abschläge auf den zu zahlenden Preis angeboten, wenn die Verfügbarkeit des Dienstes unter 99,99\% des Monats lag.\footcite[Vgl.][]{AmazonWebServicesInc..2019} Da OpenSearch Service ein Instanzbasiertes Modell verfolgt, sind eventuelle Performanceprobleme jedoch durch einen Wechsel auf eine Instanzklasse mit stärkerer Rechenleistung (vCPUs) oder Hauptspeicher (\ac{RAM}) lösbar. Dabei zeigt der Anwendungsfall der Mayo Klinik, den \citeauthor{Chen.2017} vorstellen, dass die unterliegende Software, Elasticsearch, auch mit Datensätzen von mehr als 25 Millionen \ac{JSON}-Einträgen Anfragen mit einer Latenz von weniger als 0,2 Sekunden beantworten kann.\footcite[Vgl.][]{Chen.2017}

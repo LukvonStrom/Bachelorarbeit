@@ -40,8 +40,7 @@ Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträum
 \subsection{Arten der Auswertung}\label{chap:auswertungsarten}
 Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die jeweilige Referenzarchitektur und die verwendeten Dienste fähig sind. Im Folgenden werden dazu einige einfachere Auswertungsmethoden für Zeitreihendaten vorgestellt. Die Zeitreihenanalyse und einsetzbare Werkzeuge werden im statistischen Sinn von weiterführenden Werken, wie von \citeauthor{Shumway.2017} behandelt. Es ist davon auszugehen, dass auch weiterführende Auswertungen wie fourieranalytischen Methoden, sofern in der jeweiligen Umgebung bereits vorhanden oder programmierbar, eingesetzt werden können.
 
-
-\subsubsection{Median und Quantile}
+\miniabschnitt{Median und Quantile}
 Eine der wichtigsten statistischen Lageparameter sind die Quantile eines Datensatzes und der Median, welcher ein spezielles, 50 prozentiges Quantil ist. 
 Innerhalb eines gewissen Betrachtungsfensters können für Zeitreihendaten, wie für viele andere Datensätze auch, Quantile und der Median erfasst werden. 
 Das Quantil erfasst mit der jeweiligen Prozentangabe und dem zugehörigen, ermittelten Wert die Grenze an Werten, die kleiner sind. 
@@ -69,7 +68,7 @@ Da ein Median das 50-\%-Quantil ist, bildet der Median entsprechend die Grenze a
 
 Gängig in der Datenanalyse als Sonderform der Quantile sind die sogenannten Perzentile, welche in einprozentigen Schritten existieren. Häufig verwendet werden insbesondere das 90-\% und das 99\% Perzentil.
 
-\subsubsection{Anomaliedetektion}
+\miniabschnitt{Anomaliedetektion}
 Eine weitere gängige Datenanalysemethode ist die Anomaliedetektion. 
 Dabei kann jeder Datenpunkt als Anomalie gesehen werden, der die Komplexität eines Modells, welches die Daten beschreibt, substantiell erhöhen würde.\footcite[Vgl.][]{Guha.2016} Verwandt ist dabei das Feld der \enquote{Ausreissererkennung}/outlier detection. 
 Verwendet werden können dabei diverse Methodiken. Innerhalb von \ac{AWS} Diensten wird zur Anomalieerkennung ein Algorithmus basierend auf Random Cut Forest verwendet.\footcite[Vgl.][1]{Guha.2016} Weitere Methodiken wären aber auch Random Walk oder Logik basierend auf Standardannahmen.\footcite[Vgl.][]{Moonesinghe.2006}\nzitat\footcite[Vgl.][]{Angiulli.2008} Anomalien können kausal mit unterliegenden Problemen z.B. des Sensors zusammenhängen, weshalb es wichtig ist, auch abseits von den in \autoref{chap:schwellwert} gezeigten Schwellwertüberprüfungen die Daten auf Anomalien zu prüfen.
@@ -92,9 +91,9 @@ Verwendet werden können dabei diverse Methodiken. Innerhalb von \ac{AWS} Dienst
 \caption{Zu erkennende Anomalien einer Messreihe}
 \label{abb:anomalie}
 \end{figure}
-
 Abgebildet in \autoref{abb:anomalie} sind zwei Anomalien, die direkt in mehreren Punkten vom Normalfall abweichen.
-\subsubsection{Schwellwertüberschreitung}\label{chap:schwellwert}
+
+\miniabschnitt{Schwellwertüberschreitung}\label{chap:schwellwert}
 Bei vielen gemessenen und sonstig erfassten Zeitreihendaten, bei denen akzeptierbare Werte und Wertbereiche, die Aktionen erfordern bekannt sind, sind Schwellwerte bereits ausreichend oder komplementär verwendbar. Dabei wird, wie in \autoref{abb:Schwellwerte} gezeigt, ein Schwellwert definiert (in diesem Fall $1.75$). Zusätzlich dargestellt ist eine Karenzzeit von 12 Sekunden. Erst nach kontinuierlicher Überschreitung des Schwellwerts von 12 Sekunden wird ein Alarm ausgelöst. 
 \begin{figure}[H]
 \centering
@@ -116,7 +115,7 @@ Bei vielen gemessenen und sonstig erfassten Zeitreihendaten, bei denen akzeptier
 \end{figure}
 Gleichzeitig ist es aber auch möglich, zählerbasiert einen Alarm/eine Aktion auszulösen. Bei einer Messdistanz von angenommenen 10 Sekunden und dreifacher Auslösung wäre eine 30 sekündige Karenzzeit ebenfalls implementierbar.
 
-\subsubsection{Trenderkennung/gleitender Durchschnitt}
+\miniabschnitt{Trenderkennung/gleitender Durchschnitt}
 Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, sind eine Form der Kurvenglättung. Sie glätten ausreissende Kurven und ermöglichen einen groben Trend der vorliegenden Daten anhand der Steigung der geglätteten Kurve vorauszusagen.
 \begin{figure}[H]
 \centering
@@ -162,11 +161,6 @@ Gleitende Durchschnitte, wie in \autoref{abb:gleitendeDurchschnitte} gezeigt, si
 \label{abb:gleitendeDurchschnitte}
 \end{figure}
 
-
-
-
-
-
 \subsection{Bestehende Referenzarchitekturkategorien}\label{chap:bestehende_ras}
 Im Bereich der Streamingarchitekturen gibt es bereits etablierte Referenzarchitekturen, welche verschiedene mögliche Aufbauarten einer Verarbeitung von Streaming/Zeitreihendaten zeigen.
 
@@ -182,7 +176,6 @@ Die von \citeauthor{Marz.2015} vorgestellte $\lambda$/Lambda-Architektur, welche
 Der Name ist dabei nicht mit dem \ac{AWS} Dienst Lambda zu verwechseln, sondern ist wohl auf den gedrehten Buchstaben $\lambda$ zurückzuführen, also \reflectbox{\rotatebox[origin=c]{270}{$\lambda$}}.\footcite[Vgl. auch im Folgenden][]{Berle.27.11.2017} Die $\lambda$-Architektur sieht, ausgehend von den hereingeladenen Daten, zwei verschiedene Wege für die Daten vor. 
 Zum einen den \enquote{Speed Layer}, welcher Daten direkt nach dem Eingang verarbeitet und nicht im Layer selbst speichert, sondern nur Aggregate oder Ergebnisse zur Verfügung stellt. Zum anderen gibt es den \enquote{Batch layer}, in welchem Daten zuerst in einem Master dataset gespeichert werden und dann in einem festen Intervall (\enquote{Batch jobs}) ausgewertet werden. 
 Verschiedene Datenverarbeitungsintervalle machen speziell im Sinne der verschiedenen, in \autoref{abb:DataHalflife} gezeigten, Datenhalbwertszeiten Sinn. So sind manche Auswertungen, die präzise historische Daten benötigen, in einem Batch layer besser möglich als in einem Speed layer. Der Speed layer bietet dagegen durch die Geschwindigkeit der Auswertungen die Möglichkeit, agil auf erkannte Ereignisse oder Veränderungen im Generellen zu reagieren.
-
 
 \begin{figure}[H]
 \centering

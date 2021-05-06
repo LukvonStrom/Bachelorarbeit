@@ -1,16 +1,14 @@
-\anhang{AWS IoT Events}\label{anhang:vergleich-iot-events}
+\anhang{Weitere Auswertungen Echtzeit}\label{anhang:vergleich-echtzeit}
+In den folgenden Anhangteilen sind weitere Auswertungen für die Dienste der Echtzeit Kategorie dargestellt.
 
-\anhangteil{Features des Dienstes}
+\ftanhang{AWS~IoT~Events}
 \AWSIOT{} Events unterstützt reine \enquote{if-then-else} Überprüfungen. Trotzdem sind Variablen zur Evaluation selbstgeschriebener Logik verfügbar, womit sich zumindest ein Teil der gewünschten Features umsetzen lässt. Fakt ist dennoch, dass nur Analysen in einem endlichen zeitlichen Fenster durchführbar sind, welches durch Eingangsfrequenz und Anzahl der verwendeten Variablen beschränkt ist.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.am} Eine Kalkulation eines Medians wäre (angenommen, dass die Werte sortiert gespeichert werden) wie folgt möglich, wenn 10 Variablen angenommen werden: \mintinline[breaklines]{javascript}{0.5*($variable.pastmeasure5 + $variable.pastmeasure6))}.
 Abseits von Schwellwertüberprüfungen, welche vorher definiert wurden, ist \AWSIOT{} Events nur mit großem Aufwand bei beschränkter Evaluationssprache zu weitergehenden Auswertungen fähig, welche immer von dem Zeitfenster, welches die Variablen abdecken, abhängig ist. Ebenfalls sind keine selbstständigen Algorithmen zur Anomalieerkennung integriert.
 
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{AWS~IoT~Events}
 \ac{AWS} gibt in der zu \AWSIOT{} Events zugehörigen \ac{SLA} keine Dienstleistungsumfang, sondern lediglich eine Verfügbarkeitsgarantie mit Penalen in Form von Rückzahlungen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.an} \AWSIOT{} Events hat dazu noch Limitierungen, wie beispielsweise das unveränderliche Limit von 10 Nachrichten pro Sekunde, die an einen Detektor gesendet werden können (also bei denen eigene Logik ausgeführt werden kann) oder das anpassbare Limit von 1000 Nachrichten, die pro Sekunde insgesamt evaluiert werden können.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ap}
 
-
-\anhang{Amazon Kinesis}\label{anhang:vergleich-kinesis}
-
-\anhangteil{Features des Dienstes}
+\ftanhang{Amazon~Kinesis}
 Folgend werden die Funktionen der \ac{SQL}-Analyse von Kinesis Data Analytics dargestellt, da die Funktionalitäten der Flink-Schnittstelle abhängig sind von Programmiersprache und verwendeter Bibliotheken. 
 Eine direkte Funktion, um den Median oder Quantile zu berechnen, ist nicht vorhanden. \footcite[Vgl.][]{RyanN.2018} Statdessen ist aber eine Lösung mittels der \mintinline[breaklines]{sql}{group_rank} Funktion möglich, wie von \citeauthor{RyanN.2018} im \ac{AWS} Forum gezeigt.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.as}\nzitat\footcite[Vgl.][]{RyanN.2018}
 Mittels dem von \citeauthor{Guha.2016} gezeigten Random Cut Forest Algorithmus können Anomalien erkannt werden.\footcite[Vgl.][1]{Guha.2016} Dieser Algorithmus ist in Kinesis Data Analytics in Form der \mintinline[breaklines]{sql}{RANDOM_CUT_FOREST_WITH_EXPLANATION} Funktion integriert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ar}
@@ -18,7 +16,7 @@ Die Schwellwertüberschreitungserkennung ist mittels einer \ac{SQL} \mintinline{
 Der gleitende Durchschnitt lässt sich für Intervalle mittels der \mintinline[breaklines]{sql}{EXP_AVG} Funktion berechnen.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.aq}
 \citeauthor{Herman.2020} kritisiert bei Kinesis Data Analytics den angepassten \ac{SQL} Dialekt, welcher keine Interoperabilität zulässt und die fehlende Testbarkeit außerhalb von \ac{AWS} Werkzeugen.\footcite[Vgl.][]{Herman.2020}
 
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{Amazon~Kinesis}
 Kinesis Data Streams bietet einen MB Durchsatz pro Sekunde und provisioniertem \enquote{Shard}. Da Kinesis Data Firehose auf Kinesis Data Streams aufbaut, ist ähnliches für Data Firehose anzunehmen\footcite[Vgl.][]{Pogosova.28.05.2020} 
 \ac{AWS} bietet laut eigener Aussage mittels einer spezieller HTTP/2 \ac{API} auch eine Leseverzögerung von 70 Milisekunden, oder weniger.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.af} 
 Laut der \ac{AWS}-eigenen Dokumentation liegt die Ende zu Ende Verzögerung von Dateneinspeisung bis Konsumption typischerweise unter einer Sekunde. Dies weicht das eigentliche Marketingversprechen von 70 Milisekunden schon auf.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ae}
@@ -26,9 +24,7 @@ Die Kinesis \ac{SLA} enthält auch keine Klausel zur eigentlichen Performance, n
 
 Es gab bis jetzt ein schweres Ereignis, bei dem Kinesis in einer Region für den Zeitraum von 12 Stunden beeinträchtigt war und andere, von Kinesis abhängige Dienste beeinträchtigte.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..2020e} Dieses Ereignis war jedoch auf die \enquote{us-east-1} Region begrenzt und die Auswirkungen konnten durch Migration auf andere Regionen, wie beispielsweise \enquote{eu-central-1} für Nutzende mitigiert werden.
 
-
-\anhang{AWS Lambda}\label{anhang:vergleich-lambda}
-\anhangteil{Features des Dienstes}
+\ftanhang{AWS~Lambda}
 Da Lambda eine programmierbare Plattform ist, welche mehrere Sprachen unterstützt, muss im Folgenden eine Programmiersprache angenommen werden. Python hat in einer Umfrage von Kaggle unter Datenwissenschaftlern die höchste Popularität, gefolgt von \ac{SQL} ausgemacht.\footcite[Vgl.][]{KaggleInc..2019}\nzitat\footcite[Vgl.][]{Hayes.2020} Aus diesem Grund wird im Folgenden von der Verwendung der Programmiersprache Python ausgegangen (speziell auch, da sich eine Umsetzung mit \ac{SQL} in Lambda schwierig gestalten würde).\footcite[Vgl.][]{Hayes.2020} 
 
 Gemäß einer Analyse des Entwicklerportals Stack Overflow ist das Paket \enquote{pandas} dabei die populärste Programmbibliothek für Datenwissenschaft.\footcite[Vgl.][]{Robinson.2017} Aus diesem Grund wird im Folgenden die Verwendung von Python mit pandas in Lambda angenommen. Angenommen wird, dass das an Lambda übermittelte Bearbeitungsfenster groß genug war, um Analysen zuzulassen.
@@ -38,7 +34,7 @@ In pandas können Quantile mittels der \pandasmethod{DataFrame.quantile} Methode
 Schwellwertüberschreitungen können mittels \pandasmethod{DataFrame.gt} überprüft werden, wobei \enquote{gt} für \enquote{greater-than} steht.\footcite[Vgl.][]{o.V..o.J.e}
 Ein exponentieller gleitender Durchschnitt lässt sich, wie von \citeauthor{Sharma.2019} gezeigt, mittels der folgenden, verketteten, Methoden berechnen: \pandasmethod{DataFrame.ewm().mean}.\footcite[Vgl.][]{Sharma.2019} 
 
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{AWS~Lambda}
 \ac{AWS} bietet für Lambda in dem \ac{SLA} eine 99,\textbf{95} \% garantierte Verfügbarkeit an.\footcite[Vgl.][]{AmazonWebServicesInc..2019d}
 
 Die Zuweisung von \ac{RAM} und daran gekoppelt vCPUs erfolgt bei Lambda dynamisch und ist vom Nutzer einzustellen. Um dies für Nutzende einfacher zu machen, gibt es das Projekt Lambda Power Tuning, welches die optimale \ac{RAM}-/Leistungskonfiguration für Funktionen ermittelt durch mehrere Tests.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.at} Da höhere \ac{RAM} Einstellungen mehr kosten, kann für optimale Leistung oder für das Preis/Leistungsoptimum optimiert werden.
@@ -47,8 +43,10 @@ Wie von \citeauthor{Madden.2019} gezeigt, eignet sich Lambda für die Verarbeitu
 Dies wurde mit der Verarbeitung von 259 TB Daten in knapp 20 Minuten demonstriert.\footcite[Vgl. auch im Folgenden][]{Madden.2019} Speziell heben \citeauthor{Madden.2019} auch hervor, dass Lambda von keiner Last zu knapp zwei Millionen Einträgen pro Sekunde und zurück skaliert hat.
 
 
-\anhang{Amazon MSK / ksqlDB}\label{anhang:vergleich-msk}
-\anhangteil{Features des Dienstes}
+
+
+
+\ftanhang{Amazon~MSK~/~ksqlDB}
 Im Folgenden wird der Featureumfang von ksqlDB näher beleuchtet.
 Die Berechnung eines Medians/von Perzentilen scheint in ksqlDB nicht trivial machbar zu sein.
 Wie von \citeauthor{Waehner.2018} gezeigt, ist es möglich, in den ksql eigenen \acp{UDF}, in welchen eigener Code ausgeführt wird, Anomalieerkennung basierend auf Machine Learning durchzuführen.\footcite[Vgl.][]{Waehner.2018}
@@ -56,7 +54,7 @@ Eine Schwellwertüberschreitung kann mittels einer \mintinline[breaklines]{sql}{
 Ein gleitender Durchschnitt kann ebenfalls mittels einer \ac{UDF} realisiert werden.\footcite[Vgl.][]{ConfluentInc..o.J.c} 
 Diese berechnet den gleitenden Durchschnitt mit eigenem Code.
 
-\anhangteil{Dienstleistungsumfang}
+\dlanhang{Amazon~MSK~/~ksqlDB}
 Da die Ressourcen für ksqlDB selbst eingestellt werden können, ist eine absolute Performanceaussage nicht möglich. Zusätzlich müssen zugehörige Ressourcen entweder selbst verwaltet werden oder als managed service von Confluent bezogen werden.
 Die \ac{SLA} von \ac{MSK} definiert als Verfügbarkeitsziel 99,9\%, jedoch keine weiteren Performanceziele.\footcite[Vgl.][]{AmazonWebServicesInc..2019e} 
 Die Performance von \ac{MSK} ist aufgrund des unterliegenden Instanzmodells wesentlich durch die Nutzenden beeinflussbar und ggf. durch vertikale Skalierung verbesserbar.

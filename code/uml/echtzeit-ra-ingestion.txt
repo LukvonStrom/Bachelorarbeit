@@ -6,8 +6,6 @@ entity "IoT Core\nBroker"
 collections "Simple\nStorage\nService"
 queue "Kinesis\nData\nStreams/\nFirehose"
 queue "Kinesis\nData\nAnalytics"
-boundary "Simple\nNotification\nService"
-control "QuickSight"
 
 group Übertragung
 "IoT Core\nBroker" -> "Kinesis\nData\nStreams/\nFirehose" : Übertragung
@@ -17,12 +15,5 @@ group Übertragung
         "Kinesis\nData\nAnalytics" -> "Kinesis\nData\nStreams/\nFirehose" : Nachfrage
     end
 end
-group Analyse
-loop
-"Kinesis\nData\nAnalytics" -> "Kinesis\nData\nAnalytics" : Vergleich mit alten Werten
-end
-"Kinesis\nData\nAnalytics" --> "Simple\nNotification\nService" : Alarmierung
-end
-"Kinesis\nData\nAnalytics" <-- "QuickSight" : Visualisierung
-"Simple\nStorage\nService" <-- "QuickSight" : Visualisierung
 @enduml
+

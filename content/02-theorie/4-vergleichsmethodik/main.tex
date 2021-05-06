@@ -60,24 +60,24 @@ Dienste, die diese Analyse alleine nicht bewerkstelligen können, müssen unter 
 Analysen, die individuell auslösbar sind, erfolgen alle 10 Minuten an Werktagen zwischen 9 und 17 Uhr, also monatlich 960mal. 
 
 Es wird angenommen, dass der Schwellwert 5 mal pro Gerät pro Monat überschritten wird (1000 Überschreitungen insgesamt).
-
-Für die Zwischenspeicherung in \ac{S3}, wenn benötigt, wird folgendes Datenschema angenommen:
-\begin{listing}[H]
-\inputminted[frame=lines,breaklines=true]{json}{code/estimates/filtered-estimate.json}
-\caption[Beispiel JSON]{Beispiel \ac{JSON}}
-\label{listing:json}
-\end{listing}
-Um Historien über 3 Monate bereitzustellen, sind entsprechend 3000 Einträge nötig, was eine Dateigröße von ~455,32 KB ergibt. Das Berechnungsskript ist im \anhangref{anhang:berechnung} abgedruckt.
-
-
+% Für die Zwischenspeicherung in \ac{S3}, wenn benötigt, wird folgendes Datenschema angenommen:
+% \begin{listing}[H]
+% \inputminted[frame=lines,breaklines=true]{json}{code/estimates/filtered-estimate.json}
+% \caption[Beispiel JSON]{Beispiel \ac{JSON}}
+% \label{listing:json}
+% \end{listing}
+Um Historien über 3 Monate bereitzustellen, sind entsprechend 3000 Einträge nötig, was eine Dateigröße von $\sim455,32$ kB ergibt.
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-Dimension & Preis/Einheit           & Summe \\ \hline
-Beispiel  & x\$/100.000 Datenpunkte & x\$  \\\hline
+Dimension & Preis(\$)/Einheit & Summe (\$) \\ \hline
+Beispiel  & x/100.000 Datenpunkte & x  \\\hline
+\begin{tabular}[c]{@{}l@{}}Beispiel 2\\(Speicher)\end{tabular}  & x/GB Speicher & x  \\\hline
+Summe & \cellcolor[HTML]{EFEFEF} & \underline{x} \\ \hline
 \end{tabular}
 \caption{Kostenvergleich Schema}
 \label{tab:kostenvergleich-schema}
 \end{table}
 Alle Abrechnungsdimensionen werden in der in \autoref{tab:kostenvergleich-schema} gezeigten Form dokumentiert.
+

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path')
 
-const vergleiche = ['batch', 'echtzeit', 'multimode', 'beispiel'].map(file => {
+const vergleiche = ['batch', 'echtzeit', 'multimode'].map(file => {
     return { name: file, content: JSON.parse(fs.readFileSync(path.join(__dirname, `${file}.json`)).toString()) }
 });
 
@@ -95,9 +95,6 @@ for (let { name, content } of vergleiche) {
     let result = `${header}
 ${rows.join('\n     ')}
 ${footer}`
-
-console.log(Object.keys(max).map(e => `\\subsubsection{${e}}`))
-
 
     fs.writeFileSync(path.join(__dirname, `../../content/04-produkte/vergleiche/${name}-vergleich.tex`), result)
 

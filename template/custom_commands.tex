@@ -102,6 +102,18 @@
 
 \newcommand{\pandasmethod}[1]{\mintinline[breaklines]{python}{pandas.#1()}}
 
+\newcommand{\miniabschnitt}[1]{\textbf{#1}\hfill\break\noindent}
+
+\newcommand{\ftanhang}[1]{
+\anhangteil{#1}\label{anhang:vergleich-#1} 
+\miniabschnitt{Features von #1}\label{anhang:vergleich-features-#1}}
+
+\newcommand{\dlanhang}[1]{\miniabschnitt{Dienstleistungsumfang von #1}\label{anhang:vergleich-umfang-#1}}
+
+\newcommand{\weitereevaluationen}[1]{
+\miniabschnitt{Weitere Evaluationen}
+Die vom Dienst angebotenen Features sowie der Dienstleistungsumfang werden in \ref{anhang:vergleich-#1} diskutiert.
+}
 
 
 

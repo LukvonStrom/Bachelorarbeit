@@ -15,20 +15,18 @@ Mittels der open-source vorliegenden Referenzarchitekturen können künftig inte
 \section{Kritische Reflexion}
 Innerhalb dieser Arbeit wurden Referenzarchitekturen für die Verarbeitung in der Cloud konstruiert. Ein Trend, der dabei ausgespart wurde, weil sich wichtige Komponenten nicht in der Cloud befinden, ist das sogenannte \enquote{Fog computing}. Nach der Definition von \citeauthor{Vaquero.2014} ist Fog computing ein Szenario, in dem heterogene, allgegenwärtige und dezentralisierte Geräte kommunizieren und kooperieren um Speicher- und Verarbeitungsaufgaben zu übernehmen.\footcite[Vgl.][30\psq]{Vaquero.2014} In der Praxis führt dies dazu, dass Verarbeitungsaufgaben in Teilen, angelehnt an das \enquote{Edge computing} von der Cloud in Richtung der Geräte ausgelagert wird.\footcite[Vgl.][]{Bonomi.2012} Dies geschieht dabei beispielsweise an Netzwerkgateways, die sowieso mit der Cloud kommunizieren und folgend nur noch bereits ausgewertete Daten übertragen. 
 
-\TodoW{Monitoringkonzept - Maßnahmen fehlen}
+Im Rahmen der konstruierten Monitoringkonzepte fehlen konkrete Maßnahmen, die im Falle einer Fehlermeldung auszuführen sind. Dies ist bedingt durch den reaktiven Incident-response Ansatz, den die SPIRIT/21 GmbH im Bezug auf Incidents mit \ac{AWS}-nativer Infrastruktur durchführt.
 
-\TodoW{Interviews sind z.T. thematisch ausgeschlagen}
+Im Rahmen der Anforderungserhebung wurden mit den diversen Stakeholdern Interviews geführt. Bei diesen schien die Verständlichkeit der vorab zugesendeten Materialien nicht vollständig gegeben zu sein. Aus diesem Grund musste den Stakeholder teilweise erklärt werden, wie die Kriterien konkret zu verstehen sind, damit eine Bewertung eingeholt werden konnte. Dies hätte womöglich durch die Bereitstellung von mehr Kontext bereits vor den Interviews verhindert werden können.
 
-\TodoW{AWS Well-Architected Qualitätskriterien}
-
-
+Obwohl die Referenzarchitekturen in den wesentlichen Punkten mit den Vorschlägen des \ac{AWS} Well-Architected Frameworks (bzw. im spezifischen der Analytics Lens) übereinstimmen, wurden die Architekturen nicht an den Kriterien final gemessen. Dies liegt auch mit der Ambiguität von Kriterien wie \enquote{Orchestrate ETL workflows} zusammen, bei denen die Erfüllung schwer gemessen werden kann.\footcite[Vgl.][6]{Ravirala.2020}
 
 
 \section{Ausblick}
-
 \ac{AWS} bietet mit dem Dienst Greengrass bereits eine Softwareplattform an, die auf diversen qualifizierten Gateways läuft.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.bu} Durch die lokale Ausführung von Code könnten Schwachstellen adressiert werden, wie beispielsweise schlechte Netzkonnektivität. So kann Code, der auf Greengrass ausgeführt wird in Form von Containern oder lokalen Lambdafunktionen Benachrichtigungen lokal ohne Konnektivität zur Cloud versenden und beispielsweise Aktoren auslösen. Dies würde die gezeigten Referenzarchitekturen ergänzen. Dass mit Greengrass Anomaliedetektion möglich ist, wurde auch von \citeauthor{Shankar.2020} gezeigt.\footcite[Vgl.][]{Shankar.2020}
-\TodoW{Evaluation von Greengrass}
 
 Anschließend zur Abgabe der Bachelorarbeit wird das GitHub Repository mit dem Quelltext der Bachelorarbeit veröffentlicht. Zusätzlich werden die Referenzarchitekturen an mehreren internen Stellen wie dem internen Wissensmanagement Confluence abgelegt, um einfache Zugänglichkeit zu gewährleisten.
 
-\TodoW{CDK Implementierung}
+Nach Fertigstellung der Arbeit ist vorgesehen, die Referenzarchitekturen mittels dem \ac{AWS} \ac{CDK}, der \ac{AWS}-nativen \ac{IaC} Lösung umzusetzen. Dies erlaubt automatisches ausrollen aller beteiligten Infrastrukturkomponenten. So ist die Wiederverwendbarkeit über die reinen Architekturmuster hinaus möglich, da allein der Code der beteiligten Ressourcen angepasst werden muss.
+
+Wie auch in \anhangref{anhang:interview-viet-04.05.2021} bestätigt, werden die Referenzarchitekturen in künftigen Kundenusecases verwendet. Damit kann sich der Nutzen für die Native Cloud Solution der SPIRIT/21 GmbH auch in der Praxis zeigen.
