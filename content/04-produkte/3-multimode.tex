@@ -1,10 +1,7 @@
-Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die sowohl Echtzeitverarbeitung, als auch Batch/\ac{OLAP}-Verarbeitung unterstützen.
+Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die sowohl Echtzeitverarbeitung, als auch Batch/\ac{OLAP}-Verarbeitung unterstützen. Im \ac{AWS} Portfolio ist dieser Dienst \AWSIOT{} Analytics, welcher im Folgenden beleuchtet wird.
 
 \subsection{AWS IoT Analytics} \label{productselection:iotanalytics}
-
-
-
-\AWSIOT{} Analytics ist ein Dienst der \AWSIOT{} Familie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT{} Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung von Daten an, bzw. bietet Schnittstellen, um diese Aufgaben zu erledigen. Im speziellen deckt \AWSIOT{} Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT{} Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT{} Core für Analysen genutzt werden kann.
+\AWSIOT{} Analytics ist ein Dienst der \AWSIOT{} Familie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT{} Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung von Daten an, bzw. bietet Schnittstellen, um diese Aufgaben zu erledigen. Im Speziellen deckt \AWSIOT{} Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT{} Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT{} Core für Analysen genutzt werden kann.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{graphics/IoT-Analytics-general.pdf}
@@ -44,7 +41,7 @@ Im Bereich Multimode gibt es nur einen zu vergleichenden Dienst, weshalb Abzüge
 Klar ist, dass zwar bei \AWSIOT{} Analytics die Jupyter Notebooks plattformunabhängig sind, aber die \ac{SQL}-Statements nicht übertragbar sind und zwingend ein \AWSIOT{} Core Broker benötigt wird. Aufgrund dieses \textit{vendor-lockins} kann ein großer Teil des Setups nicht übertragen werden.
 
 \miniabschnitt{Integration mit AWS}
-\AWSIOT{} Analytics integriert sich gut mit anderen Dienstleistungen von AWS, z.B. mit \AWSIOT{} Core und den anderen \AWSIOT{} Diensten, SageMaker, QuickSight , Lambda, \ac{SNS} und weiteren.
+\AWSIOT{} Analytics integriert sich gut mit anderen Dienstleistungen von AWS, z.B. mit \AWSIOT{} Core und den anderen \AWSIOT{} Diensten, SageMaker, QuickSight, Lambda, \ac{SNS} und weiteren.
 
 \miniabschnitt{Generalisierung}
 \AWSIOT{} Analytics ist speziell für \ac{IoT} Daten gebaut, weshalb Funktionalitäten eingebaut sind, die speziell in Kombination mit den anderen \AWSIOT{} Diensten Sinn machen. Die Verwendung dieser Funktionalitäten ist aber nicht zwingend notwendig. Es können auch andere Daten, z.B. IT-Monitoring eingespeist werden, wenn sie über \ac{MQTT} und den \AWSIOT{} Core Broker geladen werden.
@@ -55,7 +52,7 @@ Die Erweiterbarkeit ist gegeben durch die Möglichkeiten, die \ac{SQL} in Verbin
 \miniabschnitt{Fehlertransparenz}
 Durch Integration mit Cloudwatch, der Monitoring Lösung von \ac{AWS} sind ansteigende Fehlerraten leicht zu entdecken. Einzig, dass eingehende Daten einige Zeit benötigen, bis sie von der \AWSIOT{} Analytics Konsole angezeigt werden, kann die Fehlersuche erschweren.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.aw}
 
-\miniabschnitt{geringer Wartungsaufwand}
+\miniabschnitt{Geringer Wartungsaufwand}
 Einhergehend mit der folgenden Abwertung im Bezug auf die Skalierbarkeit und der Möglichkeit für Nutzerfehler, die das ganze System stoppen können, wurde der Wartungsaufwand abgewertet.
 
 \miniabschnitt{Skalierbarkeit \& serverlessness}

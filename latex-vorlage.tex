@@ -24,8 +24,7 @@
 
 %%% Umstellung der Seiten-Nummerierung auf i, ii, iii ... %%%
 \pagenumbering{Roman} 
-
-%%% Abstract einbinden (optionale Kurzfassung Ihrer Arbeit) %%%
+\pdfbookmark[0]{Abstract}{chap:abstract}
 \input{includes/abstract.tex}
 \cleardoublepage
 
@@ -33,8 +32,10 @@
 %%% Inhalts-, Abbildungs-, Tabellenverzeichnisse %%%
 % sollen einzeilig gesetzt werden, um Platz zu sparen 
 \begin{spacing}{1}
+\pdfbookmark[0]{Inhaltsverzeichnis}{chap:inhaltsverzeichnis}
 \tableofcontents
 \clearpage
+
 \input{includes/abkuerzungen.tex}
 
 \clearpage

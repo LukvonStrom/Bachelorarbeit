@@ -1,6 +1,6 @@
 \section{Vergleichsmethodik für die Dienstauswahl}\label{chap:vergleichsmethodik}
 
-\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben erwünschte Eigenschaften eines Big Data Systems festgelegt.\footcite[Vgl. auch im Folgenden][7\psqq]{Marz.2015} Da sich die Referenzarchitekturen ebenfalls mit großen Datenmengen arbeiten, wenn auch in anderer Weise können die Folgenden Kriterien übertragen werden:
+\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben erwünschte Eigenschaften eines Big Data Systems festgelegt.\footcite[Vgl. auch im Folgenden][7\psqq]{Marz.2015} Da die Referenzarchitekturen ebenfalls mit großen Datenmengen arbeiten, wenn auch in anderer Weise, können die Folgenden Kriterien übertragen werden:
 \begin{enumerate}
 \item Robustheit und Fehlertoleranz \englishquote{Robustness and fault tolerance} - 
 Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also, dass beispielsweise Analysecode \enquote{immutable} ist).
@@ -27,10 +27,10 @@ Eine Big data Anwendung soll wartbar bleiben, indem die Komplexität in den Kern
 Innerhalb eines Big Data Systems soll es möglich sein, nachzuverfolgen, wie Werte entstanden sind, um mögliche Fehler verfolgen zu können.
 \end{enumerate}
 
-Um die Vergleiche durchführen zu können, ist eine Priorisierung aller Kriterien notwendig. Zu diesem Zweck wird eine Umfrage mit mehreren Stakeholdern (mindestens $n=4$) durchgeführt. Diese Umfrage soll mindestens alle Stakeholder, die bereits interviewt wurden umfassen, kann aber auch zusätzliches technisches Personal des \ac{NCS} Teams inkludieren. Ausgehend von den priorisierten Kriterien kann eine gewichtete Bewertung der verglichenen Dienste erfolgen.
+Um die Vergleiche durchführen zu können, ist eine Priorisierung aller Kriterien notwendig. Zu diesem Zweck wird eine Umfrage mit mehreren Stakeholdern (mindestens $n=4$) durchgeführt. Diese Umfrage soll mindestens alle Stakeholder, die bereits interviewt wurden, umfassen, kann aber auch zusätzliches technisches Personal des \ac{NCS} Teams inkludieren. Ausgehend von den priorisierten Kriterien kann eine gewichtete Bewertung der verglichenen Dienste erfolgen.
 
 
-\subsection{Features des Dienstes}
+\subsection{Features des Dienstes}\label{subsection:Features}
 Es soll auf die Mindestverfügbarkeit folgender, in \autoref{chap:auswertungsarten} beschriebenen Analysen überprüft werden:
 
 \begin{enumerate}
@@ -42,10 +42,10 @@ Es soll auf die Mindestverfügbarkeit folgender, in \autoref{chap:auswertungsart
 
 Dabei ist zu dokumentieren, ob und in welcher Form der Dienst die Analysen unterstützt. Wenn Hilfsdienste wie Lambda benötigt werden, ist dies ebenfalls zu dokumentieren.
 
-\subsection{Dienstleistungsumfang}
+\subsection{Dienstleistungsumfang}\label{subsection:Dienstleistungsumfang}
 Es sind die Angaben des Herstellers zu bewerten und eventuelle Nutzungsfälle aufzulisten, bei denen der Dienst erfolgreich bei erhöhten Anforderungen (großes Datenvolumen, großer Durchsatz, etc.) eingesetzt wurde. Wenn vertragliche Garantien der Betreiber existieren, sollen diese ebenfalls dokumentiert werden. Dies kann sowohl Performancegarantien als auch Verfügbarkeiten oder andere Garantien, die im Rahmen des Bezugs der Dienstleistung erteilt wurden, umfassen.
 
-\subsection{Gesamtkosten}
+\subsection{Gesamtkosten}\label{subsection:Gesamtkosten}
 Um einen sinnvollen Kostenvergleich aufzustellen, sind die folgenden Annahmen zu treffen.
 
 

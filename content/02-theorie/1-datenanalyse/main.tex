@@ -11,9 +11,9 @@ In \autoref{abb:BeispielZeitreihe} findet sich beispielhaft die Zeitreihe der zw
 \label{abb:BeispielZeitreihe}
 \end{figure}
 
-Die möglichen Anwendungen in der Informatik sind ebenfalls vielzählig. So können über virtuelle oder physikalische Sensoren Messwerte, wie beispielsweise die CPU Auslastung eines gegebenen Servers über die Zeit oder Temperaturmessungen eines \ac{IoT} Gerätes über die Zeit gemacht und gespeichert werden. So nehmen mit zunehmender Digitalisierung von Fertigungslinien in Fabriken auch die Messwerte von Sensoren zu, die dort übermittelt und ausgewertet werden müssen.
+Die möglichen Anwendungen in der Informatik sind ebenfalls vielzählig. So können über virtuelle oder physikalische Sensoren Messwerte, wie beispielsweise die CPU Auslastung eines gegebenen Servers oder Temperaturmessungen eines \ac{IoT} Gerätes gemacht und gespeichert werden. So nehmen mit zunehmender Digitalisierung von Fertigungslinien in Fabriken auch die Messwerte von Sensoren zu, die dort übermittelt und ausgewertet werden müssen.
 
-Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne des Abstands zwischen einzelnen Messungen.\footcite[Vgl. auch im Folgenden][201\psq]{Mosler.2006} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und übermittelt. Die zetlichen Abstände sind gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich, einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
+Ein wichtiges Merkmal von Zeitreihen ist die Distanz zwischen den Messwerten, im Sinne des Abstands zwischen einzelnen Messungen.\footcite[Vgl. auch im Folgenden][201\psq]{Mosler.2006} Ist eine Zeitreihe äquidistant, wurde mit gleichbleibender Frequenz gemessen und übermittelt. Die zeitlichen Abstände sind gleich. Für die in dieser Arbeit diskutierten Auswertungsarten wird eine Äquidistanz der gemessenen Daten angenommen, da andernfalls ein Bias/eine Verfälschung bei der Analyse nicht ausgeschlossen werden kann. Gleichfalls ist es technisch möglich, einzelne, nicht äquidistante Messwerte auszusortieren oder fehlende Messwerte zu interpolieren. Die in \autoref{abb:BeispielZeitreihe} abgebildete Zeitreihe ist äquidistant, da die Werte alle 124 Sekunden erhoben wurden.
 
 Es ist von zwei vorliegenden Typen von Zeitreihendaten auszugehen. Zum einen existiert der mit Zeitstempel versehene Messwert, welcher einen oder in manchen Fällen auch mehrere diskrete Messwerte mit Zeitstempel der Erfassung übermittelt. 
 Zum anderen existieren auch Ereignisse, welche keine Messwerte enthalten, sondern Ergebnisse einer Vorauswertung innerhalb des übermittelnden Systems sind. 
@@ -22,7 +22,7 @@ Abhängig von der Vorauswertung werden Ereignisse einmal, nach Auftreten mit Zei
 
 \subsection{Analysewert verarbeiteter Daten}\label{chap:datenwert}
 
-Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert wird. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempi einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die Entscheidungstempi sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen Entscheidungstempi respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
+Bei der Verarbeitung von Daten ist zu beachten, dass der Wert, bzw. die Erkentnisse die aus den Daten abgleitet werden können, über die Zeit reduziert werden. \footcite[Vgl. auch im Folgenden][]{NucleusResarchInc..2012} Gemäß \citeauthor{NucleusResarchInc..2012} haben dabei verschiedene Unternehmen verschiedene Zeiträume, in denen Daten nützlich sind, da sie sich in eine von drei Entscheidungstempi einkategorisieren lassen.\footcite[Vgl. auch im Folgenden][3]{NucleusResarchInc..2012} Die Entscheidungstempi sind taktisch, operativ und strategisch. Beim taktischen Entscheidungstempo werden Änderungen sehr schnell, nahe Echtzeit getroffen und implementiert. Im Gegensatz dazu werden Entscheidungen der operativen und strategischen Entscheidungstempi respektive erst in Tagen bzw. Wochen oder innerhalb einem Quartal oder länger implementiert. Je nach Entscheidungstempo sind Analysen von eingehenden Daten also wesentlich früher notwendig oder können beispielsweise auch nur einmal täglich erstellt werden.
 
 Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \autoref{abb:DataHalflife} gezeigten Befragungsergebnisse von \citeauthor{NucleusResarchInc..2012}, Daten nach maximal 30 Minuten die Hälfte des Wertes eingebüßt.\footcite[Vgl. auch im Folgenden][6]{NucleusResarchInc..2012} Für operative Entscheidungstempi ist die durchschnittliche Halbwertszeit nach acht Stunden erreicht, für strategische Entscheidungstempi nach ca. 56 Stunden, also nach über 2 Tagen.
 
@@ -38,7 +38,7 @@ Für Unternehmen mit taktischem Entscheidendungstempo haben, gemäß der in \aut
 Aus diesen abweichenden Halbwertszeiten und damit aus den abweichenden Zeiträumen, in denen die erhobenen Daten den höchsten Wert haben, ergibt sich die Notwendigkeit von verschiedenen Datenverarbeitungsstrategien, um entsprechend taktischen, operativen oder strategischen  Entscheidenden die werthaltigsten Daten als Entscheidungsgrundlage zu präsentieren.
 
 \subsection{Arten der Auswertung}\label{chap:auswertungsarten}
-Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die jeweilige Referenzarchitektur und die verwendeten Dienste fähig sind. Im Folgenden werden dazu einige einfachere Auswertungsmethoden für Zeitreihendaten vorgestellt. Die Zeitreihenanalyse und einsetzbare Werkzeuge werden im statistischen Sinn von weiterführenden Werken, wie von \citeauthor{Shumway.2017} behandelt. Es ist davon auszugehen, dass auch weiterführende Auswertungen wie fourieranalytischen Methoden, sofern in der jeweiligen Umgebung bereits vorhanden oder programmierbar, eingesetzt werden können.
+Diese Arbeit soll anhand einiger weniger Auswertungen demonstrieren, wozu die jeweilige Referenzarchitektur und die verwendeten Dienste fähig sind. Im Folgenden werden dazu einige einfachere Auswertungsmethoden für Zeitreihendaten vorgestellt. Die Zeitreihenanalyse und einsetzbare Werkzeuge werden im statistischen Sinn von weiterführenden Werken, wie von \citeauthor{Shumway.2017} behandelt. Es ist davon auszugehen, dass auch weiterführende Auswertungen wie fourieranalytische Methoden, sofern in der jeweiligen Umgebung bereits vorhanden oder programmierbar, eingesetzt werden können.
 
 \miniabschnitt{Median und Quantile}
 Eine der wichtigsten statistischen Lageparameter sind die Quantile eines Datensatzes und der Median, welcher ein spezielles, 50 prozentiges Quantil ist. 
@@ -94,7 +94,7 @@ Verwendet werden können dabei diverse Methodiken. Innerhalb von \ac{AWS} Dienst
 Abgebildet in \autoref{abb:anomalie} sind zwei Anomalien, die direkt in mehreren Punkten vom Normalfall abweichen.
 
 \miniabschnitt{Schwellwertüberschreitung}\label{chap:schwellwert}
-Bei vielen gemessenen und sonstig erfassten Zeitreihendaten, bei denen akzeptierbare Werte und Wertbereiche, die Aktionen erfordern bekannt sind, sind Schwellwerte bereits ausreichend oder komplementär verwendbar. Dabei wird, wie in \autoref{abb:Schwellwerte} gezeigt, ein Schwellwert definiert (in diesem Fall $1.75$). Zusätzlich dargestellt ist eine Karenzzeit von 12 Sekunden. Erst nach kontinuierlicher Überschreitung des Schwellwerts von 12 Sekunden wird ein Alarm ausgelöst. 
+Wenn kritische Wertbereiche von Zeitreihendaten bereits bekannt sind, sind Schwellwerte bereits ausreichend oder komplementär verwendbar. Dabei wird, wie in \autoref{abb:Schwellwerte} gezeigt, ein Schwellwert definiert (in diesem Fall $1.75$). Zusätzlich dargestellt ist eine Karenzzeit von 12 Sekunden. Erst nach kontinuierlicher Überschreitung des Schwellwerts von 12 Sekunden wird ein Alarm ausgelöst. 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -167,7 +167,7 @@ Im Bereich der Streamingarchitekturen gibt es bereits etablierte Referenzarchite
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Lambda-Reference-Architecture.pdf}
-\caption[Die $\lambda$-Datenstreaming Referenzarchitetktur]{Die $\lambda$-Datenstreaming Referenzarchitetktur.\footnotemark}
+\caption[Die $\lambda$-Datenstreaming Referenzarchitetktur]{Die $\lambda$-Datenstreaming Referenzarchitetktur\footnotemark}
 \label{abb:LambdaStreaming}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite[][28]{Marz.2015}}
@@ -180,7 +180,7 @@ Verschiedene Datenverarbeitungsintervalle machen speziell im Sinne der verschied
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/Kappa-Reference-Architecture.pdf}
-\caption[Die $\kappa$-Datenstreaming Referenzarchitetktur]{Die $\kappa$-Datenstreaming Referenzarchitektur.\footnotemark}
+\caption[Die $\kappa$-Datenstreaming Referenzarchitetktur]{Die $\kappa$-Datenstreaming Referenzarchitektur\footnotemark}
 \label{abb:KappaStreaming}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Kreps.2014}, \cite{Berle.27.11.2017}}
@@ -194,15 +194,15 @@ Wird die Analyse in irgendeiner Weise verändert (z.B. durch Codeanpassungen), w
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/OLAP-Reference-Architecture.pdf}
-\caption[OLAP Referenzarchitetktur]{OLAP Referenzarchitetktur.\footnotemark}
+\caption[OLAP Referenzarchitetktur]{OLAP Referenzarchitetktur\footnotemark}
 \label{abb:OLAPStreaming}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Kreps.2014}}
 
-Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen. Diese ist im Stile des von \citeauthor{Codd.1993} geprägten \ac{OLAP} gehalten. Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditioneller Datenanalyse weit verbreitet, bietet jedoch womöglich wichtige Einsichten erst, nachdem die Datenhalbwertszeit bereits überschritten wurde.
+Aus der $\lambda$ Referenzarchitektur lässt sich auch eine, zur $\kappa$ Architektur gegenteilige Architektur aufzeigen. Diese ist im Stile des von \citeauthor{Codd.1993} geprägten \ac{OLAP} gehalten. Diese Architektur basiert, wie in \autoref{abb:OLAPStreaming} gezeigt, auf einer periodischen Verarbeitung der Daten im Master dataset. Dieses Vorgehen ist bei traditioneller Datenanalyse weit verbreitet, bietet möglicherweise wichtige Einsichten erst, nachdem die Datenhalbwertszeit bereits überschritten wurde.
 
 
-\subsection{Echtzeitverarbeitung}
+\subsection{Echtzeitverarbeitung}\label{subsection:echtzeitverarbeitung}
 Gemäß der in \autoref{abb:KappaStreaming} gezeigten $\kappa$-Architektur gibt es Nutzungsfälle, in welchen eine reine Echtzeitauswertung basierend auf einer Datenquelle, wie beispielsweise einem Messagebroker, Sinn machen kann. \citeauthor{Belur.2020} sieht dabei vier verschiedene Verwendungszwecke, in welchen die niedrige Verarbeitungslatenz besonders wichtig ist und den maximalen Wert aus den Daten zieht.\footcite[Vgl. auch im Folgenden][]{Belur.2020} Durch Echtzeitreporting und die Erstellung von Dashboards können aktuelle Daten schnell übersichtlich aufbereitet werden. Mittels erstellter Regeln, die Schwellwertüberschreitungen und Anomalien detektieren, können Nutzende benachrichtigt werden, sobald es zu einer Abweichung kommt. Ebenfalls sinnvoll ist der Einsatz von Machine Learning zum Auffinden von Mustern in Daten, was verbesserte Anomalierkennung, Vorhersagen und ähnliche Features ermöglicht. Ein weiterer valider Usecase der $\kappa$-Architektur ist die Transformation von Daten in gewisse Zielformate, um beispielsweise Drittsysteme anzusprechen.
 
 

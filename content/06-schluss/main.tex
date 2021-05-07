@@ -6,16 +6,15 @@ Für die spätere Konstruktion wurden bekannte Architekturmuster mittels Literat
 
 Nach durchgeführtem Dienstvergleich konnten mit den Resultaten zwei Referenzarchitekturen für Echtzeit- und Batchverarbeitung von Zeitreihendaten konstruiert und in verschiedenen Dekompositionssichten dargestellt werden.
 
-Dank weiteren Gesprächen mit diversen Stakeholdern konnte festgestellt werden, das die Referenzarchitekturen nutzenstiftend sind und künftig eingesetzt werden sollen.
+Dank weiteren Gesprächen mit diversen Stakeholdern konnte festgestellt werden, dass die Referenzarchitekturen nutzenstiftend sind und künftig eingesetzt werden sollen.
 
 Mittels der open-source vorliegenden Referenzarchitekturen können künftig interne Usecases und Kundenusecases im Bereich Zeitreihenverarbeitung in \ac{AWS} leichter umgesetzt werden, da es eine klar definierte Referenzarchitektur mit definierten Variationspunkten gibt.
-
 
 
 \section{Kritische Reflexion}
 Innerhalb dieser Arbeit wurden Referenzarchitekturen für die Verarbeitung in der Cloud konstruiert. Ein Trend, der dabei ausgespart wurde, weil sich wichtige Komponenten nicht in der Cloud befinden, ist das sogenannte \enquote{Fog computing}. Nach der Definition von \citeauthor{Vaquero.2014} ist Fog computing ein Szenario, in dem heterogene, allgegenwärtige und dezentralisierte Geräte kommunizieren und kooperieren um Speicher- und Verarbeitungsaufgaben zu übernehmen.\footcite[Vgl.][30\psq]{Vaquero.2014} In der Praxis führt dies dazu, dass Verarbeitungsaufgaben in Teilen, angelehnt an das \enquote{Edge computing} von der Cloud in Richtung der Geräte ausgelagert wird.\footcite[Vgl.][]{Bonomi.2012} Dies geschieht dabei beispielsweise an Netzwerkgateways, die sowieso mit der Cloud kommunizieren und folgend nur noch bereits ausgewertete Daten übertragen. 
 
-Im Rahmen der konstruierten Monitoringkonzepte fehlen konkrete Maßnahmen, die im Falle einer Fehlermeldung auszuführen sind. Dies ist bedingt durch den reaktiven Incident-response Ansatz, den die SPIRIT/21 GmbH im Bezug auf Incidents mit \ac{AWS}-nativer Infrastruktur durchführt.
+Im Rahmen der konstruierten Monitoringkonzepte fehlen konkrete Maßnahmen, die im Falle einer Fehlermeldung auszuführen sind. Dies ist bedingt durch den reaktiven Incident-response Ansatz, den die SPIRIT/21 im Bezug auf Incidents mit \ac{AWS}-nativer Infrastruktur durchführt.
 
 Im Rahmen der Anforderungserhebung wurden mit den diversen Stakeholdern Interviews geführt. Bei diesen schien die Verständlichkeit der vorab zugesendeten Materialien nicht vollständig gegeben zu sein. Aus diesem Grund musste den Stakeholder teilweise erklärt werden, wie die Kriterien konkret zu verstehen sind, damit eine Bewertung eingeholt werden konnte. Dies hätte womöglich durch die Bereitstellung von mehr Kontext bereits vor den Interviews verhindert werden können.
 
@@ -29,4 +28,4 @@ Anschließend zur Abgabe der Bachelorarbeit wird das GitHub Repository mit dem Q
 
 Nach Fertigstellung der Arbeit ist vorgesehen, die Referenzarchitekturen mittels dem \ac{AWS} \ac{CDK}, der \ac{AWS}-nativen \ac{IaC} Lösung umzusetzen. Dies erlaubt automatisches ausrollen aller beteiligten Infrastrukturkomponenten. So ist die Wiederverwendbarkeit über die reinen Architekturmuster hinaus möglich, da allein der Code der beteiligten Ressourcen angepasst werden muss.
 
-Wie auch in \anhangref{anhang:interview-viet-04.05.2021} bestätigt, werden die Referenzarchitekturen in künftigen Kundenusecases verwendet. Damit kann sich der Nutzen für die Native Cloud Solution der SPIRIT/21 GmbH auch in der Praxis zeigen.
+Wie auch in \anhangref{anhang:interview-viet-04.05.2021} bestätigt, werden die Referenzarchitekturen in künftigen Kundenusecases verwendet. Damit kann sich der Nutzen für die Native Cloud Solution der SPIRIT/21 auch in der Praxis zeigen.

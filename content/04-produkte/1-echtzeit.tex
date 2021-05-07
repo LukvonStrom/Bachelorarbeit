@@ -6,14 +6,10 @@ In \autoref{abb:ProdukteRT} werden verwendbare Dienste von \ac{AWS}, gemeinsam m
 \label{abb:ProdukteRT}
 \end{figure}
 
-Als Eingangspunkt dient der \ac{MQTT}-Broker \AWSIOT{} Core, der im Bild zu sehen ist. Innerhalb diesem ist es möglich Regeln zu definieren, die einzelne Nachrichten aus Topics in andere Dienste weiterzuleiten. Dazu müssen besagte Nachrichten selektiert werden, was mittels eines SQL Dialekts möglich ist. Eine beispielhafte Selektion könnte folgendermaßen aussehen: \mintinline[breaklines]{sql}{SELECT * FROM 'iot-demo-sensor' WHERE device <> 'test'}
-Alle Attribute jeder Nachricht, die Nicht vom Gerät test stammen, aus dem Topic iot-demo-sensor werden dabei selektiert und können dann z.B. weitergeleitet werden. Diese Regeln dienen dann beispielsweise der Weiterleitung an Kinesis Data Streams, \ac{MSK} oder \AWSIOT{} Events.
+Als Eingangspunkt dient der \ac{MQTT}-Broker \AWSIOT{} Core, der im Bild zu sehen ist. Innerhalb diesem ist es möglich, Regeln zu definieren, die einzelne Nachrichten aus Topics in andere Dienste weiterzuleiten. Dazu müssen besagte Nachrichten selektiert werden, was mittels eines SQL Dialekts möglich ist. Eine beispielhafte Selektion könnte folgendermaßen aussehen: \mintinline[breaklines]{sql}{SELECT * FROM 'iot-demo-sensor' WHERE device <> 'test'}.
+Alle Nachrichten (mitsamt sämtlicher Attribute), die nicht vom Gerät \textit{test} stammen, werden aus dem Topic \textit{iot-demo-sensor} selektiert und können dann z.B. weitergeleitet werden. Diese Regeln dienen dann beispielsweise der Weiterleitung an Kinesis Data Streams, \ac{MSK} oder \AWSIOT{} Events.
 
 \subsection{AWS IoT Events}
-
-
-
-
 Im Rahmen der \AWSIOT{} Familie von Diensten gibt es neben dem in \autoref{productselection:iotanalytics} angesprochenen \AWSIOT{} Analytics ebenfalls \AWSIOT{} Events.  
 Der Dienst dient nach Angaben von Amazon der Konfiguration von \enquote{If-Then-Else} Regeln, mit denen Ereignisse (also Events) erkannt und verarbeitet werden sollen, indem Aktionen ausgelöst werden.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.b} Die Abläufe können dabei, wie in \autoref{abb:BeispielIoTEvents} gezeigt, graphisch konfiguriert werden. Unterstützte Aktionen von \AWSIOT{} Events sind beispielsweise der Aufruf von Lambda oder Benachrichtigung via \ac{SNS}.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.ao}
 \begin{figure}[H]
@@ -34,7 +30,7 @@ Eine Ausführungskondition (auch Trigger genannt) wäre beispielsweise \mintinli
 Sollte ein Alarmzustand erreicht werden, können andere Dienste wie Lambda oder \ac{SNS} zur Verarbeitung oder Benachrichtigung integriert werden.
 
 \miniabschnitt{Gesamtkosten}
-Im Folgenden werden für den Beispielusecase entsprechend der offiziellen Preisaufstellung von \ac{AWS} die monatlichen Nutzungskosten berechnet. \footcite[Vgl.][]{AmazonWebServicesInc..o.J.k}
+Im Folgenden werden für den Beispielusecase die monatlichen Nutzungskosten berechnet. Die aufgeführten Preise entsprechen der offiziellen Preisaufstellung von \ac{AWS}.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.k}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -52,7 +48,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{175,6445} \\ \hline
 \weitereevaluationen{AWS~IoT~Events}
 
 \subsection{Amazon Kinesis}
-Wenn über Kinesis gesprochen wird, ist zwischen mehreren Diensten zu differenzieren. Für diese Arbeit relevant sind Kinesis Data Streams, Kinesis Data Analytics und am Rande Kinesis Data Firehose, es gibt beispielsweise aber auch Kinesis Video Streams.
+In der Kinesis Dienstfamilie gibt es verschiedene Dienste, zwischen denen zu unterscheiden ist. Für diese Arbeit relevant sind Kinesis Data Firehose, Kinesis Data Analytics und Kinesis Data Streams. Der weitere Kinesis Dienst wäre Kinesis Video Streams, welcher Medienstreams überträgt und deshalb für Zeitreihendaten nicht nutzbar ist.
 
 Mit Kinesis Data Streams ist der Dienst gemeint, der die Schnitstellen und Logik für das Streamen von Daten bereitstellt und Konsumenten wie Kinesis Data Analytics, \ac{EC2} oder Lambda unterstützt. 
 
@@ -78,7 +74,7 @@ In diesem Fall wurde angenommen, dass Kinesis Data Firehose die Datenübertragun
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{graphics/kinesis-inner-workings.pdf}
-\caption[Funktionsweise von Kinesis Data Streams]{Funktionsweise von Kinesis Data Streams.\footnotemark}
+\caption[Funktionsweise von Kinesis Data Streams]{Funktionsweise von Kinesis Data Streams\footnotemark}
 \label{abb:KinesisShards}
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite{Pogosova.28.05.2020}}
@@ -104,7 +100,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{34,24} \\ \hline
 \caption{Kostenvergleich Amazon~Kinesis~Data~Firehose~(mit~Ziel~S3)}
 \label{tab:kostenvergleich-Amazon~Kinesis}
 \end{table}
- Zusätzlich wird angenommen, das \ac{SQL}-Statements ausgeführt werden, welche als \enquote{Processing units} abgerechnet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.m} Da Kinesis Data Analytics nicht selbstständig mit \ac{SNS} kommunizieren kann, wird Lambda als Weiterleitungsplattform für Alarme mit angesetzt.\footcite[Vgl.][]{AmazonWebServicesInc..2017b} 
+ Zusätzlich wird angenommen, dass \ac{SQL}-Statements ausgeführt werden, welche als \enquote{Processing units} abgerechnet werden.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.m} Da Kinesis Data Analytics nicht selbstständig mit \ac{SNS} kommunizieren kann, wird Lambda als Weiterleitungsplattform für Alarme mit angesetzt.\footcite[Vgl.][]{AmazonWebServicesInc..2017b} 
 
 Preise für Kinesis Data Streams wären die Folgenden, unter der Annahme, dass \ac{S3} wegfällt, da Kinesis Data Streams die Daten selber zwischenspeichern kann:\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.l}
 \begin{table}[H]
@@ -127,7 +123,7 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{45,51} \\ \hline
 
 \subsection{AWS Lambda}\label{chap:vergleich-lambda}
 Bei \ac{AWS} Lambda handelt es sich um die Amazon Implementierung eines \ac{FaaS} Dienstes. Innerhalb dieser Arbeit wird Lambda als einzige generelle Computing Plattform betrachtet, da Alternativen wie \ac{EC2}, welches virtuelle Maschinen anbietet oder \ac{ECS}, welches Container anbietet, einen von einzelnen Events unabhängigen Lebenszyklus haben. 
-So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert, kontinuierlich und holen/ \enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen, sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. 
+So laufen Container auf \ac{ECS} oder virtuelle Maschinen auf \ac{EC2}, wenn nicht anders konfiguriert, kontinuierlich und holen/\enquote{fetchen} Daten. In Zeiträumen, in denen keine Daten bereitstehen, sind die entsprechenden Container und virtuellen Maschinen im Leerlauf, was unnötige Kosten erzeugt. 
 
 Lambda hingegen wird von unterstützenden Diensten zur Verarbeitung von Events aufgerufen. 
 Dabei ist je nach Dienst einstellbar, ob ein Aufruf pro Event stattfinden soll, oder Events zu einer konfigurierbaren Anzahl gruppiert werden und dann an Lambda übergeben werden. Lambda eignet sich besonders für analytische Workloads, seit der kürzlichen Addition von Intels \ac{AVX2}.\footcite[Vgl. auch im Folgenden][]{Beswick.24.11.2020} \ac{AVX2} ist ein spezieller CPU-Instruktionssatz, der die Verarbeitung von Vektorinstruktionen beschleunigt. Diese kommen besonders häufig in der Statistik oder bei dem Machine Learning vor. 
@@ -228,7 +224,7 @@ Wie von \citeauthor{Beswick.2020} dargestellt und in \autoref{abb:NetworkingMSK}
 \end{figure}
 Für weniger kritische Systeme ist es, wie hier gezeigt möglich, nur ein \ac{NAT}-Gateway zu verwenden, welches Konnektivität zum Internet ermöglicht (ohne eingehenden Traffic zu erlauben). Für kritische Lasten sollte ksqldb und das \ac{NAT}-Gateway in das zweite Subnetz repliziert werden.
 
-Um ksqlDB zu betreiben, wird im folgenden angenommen, dass ein \acf{ECS} Container mit 1vCPU, 4GB \ac{RAM} und 10GB \ac{EFS} Speicherplatz provisioniert werden muss. Zusätzlich werden zwei \ac{MSK}-Brokerinstanzen, welche auf unterliegenden \ac{EC2}-Servern basieren, provisioniert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.o} Zusätzlich wurde ein \ac{NAT}-Gateway (für Updates und ausgehenden Traffic) mit 2GB Datendurchsatz angesetzt. Der Kostenvergleich ist in \autoref{tab:kostenvergleich-Amazon~MSK} gezeigt.
+Um ksqlDB zu betreiben, wird im Folgenden angenommen, dass ein \acf{ECS} Container mit 1vCPU, 4GB \ac{RAM} und 10GB \ac{EFS} Speicherplatz provisioniert werden muss. Zusätzlich werden zwei \ac{MSK}-Brokerinstanzen, welche auf unterliegenden \ac{EC2}-Servern basieren, provisioniert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.o} Zusätzlich wurde ein \ac{NAT}-Gateway (für Updates und ausgehenden Traffic) mit 2GB Datendurchsatz angesetzt. Der Kostenvergleich ist in \autoref{tab:kostenvergleich-Amazon~MSK} gezeigt.
 
 \begin{table}[H]
 \centering
@@ -256,7 +252,6 @@ In einem Vergleich zwischen \ac{AWS} und dem Mitbewerber Confluent, stellte \cit
 \subsection{Auswahl}
 Folgend werden die einzelnen Dienste anhand der in \autoref{tab:umfragen-auswertungen} priorisierten Kriterien bewertet.
 \input{content/04-produkte/vergleiche/echtzeit-vergleich}
-
 \miniabschnitt{Übertragbarkeit zwischen Clouds}
 Da Kafka übertragbar ist, genauso wie der Programmcode von Lambda, wurden bei beiden Diensten kein Punktabzug für die Übertragbarkeit vorgenommen.
 
@@ -272,8 +267,8 @@ Eine Erweiterbarkeit ist mit \AWSIOT{} Events nicht gegeben und auch eine Erfül
 \miniabschnitt{Fehlertransparenz}
 Abzüge zur Fehlertransparenz gab es bei allen Dienstleistungen, speziell auch in Lambda, da Fehlertriage nur durch Replikation der Inputs und Debugging des Codes machbar ist.
 
-\miniabschnitt{geringer Wartungsaufwand}
-Da statt Kinesis Data Streams Kinesis Data Firehose für den Vergleich angenommen wurde, welches nicht manuell skaliert werden muss, wurden keine Abzüge beim Wartungsaufwand und der Skalierbarkeit gemacht. Da der Wartungsaufwand bei Lambda stark von der Stabilität des laufenden Programmcodes abhängig ist und genau überprüft werden muss, ob Fehler bei der Verarbeitung auftreten, wurden Abzüge gemacht. \ac{MSK} mit ksqlDB zu skalieren ist eine aufwändige Aufgabe, welche häufiges nachjustieren und viel Zeit erfordert. Im Gegensatz dazu ist \AWSIOT{} Events nur zu warten, wenn das Nachrichtenformat vom initial konfigurierten abweicht.
+\miniabschnitt{Geringer Wartungsaufwand}
+Da statt Kinesis Data Streams Kinesis Data Firehose für den Vergleich angenommen wurde, welches nicht manuell skaliert werden muss, wurden keine Abzüge beim Wartungsaufwand und der Skalierbarkeit gemacht. Da der Wartungsaufwand bei Lambda stark von der Stabilität des laufenden Programmcodes abhängig ist und genau überprüft werden muss, ob Fehler bei der Verarbeitung auftreten, wurden Abzüge gemacht. \ac{MSK} mit ksqlDB zu skalieren ist eine aufwändige Aufgabe, welche häufiges Nachjustieren und viel Zeit erfordert. Im Gegensatz dazu ist \AWSIOT{} Events nur zu warten, wenn das Nachrichtenformat vom initial Konfigurierten abweicht.
 
 \miniabschnitt{Skalierbarkeit \& serverlessness}
 Da Lambda und \AWSIOT{} Events serverless bzw. im Fall von \AWSIOT{} Events auch vollständig verwaltet sind, ist die Skalierbarkeit und \enquote{serverlessness} gegeben.
@@ -286,7 +281,7 @@ Kinesis hat im Normalbetrieb die geringsten monatlichen Kosten, während es bei 
 Die Kinesis Dienstfamilie garantiert zwar vertraglich keine Performance, leistet jedoch Werbeversprechen, die im Rahmen der erwarteten Performance liegen (Siehe \ref{anhang:vergleich-Amazon~Kinesis}). Die Performance von Lambda ist zwar in Teilen auch von der Performance des Codes der Nutzenden abhängig, jedoch ist Lambda als unterliegender Dienst in der Lage durch Skalierung hohe Last performant zu bewältigen (Siehe auch \ref{anhang:vergleich-umfang-AWS~Lambda}). Bei \ac{MSK} ist die Performance des \ac{MSK} Brokers und von ksqlDB von der Skalierung des Nutzers und dem Kostenbudget des verwendenden Projektes abhängig, da Instanzmodelle gewählt werden müssen. \AWSIOT{} Events ist vollständig verwaltet, weshalb eine hohe Performance angenommen werden kann.
 
 \miniabschnitt{Robustheit \& Fehlertoleranz}
-Kinesis ist ein System, was überwiegend stabil läuft und auch vor nutzerverursachten Fehlern gefeit ist, was einer der Gründe sein dürfte, weshalb andere \ac{AWS} Dienste auf Kinesis aufbauen. Trotzdem wurde ein Punkt beim Wartungsaufwand abgezogen, da im Falle eines Ausfalles von Kinesis schnell reagiert werden muss, um neu eintreffende Daten nicht zu verlieren.
+Kinesis ist ein System, das überwiegend stabil läuft und unempfindlich gegenüber nutzerverursachten Fehlern ist. Dies dürften Gründe sein, weshalb andere \ac{AWS} Dienste auf Kinesis aufbauen. Trotzdem wurde ein Punkt beim Wartungsaufwand abgezogen, da im Falle eines Ausfalles von Kinesis schnell reagiert werden muss, um neu eintreffende Daten nicht zu verlieren.
 
 Lambda hingegen ist je nach Ausgestaltung des Programmcodes nicht besonders fehlertolerant. Da \ac{MSK} aus Redundanzgründen in mindestens zwei Availability Zones gestartet werden muss, ist es standardmäßig robust, jedoch kommt durch ksqlDB ein weiterer \enquote{Point of failure} hinzu, welcher mit größerem Aufwand robust und fehlertolerant gemacht werden muss. \AWSIOT{} Events ist sehr robust und fehlertolerant, da es komplett verwaltet wird und die einzigen Fehler durch Nutzende eingeführt werden können.
 
@@ -294,7 +289,7 @@ Lambda hingegen ist je nach Ausgestaltung des Programmcodes nicht besonders fehl
 \AWSIOT{} Events unterstützt die Auswertungen nur in sehr eingeschränktem Maß.
 
 \miniabschnitt{Conclusio} 
-Insgesamt ist der präferierte Dienst aus der Echtzeitkategorie, wie in \autoref{tab:bewertungsmatrix-echtzeit} zu sehen, Kinesis. Aufgrund der vielzähligen Analysen, die mit Kinesis Data Analytics machbar sind, genauso wie des guten Preis/Leistungsverhältnisses eignet sich die Kinesis Familie besonders für Echtzeitauswertungen. Daraus folgt, dass die Architekturskizze aus \autoref{abb:GrobArchitekturKinesisAnalytics} in eine vollständige Referenzarchitektur überführt wird.
+Insgesamt ist der präferierte Dienst aus der Echtzeitkategorie, wie in \autoref{tab:bewertungsmatrix-echtzeit} zu sehen, Kinesis. Aufgrund der vielzähligen Analysen, die mit Kinesis Data Analytics machbar sind, genauso wie des guten Verhältnis zwischen Preis und Leistung, eignet sich die Kinesis Familie besonders für Echtzeitauswertungen. Daraus folgt, dass die Architekturskizze aus \autoref{abb:GrobArchitekturKinesisAnalytics} in eine vollständige Referenzarchitektur überführt wird.
 
 
 

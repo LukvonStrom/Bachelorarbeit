@@ -48,8 +48,6 @@
 
 \usepackage[hidelinks]{hyperref}       % URL-Formatierung, klickbare Verweise
 
-% \usepackage[plain]{algorithm}
-% \usepackage{algorithmic}
 
 \usepackage{tocloft}        % für Verzeichnis der Anhänge
 
@@ -60,6 +58,7 @@
 \newcommand{\anhang}[1]{%
   \refstepcounter{anhcnt}
   \setcounter{anhteilcnt}{0}
+  \pdfbookmark[1]{Anhang \theanhcnt: #1}{anhang:\theanhcnt-#1}
   \section*{Anhang \theanhcnt: #1}
   \addcontentsline{app}{section}{\protect\numberline{Anhang \theanhcnt}#1}\par
 }
@@ -68,7 +67,7 @@
 \setcounter{anhteilcnt}{0}
 
 \newcommand{\anhangteil}[1]{%
-	\refstepcounter{anhteilcnt}
+    \refstepcounter{anhteilcnt}
 	\subsection*{Anhang~\arabic{anhcnt}/\arabic{anhteilcnt}: #1}
 	\addcontentsline{app}{subsection}{\protect\numberline{Anhang \theanhcnt/\arabic{anhteilcnt}}#1}\par
 }

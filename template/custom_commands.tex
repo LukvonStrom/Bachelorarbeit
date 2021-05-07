@@ -52,7 +52,7 @@
         legend style={draw=white!15!black,legend cell align=left}
         ]
     \addlegendimage{white,fill=red,area legend}
-    \addlegendentry{Philip A.};
+    \addlegendentry{Philipp A.};
     \addlegendimage{white,fill=blue,area legend}
     \addlegendentry{Ralph B.};
     \addlegendimage{white,fill=cyan,area legend}
@@ -102,13 +102,23 @@
 
 \newcommand{\pandasmethod}[1]{\mintinline[breaklines]{python}{pandas.#1()}}
 
-\newcommand{\miniabschnitt}[1]{\textbf{#1}\hfill\break\noindent}
+\newcommand{\miniabschnitt}[1]{
+% \pdfbookmark[3]{#1}{miniabschnitt:\arabic{chapter}-\arabic{section}-\arabic{subsection}:#1}
+\textbf{#1}\hfill\break\noindent
+}
+
+\newcommand{\minianhangabschnitt}[2]{
+% \pdfbookmark[3]{#1 von #2}{miniabschnitt:anhang-#1-#2}
+\textbf{#1 von #2}\hfill\break\noindent
+}
 
 \newcommand{\ftanhang}[1]{
 \anhangteil{#1}\label{anhang:vergleich-#1} 
-\miniabschnitt{Features von #1}\label{anhang:vergleich-features-#1}}
+\minianhangabschnitt{Features}{#1}\label{anhang:vergleich-features-#1}}
 
-\newcommand{\dlanhang}[1]{\miniabschnitt{Dienstleistungsumfang von #1}\label{anhang:vergleich-umfang-#1}}
+\newcommand{\dlanhang}[1]{
+\minianhangabschnitt{Dienstleistungsumfang}{#1}\label{anhang:vergleich-umfang-#1}
+}
 
 \newcommand{\weitereevaluationen}[1]{
 \miniabschnitt{Weitere Evaluationen}
