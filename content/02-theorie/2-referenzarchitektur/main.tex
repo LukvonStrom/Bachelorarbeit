@@ -1,5 +1,5 @@
 \section{Referenzarchitektur}\label{theorie:referenzmodellierung}
-Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Referenzmodell, wie in \autoref{abb:RelationshipsReferenceModel} gezeigt, welches in Softwarearchitekturen instanziiert werden kann. \footcite[Vgl.][S.~17~f.]{Bass.2010} 
+Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Referenzmodell, wie in \autoref{abb:RelationshipsReferenceModel} gezeigt, die in Softwarearchitekturen instanziiert werden kann. \footcite[Vgl.][S.~17~f.]{Bass.2010} In diesem Kapitel sollen deshalb die theoretische Definition des Referenzarchitekturbegriffs, sowie mögliche Vorgehensmodelle betrachtet werden.
 
 \begin{figure}[H]
 \centering
@@ -9,20 +9,16 @@ Nach \citeauthor{Bass.2010} ist eine Referenzarchitektur ein spezialisiertes Ref
 \end{figure}
 \footnotetext{Mit Änderungen entnommen aus: \cite[][18]{Bass.2010}}
 
-In diesem Kapitel sollen deshalb die theoretische Definition des Referenzarchitekturbegriffs, sowie mögliche Vorgehensmodelle betrachtet werden.
-
-
-
-\subsection{Referenzmodelle}
+\subsection{Referenzmodelle}\label{subsection:Referenzmodell}
 
 Gemäß des konstruktionsprozessorientierten Referenzmodellbegriffs von \citeauthor{vomBrocke.2003} ist ein Referenzmodell als solches zu erkennen, wenn der Gegenstand und/oder\footnote{Die Verwendung von \enquote{und/oder} wurde hier gewählt, da der Autor der Quelle das \enquote{oder} aus der boolschen Algebra gewählt hat um explizit beide Fälle einzuschliessen.} der Inhalt des Referenzmodells bei der Konstruktion des Gegenstandes und/oder des Inhaltes eines zu konstruierenden Anwendungsmodells wiederverwendet werden kann.\footcite[Vgl.][34]{vomBrocke.2003} Dabei hat ein Referenzmodell einen Empfehlungscharakter und stellt eine \enquote{best practice} dar.\footcite[Vgl.][31]{vomBrocke.2003} 
 
 Ein Referenzmodell kann nach \citeauthor{vomBrocke.2003} nicht objektiv allgemeingültig sein und auch keinen objektiven Empfehlungscharakter haben, sondern muss subjektiv beurteilt werden.\footcite[Vgl. auch im Folgenden][31~f.]{vomBrocke.2003}  Dabei ist zumindest von den Interessensgruppen der Konstruierenden und der Nutzenden auszugehen, welche das Referenzmodell subjektiv unterschiedlich nach Allgemeingültigkeit und Empfehlungscharakter bewerten. Je nachdem welche Beurteilung höher gewichtet wird und früher einfließt, kann also entweder von der Situation ausgegangen werden, dass das Referenzmodell vom Konstruierenden zu einem solchen erklärt wird oder ein Modell, ob vom Konstruierenden beabsichtigt oder nicht, von den Nutzenden zu einem solchen erhoben wird.
 
 
-\subsection{Referenzarchitektur}
+\subsection{Referenzarchitektur}\label{subsection:Referenzarchitektu}
 Der IEEE Standard 1471-2000 definiert Architektur im Kontext von softwareintensiven Systemen wie folgt:
-\enquote{The fundamental organization of a system embodied in its components, their relationships
+\textit{The fundamental organization of a system embodied in its components, their relationships
 to each other, and to the environment, and the principles guiding its design and evolution.} \footcite[][3]{IEEEComputerSociety.2000}. Als softwareintensives System kann jedes System gesehen werden, bei dem Software essentielle Einflüsse auf das Design, die Erstellung, das Deployment oder die Evolution des Systems hat.\footcite[Vgl.][1]{IEEEComputerSociety.2000}
 Wird dieser Architekturbegriff auf bekannte Bereitstellungsmodi aus der Cloud, wie \ac{SaaS}, \ac{PaaS}, \ac{IaaS} oder \ac{FaaS} angewendet, wird klar, dass von einer Architektur im Sinne des IEEE Standards 1471-2000 ausgegangen werden kann, sobald Software involviert ist. Im Rahmen dieser Arbeit werden auch Dienste, die sich nach der NIST Cloud Definition unter \ac{SaaS} Dienste zählen lassen, behandelt. Als \ac{SaaS} Dienst gilt dabei jeder Dienst, bei dem Nutzende die unterliegende Infrastruktur nicht verwalten und die Applikation nur über limitierte Konfigurationen verwalten können. Sollte aber die Konfiguration mittels einer Programmiersprache bzw. Datenabfragesprache wie \ac{SQL} erfolgen, ist die Bedingung erfüllt, dass Software wesentliche Einflüsse auf das System hat.
 
@@ -46,7 +42,7 @@ Um einen möglichst hohen Nutzen stiften zu können, müssen die organisatorisch
 \item \enquote{up-to-date} und wartbar \englishquote{up-to-date and maintainable}
 \item wertschöpfend für den Betrieb \englishquote{adds value to the business}
 \end{enumerate}
-Die Erfüllung dieser Qualitätskriterien wird auf unterschiedliche Weise gemessen. Die Erfüllung der Kriterien 1, 3, 4 und 5 soll durch Interviews diverser Stakeholder der Cloud-Entwicklung gezeigt werden. Dabei wird auf einen fixierten Versionspunkt der Referenzarchitekturen referenziert. In den Interviews sollen die Stakeholder unformalisiert nach ihrem Eindruck zum Erfüllungsgrad der Qualitätskriterien befragt werden. Die Kriterien 2, 6 und 7 können durch einen Fachbeweis erfüllt werden. Dieses Vorgehen entspricht in Teilen dem inkrementellen Vorgehen von \citeauthor{Muller.2020}.
+Die Erfüllung dieser Qualitätskriterien wird auf unterschiedliche Weise gemessen. Die Erfüllung der Kriterien 1, 3, 4 und 5 soll durch Interviews diverser Stakeholder der Cloud-Entwicklung gezeigt werden. Dabei wird auf einen fixierten Versionspunkt der Referenzarchitekturen verwiesen. In den Interviews sollen die Stakeholder unformalisiert nach ihrem Eindruck zum Erfüllungsgrad der Qualitätskriterien befragt werden. Die Kriterien 2, 6 und 7 können durch einen Fachbeweis erfüllt werden. Dieses Vorgehen entspricht in Teilen dem inkrementellen Vorgehen von \citeauthor{Muller.2020}.
 
 % Für die technischen Aspekte der Referenzarchitekturen definiert \ac{AWS} im Rahmen des sogenannten Well Architected Frameworks Themenfelder, die bei exzellenten Architekturen zu beachten sind. Für Datenanalysen gibt es die Analytics Lens, welche entsprechend für Referenzarchitekturen genauso Anwendung finden sollte. Kriterien sind dabei die Folgenden:\footcite[Vgl.][6]{Ravirala.2020}
 % \begin{enumerate}
@@ -64,7 +60,7 @@ Die Erfüllung dieser Qualitätskriterien wird auf unterschiedliche Weise gemess
 
 % \TodoW{In Text einbetten, Erklärung welche passen}
 
-\subsection{Vorgehensmodell}
+\subsection{Vorgehensmodell}\label{subsection:Vorgehensmodel}
 
 \citeauthor{Schutte.1998} unterteilt, wie in \autoref{abb:VorgehensmodellReferenzmodellierung} gezeigt, Referenzmodellierung generell in vier Phasen.\footcite[Vgl. auch im Folgenden][184\psq]{Schutte.1998} 
 
@@ -94,9 +90,9 @@ Nach \citeauthor{Muller.2020} hat eine Referenzarchitektur mehrere Dekomposition
 \end{figure}
 \footnotetext{Entnommen aus: \cite[][11]{Muller.2020}}
 
-Mehrere Dekompositionen machen insbesondere auch Sinn, da wie im Diagramm von \citeauthor{Muller.2020} - \autoref{abb:DetailgradMuller} - eine Addressierung von unterschiedlichen Aspekten wie Systemgestaltung, aber auch Stakeholder oder Kontext erfolgen sollte. Eine Adressierung der Stakeholder und des Kontextes ist insofern gegeben, dass, wie in \autoref{chap:requirements} gezeigt, Interviews durchgeführt und im Anhang dieser Arbeit transkribiert werden. An Stellen, an denen ein Einsatz von Teilen der Referenzarchitektur nontrivial scheint, kann durch Codebeispiele oder konkrete, kopierbare Codeausschnitte gezeigt werden, auf was speziell im technischen Bereich zu achten ist.
+Mehrere Dekompositionen machen insbesondere auch Sinn, da wie im Diagramm von \citeauthor{Muller.2020} - \autoref{abb:DetailgradMuller} - unterschiedliche Aspekte wie Systemgestaltung, aber auch Stakeholder oder Kontext adressiert werden sollten. Eine Adressierung der Stakeholder und des Kontextes ist insofern gegeben, dass, wie in \autoref{chap:requirements} gezeigt, Interviews durchgeführt und im Anhang dieser Arbeit transkribiert werden. An Stellen, an denen ein Einsatz von Teilen der Referenzarchitektur nontrivial scheint, kann durch Codebeispiele oder konkrete, kopierbare Codeausschnitte gezeigt werden, auf was speziell im technischen Bereich zu achten ist.
 
-Zusätzlich sollen Dekompositionen unterschiedliche Aufgaben erfüllen. Speziell für die Darstellung der verwendeten Dienste von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss soll die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet werden. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In der finalen Umsetzung werden die offiziellen \ac{AWS} Icons die entsprechenden Services darstellen, die verwendet werden.
+Zusätzlich sollen Dekompositionen unterschiedliche Aufgaben erfüllen. Speziell für die Darstellung der verwendeten Dienste von \ac{AWS} in den Referenzarchitekturen und dem Datenfluss wird die erste Stufe der Bausteinsicht des Architekturstandards arc42 verwendet. Das Konzept jener Bausteinsicht, also wie sie zu gestalten ist, findet sich in \autoref{abb:BausteinsichtStufe1}. In der finalen Umsetzung werden die offiziellen \ac{AWS} Icons die die entsprechenden Services darstellen, verwendet.
 
 \begin{figure}[H]
 \centering
@@ -118,14 +114,14 @@ Zusätzlich zu der Bausteinsicht können, wie in \autoref{abb:Diagrammtypen} gez
 
 Wie von \citeauthor{Muller.2020} vorgeschlagen und im vorherigen Unterkapitel erläutert, ist ein inkrementeller Ansatz unter Verwendung von Prototypen und kontinuierlichem Feedback der Zielstakeholder unerlässlich.\footcite[Vgl.][7]{Muller.2020} 
 
-Sehr wichtig für eine Referenzarchitektur ist auch die Dokumentation, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre dabei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[Vgl.][24\psqq]{Webber.2001} Mittels der Variationspunkte kann eine statische Referenzarchitektur konstruiert werden, welche an spezifisch definierten Punkten angepasst werden muss, um einzigartige Architekturen zu erzeugen.\footcite[Vgl.][24]{Webber.2001} Dabei gibt es vier verschiedene Ansichten, aus denen Variationspunkte definiert werden können:\footcite[Vgl.][25\psq]{Webber.2001}
+Einen wichtigen Aspekt einer Referenzarchitektur stellt die Dokumentation dar, wie die Wiederverwendung zu handhaben ist. Ein möglicher Ansatz wäre hierbei die gezielte Integration und Dokumentation von Variationspunkten, wie von \citeauthor{Webber.2001} vorgeschlagen.\footcite[Vgl.][24\psqq]{Webber.2001} Mittels der Variationspunkte ist es möglich, eine statische Referenzarchitektur zu konstruieren, welche an spezifisch definierten Punkten angepasst werden kann, um einzigartige Architekturen zu erzeugen.\footcite[Vgl.][24]{Webber.2001} Dabei gibt es vier verschiedene Ansichten, aus denen Variationspunkte definiert werden können:\footcite[Vgl.][25\psq]{Webber.2001}
 \begin{enumerate}
 \item \label{view:first} Anforderungs-Variationspunktsicht \englishquote{Requirement-Variation-Point View}
 \item \label{view:second} Komponenten-Variationspunktsicht \englishquote{Component-Variation-Point View}
 \item \label{view:third} statische Variationspunktsicht \englishquote{Static-Variation-Point View}
 \item \label{view:fourth} dynamische Variationspunktsicht\englishquote{Dynamic-Variation-Point View}
 \end{enumerate}
-Dabei sind für diese Arbeit, in der keine implementierungsnahe (im Sinne von Programmierung) Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht wichtig. Die statische und dynamische Variationspunktsicht agieren stärker auf Implementierungsebene.\footcite[Vgl. auch im Folgenden][25\psq]{Webber.2001} Auf dieser können beispielsweise mittels objektorientierter Programmierung Klassen bereitgestellt werden, von welchen geerbt werden kann. Gleichzeitig kann die Verhaltensweise des Programms auch durch z.B. Callbacks oder Parameterisierung des Aufrufes verändert werden.
+Dabei sind für diese Arbeit, in der keine implementierungsnahe (im Sinne von Programmierung) Softwarearchitektur entworfen wird, hauptsächlich die anforderungsbasierte und die komponentenbasierte Variationspunktsicht wichtig. Die statische und dynamische Variationspunktsicht agieren stärker auf Implementierungsebene.\footcite[Vgl. auch im Folgenden][25\psq]{Webber.2001} Es ist möglich, auf dieser beispielsweise mittels objektorientierter Programmierung Klassen bereitzustellen, von welchen geerbt werden kann. Gleichzeitig ist eine Veränderung der Verhaltensweise des Programms auch durch z.B. Callbacks oder Parameterisierung des Aufrufes möglich.
 
 
 Variationspunkte können, wie in \autoref{abb:Variationspunkte} dargestellt innerhalb der verschiedenen, dargestellten Schichten wie folgt dargestellt werden:
@@ -135,6 +131,6 @@ Variationspunkte können, wie in \autoref{abb:Variationspunkte} dargestellt inne
 \caption{Darstellung Variationspunkte}
 \label{abb:Variationspunkte}
 \end{figure}
-In den Architekturebenen werden entsprechend die Variationspunkte mit alphanumerischen Identifikationen versehen. So können gleiche Variationspunkte in mehreren Dekompositionen referenziert werden.
+In den Architekturebenen sind entsprechend die Variationspunkte mit alphanumerischen Identifikationen versehen. So können gleiche Variationspunkte in mehreren Dekompositionen referenziert werden.
 
 

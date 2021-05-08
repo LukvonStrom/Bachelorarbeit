@@ -1,9 +1,9 @@
 \section{Vergleichsmethodik für die Dienstauswahl}\label{chap:vergleichsmethodik}
 
-\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben erwünschte Eigenschaften eines Big Data Systems festgelegt.\footcite[Vgl. auch im Folgenden][7\psqq]{Marz.2015} Da die Referenzarchitekturen ebenfalls mit großen Datenmengen arbeiten, wenn auch in anderer Weise, können die Folgenden Kriterien übertragen werden:
+\citeauthor{Marz.2015}, die bereits die $\lambda$-Architektur geprägt haben, haben erwünschte Eigenschaften eines Big Data Systems festgelegt.\footcite[Vgl. auch im Folgenden][7\psqq]{Marz.2015} Da die Referenzarchitekturen ebenfalls mit großen Datenmengen arbeiten, wenn auch in anderer Weise, ist es möglich die Folgenden Kriterien zu übertragen:
 \begin{enumerate}
 \item Robustheit und Fehlertoleranz \englishquote{Robustness and fault tolerance} - 
-Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also, dass beispielsweise Analysecode \enquote{immutable} ist).
+Systeme sollen Herausforderungen, wie beispielsweise Paralellität, Datenduplikate oder technische Ausfälle verkraften. Zusätzlich ist Resilienz gegenüber menschlichen Fehlern wünschenswert, so dass händische Änderungen rückgängig gemacht werden können (also, dass beispielsweise Analysecode \textit{immutable} ist).
 
 \item Lese- und Schreibzugriffe mit niedriger Latenz \englishquote{Low latency reads and updates} - 
 Lesezugriffe auf Daten sollen mit niedriger Latenz stattfinden. Wie bereits beschrieben, kann aufgrund der Messdistanz eine Aktualisierung von Daten durchaus längere Zeit benötigen, jedoch sollte ein Big Data System in der Lage sein, Datenaktualisierungen mit niedriger Latenz durchzuführen.

@@ -1,34 +1,30 @@
-\chapter{Einleitung}
+\chapter{Einleitung}\label{chapter:Einleitun}
 Im Folgenden wird für die vorliegende Arbeit anhand der Problemstellung und der daraus folgenden Zielsetzung der Aufbau und damit das Vorgehen für die nachfolgenden Kapitel erläutert.
-\section{Problemstellung und Zielsetzung}
-Im Rahmen des Ausbaus der Datenanalysefähigkeiten der SPIRIT/21 GmbH (nachfolgend SPIRIT/21) mangelt es bis dato an einem Konzept, um
-Zeitreihen-Daten zu analysieren. 
-Diese Zeitreihendaten könnten beispielsweise Messungen von \acf{IoT}-Sensoren sein, die in regelmäßigen Intervallen übermittelt werden. Die Vorteile der Public Cloud, wie Effizienzgewinne, Skalierbarkeit und nutzungsbasierte Abrechnung, welche die Cloudkunden der SPIRIT/21 gewohnt sind, sollen auch bei diesen Datenanalysen zum Tragen kommen. 
-Aufgrund der strategischen Priorisierung des Cloudanbieters \acf{AWS} sollen primär die offerierten Dienste dieses Unternehmens verwendet werden.
-Als Lösungsvorlage für künftige Kundenprobleme sollen Referenzarchitekturen erstellt werden, welche wiederverwendet werden können. 
+\section{Problemstellung und Zielsetzung}\label{section:Problemstellung-und-Zielsetzun}
+Im Rahmen des Ausbaus der Datenanalysefähigkeiten der SPIRIT/21 GmbH (nachfolgend SPIRIT/21) mangelt es bis dato an einem Konzept, um Zeitreihendaten zu analysieren. 
+Diese Zeitreihendaten sind beispielsweise in regelmäßigen Intervallen übermittelte Messungen von \acf{IoT}-Sensoren. Die Vorteile der Public Cloud, wie Effizienzgewinne, Skalierbarkeit und nutzungsbasierte Abrechnung, welche die Cloudkunden der SPIRIT/21 gewohnt sind, sollen auch bei diesen Datenanalysen zum Tragen kommen. 
+Aufgrund der strategischen Priorisierung des Cloudanbieters \acf{AWS} liegt der primäre Fokus der Arbeit auf den offerierten Diensten dieses Unternehmens.
+Als Lösungsvorlage für künftige Kundenprobleme sollen Referenzarchitekturen erstellt werden, welche wiederverwbar sind. 
 Die Datenanalyse von Daten in der Datenbank und die Echtzeitanalyse sind dabei für die
 Zeitreihendaten von Relevanz, weshalb für beide Fälle eine Referenzarchitektur ausgearbeitet wird.
-Zusätzlich soll eine Empfehlung ausgearbeitet werden, welche Referenzarchitektur und welche
-zugehörige Technik bei welchen Problemstellungen eingesetzt werden können. Als konkreter Anwendungsfall dienen \ac{IoT}-Daten, die bereits von mehreren Datenlieferanten, wie Sensoren, in der Cloud gespeichert werden und bei welchen viele Datenpunkte zur Analyse vorliegen. Ausgehend von diesen \ac{IoT}-Daten können die konzipierten Referenzarchitekturen auch für andere Zeitreihendaten, welche beispielsweise beim Anwendungs-Monitoring anfallen, verwendet werden. 
-Die SPIRIT/21 antizipiert einen Anstieg von Kundenprojekten mit Datenanalyseanteilen. Aus diesem Grund wird eine Bachelorarbeit, die eine wiederzuverwendende Architektur für Datenanalysen ausarbeitet, benötigt. Zusätzlich sieht sich die SPIRIT/21 in einer ähnlichen Situation, wie die Mehrheit von 545 in einer Umfrage befragten Unternehmen, die angaben, unzureichendes Know-how für Datenanalyse zu besitzen.\footcite[Vgl.][]{o.V..o.J.} Da eine Referenzarchitektur für gewöhnlich als Sammlung von best practices und zumindest als Inspiration für eigene Architekturen dient, kann so auch der Know-how Aufbau der Cloud Mitarbeitenden initiiert werden.
+Zusätzlich wird eine Empfehlung ausgearbeitet, welche Referenzarchitektur und welche
+zugehörige Technik bei welchen Problemstellungen eingesetzt werden können. Als konkreter Anwendungsfall dienen \ac{IoT}-Daten, die bereits von mehreren Datenlieferanten, wie Sensoren, in der Cloud gespeichert werden und bei welchen viele Datenpunkte zur Analyse vorliegen. Ausgehend von diesen \ac{IoT}-Daten können die konzipierten Referenzarchitekturen auch für andere Zeitreihendaten, die beispielsweise beim Anwendungs-Monitoring anfallen, verwendet werden. 
+Die SPIRIT/21 antizipiert einen Anstieg von Kundenprojekten mit Datenanalyseanteilen. Aus diesem Grund wird eine Bachelorarbeit, die eine wiederzuverwendende Architektur für Datenanalysen ausarbeitet, benötigt. Zusätzlich sieht sich die SPIRIT/21 in einer ähnlichen Situation, wie die Mehrheit von 545 in einer Umfrage befragten Unternehmen, die angaben, unzureichendes Know-how für Datenanalyse zu besitzen.\footcite[Vgl.][]{o.V..o.J.} Da eine Referenzarchitektur für gewöhnlich als Sammlung von \enquote{best practices} und zumindest als Inspiration für eigene Architekturen dient, kann so auch der Know-how Aufbau der Cloud Mitarbeitenden initiiert werden.
 
 Im Rahmen der Arbeit werden Konzepte für Referenzarchitekturen entwickelt, die zeigen, wie Daten sowohl in Echtzeit als auch mit Zeitverzögerung in der Public Cloud analysiert werden können. 
-Ebenso soll die Arbeit Entscheidungskriterien liefern, wann welche Form der Datenanalyse für die verschiedenen in der Arbeit ausgewählten Analysen verwendet werden soll. 
+Ebenso soll die Arbeit Entscheidungskriterien liefern, wann welche Form der Datenanalyse für die verschiedenen, in der Arbeit ausgewählten, Analysen verwendet werden soll. 
 Dabei werden für die konzipierten Referenzarchitekturen jeweils die unter den definierten Randbedingungen optimalen Analysedienste im Rahmen der Bachelorarbeit ausgesucht.
 
-\TodoW{final überarbeiten}
-
-\section{Aufbau der Arbeit}
+\section{Aufbau der Arbeit}\label{section:Aufbau-der-Arbei}
 
 Am Anfang der Arbeit werden anhand einer Literaturrecherche die Grundlagen der Datenverarbeitung mit speziellem Fokus auf die möglichen Auswertungen und die präferierten Verarbeitungsarten dargestellt. 
 
-Ebenfalls werden infrage kommende Analysedienste beleuchtet. 
 Daraufhin wird mittels Literaturrecherche die später zu verwendende Methodik der Referenzmodellierung dargestellt. 
-Des Weiteren wird die verwendete Methodik der Anforderungserhebung und der durchgeführten Interviews geschildert. 
+Des weiteren wird die verwendete Methodik der Anforderungserhebung und der durchgeführten Interviews geschildert. 
 Im Folgenden werden die Kriterien und das Vorgehen beschrieben, nach denen die Analysedienste verglichen und ausgewählt werden. 
 
 Im Anwendungsteil werden zuerst die Rahmenbedingungen der Datenverarbeitung dargestellt, woraufhin existierende Anwendungsfälle, die analysierbare Daten produzieren, erläutert werden. 
 Im Anschluss werden für die Batch- und die Echtzeitverarbeitung eine Auswahl der passenden Dienste nach den vorgestellten Kriterien durchgeführt. 
 
-Folgend werden im Modellierungskapitel Referenzarchitekturen basierend auf den Anforderungen der interviewten Stakeholder und basierend auf den selektierten Diensten entworfen. Abschließend wird reflektiert, ob die entwickelten Referenzarchitekturen den Anforderungen von mehreren Stakeholdern genügen und die Architektur in Zukunft eingesetzt werden kann. Final werden die Ergebnisse der Arbeit reflektiert und zusammengefasst.
+Nachfolgend werden im Modellierungskapitel Referenzarchitekturen basierend sowohl auf den Anforderungen der interviewten Stakeholder, als auch basierend auf den selektierten Diensten entworfen. Abschließend wird reflektiert, ob die entwickelten Referenzarchitekturen den Anforderungen von mehreren Stakeholdern genügen und die Architektur in Zukunft eingesetzt werden kann. Final werden die Ergebnisse der Arbeit reflektiert und zusammengefasst.
 

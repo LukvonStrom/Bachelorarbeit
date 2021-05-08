@@ -1,9 +1,9 @@
 \addtocontents{toc}{\protect\newpage}
-\chapter{Dienstauswahl}
+\chapter{Dienstauswahl}\label{chapter:Dienstauswah}
 Im nachfolgenden Kapitel werden mittels der in \autoref{chap:vergleichsmethodik} vorgestellten Methodik die Dienste für die finalen Referenzarchitekturen unter den in \autoref{chap:rahmendatenverarbeitung} vorgestellten Rahmenbedingungen verglichen und ausgewählt.
 
-\section{Angewandte Methodik}
-Die  in \autoref{chap:vergleichsmethodik} gezeigten Bewertungskriterien basieren auf mehreren Referenzen. Dies inkludiert die Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \anhangref{anhang:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \enquote{serverlessness}. Skalierbarkeit \& \enquote{serverlessness} kann nicht die volle Punktzahl erreichen, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Dienste nur zeitlich vorgeplante Auswertungen durchführen können, oder die Fähigkeit außerhalb des eigenen Ausführungsplans Anfragen zu bearbeiten, nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall diese bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Ausgehend von dieser Prioritätenliste wurde eine Umfrage zur Priorisierung durchgeführt, welche die finalen Prioritätengewichte, wie in \autoref{tab:umfragen-auswertungen} gezeigt, ergibt. 
+\section{Angewandte Methodik}\label{section:Angewandte-Methodi}
+Die  in \autoref{chap:vergleichsmethodik} gezeigten Bewertungskriterien basieren auf mehreren Referenzen. Dies inkludiert die Kriterien von \citeauthor{Marz.2015}, die ISO 9126 Norm, die im Interview in \anhangref{anhang:interview-ralph-24.03.2021} eingebracht wurde und das Kriterium \textit{serverlessness}. Skalierbarkeit \& \textit{serverlessness} kann nicht die volle Punktzahl erreichen, wenn Skalierungsoperationen nicht automatisch durchgeführt werden können. Bei den Kriterien von \citeauthor{Marz.2015} wurde Ad hoc queries gestrichen, da manche Dienste nur zeitlich vorgeplante Auswertungen durchführen können, oder die Fähigkeit außerhalb des eigenen Ausführungsplans Anfragen zu bearbeiten, nicht besitzen. Ebenfalls wurde die Nachverfolgbarkeit als Kriterium ausgenommen, da ein geringer Wartungsaufwand im Wartungsfall dies bedingt. Die Performancegarantien werden genau wie die Kosten, welche ein eigenes Kriterium sind, nach eigener, in \autoref{chap:vergleichsmethodik} beschriebener Methodik evaluiert. Aus diesem Grund wurde \enquote{Lese- und Schreibzugriffe mit niedriger Latenz} in Performancegarantien umbenannt. Ausgehend von dieser Prioritätenliste wurde eine Umfrage zur Priorisierung durchgeführt, welche die finalen Prioritätengewichte, wie in \autoref{tab:umfragen-auswertungen} gezeigt, ergibt. 
 
 \begin{table}[H]
 \centering
@@ -14,9 +14,9 @@ Kriterium & \begin{tabular}[c]{@{}l@{}}Durchschnitt\\ ($n=6$)\end{tabular} & \be
 Integration mit AWS & 3,17 &  3\\ \hline
 Generalisierung & 4,33 &  4\\ \hline
 Erweiterbarkeit & 4,33 &  4\\ \hline
-Fehlertransparenz / \enquote{Debuggability} & 4,67 &  5\\ \hline
+Fehlertransparenz / \textit{Debuggability} & 4,67 &  5\\ \hline
 geringer Wartungsaufwand & 6,5 &  7\\ \hline
-Skalierbarkeit  \& \enquote{serverlessness} & 7,17 &  7\\ \hline
+Skalierbarkeit  \& \textit{serverlessness} & 7,17 &  7\\ \hline
 Kosten & 7,33 &  7\\ \hline
 Performancegarantien & 8,0 &  8\\ \hline
 Robustheit \& Fehlertoleranz & 8,83 &  9\\ \hline
@@ -30,19 +30,19 @@ Summe & & 66\\ \hline
 
 Die Ergebnisse der Umfrage sind in \autoref{tab:umfragen-auswertungen} dargestellt. Die Beschreibung des Vorgehens zur Umfrage ist in \anhangref{anhang:umfrage}. Insgesamt sind die Kriterien nach Priorität absteigend geordnet, welche gleichzeitig die Summe an Punkten darstellt, die maximal für dieses Kriterium zulässig sind.
 
-Ausgehend von der Gesamtsumme der Punkte kann eine Rangliste erstellt werden, welche Dienstleistungen für die Referenzarchitektur verwendet werden können.
+Ausgehend von der Gesamtsumme der Punkte kann eine Rangliste erstellt werden, welche Dienstleistungen für die Referenzarchitektur zu verwenden sind.
 
 
 
 \section{Dienste für Echtzeitverarbeitung}\label{produkte:echtzeit}
 
-\input{content/04-produkte/1-echtzeit}
+\input{content/04-produkte/2-echtzeit}
 
-\section{Dienste für Batchverarbeitung}
+\section{Dienste für Batchverarbeitung}\label{section:Dienste-für-Batchverarbeitun}
 
-\input{content/04-produkte/2-batch}
+\input{content/04-produkte/3-batch}
 
-\section{Dienste, die mehrere Modi unterstützen}
-\input{content/04-produkte/3-multimode}
+\section{Dienste, die mehrere Modi unterstützen}\label{section:Dienste-die-mehrere-Modi-unterstütze}
+\input{content/04-produkte/4-multimode}
 
 

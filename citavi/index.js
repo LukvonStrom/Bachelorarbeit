@@ -22,7 +22,12 @@ sample = sample.map(el => {
 		// Klare Herausgeberschaft statt Autorenschaft
 		if((key === "author" && buffer.entryTags["author"] === "Amazon Web Services, Inc.") || (key === "url" && buffer.entryTags["url"].includes("amazon.com"))){
 			if(buffer.entryTags["author"] && buffer.entryTags["author"].includes("Amazon Web Services")){
+				buffer.entryTags.author = "";
 				delete buffer.entryTags.author;
+			}
+			if(buffer.entryTags["organization"] && buffer.entryTags["organization"].includes("Amazon Web Services")){
+				buffer.entryTags.organization = "";
+				delete buffer.entryTags.organization;
 			}
 			buffer.entryTags["editor"] = "{Amazon Web Services, Inc.}";
 		}

@@ -11,7 +11,7 @@
 
 \LF Herzlichen Dank Ralph, für deine Bereitschaft zum Interview. Beginnend möchte ich dich fragen, was deine Rolle/Tätigkeiten innerhalb der SPIRIT/21 sind und wie du mit Architekturen zu tun hast.
 
-\RB Meine Rolle in der SPIRIT hat sich schon ein paar mal gewandelt. Aktuell bin ich für den Bereich Lead \ac{rnd} Verantwortlicher für Forschung und Entwicklung. Als Vorsitzender des Tech- und Architekturboards bin ich für die technologische Qualifizierung von Entwicklungsthemen verantwortlich. Genauso koordiniere ich auch den Einsatz von bestimmten neuen Technologien in den einzelnen Solutions.
+\RB Meine Rolle in der SPIRIT/21 hat sich schon ein paar mal gewandelt. Aktuell bin ich für den Bereich Lead \ac{rnd} Verantwortlicher für Forschung und Entwicklung. Als Vorsitzender des Tech- und Architekturboards bin ich für die technologische Qualifizierung von Entwicklungsthemen verantwortlich. Genauso koordiniere ich auch den Einsatz von bestimmten neuen Technologien in den einzelnen Solutions.
 
 \LF Verstehe. Wo siehst du denn Anwendungsgebiete von Referenzarchitekturen in Richtung Zeitreihendatenverarbeitung? 
 
@@ -69,37 +69,37 @@
 
 \RB Eine Architektur ist ja klar nicht marktgängig sondern die implementierende Lösung. Aber die Architektur muss die Lösung marktgängig machen. Dazu muss sie die Kundenkriterien berücksichtigen. Sei es Benutzbarkeit, Effizienz, Übetragbarkeit, Funktionalität, ... (\textit{siehe \autoref{abb:ISO9126}}). Je nach Kunde benötigt man eine extrem hohe Performance, oder die Fähigkeit viele Daten aufzubewahren. Da kann dann beispielsweise ein Cluster oder ein \ac{AWS} Service die Lösung sein.
 
-\LF In Richtung \ac{AWS} wollte ich ja generell schauen in der Bachelorarbeit. Weil die Services eben managed sind, sind sie ja auch autoskalierend meistens.
+\LF In Richtung \ac{AWS} wollte ich ja generell schauen in der Bachelorarbeit. Da die Services eben managed sind, sind sie ja auch meistens autoskalierend.
 
 \RB Da musst du aber auch aufpassen. Elasticsearch ist beispielsweise ja in Teilen autoskalierend. Oder der AWS IoT Core Hub der garantiert eine Billion Messages, das muss man erstmal selber hinbekommen. Diese Probleme sind weg, aber sie haben auch Services, wo du selber skalieren musst. 
 
 \LF Ja, Kinesis Data Streams ist beispielsweise einer der Dienste wo man selber Shards nachprovisionieren muss, damit man skalieren kann.
 
-\RB Da muss man halt aufpassen. Wo sind die Limitierungen, was geht.
+\RB Da muss man halt aufpassen. Wo sind die Limitierungen und was geht.
 
 \LF Das werde ich in der Arbeit mit ausloten.
 
 \RB Hier (\textit{\autoref{abb:ISO9126}}) siehst du die ISO 9126. Die Norm ist relativ alt, aber passt eigentlich immer noch. Interessant ist dabei der Punkt Übertragbarkeit. Das finde ich, ist bei \ac{AWS}-Services etwas, das thematisiert werden sollte. Es ist unbestreitbar, dass die Benutzbarkeit von \ac{AWS}-Services gut ist, dass die Effizienz und Zuverlässigkeit ziemlich gut sind. Die Funktionalität ist meistens auch nicht schlecht, aber mit der Übertragbarkeit haben wir meistens ein Problem.
 
-\LF Das ist ja aber immer bei so managed services ein Problem.
+\LF Das ist ja aber immer bei so \textit{managed services} ein generelles Problem.
 
 \RB Aber man muss da drastisch unterscheiden und das ist für mich ein Kernunterscheidungsmerkmal. Die Übertragbarkeit ist trotzdem bei vielen Kunden wichtig. Es spricht jetzt nichts gegen \ac{AWS}, wenn du beispielsweise den Elasticsearch service nimmst hast du ja ein Standard Elasticsearch. Das kannst du einfach übertragen.
 
 \LF Es gibt ja bei \ac{AWS} verschiedene Services. Sowohl native, als auch managed Kafka oder ähnliches.
 
-\RB Genau managed Kafka, oder es gibt jetzt auch neuerdings managed OpenShift - coole Sache. Die Frag ist  halt, inwiefern ist es standardkonform und inwiefern nicht mehr. Das ist ein wichtiger Aspekt finde ich. Wenn man jetzt nur die Cloud betrachtet eher irrelevant, also wenn jemand sowieso nur \ac{AWS} machen will, dann ist es egal.
+\RB Genau managed Kafka, oder es gibt jetzt auch neuerdings managed OpenShift - coole Sache. Die Frage ist  halt, inwiefern ist es standardkonform und inwiefern nicht mehr. Das ist ein wichtiger Aspekt finde ich. Wenn man jetzt nur die Cloud betrachtet eher irrelevant, also wenn jemand sowieso nur \ac{AWS} machen will, dann ist es egal.
 
 \LF Ja, das wäre eher die Zielsetzung meiner Arbeit gewesen.
 
-\RB Ja, schwierig ist da nur, dass sich allein der verantwortliche IT-Leiter beim Kunden ändern muss, der \ac{AWS} blöd findet und alles auf Azure packen möchte. Dann wäre es doch wichtig zu wissen, ob du Kafka nimmst, was man woanders auch bekommt, oder ob du eine properitäre Lösung verwendest. Das ist schon ein Kriterieum, was man betrachten sollte.
+\RB Ja, schwierig ist da nur, dass sich allein der verantwortliche IT-Leiter beim Kunden ändern muss, der \ac{AWS} blöd findet und alles auf Azure packen möchte. Dann wäre es doch wichtig zu wissen, ob du Kafka nimmst, was man woanders auch bekommt, oder ob du eine properitäre Lösung verwendest. Das ist schon ein Kriterium, was man betrachten sollte.
 
-\LF Übertragbarkeit werde ich auf jeden Fall mit anschauen. Ich hab schon einige Alternativen ausgemacht, wo man entweder properitäre, \ac{AWS}-native Dienste verwenden kann, oder managed open source Dienste wie Kafka. Noch kurz zu dem Dimensionsmodell. Zusammenfassend wäre die subjektive Allgemeingültigkeit ziemlich in der Mitte, die Anwendbarkeit möglichst hoch. Wie siehst du die Dekompositionstiefe?
+\LF Übertragbarkeit werde ich auf jeden Fall mit anschauen. Ich hab schon einige Alternativen ausgemacht, wo man entweder properitäre, \ac{AWS}-native Dienste verwenden kann, oder \textit{managed open source} Dienste wie Kafka. Noch kurz zu dem Dimensionsmodell. Zusammenfassend wäre die subjektive Allgemeingültigkeit ziemlich in der Mitte, die Anwendbarkeit möglichst hoch. Wie siehst du die Dekompositionstiefe?
 
-\RB Das ist immer eine gute frage. So tief wie nötig, aber nicht tiefer. Da gab es Versuche, beispielsweise arc42 vollständig auszufüllen. Die Diskussion hatten wir schon, das halte ich für nicht gut. Dokumentation generell sollte da eintreten, wo es Abweichungen gibt, oder wo es kompliziert wird. Ansonsten sollte man auf einer hohen Ebene agieren.
+\RB Das ist immer eine gute Frage. So tief wie nötig, aber nicht tiefer. Da gab es Versuche, beispielsweise arc42 vollständig auszufüllen. Die Diskussion hatten wir schon, das halte ich für nicht gut. Dokumentation generell sollte da eintreten, wo es Abweichungen gibt, oder wo es kompliziert wird. Ansonsten sollte man auf einer hohen Ebene agieren.
 
 \LF Von den Zahlen her also 2/3 in der Mitte?
 
-\RB Genau das. Das Problem ist, Architekturen sind für viele ja eher Neuland. Man muss sich da teilweise ran tasten. Die Architekturwerkzeuge helfen beim Bauen einer Lösung. Es ist beispielsweise bei einem Hammer und Nagel immer noch abhängig vom Handwerker, ob der Nagel gerade in der Wand steckt. Eine Architektur, die nur ein Bauplan sind, aber nicht vermitteln warum man was macht sind ein Problem.
+\RB Genau das. Das Problem ist, Architekturen sind für viele ja eher Neuland. Man muss sich da teilweise rantasten. Die Architekturwerkzeuge helfen beim Bauen einer Lösung. Es ist beispielsweise bei einem Hammer und Nagel immer noch abhängig vom Handwerker, ob der Nagel gerade in der Wand steckt. Eine Architektur, die nur ein Bauplan ist, aber nicht vermitteln warum man was macht, ist ein Problem.
 
 \LF Da hätte ich versucht die Tradeoffs ensprechend zu erklären.
 

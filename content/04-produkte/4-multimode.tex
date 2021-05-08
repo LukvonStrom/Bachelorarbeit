@@ -1,4 +1,4 @@
-Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die sowohl Echtzeitverarbeitung, als auch Batch/\ac{OLAP}-Verarbeitung unterstützen. Im \ac{AWS} Portfolio ist dieser Dienst \AWSIOT{} Analytics, welcher im Folgenden beleuchtet wird.
+Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die sowohl Echtzeitverarbeitung, als auch Batch/\ac{OLAP}-Verarbeitung unterstützen. Im \ac{AWS} Portfolio ist dieser Dienst \AWSIOT{} Analytics, der im Folgenden beleuchtet wird.
 
 \subsection{AWS IoT Analytics} \label{productselection:iotanalytics}
 \AWSIOT{} Analytics ist ein Dienst der \AWSIOT{} Familie, der nach Aussage des Herstellers weitreichende Analysen von \ac{IoT} Daten, die beispielsweise via \AWSIOT{} Core geladen werden können, zulässt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.c} Dabei bietet der Dienst Lösungen für Sammlung, Verarbeitung, Speicherung, Analyse und Benachrichtigung/Visualisierung von Daten an, bzw. bietet Schnittstellen, um diese Aufgaben zu erledigen. Im Speziellen deckt \AWSIOT{} Analytics die Aufgaben einer $\lambda$-Architektur ab. So besitzt \AWSIOT{} Analytics beispielsweise eine integrierte Zeitreihendatenbank, welche ergänzend zu den Echtzeitdaten von \AWSIOT{} Core für Analysen genutzt werden kann.
@@ -11,7 +11,7 @@ Aufgrund der hohen Popularität der $\lambda$-Architektur, gibt es Dienste, die 
 In \autoref{abb:GrobArchitekturIoTAnalytics} ist die Grobarchitektur und Verknüpfung mit anderen Diensten unter Annahme der Vorraussetzungen aus \autoref{chap:rahmendatenverarbeitung} gezeigt. Datenliefernde Geräte, wie beispielsweise Sensoren, liefern Zeitreihen-Messwerte via dem \ac{MQTT} Protokoll an. Die Weiterleitung zu IoT Analytics erfolgt mittels einer eingerichteten Regel im \ac{IoT} Core Messagebroker, welche mittels eines Dialekts der \ac{SQL} Sprache gewisse Topics vorselektiert oder alle Topics zulässt.
 
 
-Für erweiterte Analysen stellt \AWSIOT{} Analytics sogenannte Notebooks zur Verfügung, die auf den \enquote{Jupyter Notebooks} basieren. Diese Notebooks werden verwendet, um Python Programmabläufe zu visualieieren und zu modularisieren. Da in den Jupyter Notebooks der volle Paketumfang von Python verfügbar ist, inklusive z.B. Machine Learning Bibliotheken wie Tensorflow, sind wesentlich erweiterte Analysen möglich. Die Ressourcen für Notebooks sind seperat zu provisionieren und werden in Analytics Compute Units abgerechnet, wobei eine Compute Unit 4vCPU-Kerne und 16 GB \ac{RAM} hat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.i} Diese Compute Units werden sekundengenau abgerechnet und kosten nur für die Laufzeit Geld.
+Für erweiterte Analysen stellt \AWSIOT{} Analytics sogenannte Notebooks zur Verfügung, die auf den \enquote{Jupyter Notebooks} basieren. Diese Notebooks werden verwendet, um Python Programmabläufe zu visualieieren und zu modularisieren. Da in den Jupyter Notebooks der volle Paketumfang von Python verfügbar ist, inklusive z.B. Machine Learning Bibliotheken wie Tensorflow, sind wesentlich erweiterte Analysen möglich. Die Ressourcen für Notebooks sind separat zu provisionieren und werden in Analytics Compute Units abgerechnet, wobei eine Compute Unit 4vCPU-Kerne und 16 GB \ac{RAM} hat.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.i} Diese Compute Units werden sekundengenau abgerechnet und kosten nur für die Laufzeit Geld.
 
 \miniabschnitt{Gesamtkosten}
 In \autoref{tab:kostenvergleich-AWS~IoT~Analytics} sind die kalkulierten Preise nach gängiger Preismatrix dargestellt.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.i} Die Nutzung von externen Ausführungsdiensten (z.B. StepFunctions/Lambda) für \ac{SQL}-Abfragen ist nicht notwendig, da die Abfragen im Dienst selbst terminiert werden können.
@@ -29,11 +29,11 @@ Summe & \cellcolor[HTML]{EFEFEF} & \underline{129,75}  \\\hline
 \caption{Kostenvergleich AWS~IoT~Analytics}
 \label{tab:kostenvergleich-AWS~IoT~Analytics}
 \end{table}
- Das bestehende \enquote{Free Tier}, welches \ac{AWS} für den Dienst anbietet, wird ignoriert, da es nur in den ersten zwölf Monaten der Nutzung des Dienstes verrechnet wird. Bei \ac{S3} wird angenommen, dass die Standard Speicherklasse verwendet wird und Volumenrabattierungen bei Datenvolumina >50TB im Monat nicht relevant sind.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.j} Andere Speicherklassen sind günstiger, somit gibt die Schätzung eine Obergrenze für die \ac{S3} Preise. Es wurde ebenfalls keine eigene Logik in Notebooks kalkuliert, welche 0,36\$ pro Stunde und Compute Unit im Betrieb kosten würden. Dies ist dem Fakt geschuldet, dass für dieses Beispiel die Analysen mit \ac{SQL} bewältigbar sind.
+ Das bestehende \textit{free tier}, das \ac{AWS} für den Dienst anbietet, wird ignoriert, da es nur in den ersten zwölf Monaten der Nutzung des Dienstes verrechnet wird. Bei \ac{S3} wird angenommen, dass die Standard Speicherklasse verwendet wird und Volumenrabattierungen bei Datenvolumina >50TB im Monat nicht relevant sind.\footcite[Vgl. auch im Folgenden][]{AmazonWebServicesInc..o.J.j} Andere Speicherklassen sind günstiger, somit gibt die Schätzung eine Obergrenze für die \ac{S3} Preise. Es wurde ebenfalls keine eigene Logik in Notebooks kalkuliert, welche 0,36\$ pro Stunde und Compute Unit im Betrieb kosten würden. Dies ist dem Fakt geschuldet, dass für dieses Beispiel die Analysen mit \ac{SQL} bewältigbar sind.
  
 \weitereevaluationen{AWS~IoT~Analytics}
 
-\subsection{Auswahl}
+\subsection{Auswahl}\label{subsection:Auswah-M}
 Im Bereich Multimode gibt es nur einen zu vergleichenden Dienst, weshalb Abzüge nicht auf relativen Kriterien zu den anderen Diensten basieren, sondern auf absoluten Abzügen. Verwendet werden die in \autoref{tab:umfragen-auswertungen} priorisierten Vergleichskriterien.
 \input{content/04-produkte/vergleiche/multimode-vergleich}
 
@@ -56,7 +56,7 @@ Durch Integration mit Cloudwatch, der Monitoring Lösung von \ac{AWS} sind anste
 Einhergehend mit der folgenden Abwertung im Bezug auf die Skalierbarkeit und der Möglichkeit für Nutzerfehler, die das ganze System stoppen können, wurde der Wartungsaufwand abgewertet.
 
 \miniabschnitt{Skalierbarkeit \& serverlessness}
-Im Bereich \enquote{serverlessness} wurden Abzüge getätigt, da Analytics Compute Units nicht selbstständig skalieren.
+Im Bereich \textit{serverlessness} wurden Abzüge getätigt, da Analytics Compute Units nicht selbstständig skalieren.
 
 \miniabschnitt{Kosten}
 Da die Abfragekosten mittels \ac{SQL} proportional zu den anderen Kosten hoch erscheinen, wurden Abzüge gemacht.
@@ -70,5 +70,5 @@ Eine Fehlertoleranz ist gegeben, wenn der Anwender keine Fehler selbst einführt
 \miniabschnitt{Auswertungen}
 Da alle Auswertungen sogar in multiplen Wegen machbar sind, wurde die volle Punktzahl für diese Kategorie vergeben.
 
-\miniabschnitt{Conclusio}
+\miniabschnitt{Schlussfolgerung}
 Im Vergleich zu den spezialisierteren Diensten, die dem $\kappa$ oder \ac{OLAP} Muster folgen, schneidet \AWSIOT{} Analytics schlechter ab. Dies ist bedingt durch die wesentlich höheren monatlichen Kosten, genauso wie durch eine fehlende Garantie der schnellen Datenverarbeitung, zu welcher Kinesis fähig ist. Das $lambda$ Pattern scheint in dieser Implementierung ein nachteiliger Kompromiss aus der Kombination von $kappa$ und \ac{OLAP} zu sein.

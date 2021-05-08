@@ -22,7 +22,7 @@ Zusätzlich haben sich im Rahmen der Interviews folgende Anforderungen ergeben:
 \item Automatisierte operative Entscheidungen
 \item \label{anforderung:wertschöpfung} Wertschöpfung für das Unternehmen wichtig
 \item \label{anforderung:akzeptabel} akzeptabel und problemlösend für Domäne
-\item \label{anforderung:zugänglichkeit} Zugänglichkeit und zugang durch Mehrheit der Organisation
+\item \label{anforderung:zugänglichkeit} Zugänglichkeit und Zugang durch Mehrheit der Organisation
 \end{enumerate}
 
 Im Folgenden werden die Referenzarchitekturen entworfen und miteinander verglichen, um mögliche Stärken und Einsatzgebiete zu identifizieren. Einige der Anforderungen, wie \ref{anforderung:wertschöpfung}, \ref{anforderung:akzeptabel} und \ref{anforderung:zugänglichkeit} werden nicht für beide Referenzarchitekturen einzeln, sondern gesammelt erfasst.
@@ -30,14 +30,14 @@ Im Folgenden werden die Referenzarchitekturen entworfen und miteinander verglich
 In den folgenden Referenzarchitekturen wird in mehrere Dekompositionen unterteilt. In der Datenverarbeitungssequenz werden mit Hilfe eines Sequenzdiagramms die Abläufe zur Datenverarbeitung mit dem zu betrachtenden Dienst, ausgehend von \AWSIOT{} Core als Messagebroker, gezeigt.
 Die Verteilungssicht soll sowohl die Interaktion der Dienste untereinander, als auch grob das durchzuführende Deployment zeigen. Die Bausteinsicht zeigt wichtige Elemente der einzelnen Dienste auf, die konkret untereinander interagieren. So ist die konkrete Untereinheit, die Daten von \AWSIOT{} Core an andere Dienste versendet, eine \AWSIOT{} Core Rule, welche aufzuzeigen wäre.
 
-Zusätzlich zu den Dekompositionssichten wird auch ein Monitoringkonzept vorgestellt, um Fehler in den Abläufen schnell erkennen zu können. Dieses Monitoringkonzept soll kritische Metriken aufzeigen, welche überwacht werden müssen, um kontinuierliche Analysen sicherzustellen. Für das Monitoringkonzept wird vorausgesetzt, dass der \ac{AWS}-native Dienst CloudWatch zur Überwachung eingesetzt wird. 
+Zusätzlich zu den Dekompositionssichten wird auch ein Monitoringkonzept vorgestellt, um Fehler in den Abläufen schnell erkennen zu können. Dieses Monitoringkonzept soll kritische Metriken aufzeigen, die überwacht werden müssen, um kontinuierliche Analysen sicherzustellen. Für das Monitoringkonzept wird vorausgesetzt, dass der \ac{AWS}-native Dienst CloudWatch zur Überwachung eingesetzt wird. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.66\textwidth]{graphics/CloudWatch-Monitoring}
 \caption{CloudWatch Monitoring}
 \label{abb:CloudWatchMonitoring}
 \end{figure}
-CloudWatch erfasst zentralisiert Metriken aller Dienste und löst bei nutzerdefinierten Überschreitungen einen Alarm aus, welcher dann via \ac{SNS} versendet werden kann (siehe \autoref{abb:CloudWatchMonitoring}). Dabei kann bei Metriken mit hoher Varianz die Cloudwatch eigene Anomalienerkennung verwendet werden oder die Schwellwerterkennung.
+CloudWatch erfasst zentralisiert Metriken aller Dienste und löst bei nutzerdefinierten Überschreitungen einen Alarm aus, der dann via \ac{SNS} versendet werden kann (siehe \autoref{abb:CloudWatchMonitoring}). Dabei kann bei Metriken mit hoher Varianz die Cloudwatch eigene Anomalienerkennung verwendet werden oder die Schwellwerterkennung.
 
 
 
