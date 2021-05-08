@@ -42,7 +42,7 @@ jobs:
       - name: Install Ghostscript and move & copy
         run: |
           sudo apt-get install ghostscript -y
-          gs -o Titelseite.png -sDEVICE=pngalpha -dLastPage=1 latex-vorlage.pdf
+          gs -o Titelseite.png -sDEVICE=pngalpha -dLastPage=1 Bachelorarbeit.pdf
           cp Bachelorarbeit.pdf docs/Bachelorarbeit.pdf
           cp Titelseite.png docs/Titelseite.png  
       - name: Deploy 
