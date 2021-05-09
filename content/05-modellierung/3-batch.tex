@@ -2,15 +2,16 @@ Für diese Referenzarchitektur käme sowohl der Dienst der Multimode Klasse, \AW
 Diese Referenzarchitektur entspricht dem in \autoref{chap:bestehende_ras} vorgestellten Konzept einer \ac{OLAP}-Architektur. Folgend wird auf die verschiedenen Dekompositionen inklusiver mit der Echtzeitreferenzarchitektur gemeinsamen Variationspunkte (\textbf{VP GX}) eingegangen.
 
 \subsection{Datenverarbeitungssequenz}\label{subsection:Datenverarbeitungssequen-B}
-In \autoref{abb:SequenceBatchRA} ist die Datenverarbeitungssequenz der Referenzarchitektur zu sehen. Die Daten werden mittels einer properitären Verbindung von \AWSIOT{} Core an Timestream überspielt und von Timestream gespeichert. In einem regelmäßigen Intervall (ähnlich zu den \textit{cron-jobs} auf Linux) wird eine Lambda Funktion aufgerufen. Diese fragt Timestream ab, interpretiert die Resultate und löst im Alarmfall Nachrichten an \ac{SNS} aus. QuickSight greift als Visualisierungslösung, wenn gewünscht, auf den gesamten Datenbestand von Timestream zu. Dies passiert entweder beim Abruf von nutzererstellten Dashboards oder durch periodisches Laden von Daten in den QuickSight eigenen Cache, genannt \textit{SPICE}.
+In \autoref{abb:SequenceBatchRA} ist die Datenverarbeitungssequenz der Referenzarchitektur zu sehen. Die Daten werden von \AWSIOT{} Core an Timestream überspielt und von Timestream gespeichert. In einem regelmäßigen Intervall (ähnlich zu den \textit{cron-jobs} auf Linux) wird eine Lambda Funktion aufgerufen. Diese fragt Timestream ab, interpretiert die Resultate und löst im Alarmfall Nachrichten an \ac{SNS} aus. QuickSight greift als Visualisierungslösung, auf den gesamten Datenbestand von Timestream zu. Dies passiert entweder beim Abruf von nutzererstellten Dashboards oder durch periodisches Laden von Daten in den QuickSight eigenen Cache, genannt \textit{SPICE}.
+
+\textbf{Variationspunkt G2:} Hier wird eine Dashboardinglösung, im Speziellen der \ac{AWS} eigene Dienst QuickSight vorgesehen. Dies erfolgt, damit Benachrichtigungen, die via \ac{SNS} versendet werden, leicht für die Benachrichtigten nachvollziehbar sind. Wenn also beispielsweise eine Anomalie erkannt wurde, ist dies mit einer Visualisierung nachvollziehbar, um dann entsprechend zu handeln. Wichtig ist, dass die Visualisierung sowohl von den Originaldaten aus dem Speicher von Timestream gespeist wird, als auch aus der Analyse. Das für und wieder des Einsatzes wurde auch bereits in \vpref{G2} der Echtzeitarchitektur diskutiert. Alternativ ist Timestream auch mit Grafana und damit dem Managed Service von Grafana integriert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bm}\nzitat\footcite[Vgl.][]{Dutt.2020} Grafana kann dabei ebenfalls als Dashboardinglösung verwendet werden und kostet dabei das gleiche wie die Standard Edition von QuickSight, nämlich 9\$ für Nutzende monatlich.\footcite[Vgl. auch im Foglenden][]{AmazonWebServicesInc..o.J.bn}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bo} Erweiterte Kapazitäten bei QuickSight kosten 18\$ pro Monat für Nutzende. 
+
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.38\textheight]{graphics/batch-ra.pdf}
+\includegraphics[height=0.4\textheight]{graphics/batch-ra.pdf}
 \caption{Sequenzdiagramm Batch Verarbeitung}
 \label{abb:SequenceBatchRA}
 \end{figure}
-
-\textbf{Variationspunkt G2:} Hier wird eine Dashboardinglösung, im Speziellen der \ac{AWS} eigene Dienst QuickSight vorgesehen. Dies erfolgt, damit Benachrichtigungen, die via \ac{SNS} versendet werden, leicht für die Benachrichtigten nachvollziehbar sind. Wenn also beispielsweise eine Anomalie erkannt wurde, ist dies mit einer Visualisierung nachvollziehbar, um dann entsprechend zu handeln. Wichtig ist, dass die Visualisierung sowohl von den Originaldaten aus dem Speicher von Timestream gespeist wird, als auch aus der Analyse. Das für und wieder des Einsatzes wurde auch bereits in \vpref{G2} der Echtzeitarchitektur diskutiert. Alternativ ist Timestream auch mit Grafana und damit dem Managed Service von Grafana integriert.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bm}\nzitat\footcite[Vgl.][]{Dutt.2020} Grafana kann dabei ebenfalls als Dashboardinglösung verwendet werden und kostet dabei das gleiche wie die Standard Edition von QuickSight, nämlich 9\$ für Nutzende monatlich.\footcite[Vgl. auch im Foglenden][]{AmazonWebServicesInc..o.J.bn}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bo} Erweiterte Kapazitäten bei QuickSight kosten 18\$ pro Monat für Nutzende. 
 
 
 
@@ -18,7 +19,7 @@ In \autoref{abb:SequenceBatchRA} ist die Datenverarbeitungssequenz der Referenza
 In der folgenden \autoref{abb:TopLevelDBRA} ist die Verteilungssicht der Referenzarchitektur gemeinsam mit den Variationspunkten gezeigt. Variationspunkte mit Präfix G können dabei auch auf bereits definierte Variationspunkte der Echtzeitreferenzarchitektur referenzieren.
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{graphics/DB-RA-Overview.pdf}
+\includegraphics[width=0.8\textwidth]{graphics/DB-RA-Overview.pdf}
 \caption{Verteilungssicht}
 \label{abb:TopLevelDBRA}
 \end{figure}
@@ -97,7 +98,7 @@ Da Timestream abseits der numerischen Datentypen auch Datentypen vie \textit{var
 
 
 \miniabschnitt{Automatisierte operative Entscheidungen}
-Das Codebeispiel in \anhangref{anhang:batch-codesample} demonstriert, dass es möglich ist, basierend auf den Ergebnissen einer Abfrage automatisiert Abfragen durchzuführen. Dabei ist jedoch zu beachten, dass durch die Intervallverzögerung Aktionen im schlechtesten Fall nach genau $t$ Minuten nach dem Ereignis ausgelöst werden. Dabei ist $t$ das Intervall zwischen einzelnen Ausführungen, wie in \vpref{E5} beschrieben. Dies kann bei kritischen Aktionen, die möglichst schnell ausgeführt werden sollen, jedoch die akzeptable Raktionszeit stark überschreiten. Sollte Timestream ähnlich zu Amazons DynamoDB integrierte Streams als Feature bekommen, welche Änderungen am Datensatz zur Verarbeitung an Plattformen wie Lambda senden, wäre dieses Problem adressierbar.
+Das Codebeispiel in \anhangref{anhang:batch-codesample} demonstriert, dass es möglich ist, basierend auf den Ergebnissen einer Abfrage automatisiert Abfragen durchzuführen. Dabei ist jedoch zu beachten, dass durch die Intervallverzögerung Aktionen im schlechtesten Fall nach genau $t$ Minuten nach dem Ereignis ausgelöst werden. Dabei ist $t$ das Intervall zwischen einzelnen Ausführungen, wie in \vpref{E5} beschrieben. Dies kann bei kritischen Aktionen jedoch die akzeptable Raktionszeit stark überschreiten. Sollte Timestream ähnlich zu Amazons DynamoDB integrierte Streams als Feature bekommen, welche Änderungen am Datensatz zur Verarbeitung an Plattformen wie Lambda senden, wäre dieses Problem adressierbar.
 
 \subsection{Produktives Monitoringkonzept}\label{subsection:Produktives-Monitoringkonzep-B}
 Um die Batch-Referenzarchitektur nach Instanziierung für einen Usecase möglichst störungsfrei betreiben zu können, sind folgend die zu überwachenden Metriken gelistet, die einen Fehler innerhalb des verteilten Systems anzeigen. \autoref{tab:cloudwatch-metrics-db} enthält die Cloud-Watch Metriken der Dienste TimeStream, Lambda, \ac{SNS}, \AWSIOT{} Core und EventBridge.\footcite[Vgl.][]{AmazonWebServicesInc..o.J.be}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bf}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bc}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.az}\nzitat\footcite[Vgl.][]{AmazonWebServicesInc..o.J.bl}
